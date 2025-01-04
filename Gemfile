@@ -6,9 +6,15 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'puma'
+gem 'view_component', '3.21.0'
 
-# Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-gem 'rubocop-rails-omakase', require: false
+group :development do
+  gem 'lookbook', '2.3.4'
+  gem 'rubocop', '1.69.2'
+  gem 'rubocop-performance', '1.23.0'
+  gem 'rubocop-rails', '2.28.0'
+  gem 'ruby-lsp'
+end
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"

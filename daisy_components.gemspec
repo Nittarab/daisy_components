@@ -5,11 +5,11 @@ require_relative 'lib/daisy_components/version'
 Gem::Specification.new do |spec|
   spec.name        = 'daisy_components'
   spec.version     = DaisyComponents::VERSION
-  spec.authors     = ['']
-  spec.email       = ['']
-  spec.homepage    = 'TODO'
-  spec.summary     = 'TODO: Summary of DaisyComponents.'
-  spec.description = 'TODO: Description of DaisyComponents.'
+  spec.authors     = ['Patrick Barattin']
+  spec.email       = ['pbarattin@gmail.com']
+  spec.homepage    = 'https://github.com/pbarattin/daisy_components'
+  spec.summary     = 'DaisyUI components for Rails'
+  spec.description = 'A collection of ViewComponents implementing DaisyUI design system'
   spec.license     = 'MIT'
   spec.required_ruby_version = '>= 3.4.0'
 
@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency 'rails', '>= 8.0.1'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end
