@@ -16,6 +16,7 @@ The docs are in the test/components/docs folder
 use Gemfile to manage dependencies no gemspec
 
 Use Minitest and Fixtures for testing
+Use Capybara for testing
 
 Create SVG for icons
 
