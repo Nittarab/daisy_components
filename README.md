@@ -33,6 +33,7 @@ $ bin/rails server
 2. Visit http://localhost:3000/lookbook to see the component documentation and playground.
 
 ![alt text](<docs/assets/2025-01_screeshot_1.png>)
+![alt text](<docs/assets/2025-01_screeshot_2.png>)
 
 ## Testing
 
