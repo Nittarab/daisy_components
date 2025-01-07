@@ -102,20 +102,22 @@ module DaisyComponents
       end
 
       def shared_arguments
+        classes = class_names(
+          'btn',
+          "btn-#{@variant}" => @variant,
+          "btn-#{@size}" => @size,
+          'btn-disabled' => @disabled,
+          'loading' => @loading,
+          'btn-active' => @active
+        )
+
         {
-          class: class_names(
-            'btn',
-            "btn-#{@variant}" => @variant,
-            "btn-#{@size}" => @size,
-            'btn-disabled' => @disabled,
-            'loading' => @loading,
-            'btn-active' => @active
-          ),
+          class: [classes, system_arguments[:class]].compact.join(' '),
           disabled: @disabled,
           'aria-disabled': @disabled,
           'aria-busy': @loading,
           role: @href ? 'button' : nil,
-          **system_arguments
+          **system_arguments.except(:class)
         }
       end
 
