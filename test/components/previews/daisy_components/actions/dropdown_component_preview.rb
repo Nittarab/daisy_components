@@ -10,7 +10,8 @@ module DaisyComponents
       # @title Default
       # @description Interactive dropdown menu with customizable trigger and content
       #
-      # @param position select { choices: [end, top, bottom, left, right] } "Position of the dropdown content relative to the trigger"
+      # @param position select { choices: [end, top, bottom, left, right] } "Position of the dropdown content relative
+      #                                                                        to the trigger"
       # @param hover toggle "When true, opens the dropdown on hover instead of click"
       # @param open toggle "When true, forces the dropdown to stay open"
       # @param align_end toggle "When true, aligns the dropdown content to the end (right) of the trigger"

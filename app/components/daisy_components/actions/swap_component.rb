@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DaisyComponents
   module Actions
     class SwapComponent < DaisyComponents::BaseComponent
@@ -26,14 +28,23 @@ module DaisyComponents
       end
 
       def call
-        tag.label(class: default_classes) do
-          safe_join([
-            tag.input(type: 'checkbox', hidden: true),
-            (tag.div(on, class: 'swap-on') if on),
-            (tag.div(off, class: 'swap-off') if off),
-            (tag.div(indeterminate, class: 'swap-indeterminate') if indeterminate)
-          ].compact)
-        end
+        tag.label(class: default_classes) { render_swap_content }
+      end
+
+      private
+
+      def render_swap_content
+        safe_join([
+          tag.input(type: 'checkbox', hidden: true),
+          render_state(:on),
+          render_state(:off),
+          render_state(:indeterminate)
+        ].compact)
+      end
+
+      def render_state(state)
+        content = public_send(state)
+        tag.div(content, class: "swap-#{state}") if content
       end
     end
   end

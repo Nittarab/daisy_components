@@ -44,7 +44,8 @@ module DaisyComponents
       BUTTON_TYPES = %w[button submit reset].freeze
 
       # @param text [String] The text content to display inside the button
-      # @param variant [String] Visual style of the button (neutral/primary/secondary/accent/info/success/warning/error/ghost/link)
+      # @param variant [String] Visual style of the button
+      #    (neutral/primary/secondary/accent/info/success/warning/error/ghost/link)
       # @param size [String] Size of the button (lg/md/sm/xs)
       # @param disabled [Boolean] When true, prevents user interaction and grays out the button
       # @param href [String] Turns the button into a link pointing to this URL

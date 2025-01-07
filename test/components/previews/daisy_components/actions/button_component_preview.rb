@@ -4,14 +4,16 @@
 # @display bg_color "#fff"
 module DaisyComponents
   module Actions
-    class ButtonComponentPreview < Lookbook::Preview
+    class ButtonComponentPreview < ViewComponent::Preview
       # @!group Playground
 
       # @title Default
       # @description Basic button example with all available options
       #
       # @param text text "The text content to display inside the button"
-      # @param variant select { choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost, link] } "Visual style of the button"
+      # @param variant select { choices: [neutral, primary, secondary, accent, info,
+      #                                   success, warning, error, ghost, link] }
+      #                                   "Visual style of the button"
       # @param size select { choices: [xs, sm, md, lg] } "Size of the button"
       # @param disabled toggle "When true, prevents user interaction and grays out the button"
       # @param loading toggle "When true, shows a loading spinner and disables the button"
@@ -21,32 +23,17 @@ module DaisyComponents
       # @param method select { choices: [get, post, put, patch, delete] } "HTTP method for Rails/Turbo links"
       # @param target select { choices: [_blank, _self, _parent, _top] } "Link target attribute"
       # @param classes text "Additional CSS classes to apply to the button"
-      def playground(
-        text: 'Click me',
-        variant: 'primary',
-        size: 'md',
-        disabled: false,
-        loading: false,
-        active: false,
-        href: nil,
-        type: 'button',
-        method: nil,
-        target: nil,
-        classes: ''
-      )
-        render(DaisyComponents::Actions::ButtonComponent.new(
-                 text: text,
-                 variant: variant,
-                 size: size,
-                 disabled: disabled,
-                 loading: loading,
-                 active: active,
-                 href: href,
-                 type: type,
-                 method: method,
-                 target: target,
-                 classes: classes
-               ))
+      def playground(text: 'Click me', variant: 'primary', size: 'md', disabled: false,
+                     loading: false, active: false, href: nil, type: 'button', method: nil,
+                     target: nil, classes: '')
+        render_button_with_options(text:, variant:, size:, disabled:, loading:,
+                                   active:, href:, type:, method:, target:, classes:)
+      end
+
+      private
+
+      def render_button_with_options(**)
+        render(ButtonComponent.new(**))
       end
 
       # @!endgroup
