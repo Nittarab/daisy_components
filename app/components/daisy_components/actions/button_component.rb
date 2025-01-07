@@ -43,18 +43,18 @@ module DaisyComponents
       # Valid HTML button types
       BUTTON_TYPES = %w[button submit reset].freeze
 
-      # @param text [String] Button text (optional if block given)
-      # @param variant [String] Button style variant
-      # @param size [String] Button size
-      # @param disabled [Boolean] Whether the button is disabled
-      # @param href [String] URL for link buttons
-      # @param type [String] Button type for form buttons
-      # @param method [String] HTTP method for Rails/Turbo links
-      # @param target [String] Target for link buttons
-      # @param rel [String] Rel attribute for link buttons
-      # @param loading [Boolean] Whether to show loading state
-      # @param active [Boolean] Whether button appears pressed
-      # @param system_arguments [Hash] Additional HTML attributes
+      # @param text [String] The text content to display inside the button
+      # @param variant [String] Visual style of the button (neutral/primary/secondary/accent/info/success/warning/error/ghost/link)
+      # @param size [String] Size of the button (lg/md/sm/xs)
+      # @param disabled [Boolean] When true, prevents user interaction and grays out the button
+      # @param href [String] Turns the button into a link pointing to this URL
+      # @param type [String] HTML button type attribute (button/submit/reset)
+      # @param method [String] HTTP method for Rails/Turbo links (get/post/put/patch/delete)
+      # @param target [String] Link target attribute (_blank/_self/_parent/_top)
+      # @param rel [String] Link relationship attribute (e.g., noopener, noreferrer)
+      # @param loading [Boolean] When true, shows a loading spinner and disables the button
+      # @param active [Boolean] When true, gives the button a pressed appearance
+      # @param system_arguments [Hash] Additional HTML attributes to be applied to the button
       def initialize(
         text: nil,
         variant: nil,
@@ -106,15 +106,15 @@ module DaisyComponents
           'btn',
           "btn-#{@variant}" => @variant,
           "btn-#{@size}" => @size,
-          'btn-disabled' => @disabled,
+          'btn-disabled' => @disabled || @loading,
           'loading' => @loading,
           'btn-active' => @active
         )
 
         {
           class: [classes, system_arguments[:class]].compact.join(' '),
-          disabled: @disabled,
-          'aria-disabled': @disabled,
+          disabled: @disabled || @loading,
+          'aria-disabled': @disabled || @loading,
           'aria-busy': @loading,
           role: @href ? 'button' : nil,
           **system_arguments.except(:class)
