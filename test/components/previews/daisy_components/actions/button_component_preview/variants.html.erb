@@ -3,7 +3,7 @@
 
 <div class="not-prose flex flex-wrap gap-2 p-4">
   <% variants.each do |variant| %>
-    <%= render(DaisyComponents::Actions::ButtonComponent.new(variant: variant)) do %>
+    <%= render(DaisyComponents::Actions::ButtonComponent.new(variant: variant.to_s)) do %>
       <%= variant.titleize %>
     <% end %>
   <% end %>
