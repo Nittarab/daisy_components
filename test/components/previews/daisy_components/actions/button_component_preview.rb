@@ -10,17 +10,17 @@ module DaisyComponents
       # @title Default
       # @description Basic button example with all available options
       #
-      # @param text text Button text
-      # @param variant [String] select [neutral, primary, secondary, accent, info, success, warning, error, ghost, link] Button style variant
-      # @param size [String] select [xs, sm, md, lg] Button size
-      # @param disabled toggle Whether the button is disabled
-      # @param loading toggle Whether to show loading state
-      # @param active toggle Whether button appears pressed
-      # @param href text URL for link buttons
-      # @param type [String] select [button, submit, reset] Button type for form buttons
-      # @param method [String] select [get, post, put, patch, delete] HTTP method for Rails/Turbo links
-      # @param target [String] select [_blank, _self, _parent, _top] Target for link buttons
-      # @param classes text Additional CSS classes
+      # @param text text "The text content to display inside the button"
+      # @param variant select { choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost, link] } "Visual style of the button"
+      # @param size select { choices: [xs, sm, md, lg] } "Size of the button"
+      # @param disabled toggle "When true, prevents user interaction and grays out the button"
+      # @param loading toggle "When true, shows a loading spinner and disables the button"
+      # @param active toggle "When true, gives the button a pressed appearance"
+      # @param href text "Turns the button into a link pointing to this URL"
+      # @param type select { choices: [button, submit, reset] } "HTML button type attribute"
+      # @param method select { choices: [get, post, put, patch, delete] } "HTTP method for Rails/Turbo links"
+      # @param target select { choices: [_blank, _self, _parent, _top] } "Link target attribute"
+      # @param classes text "Additional CSS classes to apply to the button"
       def playground(
         text: 'Click me',
         variant: 'primary',
