@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="light">
   <head>
     <title><%= content_for(:title) || "Dummy" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,12 +16,17 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application" %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="min-h-screen flex flex-col items-center justify-center">
+      <%= yield %>
+    </div>
   </body>
 </html>
