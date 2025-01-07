@@ -5,10 +5,11 @@ module DaisyComponents
     class DropdownComponent < BaseComponent
       POSITIONS = %w[end top bottom left right].freeze
 
-      def initialize(position: nil, hover: false, open: false, **system_arguments)
+      def initialize(position: nil, hover: false, open: false, align_end: false, **system_arguments)
         @position = position if POSITIONS.include?(position.to_s)
         @hover = hover
         @open = open
+        @align_end = align_end
         super(**system_arguments)
       end
 
@@ -24,7 +25,8 @@ module DaisyComponents
             'dropdown',
             "dropdown-#{@position}" => @position,
             'dropdown-hover' => @hover,
-            'dropdown-open' => @open
+            'dropdown-open' => @open,
+            'dropdown-end' => @align_end
           ),
           **system_arguments
         }

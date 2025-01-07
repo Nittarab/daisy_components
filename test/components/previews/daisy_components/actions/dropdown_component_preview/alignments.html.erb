@@ -1,0 +1,72 @@
+<%# @label Dropdown Alignments %>
+<%# @display height 500 %>
+
+<div class="flex flex-wrap items-center justify-center gap-8 min-h-[500px]">
+  <div class="grid grid-cols-2 gap-8">
+    <div class="flex flex-col items-center gap-2">
+      <h3 class="text-lg font-medium">Default Alignment</h3>
+      <%= render(DaisyComponents::Actions::DropdownComponent.new) do %>
+        <label tabindex="0" class="btn m-1">Click me</label>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col items-center gap-2">
+      <h3 class="text-lg font-medium">Align End</h3>
+      <%= render(DaisyComponents::Actions::DropdownComponent.new(align_end: true)) do %>
+        <label tabindex="0" class="btn m-1">Click me</label>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col items-center gap-2">
+      <h3 class="text-lg font-medium">Top Default</h3>
+      <%= render(DaisyComponents::Actions::DropdownComponent.new(position: 'top')) do %>
+        <label tabindex="0" class="btn m-1">Click me</label>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col items-center gap-2">
+      <h3 class="text-lg font-medium">Top Align End</h3>
+      <%= render(DaisyComponents::Actions::DropdownComponent.new(position: 'top', align_end: true)) do %>
+        <label tabindex="0" class="btn m-1">Click me</label>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col items-center gap-2">
+      <h3 class="text-lg font-medium">Left Default</h3>
+      <%= render(DaisyComponents::Actions::DropdownComponent.new(position: 'left')) do %>
+        <label tabindex="0" class="btn m-1">Click me</label>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col items-center gap-2">
+      <h3 class="text-lg font-medium">Left Align End</h3>
+      <%= render(DaisyComponents::Actions::DropdownComponent.new(position: 'left', align_end: true)) do %>
+        <label tabindex="0" class="btn m-1">Click me</label>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div> 

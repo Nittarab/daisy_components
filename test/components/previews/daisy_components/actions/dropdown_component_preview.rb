@@ -13,17 +13,20 @@ module DaisyComponents
       # @param position [String] select [end, top, bottom, left, right]
       # @param hover toggle
       # @param open toggle
+      # @param align_end toggle
       def playground(
         position: nil,
         hover: false,
-        open: false
+        open: false,
+        align_end: false
       )
         render_with_template(
           template: 'daisy_components/actions/dropdown_component_preview/playground',
           locals: {
             position: position,
             hover: hover,
-            open: open
+            open: open,
+            align_end: align_end
           }
         )
       end
@@ -43,6 +46,21 @@ module DaisyComponents
           locals: {
             positions: DaisyComponents::Actions::DropdownComponent::POSITIONS
           }
+        )
+      end
+
+      # @!endgroup
+
+      # @!group Alignments
+
+      # Dropdown Alignments
+      # ---------------
+      # Different dropdown alignments
+      #
+      # @label Alignments
+      def alignments
+        render_with_template(
+          template: 'daisy_components/actions/dropdown_component_preview/alignments'
         )
       end
 
