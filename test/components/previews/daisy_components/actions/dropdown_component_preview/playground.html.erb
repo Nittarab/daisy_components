@@ -1,0 +1,16 @@
+<%# @label Dropdown Playground %>
+<%# @display height 300 %>
+
+<div class="flex items-center justify-center min-h-[300px]">
+  <%= render(DaisyComponents::Actions::DropdownComponent.new(
+    position: position,
+    hover: hover,
+    open: open
+  )) do %>
+    <label tabindex="0" class="btn m-1">Click</label>
+    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+      <li><a>Item 1</a></li>
+      <li><a>Item 2</a></li>
+    </ul>
+  <% end %>
+</div> 
