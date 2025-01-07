@@ -10,8 +10,11 @@ https://github.com/primer/view_components
 
 This project use Lookbook for documentation 
 https://github.com/lookbook-hq/lookbook
+The preview are in the test/components/previews folder
+The docs are in the test/components/docs folder
 
 use Gemfile to manage dependencies no gemspec
 
 Use Minitest and Fixtures for testing
 
+Create SVG for icons
