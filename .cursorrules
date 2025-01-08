@@ -22,3 +22,21 @@ Create SVG for icons
 
 DONT delete documentation comments in the code, update them instead
 
+Ruby Style Guide
+Style/ClassAndModuleChildren
+
+good:
+```ruby
+module DaisyComponents
+  module Actions
+    class SwapComponentTest < DaisyComponents::ComponentTestCase
+    end
+  end
+end
+```
+
+bad:
+```ruby
+class DaisyComponents::Actions::SwapComponentTest < DaisyComponents::ComponentTestCase
+end
+```
