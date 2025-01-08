@@ -1,0 +1,10 @@
+<%# Avatar Shapes %>
+<div class="flex gap-4">
+  <% [:circle, :squircle, :hexagon, :triangle].each do |shape| %>
+    <%= render(DaisyComponents::DataDisplay::AvatarComponent.new(shape: shape, size: 24)) do |component| %>
+      <% component.with_image do %>
+        <%= tag.img(src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=A') %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div> 

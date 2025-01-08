@@ -1,0 +1,21 @@
+<%# Avatar Group %>
+<% if group? %>
+  <%= tag.div(**html_attributes) do %>
+    <% groups.each do |avatar| %>
+      <%= avatar %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%# Single Avatar %>
+  <%= tag.div(**html_attributes) do %>
+    <% if image %>
+      <%= image %>
+    <% elsif src %>
+      <%= tag.img(src: src, alt: system_arguments[:alt] || 'Avatar', class: 'w-full h-full object-cover') %>
+    <% else %>
+      <div class="bg-neutral text-neutral-content rounded-full w-full h-full flex items-center justify-center">
+        <%= placeholder %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %> 
