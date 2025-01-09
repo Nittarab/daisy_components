@@ -1,0 +1,11 @@
+<div class="flex flex-wrap gap-2">
+  <%= render DaisyComponents::Actions::ButtonComponent.new(class: 'gap-2') do %>
+    Inbox
+    <%= render DaisyComponents::DataDisplay::BadgeComponent.new('99+', variant: 'secondary') %>
+  <% end %>
+
+  <%= render DaisyComponents::Actions::ButtonComponent.new(variant: 'primary', class: 'gap-2') do %>
+    Notifications
+    <%= render DaisyComponents::DataDisplay::BadgeComponent.new('8', variant: 'secondary') %>
+  <% end %>
+</div> 

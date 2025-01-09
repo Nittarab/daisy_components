@@ -40,3 +40,5 @@ bad:
 class DaisyComponents::Actions::SwapComponentTest < DaisyComponents::ComponentTestCase
 end
 ```
+
+Every component preview should have a playground method with all the parameters as options and the description as Lookbook description.
