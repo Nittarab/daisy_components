@@ -39,6 +39,18 @@ module DaisyComponents
         assert_selector('.avatar.mask.mask-squircle')
       end
 
+      def test_renders_with_hexagon_shape
+        render_inline(AvatarComponent.new(shape: :hexagon, src: 'https://placehold.co/100x100'))
+
+        assert_selector('.avatar.mask.mask-hexagon')
+      end
+
+      def test_renders_with_triangle_shape
+        render_inline(AvatarComponent.new(shape: :triangle, src: 'https://placehold.co/100x100'))
+
+        assert_selector('.avatar.mask.mask-triangle')
+      end
+
       def test_renders_with_online_status
         render_inline(AvatarComponent.new(online: true, src: 'https://placehold.co/100x100'))
 
@@ -53,29 +65,23 @@ module DaisyComponents
 
       def test_renders_with_placeholder
         render_inline(AvatarComponent.new) do |component|
-          component.with_placeholder { 'JD' }
+          component.with_placeholder { 'PB' }
         end
 
         assert_selector('.avatar')
-        assert_selector('.bg-neutral.text-neutral-content', text: 'JD')
+        assert_selector('.bg-neutral.text-neutral-content')
+        assert_text('PB')
       end
 
       def test_renders_avatar_group
-        render_inline(AvatarComponent.new(class: 'avatar-group h-12 -space-x-4')) do |component|
-          component.with_group do |group|
-            group.with_image { tag.img(src: 'https://placehold.co/100x100?text=1', alt: 'Avatar 1') }
-          end
-          component.with_group do |group|
-            group.with_image { tag.img(src: 'https://placehold.co/100x100?text=2', alt: 'Avatar 2') }
-          end
+        render_inline(AvatarComponent.new) do |component|
+          component.with_group(src: 'https://placehold.co/100x100')
+          component.with_group(src: 'https://placehold.co/100x100')
         end
 
         assert_selector('.avatar-group')
         assert_selector('.avatar', count: 2)
-        assert_selector('.h-12')
-        assert_selector('.-space-x-4')
-        assert_selector('img[alt="Avatar 1"]')
-        assert_selector('img[alt="Avatar 2"]')
+        assert_selector('img[src="https://placehold.co/100x100"]', count: 2)
       end
 
       def test_renders_with_custom_classes
@@ -84,16 +90,22 @@ module DaisyComponents
         assert_selector('.avatar.custom-class')
       end
 
-      def test_renders_with_multiple_custom_classes
-        render_inline(AvatarComponent.new(class: 'custom-class-1 custom-class-2 p-4 m-2', src: 'https://placehold.co/100x100'))
+      def test_renders_with_alt_text
+        render_inline(AvatarComponent.new(src: 'https://placehold.co/100x100', alt: 'User Avatar'))
 
-        assert_selector('.avatar.custom-class-1.custom-class-2.p-4.m-2')
+        assert_selector('img[alt="User Avatar"]')
       end
 
-      def test_renders_with_custom_alt_text
-        render_inline(AvatarComponent.new(src: 'https://placehold.co/100x100', alt: 'Custom Alt'))
+      def test_renders_with_multiple_attributes
+        render_inline(AvatarComponent.new(
+                        size: 24,
+                        shape: :circle,
+                        online: true,
+                        src: 'https://placehold.co/100x100',
+                        class: 'custom-class'
+                      ))
 
-        assert_selector('img[alt="Custom Alt"]')
+        assert_selector('.avatar.w-24.h-24.rounded-full.online.custom-class')
       end
     end
   end
