@@ -1,0 +1,11 @@
+<%= render(DaisyComponents::DataDisplay::CardComponent.new(bordered: true)) do |component| %>
+  <% component.with_title do %>
+    Bordered Card
+  <% end %>
+  <% component.with_body do %>
+    <p>This card has a border around its edges.</p>
+  <% end %>
+  <% component.with_actions do %>
+    <button class="btn btn-primary">Action</button>
+  <% end %>
+<% end %> 

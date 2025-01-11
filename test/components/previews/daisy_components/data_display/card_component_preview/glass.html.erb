@@ -1,0 +1,13 @@
+<div class="min-h-[400px] bg-primary flex items-center justify-center p-8">
+  <%= render(DaisyComponents::DataDisplay::CardComponent.new(glass: true)) do |component| %>
+    <% component.with_title do %>
+      Glass Card
+    <% end %>
+    <% component.with_body do %>
+      <p>This card has a glass morphism effect that works best on colored backgrounds.</p>
+    <% end %>
+    <% component.with_actions do %>
+      <button class="btn btn-primary">Action</button>
+    <% end %>
+  <% end %>
+</div> 
