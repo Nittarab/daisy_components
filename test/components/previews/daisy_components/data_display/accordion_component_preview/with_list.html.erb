@@ -1,0 +1,11 @@
+<%= render(DaisyComponents::DataDisplay::AccordionComponent.new) do |component| %>
+  <% component.with_item(title: 'With List') do %>
+    <%= tag.ul(class: 'list-disc list-inside') do %>
+      <%= safe_join([
+        tag.li('First item'),
+        tag.li('Second item'),
+        tag.li('Third item')
+      ]) %>
+    <% end %>
+  <% end %>
+<% end %> 

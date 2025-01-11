@@ -1,44 +1,56 @@
 # frozen_string_literal: true
 
+# @label Badge
+# @display bg_color "#fff"
 module DaisyComponents
   module DataDisplay
-    # @label Badge
-    class BadgeComponentPreview < ViewComponent::Preview
+    class BadgeComponentPreview < Lookbook::Preview
       # @!group Playground
 
-      # @label Playground
-      # @param text text "Badge text"
-      # @param variant select [neutral, primary, secondary, accent, ghost, info, success, warning, error]
-      # @param size select [xs, sm, md, lg]
-      # @param outline toggle
+      # @title Default
+      # @description Interactive badge component with customizable styling
+      #
+      # @param text text "Text content inside the badge"
+      # @param variant select { choices: [neutral, primary, secondary, accent, ghost, info, success, warning, error] } "Visual style"
+      # @param size select { choices: [xs, sm, md, lg] } "Badge size"
+      # @param outline toggle "Show outlined style"
+      # @param classes text "Additional CSS classes"
       def playground(
         text: 'Badge',
         variant: nil,
         size: nil,
-        outline: false
+        outline: false,
+        classes: ''
       )
-        render BadgeComponent.new(
-          text,
-          variant: variant,
-          size: size,
-          outline: outline
-        )
+        render(BadgeComponent.new(
+                 text,
+                 variant:,
+                 size:,
+                 outline:,
+                 class: classes
+               ))
       end
 
       # @!endgroup
 
-      # @!group Basics
+      # @!group Examples
 
-      # @label Default
-      # @description Basic badge with default styling
+      # Basic Badge
+      # ---------------
+      # Simple badge with default styling
+      #
+      # @label Basic
       def default
-        render BadgeComponent.new('Badge')
+        render(BadgeComponent.new('Badge'))
       end
 
-      # @label With Block
-      # @description Badge with block content
+      # Block Content
+      # ---------------
+      # Badge with custom block content
+      #
+      # @label Block
       def with_block
-        render BadgeComponent.new do
+        render(BadgeComponent.new) do
           'Block content'
         end
       end
@@ -47,16 +59,22 @@ module DaisyComponents
 
       # @!group Variants
 
+      # Badge Colors
+      # ---------------
+      # All available badge colors
+      #
       # @label Colors
-      # @description Badges in different colors
       def colors
         render_with_template(locals: {
                                variants: BadgeComponent::VARIANTS
                              })
       end
 
+      # Outline Style
+      # ---------------
+      # Badges with outline style
+      #
       # @label Outline
-      # @description Outlined badges in different colors
       def outline
         render_with_template(locals: {
                                variants: BadgeComponent::VARIANTS
@@ -67,8 +85,11 @@ module DaisyComponents
 
       # @!group Sizes
 
+      # Badge Sizes
+      # ---------------
+      # All available badge sizes
+      #
       # @label Sizes
-      # @description Badges in different sizes
       def sizes
         render_with_template(locals: {
                                sizes: BadgeComponent::SIZES
@@ -79,10 +100,13 @@ module DaisyComponents
 
       # @!group Examples
 
-      # @label With Icon
-      # @description Badge with an icon
+      # With Icon
+      # ---------------
+      # Badge with an icon
+      #
+      # @label Icon
       def with_icon
-        render BadgeComponent.new(class: 'gap-2') do
+        render(BadgeComponent.new(class: 'gap-2')) do
           safe_join([
                       tag.svg(
                         xmlns: 'http://www.w3.org/2000/svg',
@@ -102,8 +126,11 @@ module DaisyComponents
         end
       end
 
+      # In Button
+      # ---------------
+      # Badge used within a button
+      #
       # @label In Button
-      # @description Badge used within a button
       def in_button
         render_with_template
       end

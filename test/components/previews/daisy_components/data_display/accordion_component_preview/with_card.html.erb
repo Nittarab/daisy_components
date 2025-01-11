@@ -1,0 +1,26 @@
+<%= render(DaisyComponents::DataDisplay::AccordionComponent.new) do |component| %>
+  <% component.with_item(title: 'Interactive Card Example') do %>
+    <%= render(DaisyComponents::DataDisplay::CardComponent.new(glass: true)) do |card| %>
+      <% card.with_figure do %>
+        <%= tag.img(src: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Card+Image') %>
+      <% end %>
+      <% card.with_title { 'Feature Card' } %>
+      <% card.with_body do %>
+        <p class="text-base-content/70 mb-4">
+          This is a more complex example showing how cards can be nested inside accordion items. 
+          The card includes an image, description, and multiple actions.
+        </p>
+        <div class="flex gap-2 items-center text-sm text-base-content/60">
+          <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Feature', variant: 'primary')) %>
+          <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Example', variant: 'ghost')) %>
+          <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Demo', variant: 'outline')) %>
+        </div>
+      <% end %>
+      <% card.with_actions do %>
+        <div class="flex justify-between items-center">
+          <%= render(DaisyComponents::Actions::ButtonComponent.new(text: 'Primary Action', variant: 'primary')) %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %> 

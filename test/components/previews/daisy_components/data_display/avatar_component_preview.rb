@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
+# @label Avatar
+# @display bg_color "#fff"
 module DaisyComponents
   module DataDisplay
-    # @label Avatar
-    class AvatarComponentPreview < ViewComponent::Preview
-      # @!group Basic
+    class AvatarComponentPreview < Lookbook::Preview
+      # @!group Playground
 
       # @title Default
-      # @description Basic avatar example with all available options
+      # @description Interactive avatar component with customizable appearance and status
       #
-      # @param size select { choices: [6, 8, 10, 12, 16, 20] } "Size of the avatar in Tailwind units"
-      # @param shape select { choices: [circle, squircle, hexagon, triangle] } "Shape of the avatar"
-      # @param online toggle "When true, shows online indicator"
-      # @param offline toggle "When true, shows offline indicator"
-      # @param classes text "Additional CSS classes to apply"
-      def playground(size: 12, shape: :circle, online: false, offline: false, classes: '')
+      # @param size select { choices: [8, 12, 16, 20, 24, 32] } "Size of the avatar in Tailwind units"
+      # @param shape select { choices: [circle, squircle, hexagon, triangle] } "Shape of the avatar container"
+      # @param online toggle "Show an online status indicator"
+      # @param offline toggle "Show an offline status indicator"
+      # @param classes text "Additional CSS classes to apply to the avatar container"
+      def playground(size: 24, shape: :circle, online: false, offline: false, classes: '')
         render(AvatarComponent.new(
                  size:, shape:, online:, offline:, class: classes
                )) do |component|
@@ -30,7 +31,9 @@ module DaisyComponents
 
       # Basic Avatar
       # ---------------
-      # Simple avatar with image
+      # Simple avatar with an image
+      #
+      # @label Basic
       def basic
         render(AvatarComponent.new(size: 12)) do |component|
           component.with_image do
@@ -41,14 +44,18 @@ module DaisyComponents
 
       # Avatar Sizes
       # ---------------
-      # Different size options
+      # Different size variations
+      #
+      # @label Sizes
       def sizes
         render_with_template
       end
 
       # Avatar Shapes
       # ---------------
-      # Different shape options
+      # Different shape variations
+      #
+      # @label Shapes
       def shapes
         render_with_template
       end
@@ -56,6 +63,8 @@ module DaisyComponents
       # Online Status
       # ---------------
       # Avatar with online indicator
+      #
+      # @label Online
       def online
         render(AvatarComponent.new(online: true, size: 12)) do |component|
           component.with_image do
@@ -67,6 +76,8 @@ module DaisyComponents
       # Offline Status
       # ---------------
       # Avatar with offline indicator
+      #
+      # @label Offline
       def offline
         render(AvatarComponent.new(offline: true, size: 12)) do |component|
           component.with_image do
@@ -75,9 +86,11 @@ module DaisyComponents
         end
       end
 
-      # Placeholder
+      # Text Placeholder
       # ---------------
-      # Avatar with placeholder content
+      # Avatar with text placeholder instead of image
+      #
+      # @label Placeholder
       def placeholder
         render(AvatarComponent.new(size: 12)) do |component|
           component.with_placeholder { 'JD' }
@@ -86,7 +99,9 @@ module DaisyComponents
 
       # Avatar Group
       # ---------------
-      # Multiple avatars in a group
+      # Multiple avatars grouped together
+      #
+      # @label Group
       def group
         render(AvatarComponent.new(size: 12, class: 'avatar-group h-12')) do |component|
           # First avatar

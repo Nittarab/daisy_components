@@ -25,8 +25,12 @@
   </head>
 
   <body>
-    <div class="min-h-screen flex flex-col items-center justify-center">
-      <%= yield %>
+    <div class="min-h-screen bg-[repeating-linear-gradient(45deg,var(--fallback-b1,oklch(var(--b1))),var(--fallback-b1,oklch(var(--b1)))13px,var(--fallback-b2,oklch(var(--b2)))13px,var(--fallback-b2,oklch(var(--b2)))14px)] p-4">
+      <div class="preview flex min-h-[6rem] min-w-[18rem] max-w-4xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4">
+      <div class="preview flex min-h-[6rem] min-w-[18rem] max-w-4xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
+

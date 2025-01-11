@@ -6,37 +6,7 @@ module DaisyComponents
     class SwapComponentPreview < ViewComponent::Preview
       include DaisyComponents::IconsHelper
 
-      # @!group Basic Examples
-
-      # @label Text Swap
-      # @description Basic text swap with different effects
-      # @param effect select ["none", "rotate", "flip"]
-      def text(effect: 'none')
-        render(SwapComponent.new(
-                 rotate: effect == 'rotate',
-                 flip: effect == 'flip'
-               )) do |component|
-          component.with_on { tag.div('ON', class: 'font-bold text-primary') }
-          component.with_off { tag.div('OFF', class: 'font-bold text-base-content') }
-        end
-      end
-
-      # @label Emoji Swap
-      # @description Fun emoji swap with different effects
-      # @param effect select ["none", "rotate", "flip"]
-      def emoji(effect: 'none')
-        render(SwapComponent.new(
-                 rotate: effect == 'rotate',
-                 flip: effect == 'flip'
-               )) do |component|
-          component.with_on { tag.div('😄', class: 'text-2xl') }
-          component.with_off { tag.div('😴', class: 'text-2xl') }
-        end
-      end
-
-      # @!endgroup
-
-      # @!group UI Controls
+      # @!group Playground
 
       # @label Hamburger Menu
       # @description Swap component used as a hamburger menu button
@@ -65,6 +35,36 @@ module DaisyComponents
       def theme(effect: 'none', size: 'md')
         render_swap_with_icons(effect, size) do |size_class|
           [sun_icon(size_class), moon_icon(size_class)]
+        end
+      end
+
+      # @!endgroup
+
+      # @!group Basic Examples
+
+      # @label Text Swap
+      # @description Basic text swap with different effects
+      # @param effect select ["none", "rotate", "flip"]
+      def text(effect: 'none')
+        render(SwapComponent.new(
+                 rotate: effect == 'rotate',
+                 flip: effect == 'flip'
+               )) do |component|
+          component.with_on { tag.div('ON', class: 'font-bold text-primary') }
+          component.with_off { tag.div('OFF', class: 'font-bold text-base-content') }
+        end
+      end
+
+      # @label Emoji Swap
+      # @description Fun emoji swap with different effects
+      # @param effect select ["none", "rotate", "flip"]
+      def emoji(effect: 'none')
+        render(SwapComponent.new(
+                 rotate: effect == 'rotate',
+                 flip: effect == 'flip'
+               )) do |component|
+          component.with_on { tag.div('😄', class: 'text-2xl') }
+          component.with_off { tag.div('😴', class: 'text-2xl') }
         end
       end
 
