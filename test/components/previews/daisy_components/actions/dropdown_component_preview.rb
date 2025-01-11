@@ -7,8 +7,9 @@ module DaisyComponents
     class DropdownComponentPreview < Lookbook::Preview
       # @!group Playground
 
-      # @title Default
-      # @description Interactive dropdown menu with customizable trigger and content
+      # Playground
+      # ---------------
+      # Interactive dropdown menu with customizable trigger and content
       #
       # @param position select { choices: [end, top, bottom, left, right] } "Position of the dropdown content relative
       #                                                                        to the trigger"

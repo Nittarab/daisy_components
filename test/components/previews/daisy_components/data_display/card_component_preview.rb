@@ -7,8 +7,9 @@ module DaisyComponents
     class CardComponentPreview < Lookbook::Preview
       # @!group Playground
 
-      # @title Default
-      # @description Interactive card component with customizable content and styling
+      # Playground
+      # ---------------
+      # Interactive card component with customizable content and styling
       #
       # @param bordered toggle "Add a border around the card"
       # @param glass toggle "Apply a glass morphism effect"

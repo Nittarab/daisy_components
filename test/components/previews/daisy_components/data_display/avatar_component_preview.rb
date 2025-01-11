@@ -7,8 +7,9 @@ module DaisyComponents
     class AvatarComponentPreview < Lookbook::Preview
       # @!group Playground
 
-      # @title Default
-      # @description Interactive avatar component with customizable appearance and status
+      # Playground
+      # ---------------
+      # Interactive avatar component with customizable appearance and status
       #
       # @param size select { choices: [8, 12, 16, 20, 24, 32] } "Size of the avatar in Tailwind units"
       # @param shape select { choices: [circle, squircle, hexagon, triangle] } "Shape of the avatar container"

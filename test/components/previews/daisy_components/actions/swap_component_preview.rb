@@ -8,8 +8,11 @@ module DaisyComponents
 
       # @!group Playground
 
+      # Hamburger Menu
+      # ---------------
+      # Swap component used as a hamburger menu button
+      #
       # @label Hamburger Menu
-      # @description Swap component used as a hamburger menu button
       # @param effect select ["none", "rotate", "flip"]
       # @param size select ["sm", "md", "lg"]
       def hamburger(effect: 'none', size: 'md')
@@ -18,8 +21,11 @@ module DaisyComponents
         end
       end
 
+      # Volume Control
+      # ---------------
+      # Volume control with different effects and sizes
+      #
       # @label Volume Control
-      # @description Volume control with different effects and sizes
       # @param effect select ["none", "rotate", "flip"]
       # @param size select ["sm", "md", "lg"]
       def volume(effect: 'none', size: 'md')
@@ -28,8 +34,11 @@ module DaisyComponents
         end
       end
 
+      # Theme Toggle
+      # ---------------
+      # Theme toggle with sun/moon icons
+      #
       # @label Theme Toggle
-      # @description Theme toggle with sun/moon icons
       # @param effect select ["none", "rotate", "flip"]
       # @param size select ["sm", "md", "lg"]
       def theme(effect: 'none', size: 'md')
@@ -42,8 +51,11 @@ module DaisyComponents
 
       # @!group Basic Examples
 
+      # Text Swap
+      # ---------------
+      # Basic text swap with different effects
+      #
       # @label Text Swap
-      # @description Basic text swap with different effects
       # @param effect select ["none", "rotate", "flip"]
       def text(effect: 'none')
         render(SwapComponent.new(
@@ -55,8 +67,11 @@ module DaisyComponents
         end
       end
 
+      # Emoji Swap
+      # ---------------
+      # Fun emoji swap with different effects
+      #
       # @label Emoji Swap
-      # @description Fun emoji swap with different effects
       # @param effect select ["none", "rotate", "flip"]
       def emoji(effect: 'none')
         render(SwapComponent.new(

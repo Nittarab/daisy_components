@@ -7,8 +7,9 @@ module DaisyComponents
     class BadgeComponentPreview < Lookbook::Preview
       # @!group Playground
 
-      # @title Default
-      # @description Interactive badge component with customizable styling
+      # Default
+      # ---------------
+      # Interactive badge component with customizable styling
       #
       # @param text text "Text content inside the badge"
       # @param variant select { choices: [neutral, primary, secondary, accent, ghost, info, success, warning, error] } "Visual style"

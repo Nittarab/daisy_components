@@ -7,8 +7,9 @@ module DaisyComponents
     class ButtonComponentPreview < ViewComponent::Preview
       # @!group Playground
 
-      # @title Default
-      # @description Basic button example with all available options
+      # Playground
+      # ---------------
+      # Basic button example with all available options
       #
       # @param text text "The text content to display inside the button"
       # @param variant select { choices: [neutral, primary, secondary, accent, info,
@@ -43,6 +44,8 @@ module DaisyComponents
       # Text Parameter
       # ---------------
       # Simple button with text parameter
+      #
+      # @label Text Parameter
       def text_param
         render DaisyComponents::Actions::ButtonComponent.new(text: 'Text Parameter')
       end

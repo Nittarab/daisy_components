@@ -7,8 +7,9 @@ module DaisyComponents
     class AccordionComponentPreview < Lookbook::Preview
       # @!group Playground
 
-      # @title Default
-      # @description Interactive accordion component with customizable behavior and styling
+      # Playground
+      # ---------------
+      # Interactive accordion component with customizable behavior and styling
       #
       # @param join toggle "Join items together without gaps"
       # @param arrow toggle "Show arrow indicator"
