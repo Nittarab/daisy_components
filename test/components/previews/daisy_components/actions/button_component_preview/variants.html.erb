@@ -1,10 +1,11 @@
 <%# @label Button Variants %>
 <%# @display height 200 %>
 
-<div class="not-prose flex flex-wrap gap-2 p-4">
+<div class="flex flex-wrap gap-2">
   <% variants.each do |variant| %>
-    <%= render(DaisyComponents::Actions::ButtonComponent.new(variant: variant.to_s)) do %>
-      <%= variant.titleize %>
-    <% end %>
+    <%= render DaisyComponents::Actions::ButtonComponent.new(
+      text: variant.titleize,
+      variant: variant
+    ) %>
   <% end %>
 </div> 
