@@ -42,5 +42,11 @@ end
 ```
 
 Every component preview should have a playground method with all the parameters as options and the description as Lookbook description.
+For every component create:
+ - Ruy class
+ - html template
+ - lookbook preview with a playground method and the description as Lookbook description with group and label 
+ - test
+ - documentation
 
 For images, use placehold.co to generate placeholder images.
