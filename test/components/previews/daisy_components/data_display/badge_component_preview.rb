@@ -12,7 +12,8 @@ module DaisyComponents
       # Interactive badge component with customizable styling
       #
       # @param text text "Text content inside the badge"
-      # @param variant select { choices: [neutral, primary, secondary, accent, ghost, info, success, warning, error] } "Visual style"
+      # @param variant select { choices: [neutral, primary, secondary, accent, ghost, info, success, warning, error] }
+      #  "Visual style"
       # @param size select { choices: [xs, sm, md, lg] } "Badge size"
       # @param outline toggle "Show outlined style"
       # @param classes text "Additional CSS classes"
