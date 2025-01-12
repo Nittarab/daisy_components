@@ -1,11 +1,13 @@
 <%= render(DaisyComponents::DataDisplay::CardComponent.new(compact: true)) do |component| %>
-  <% component.with_title do %>
-    Compact Card
-  <% end %>
-  <% component.with_body do %>
-    <p>This card uses less padding for a more compact and space-efficient layout.</p>
-  <% end %>
-  <% component.with_actions do %>
-    <button class="btn btn-primary">Action</button>
+  <% component.with_body do |body| %>
+    <% body.with_title do %>
+      Compact Card
+    <% end %>
+    <% body.with_description do %>
+      <p>This card uses less padding for a more compact and space-efficient layout.</p>
+    <% end %>
+    <% body.with_actions do |actions| %>
+      <button class="btn btn-primary">Action</button>
+    <% end %>
   <% end %>
 <% end %> 

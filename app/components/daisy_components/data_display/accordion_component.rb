@@ -26,17 +26,14 @@ module DaisyComponents
 
       def default_classes
         class_names(
+          'w-full', # Always full width
           system_arguments[:class],
-          'join join-vertical w-full' => join
+          join ? 'join join-vertical' : 'space-y-2'
         )
       end
 
       def call
-        if join
-          tag.div(class: default_classes) { safe_join(items || []) }
-        else
-          tag.div(class: system_arguments[:class]) { safe_join(items || []) }
-        end
+        tag.div(class: default_classes) { safe_join(items || []) }
       end
     end
   end

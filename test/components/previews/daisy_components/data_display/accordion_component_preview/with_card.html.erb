@@ -1,25 +1,64 @@
 <%= render(DaisyComponents::DataDisplay::AccordionComponent.new) do |component| %>
-  <% component.with_item(title: 'Interactive Card Example') do %>
+  <% component.with_item(title: 'Basic Card') do %>
+    <%= render(DaisyComponents::DataDisplay::CardComponent.new) do |card| %>
+      <% card.with_body do |body| %>
+        <% body.with_title { 'Simple Card' } %>
+        <% body.with_description { 'A basic card with just title and description.' } %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% component.with_item(title: 'Interactive Card with Image') do %>
     <%= render(DaisyComponents::DataDisplay::CardComponent.new(glass: true)) do |card| %>
       <% card.with_figure do %>
         <%= tag.img(src: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Card+Image') %>
       <% end %>
-      <% card.with_title { 'Feature Card' } %>
-      <% card.with_body do %>
-        <p class="text-base-content/70 mb-4">
-          This is a more complex example showing how cards can be nested inside accordion items. 
-          The card includes an image, description, and multiple actions.
-        </p>
-        <div class="flex gap-2 items-center text-sm text-base-content/60">
-          <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Feature', variant: 'primary')) %>
-          <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Example', variant: 'ghost')) %>
-          <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Demo', variant: 'outline')) %>
-        </div>
-      <% end %>
-      <% card.with_actions do %>
-        <div class="flex justify-between items-center">
+      <% card.with_body do |body| %>
+        <% body.with_title { 'Feature Card' } %>
+        <% body.with_description do %>
+          <p class="text-base-content/70 mb-4">
+            This is a more complex example showing how cards can be nested inside accordion items. 
+            The card includes an image, description, and multiple actions.
+          </p>
+          <div class="flex gap-2 items-center text-sm text-base-content/60">
+            <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Feature', variant: 'primary')) %>
+            <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Example', variant: 'ghost')) %>
+            <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Demo', variant: 'outline')) %>
+          </div>
+        <% end %>   
+        <% body.with_actions do %>
           <%= render(DaisyComponents::Actions::ButtonComponent.new(text: 'Primary Action', variant: 'primary')) %>
-        </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% component.with_item(title: 'Side Image Card') do %>
+    <%= render(DaisyComponents::DataDisplay::CardComponent.new(style: :side)) do |card| %>
+      <% card.with_figure do %>
+        <%= tag.img(src: 'https://placehold.co/300x200/3B82F6/FFFFFF?text=Side+Image') %>
+      <% end %>
+      <% card.with_body do |body| %>
+        <% body.with_title { 'Side Card' } %>
+        <% body.with_description { 'A card with a side image layout.' } %>
+        <% body.with_actions do %>
+          <%= render(DaisyComponents::Actions::ButtonComponent.new(text: 'Learn More', variant: 'ghost')) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% component.with_item(title: 'Compact Card with Variants') do %>
+    <%= render(DaisyComponents::DataDisplay::CardComponent.new(style: :compact, bordered: true, glass: true)) do |card| %>
+      <% card.with_body do |body| %>
+        <% body.with_title(tag_name: :h3) { 'Compact Card' } %>
+        <% body.with_description do %>
+          <p>A compact card with bordered and glass variants.</p>
+          <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Compact', variant: 'secondary')) %>
+        <% end %>
+        <% body.with_actions do %>
+          <%= render(DaisyComponents::Actions::ButtonComponent.new(text: 'Action', variant: 'outline')) %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

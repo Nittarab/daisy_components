@@ -2,10 +2,12 @@
   <% component.with_title do %>
     Basic Card
   <% end %>
-  <% component.with_body do %>
-    <p>This is a basic card with default styling.</p>
-  <% end %>
-  <% component.with_actions do %>
-    <button class="btn btn-primary">Action</button>
+  <% component.with_body do |body| %>
+    <% body.with_description do %>
+      <p>This is a basic card with default styling.</p>
+    <% end %>
+    <% body.with_actions do |actions| %>
+      <button class="btn btn-primary">Action</button>
+    <% end %>
   <% end %>
 <% end %> 

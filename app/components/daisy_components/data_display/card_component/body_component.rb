@@ -4,21 +4,18 @@ module DaisyComponents
   module DataDisplay
     class CardComponent
       class BodyComponent < DaisyComponents::BaseComponent
-        renders_one :title, lambda { |text = nil, **system_arguments|
-          TitleComponent.new(text, **system_arguments)
-        }
-        renders_one :actions, lambda { |**system_arguments|
-          ActionsComponent.new(justify: :end, **system_arguments)
-        }
+        # Title is a component slot that renders TitleComponent
+        renders_one :title, 'DaisyComponents::DataDisplay::CardComponent::TitleComponent'
 
-        def initialize(style: nil, description: nil, **system_arguments)
+        # Actions is a component slot that renders ActionsComponent
+        renders_one :actions, 'DaisyComponents::DataDisplay::CardComponent::ActionsComponent'
+
+        # Description is a content slot that can contain any content
+        renders_one :description
+
+        def initialize(style: nil, **system_arguments)
           @style = style
-          @description = description
           super(**system_arguments)
-        end
-
-        def description
-          tag.p(@description) if @description
         end
 
         private

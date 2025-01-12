@@ -2,12 +2,14 @@
   <% component.with_figure do %>
     <%= tag.img(src: 'https://placehold.co/300x400/3B82F6/FFFFFF?text=Side+Image') %>
   <% end %>
-  <% component.with_body do %>
-    <% component.with_title do %>
+  <% component.with_body do |body| %>
+    <% body.with_title do %>
       Side Image Card
     <% end %>
-    <p>This card layout places the image on the side, creating a horizontal arrangement.</p>
-    <% component.with_actions do %>
+    <% body.with_description do %>
+      <p>This card layout places the image on the side, creating a horizontal arrangement.</p>
+    <% end %>
+    <% body.with_actions do |actions| %>
       <button class="btn btn-primary">Action</button>
     <% end %>
   <% end %>
