@@ -18,6 +18,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'debug'
 end
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
