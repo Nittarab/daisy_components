@@ -32,6 +32,8 @@ module DaisyComponents
           }
         end
       end
+
+      config.autoload_paths << root.join('app/components')
     end
   end
 end
