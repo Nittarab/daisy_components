@@ -7,115 +7,78 @@ module DaisyComponents
     class CardComponentTest < DaisyComponents::ComponentTestCase
       def test_renders_basic_card
         render_inline(CardComponent.new) do |component|
-          component.with_body { 'Card content' }
+          component.with_body(description: 'Content')
         end
 
-        assert_selector('.card')
-        assert_selector('.card-body', text: 'Card content')
+        assert_selector '.card.bg-base-100.w-96.shadow-xl'
+        assert_selector '.card-body'
+        assert_selector 'p', text: 'Content'
       end
 
-      def test_renders_with_figure
+      def test_renders_card_with_all_slots
         render_inline(CardComponent.new) do |component|
-          component.with_figure { tag.img(src: 'https://placehold.co/400x200') }
-          component.with_body { 'Card content' }
-        end
-
-        assert_selector('.card img[src="https://placehold.co/400x200"]')
-      end
-
-      def test_renders_with_title
-        render_inline(CardComponent.new) do |component|
-          component.with_body do |body|
-            body.with_title('Card Title')
-            'Card content'
+          component.with_figure { tag.img(src: 'test.jpg') }
+          component.with_body(description: 'Content') do |body|
+            body.with_title { 'Title' }
+            body.with_actions { 'Actions' }
           end
         end
 
-        assert_selector('.card-title', text: 'Card Title')
-        assert_selector('.card-body', text: 'Card content')
+        assert_selector '.card'
+        assert_selector 'figure img[src="test.jpg"]'
+        assert_selector '.card-body'
+        assert_selector '.card-title', text: 'Title'
+        assert_selector 'p', text: 'Content'
+        assert_selector '.card-actions.justify-end', text: 'Actions'
       end
 
-      def test_renders_with_actions
-        render_inline(CardComponent.new) do |component|
-          component.with_body { 'Card content' }
-          component.with_actions do
-            'Card actions'
-          end
-        end
-
-        assert_selector('.card-actions', text: 'Card actions')
-      end
-
-      def test_renders_with_bordered_style
-        render_inline(CardComponent.new(bordered: true)) do |component|
-          component.with_body { 'Card content' }
-        end
-
-        assert_selector('.card.card-bordered')
-      end
-
-      def test_renders_with_image_full
-        render_inline(CardComponent.new(image_full: true)) do |component|
-          component.with_figure { tag.img(src: 'https://placehold.co/400x200') }
-          component.with_body { 'Card content' }
-        end
-
-        assert_selector('.card.image-full')
-      end
-
-      def test_renders_with_compact_style
-        render_inline(CardComponent.new(style: :compact)) do |component|
-          component.with_body { 'Card content' }
-        end
-
-        assert_selector('.card.card-compact')
-      end
-
-      def test_renders_with_side_style
+      def test_renders_side_image_card
         render_inline(CardComponent.new(style: :side)) do |component|
-          component.with_figure { tag.img(src: 'https://placehold.co/400x200') }
-          component.with_body { 'Card content' }
+          component.with_figure { tag.img(src: 'test.jpg') }
+          component.with_body(description: 'Content') do |body|
+            body.with_title { 'Title' }
+            body.with_actions { 'Actions' }
+          end
         end
 
-        assert_selector('.card.card-side')
+        assert_selector '.card.card-side'
+        assert_selector '.card-body.flex.flex-col.justify-between'
+        assert_selector 'p', text: 'Content'
       end
 
-      def test_renders_with_glass_effect
-        render_inline(CardComponent.new(glass: true)) do |component|
-          component.with_body { 'Card content' }
+      def test_applies_variants
+        render_inline(CardComponent.new(bordered: true, glass: true, image_full: true)) do |component|
+          component.with_body(description: 'Content')
         end
 
-        assert_selector('.card.glass')
+        assert_selector '.card.card-bordered.glass.image-full'
+        assert_selector 'p', text: 'Content'
       end
 
-      def test_renders_with_custom_classes
+      def test_renders_compact_style
+        render_inline(CardComponent.new(style: :compact)) do |component|
+          component.with_body(description: 'Content')
+        end
+
+        assert_selector '.card.card-compact'
+        assert_selector 'p', text: 'Content'
+      end
+
+      def test_handles_invalid_style
+        render_inline(CardComponent.new(style: :invalid)) do |component|
+          component.with_body(description: 'Content')
+        end
+
+        assert_selector '.card.card-normal'
+        assert_selector 'p', text: 'Content'
+      end
+
+      def test_renders_custom_classes
         render_inline(CardComponent.new(class: 'custom-class')) do |component|
-          component.with_body { 'Card content' }
+          component.with_body(description: 'Content')
         end
 
-        assert_selector('.card.custom-class')
-      end
-
-      def test_renders_with_justified_actions
-        render_inline(CardComponent.new) do |component|
-          component.with_body { 'Card content' }
-          component.with_actions(justify: 'between') do
-            'Card actions'
-          end
-        end
-
-        assert_selector('.card-actions.justify-between')
-      end
-
-      def test_renders_with_custom_title_tag
-        render_inline(CardComponent.new) do |component|
-          component.with_body do |body|
-            body.with_title('Card Title', tag_name: :h3)
-            'Card content'
-          end
-        end
-
-        assert_selector('h3.card-title', text: 'Card Title')
+        assert_selector '.card.custom-class'
       end
     end
   end

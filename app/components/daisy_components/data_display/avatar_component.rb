@@ -21,6 +21,8 @@ module DaisyComponents
         super(**system_arguments)
       end
 
+      private
+
       def default_classes
         if group?
           class_names(
@@ -31,15 +33,28 @@ module DaisyComponents
           class_names(
             'avatar',
             system_arguments[:class],
-            online: online,
-            offline: offline,
-            "w-#{size} h-#{size}": size,
-            'rounded-full': shape == :circle,
-            'mask mask-squircle': shape == :squircle,
-            'mask mask-hexagon': shape == :hexagon,
-            'mask mask-triangle': shape == :triangle
+            status_classes,
+            size_classes,
+            shape_classes
           )
         end
+      end
+
+      def status_classes
+        { online: online, offline: offline }
+      end
+
+      def size_classes
+        { "w-#{size} h-#{size}": size }
+      end
+
+      def shape_classes
+        {
+          'rounded-full': shape == :circle,
+          'mask mask-squircle': shape == :squircle,
+          'mask mask-hexagon': shape == :hexagon,
+          'mask mask-triangle': shape == :triangle
+        }
       end
 
       def html_attributes

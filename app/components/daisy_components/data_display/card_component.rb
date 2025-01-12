@@ -3,15 +3,11 @@
 module DaisyComponents
   module DataDisplay
     class CardComponent < DaisyComponents::BaseComponent
-      renders_one :figure
-      renders_one :title, lambda { |text = nil, **system_arguments|
-        CardTitleComponent.new(text, **system_arguments)
+      renders_one :figure, lambda { |**system_arguments|
+        FigureComponent.new(**system_arguments)
       }
       renders_one :body, lambda { |**system_arguments|
-        CardBodyComponent.new(**system_arguments)
-      }
-      renders_one :actions, lambda { |**system_arguments|
-        CardActionsComponent.new(**system_arguments)
+        BodyComponent.new(style: @style, **system_arguments)
       }
 
       STYLES = %w[normal compact side].freeze
@@ -19,20 +15,10 @@ module DaisyComponents
       def initialize(bordered: false, image_full: false, style: :normal, glass: false, **system_arguments)
         @bordered = bordered
         @image_full = image_full
-        @style = style if STYLES.include?(style.to_s)
+        @style = STYLES.include?(style.to_s) ? style : :normal
         @glass = glass
 
         super(**system_arguments)
-      end
-
-      def call
-        tag.div(**html_attributes) do
-          safe_join([
-            figure,
-            body,
-            actions
-          ].compact)
-        end
       end
 
       private
@@ -40,6 +26,9 @@ module DaisyComponents
       def default_classes
         class_names(
           'card',
+          'bg-base-100',
+          'w-96',
+          'shadow-xl',
           system_arguments[:class],
           'card-bordered': @bordered,
           'image-full': @image_full,
