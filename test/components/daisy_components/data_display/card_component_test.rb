@@ -106,6 +106,15 @@ module DaisyComponents
 
         assert_selector '.card-body h3.card-title', text: 'Custom Title'
       end
+
+      def test_renders_body_with_title_and_description
+        render_inline(CardComponent.new) do |component|
+          component.with_body(title: 'Title from param', description: 'Description from param')
+        end
+
+        assert_selector '.card-title', text: 'Title from param'
+        assert_text 'Description from param'
+      end
     end
   end
 end

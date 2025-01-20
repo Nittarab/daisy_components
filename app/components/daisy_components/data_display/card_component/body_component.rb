@@ -13,9 +13,20 @@ module DaisyComponents
         # Description is a content slot that can contain any content
         renders_one :description
 
-        def initialize(style: nil, **system_arguments)
+        def initialize(style: nil, description: nil, title: nil, button_text: nil, button_class: nil,
+                       **system_arguments)
           @style = style
+          @description = description
+          @title = title
+          @button_text = button_text
+          @button_class = button_class
           super(**system_arguments)
+        end
+
+        def before_render
+          with_description { @description } if @description && !description?
+          with_title(@title) if @title && !title?
+          with_actions { tag.button(@button_text, class: @button_class) } if @button_text && !actions?
         end
 
         private

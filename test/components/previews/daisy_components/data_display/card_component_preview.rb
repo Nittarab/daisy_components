@@ -19,6 +19,7 @@ module DaisyComponents
       # @param description text "Card description"
       # @param image_url text "URL for the card image"
       # @param button_text text "Text for the action button"
+      # @param button_class text "CSS classes for the button" default: "btn btn-primary"
       def playground(
         style: :normal,
         bordered: false,
@@ -27,25 +28,20 @@ module DaisyComponents
         title: 'Card Title',
         description: 'Card content goes here.',
         image_url: 'https://placehold.co/400x200',
-        button_text: 'Action'
+        button_text: 'Action',
+        button_class: 'btn btn-primary'
       )
         render CardComponent.new(
           style: style,
           bordered: bordered,
           glass: glass,
-          image_full: image_full
-        ) do |component|
-          component.with_figure { tag.img(src: image_url) } if image_url.present?
-          component.with_body do |body|
-            body.with_title { title } if title.present?
-            body.with_description { description }
-            if button_text.present?
-              body.with_actions do
-                tag.button(button_text, class: 'btn btn-primary')
-              end
-            end
-          end
-        end
+          image_full: image_full,
+          title: title,
+          description: description,
+          image_url: image_url,
+          button_text: button_text,
+          button_class: button_class
+        )
       end
 
       # @!group Variants
@@ -56,12 +52,7 @@ module DaisyComponents
       #
       # @label Default
       def default
-        render CardComponent.new do |component|
-          component.with_body do |body|
-            body.with_title { 'Card Title' }
-            body.with_description { 'Card content goes here.' }
-          end
-        end
+        render CardComponent.new(title: 'Card Title', description: 'Card content goes here.')
       end
 
       # Card with Image
@@ -70,16 +61,13 @@ module DaisyComponents
       #
       # @label With Image
       def with_image
-        render CardComponent.new do |component|
-          component.with_figure { tag.img(src: 'https://placehold.co/400x200') }
-          component.with_body do |body|
-            body.with_title { 'Image Card' }
-            body.with_description { 'Here is a description of the image above.' }
-            body.with_actions do
-              tag.button('View Details', class: 'btn btn-primary')
-            end
-          end
-        end
+        render CardComponent.new(
+          title: 'Image Card',
+          description: 'Here is a description of the image above.',
+          image_url: 'https://placehold.co/400x200',
+          button_text: 'View Details',
+          button_class: 'btn btn-primary'
+        )
       end
 
       # Side Image Layout
@@ -88,16 +76,14 @@ module DaisyComponents
       #
       # @label Side Image
       def side_image
-        render CardComponent.new(style: :side) do |component|
-          component.with_figure { tag.img(src: 'https://placehold.co/200x200') }
-          component.with_body do |body|
-            body.with_title { 'Side Image Card' }
-            body.with_description { 'This card uses a side image layout.' }
-            body.with_actions do
-              tag.button('Learn More', class: 'btn btn-primary')
-            end
-          end
-        end
+        render CardComponent.new(
+          style: :side,
+          title: 'Side Image Card',
+          description: 'This card uses a side image layout.',
+          image_url: 'https://placehold.co/200x200',
+          button_text: 'Learn More',
+          button_class: 'btn btn-primary'
+        )
       end
 
       # Card with Border
@@ -106,11 +92,10 @@ module DaisyComponents
       #
       # @label Bordered
       def bordered
-        render CardComponent.new(bordered: true) do |component|
-          component.with_body do |body|
-            body.with_description { 'This card has a border.' }
-          end
-        end
+        render CardComponent.new(
+          bordered: true,
+          description: 'This card has a border.'
+        )
       end
 
       # Glass Effect
@@ -119,11 +104,10 @@ module DaisyComponents
       #
       # @label Glass
       def glass
-        render CardComponent.new(glass: true) do |component|
-          component.with_body do |body|
-            body.with_description { 'This card has a glass effect.' }
-          end
-        end
+        render CardComponent.new(
+          glass: true,
+          description: 'This card has a glass effect.'
+        )
       end
 
       # Full Width Image
@@ -132,16 +116,14 @@ module DaisyComponents
       #
       # @label Image Full
       def image_full
-        render CardComponent.new(image_full: true) do |component|
-          component.with_figure { tag.img(src: 'https://placehold.co/400x200') }
-          component.with_body do |body|
-            body.with_title { 'Full Image Card' }
-            body.with_description { 'This card has a full image background.' }
-            body.with_actions do
-              tag.button('Read More', class: 'btn btn-primary')
-            end
-          end
-        end
+        render CardComponent.new(
+          image_full: true,
+          title: 'Full Image Card',
+          description: 'This card has a full image background.',
+          image_url: 'https://placehold.co/400x200',
+          button_text: 'Read More',
+          button_class: 'btn btn-primary'
+        )
       end
 
       # Compact Layout
@@ -150,11 +132,10 @@ module DaisyComponents
       #
       # @label Compact
       def compact
-        render CardComponent.new(style: :compact) do |component|
-          component.with_body do |body|
-            body.with_description { 'This card uses compact padding.' }
-          end
-        end
+        render CardComponent.new(
+          style: :compact,
+          description: 'This card uses compact padding.'
+        )
       end
     end
   end
