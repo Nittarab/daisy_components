@@ -24,8 +24,8 @@ module DaisyComponents
         end
 
         def before_render
-          with_description { @description } if @description && !description?
           with_title(@title) if @title && !title?
+          with_description { @description } if @description && !description?
           with_actions { tag.button(@button_text, class: @button_class) } if @button_text && !actions?
         end
 

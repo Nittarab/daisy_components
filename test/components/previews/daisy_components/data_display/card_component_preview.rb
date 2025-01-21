@@ -137,6 +137,15 @@ module DaisyComponents
           description: 'This card uses compact padding.'
         )
       end
+
+      # Complex Description
+      # ---------------
+      # Card with a complex description containing a badge and text content
+      #
+      # @label Complex Description
+      def complex_description
+        render_with_template
+      end
     end
   end
 end
