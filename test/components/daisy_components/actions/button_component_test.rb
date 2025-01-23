@@ -142,6 +142,56 @@ module DaisyComponents
                       ))
         assert_selector('button.btn[aria-label="Custom Label"][aria-expanded="true"]')
       end
+
+      def test_button_type_validation
+        render_inline(ButtonComponent.new(
+                        text: 'Invalid',
+                        type: 'invalid-type'
+                      ))
+
+        assert_selector("button[type='button']") # Falls back to default
+        refute_selector("button[type='invalid-type']")
+      end
+
+      def test_link_with_custom_rel
+        render_inline(ButtonComponent.new(
+                        text: 'Custom Rel',
+                        href: '/path',
+                        rel: 'nofollow'
+                      ))
+
+        assert_selector("a.btn[rel='nofollow']")
+      end
+
+      def test_link_without_target_blank_has_no_rel
+        render_inline(ButtonComponent.new(
+                        text: 'No Rel',
+                        href: '/path',
+                        target: '_self'
+                      ))
+
+        refute_selector('a[rel]')
+      end
+
+      def test_loading_and_disabled_state_combination
+        render_inline(ButtonComponent.new(
+                        text: 'Processing',
+                        loading: true,
+                        disabled: true
+                      ))
+
+        assert_selector('button.btn.loading.btn-disabled[disabled][aria-disabled="true"][aria-busy="true"]')
+      end
+
+      def test_base_component_classes
+        button = ButtonComponent.new(text: 'Test', classes: 'custom-class-1 custom-class-2')
+        assert_equal 'custom-class-1 custom-class-2', button.send(:classes)
+      end
+
+      def test_base_component_nil_classes
+        button = ButtonComponent.new(text: 'Test', classes: nil)
+        assert_equal '', button.send(:classes)
+      end
     end
   end
 end

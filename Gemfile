@@ -19,6 +19,8 @@ end
 group :test do
   gem 'capybara'
   gem 'debug'
+  gem 'simplecov', require: false
+  gem 'simplecov-cobertura', require: false
 end
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
