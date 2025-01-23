@@ -26,7 +26,7 @@ module DaisyComponents
         render_inline(DropdownComponent.new(position: 'invalid-position')) { 'Content' }
 
         assert_selector('div.dropdown')
-        refute_includes rendered_content, 'invalid-position'
+        assert_not_includes rendered_content, 'invalid-position'
       end
 
       def test_renders_with_hover

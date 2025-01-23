@@ -2,6 +2,10 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.4
 
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-capybara
 
 Style/Documentation:
   Enabled: false

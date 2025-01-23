@@ -27,7 +27,7 @@ module DaisyComponents
       def render_icon
         return unless @icon
 
-        raw(@icon)
+        sanitize(@icon)
       end
 
       def default_classes
