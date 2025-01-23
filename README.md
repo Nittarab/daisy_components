@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/github/Nittarab/daisy_components/graph/badge.svg?token=7ZOMOEG3U9)](https://codecov.io/github/Nittarab/daisy_components)
+
 # DaisyComponents
 
 DaisyComponents is a Ruby gem that provides a collection of ViewComponents implementing the DaisyUI design system for Rails applications. It combines the power of ViewComponent, TailwindCSS, and DaisyUI to create reusable, maintainable UI components.
