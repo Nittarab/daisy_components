@@ -110,6 +110,38 @@ module DaisyComponents
         assert_selector('button.btn.btn-primary.btn-lg.btn-disabled.loading.btn-active.custom-class')
         assert_text('Custom Button')
       end
+
+      def test_renders_with_block_content
+        render_inline(ButtonComponent.new) { 'Block content' }
+        assert_selector('button.btn', text: 'Block content')
+        assert_selector("button[type='button']")
+        refute_selector('a')
+      end
+
+      def test_renders_with_html_content
+        render_inline(ButtonComponent.new) do
+          "<i class='icon'></i> With Icon".html_safe
+        end
+        assert_selector('button.btn i.icon')
+        assert_text('With Icon')
+      end
+
+      def test_renders_with_data_attributes
+        render_inline(ButtonComponent.new(
+                        text: 'Data',
+                        data: { controller: 'button', action: 'click->button#click' }
+                      ))
+        assert_selector('button.btn[data-controller="button"][data-action="click->button#click"]')
+      end
+
+      def test_renders_with_aria_attributes
+        render_inline(ButtonComponent.new(
+                        text: 'Aria',
+                        'aria-label': 'Custom Label',
+                        'aria-expanded': 'true'
+                      ))
+        assert_selector('button.btn[aria-label="Custom Label"][aria-expanded="true"]')
+      end
     end
   end
 end

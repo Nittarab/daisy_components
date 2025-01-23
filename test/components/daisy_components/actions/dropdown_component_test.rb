@@ -88,6 +88,15 @@ module DaisyComponents
         assert_selector('div.dropdown[aria-label="Dropdown menu"][aria-expanded="true"]')
       end
 
+      def test_renders_with_html_content
+        render_inline(DropdownComponent.new) do
+          '<button>Trigger</button><div>Content</div>'.html_safe
+        end
+
+        assert_selector('div.dropdown button', text: 'Trigger')
+        assert_selector('div.dropdown div', text: 'Content')
+      end
+
       def test_renders_with_complex_content
         content = content_tag(:button, 'Trigger', class: 'btn') +
                   content_tag(:ul, class: 'dropdown-content') do
@@ -112,15 +121,6 @@ module DaisyComponents
                       )) { 'Content' }
 
         assert_selector('div.dropdown.dropdown-top.dropdown-hover.dropdown-open.dropdown-end')
-      end
-
-      def test_renders_with_html_content
-        render_inline(DropdownComponent.new) do
-          '<button>Trigger</button><div>Content</div>'.html_safe
-        end
-
-        assert_selector('div.dropdown button', text: 'Trigger')
-        assert_selector('div.dropdown div', text: 'Content')
       end
 
       def test_renders_with_button_component
