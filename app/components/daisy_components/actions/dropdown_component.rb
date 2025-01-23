@@ -46,9 +46,9 @@ module DaisyComponents
     #   <% end %>
     class DropdownComponent < BaseComponent
       # Available dropdown positions from DaisyUI
-      POSITIONS = %w[end top bottom left right].freeze
+      POSITIONS = %w[top bottom left right].freeze
 
-      # @param position [String] Position of the dropdown content relative to the trigger (end/top/bottom/left/right)
+      # @param position [String] Position of the dropdown content relative to the trigger (top/bottom/left/right)
       # @param hover [Boolean] When true, opens the dropdown on hover instead of click
       # @param open [Boolean] When true, forces the dropdown to stay open
       # @param align_end [Boolean] When true, aligns the dropdown content to the end (right) of the trigger
