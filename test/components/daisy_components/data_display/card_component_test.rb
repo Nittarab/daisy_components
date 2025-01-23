@@ -6,7 +6,7 @@ module DaisyComponents
   module DataDisplay
     class CardComponentTest < DaisyComponents::ComponentTestCase
       def test_renders_basic_card
-        render_preview(CardComponentPreview, :default)
+        render_preview(:default, from: CardComponentPreview)
         assert_selector '.card.bg-base-100.w-96.shadow-xl'
         assert_selector '.card-body'
         assert_text 'Card Title'
@@ -14,7 +14,7 @@ module DaisyComponents
       end
 
       def test_renders_with_image
-        render_preview(CardComponentPreview, :with_image)
+        render_preview(:with_image, from: CardComponentPreview)
         assert_selector '.card figure img[src="https://placehold.co/400x200"]'
         assert_selector '.card-title', text: 'Image Card'
         assert_text 'Here is a description of the image above.'
@@ -22,7 +22,7 @@ module DaisyComponents
       end
 
       def test_renders_side_image_card
-        render_preview(CardComponentPreview, :side_image)
+        render_preview(:side_image, from: CardComponentPreview)
         assert_selector '.card.card-side'
         assert_selector '.card figure img[src="https://placehold.co/200x200"]'
         assert_selector '.card-title', text: 'Side Image Card'
@@ -31,19 +31,19 @@ module DaisyComponents
       end
 
       def test_renders_bordered_card
-        render_preview(CardComponentPreview, :bordered)
+        render_preview(:bordered, from: CardComponentPreview)
         assert_selector '.card.card-bordered'
         assert_text 'This card has a border.'
       end
 
       def test_renders_glass_card
-        render_preview(CardComponentPreview, :glass)
+        render_preview(:glass, from: CardComponentPreview)
         assert_selector '.card.glass'
         assert_text 'This card has a glass effect.'
       end
 
       def test_renders_image_full_card
-        render_preview(CardComponentPreview, :image_full)
+        render_preview(:image_full, from: CardComponentPreview)
         assert_selector '.card.image-full'
         assert_selector '.card figure img[src="https://placehold.co/400x200"]'
         assert_selector '.card-title', text: 'Full Image Card'
@@ -52,21 +52,21 @@ module DaisyComponents
       end
 
       def test_renders_compact_card
-        render_preview(CardComponentPreview, :compact)
+        render_preview(:compact, from: CardComponentPreview)
         assert_selector '.card.card-compact'
         assert_text 'This card uses compact padding.'
       end
 
       def test_playground_renders_with_all_options
-        render_preview(CardComponentPreview, :playground,
-                       style: :side,
-                       bordered: true,
-                       glass: true,
-                       image_full: true,
-                       title: 'Custom Title',
-                       description: 'Custom Description',
-                       image_url: 'https://placehold.co/300x300',
-                       button_text: 'Custom Action')
+        render_preview(:playground, from: CardComponentPreview,
+                                    params: { style: :side,
+                                              bordered: true,
+                                              glass: true,
+                                              image_full: true,
+                                              title: 'Custom Title',
+                                              description: 'Custom Description',
+                                              image_url: 'https://placehold.co/300x300',
+                                              button_text: 'Custom Action' })
 
         assert_selector '.card.card-side.card-bordered.glass.image-full'
         assert_selector '.card figure img[src="https://placehold.co/300x300"]'

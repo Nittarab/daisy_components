@@ -1,5 +1,6 @@
 <div class="flex flex-wrap items-center gap-2">
-  <% sizes.each do |size| %>
-    <%= render DaisyComponents::DataDisplay::BadgeComponent.new("badge-#{size}", size: size) %>
-  <% end %>
+  <%= render DaisyComponents::DataDisplay::BadgeComponent.new("Large", size: 'lg') %>
+  <%= render DaisyComponents::DataDisplay::BadgeComponent.new("Medium", size: 'md') %>
+  <%= render DaisyComponents::DataDisplay::BadgeComponent.new("Small", size: 'sm') %>
+  <%= render DaisyComponents::DataDisplay::BadgeComponent.new("Extra Small", size: 'xs') %>
 </div> 
