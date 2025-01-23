@@ -27,7 +27,8 @@ module DaisyComponents
       def render_icon
         return unless @icon
 
-        sanitize(@icon)
+        helpers.sanitize(@icon, tags: %w[svg path g circle],
+                                attributes: %w[class viewBox fill stroke d])
       end
 
       def default_classes
