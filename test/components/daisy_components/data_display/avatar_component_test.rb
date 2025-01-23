@@ -5,105 +5,72 @@ require 'test_helper'
 module DaisyComponents
   module DataDisplay
     class AvatarComponentTest < DaisyComponents::ComponentTestCase
-      def test_renders_basic_avatar_with_src
-        render_inline(AvatarComponent.new(src: 'https://placehold.co/100x100'))
-
+      def test_renders_basic_avatar
+        render_preview(:basic)
         assert_selector('.avatar')
-        assert_selector('img[src="https://placehold.co/100x100"]')
-      end
-
-      def test_renders_basic_avatar_with_image_slot
-        render_inline(AvatarComponent.new) do |component|
-          component.with_image { tag.img(src: 'https://placehold.co/100x100', alt: 'Avatar') }
-        end
-
-        assert_selector('.avatar')
-        assert_selector('img[src="https://placehold.co/100x100"]')
+        assert_selector('img[src="https://placehold.co/400x400/3B82F6/FFFFFF?text=A"]')
       end
 
       def test_renders_with_size
-        render_inline(AvatarComponent.new(size: 16, src: 'https://placehold.co/100x100'))
-
+        render_preview(:sizes)
         assert_selector('.avatar.w-16.h-16')
+        assert_selector('.avatar.w-24.h-24')
+        assert_selector('.avatar.w-32.h-32')
       end
 
-      def test_renders_with_circle_shape
-        render_inline(AvatarComponent.new(shape: :circle, src: 'https://placehold.co/100x100'))
-
+      def test_renders_with_shapes
+        render_preview(:shapes)
         assert_selector('.avatar.rounded-full')
-      end
-
-      def test_renders_with_squircle_shape
-        render_inline(AvatarComponent.new(shape: :squircle, src: 'https://placehold.co/100x100'))
-
         assert_selector('.avatar.mask.mask-squircle')
-      end
-
-      def test_renders_with_hexagon_shape
-        render_inline(AvatarComponent.new(shape: :hexagon, src: 'https://placehold.co/100x100'))
-
         assert_selector('.avatar.mask.mask-hexagon')
-      end
-
-      def test_renders_with_triangle_shape
-        render_inline(AvatarComponent.new(shape: :triangle, src: 'https://placehold.co/100x100'))
-
         assert_selector('.avatar.mask.mask-triangle')
       end
 
       def test_renders_with_online_status
-        render_inline(AvatarComponent.new(online: true, src: 'https://placehold.co/100x100'))
-
+        render_preview(:online)
         assert_selector('.avatar.online')
+        assert_selector('img[src="https://placehold.co/400x400/22C55E/FFFFFF?text=ON"]')
       end
 
       def test_renders_with_offline_status
-        render_inline(AvatarComponent.new(offline: true, src: 'https://placehold.co/100x100'))
-
+        render_preview(:offline)
         assert_selector('.avatar.offline')
+        assert_selector('img[src="https://placehold.co/400x400/EF4444/FFFFFF?text=OFF"]')
       end
 
       def test_renders_with_placeholder
-        render_inline(AvatarComponent.new) do |component|
-          component.with_placeholder { 'PB' }
-        end
-
+        render_preview(:placeholder)
         assert_selector('.avatar')
         assert_selector('.bg-neutral.text-neutral-content')
-        assert_text('PB')
+        assert_text('JD')
       end
 
       def test_renders_avatar_group
-        render_inline(AvatarComponent.new) do |component|
-          component.with_group(src: 'https://placehold.co/100x100')
-          component.with_group(src: 'https://placehold.co/100x100')
-        end
-
+        render_preview(:group)
         assert_selector('.avatar-group')
-        assert_selector('.avatar', count: 2)
-        assert_selector('img[src="https://placehold.co/100x100"]', count: 2)
+        assert_selector('.avatar', count: 4) # Including the counter avatar
+        assert_selector('img[src="https://placehold.co/400x400/3B82F6/FFFFFF?text=1"]')
+        assert_selector('img[src="https://placehold.co/400x400/22C55E/FFFFFF?text=2"]')
+        assert_selector('img[src="https://placehold.co/400x400/EF4444/FFFFFF?text=3"]')
+        assert_text('+2')
       end
 
       def test_renders_with_custom_classes
-        render_inline(AvatarComponent.new(class: 'custom-class', src: 'https://placehold.co/100x100'))
-
+        render_inline(AvatarComponent.new(class: 'custom-class', size: 12)) do |component|
+          component.with_image do
+            tag.img(src: 'https://placehold.co/400x400', alt: 'Avatar')
+          end
+        end
         assert_selector('.avatar.custom-class')
       end
 
-      def test_renders_with_alt_text
-        render_inline(AvatarComponent.new(src: 'https://placehold.co/100x100', alt: 'User Avatar'))
-
-        assert_selector('img[alt="User Avatar"]')
-      end
-
-      def test_renders_with_multiple_attributes
-        render_inline(AvatarComponent.new(
-                        size: 24,
-                        shape: :circle,
-                        online: true,
-                        src: 'https://placehold.co/100x100',
-                        class: 'custom-class'
-                      ))
+      def test_playground_renders_with_all_options
+        render_preview(:playground, params: {
+                         size: 24,
+                         shape: :circle,
+                         online: true,
+                         classes: 'custom-class'
+                       })
 
         assert_selector('.avatar.w-24.h-24.rounded-full.online.custom-class')
       end

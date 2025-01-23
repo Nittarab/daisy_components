@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-# @label Dropdown
-# @display bg_color "#fff"
 module DaisyComponents
   module Actions
-    class DropdownComponentPreview < Lookbook::Preview
+    # @label Dropdown
+    # @display bg_color "#fff"
+    class DropdownComponentPreview < ViewComponent::Preview
       # @!group Playground
 
       # Playground
       # ---------------
       # Interactive dropdown menu with customizable trigger and content
       #
-      # @param position select { choices: [end, top, bottom, left, right] } "Position of the dropdown content relative
-      #                                                                        to the trigger"
+      # @param position select { choices: [top, bottom, left, right] }
+      #                       "Position of the dropdown content relative to the trigger"
       # @param hover toggle "When true, opens the dropdown on hover instead of click"
       # @param open toggle "When true, forces the dropdown to stay open"
       # @param align_end toggle "When true, aligns the dropdown content to the end (right) of the trigger"
@@ -49,7 +49,7 @@ module DaisyComponents
         render_with_template(
           template: 'daisy_components/actions/dropdown_component_preview/positions',
           locals: {
-            positions: DaisyComponents::Actions::DropdownComponent::POSITIONS
+            positions: ::DaisyComponents::Actions::DropdownComponent::POSITIONS
           }
         )
       end

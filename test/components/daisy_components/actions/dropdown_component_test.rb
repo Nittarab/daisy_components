@@ -4,7 +4,7 @@ require 'test_helper'
 
 module DaisyComponents
   module Actions
-    class DropdownComponentTest < ViewComponent::TestCase
+    class DropdownComponentTest < DaisyComponents::ComponentTestCase
       include ActionView::Helpers::TagHelper
       include ActionView::Context
 
@@ -88,6 +88,15 @@ module DaisyComponents
         assert_selector('div.dropdown[aria-label="Dropdown menu"][aria-expanded="true"]')
       end
 
+      def test_renders_with_html_content
+        render_inline(DropdownComponent.new) do
+          '<button>Trigger</button><div>Content</div>'.html_safe
+        end
+
+        assert_selector('div.dropdown button', text: 'Trigger')
+        assert_selector('div.dropdown div', text: 'Content')
+      end
+
       def test_renders_with_complex_content
         content = content_tag(:button, 'Trigger', class: 'btn') +
                   content_tag(:ul, class: 'dropdown-content') do
@@ -114,15 +123,6 @@ module DaisyComponents
         assert_selector('div.dropdown.dropdown-top.dropdown-hover.dropdown-open.dropdown-end')
       end
 
-      def test_renders_with_html_content
-        render_inline(DropdownComponent.new) do
-          '<button>Trigger</button><div>Content</div>'.html_safe
-        end
-
-        assert_selector('div.dropdown button', text: 'Trigger')
-        assert_selector('div.dropdown div', text: 'Content')
-      end
-
       def test_renders_with_button_component
         render_inline(DropdownComponent.new) do
           button = render_inline(ButtonComponent.new(text: 'Dropdown')).to_html
@@ -133,6 +133,66 @@ module DaisyComponents
         assert_includes rendered_content, 'Dropdown'
         assert_includes rendered_content, 'dropdown-content'
         assert_includes rendered_content, 'Menu'
+      end
+
+      def test_renders_dropdown_positions
+        render_preview(:positions)
+        DropdownComponent::POSITIONS.each do |position|
+          assert_selector("div.dropdown.dropdown-#{position}")
+          assert_selector('label.btn')
+          assert_selector('ul.dropdown-content')
+          assert_selector('li a', text: 'Item 1')
+          assert_selector('li a', text: 'Item 2')
+        end
+      end
+
+      def test_renders_dropdown_alignments
+        render_preview(:alignments)
+        # Default alignment
+        assert_selector('div.dropdown:not(.dropdown-end)')
+        # End alignment
+        assert_selector('div.dropdown.dropdown-end')
+        # Top alignment
+        assert_selector('div.dropdown.dropdown-top')
+        # Top end alignment
+        assert_selector('div.dropdown.dropdown-top.dropdown-end')
+        # Left alignment
+        assert_selector('div.dropdown.dropdown-left')
+        # Left end alignment
+        assert_selector('div.dropdown.dropdown-left.dropdown-end')
+      end
+
+      def test_renders_dropdown_behaviors
+        render_preview(:behaviors)
+        # Hover behavior
+        assert_selector('div.dropdown.dropdown-hover')
+        assert_selector('label.btn', text: 'Hover me')
+        # Force open
+        assert_selector('div.dropdown.dropdown-open')
+        assert_selector('label.btn', text: 'Always Open')
+      end
+
+      def test_playground_renders_with_all_options
+        render_preview(:playground, params: {
+                         position: 'top',
+                         hover: true,
+                         open: true,
+                         align_end: true,
+                         classes: 'custom-class'
+                       })
+
+        assert_selector('div.dropdown.dropdown-top.dropdown-hover.dropdown-open.dropdown-end.custom-class')
+        assert_selector('button.btn', text: 'Click me')
+        assert_selector('ul.dropdown-content')
+        assert_selector('li a', text: 'Item 1')
+        assert_selector('li a', text: 'Item 2')
+      end
+
+      def test_renders_with_custom_classes
+        render_inline(DropdownComponent.new(class: 'custom-class')) do
+          tag.button('Click me', class: 'btn')
+        end
+        assert_selector('div.dropdown.custom-class')
       end
     end
   end

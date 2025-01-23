@@ -4,7 +4,8 @@
 # @display bg_color "#fff"
 module DaisyComponents
   module DataDisplay
-    class BadgeComponentPreview < Lookbook::Preview
+    class BadgeComponentPreview < ViewComponent::Preview
+      include DaisyComponents::IconsHelper
       # @!group Playground
 
       # Default
@@ -24,13 +25,7 @@ module DaisyComponents
         outline: false,
         classes: ''
       )
-        render(BadgeComponent.new(
-                 text,
-                 variant:,
-                 size:,
-                 outline:,
-                 class: classes
-               ))
+        render(BadgeComponent.new(text, variant: variant, size: size, outline: outline, class: classes))
       end
 
       # @!endgroup
@@ -43,7 +38,7 @@ module DaisyComponents
       #
       # @label Basic
       def default
-        render(BadgeComponent.new('Badge'))
+        render(BadgeComponent.new('Default Badge'))
       end
 
       # Block Content
@@ -52,9 +47,7 @@ module DaisyComponents
       #
       # @label Block
       def with_block
-        render(BadgeComponent.new) do
-          'Block content'
-        end
+        render(BadgeComponent.new('Block Badge'))
       end
 
       # @!endgroup
@@ -67,9 +60,7 @@ module DaisyComponents
       #
       # @label Colors
       def colors
-        render_with_template(locals: {
-                               variants: BadgeComponent::VARIANTS
-                             })
+        render_with_template(locals: { variants: BadgeComponent::VARIANTS })
       end
 
       # Outline Style
@@ -78,9 +69,7 @@ module DaisyComponents
       #
       # @label Outline
       def outline
-        render_with_template(locals: {
-                               variants: BadgeComponent::VARIANTS
-                             })
+        render_with_template(locals: { variants: BadgeComponent::VARIANTS })
       end
 
       # @!endgroup
@@ -93,9 +82,7 @@ module DaisyComponents
       #
       # @label Sizes
       def sizes
-        render_with_template(locals: {
-                               sizes: BadgeComponent::SIZES
-                             })
+        render_with_template(locals: { sizes: BadgeComponent::SIZES })
       end
 
       # @!endgroup
@@ -108,24 +95,7 @@ module DaisyComponents
       #
       # @label Icon
       def with_icon
-        render(BadgeComponent.new(class: 'gap-2')) do
-          safe_join([
-                      tag.svg(
-                        xmlns: 'http://www.w3.org/2000/svg',
-                        fill: 'none',
-                        viewBox: '0 0 24 24',
-                        class: 'inline-block w-4 h-4 stroke-current'
-                      ) do
-                        tag.path(
-                          'stroke-linecap': 'round',
-                          'stroke-linejoin': 'round',
-                          'stroke-width': '2',
-                          d: 'M6 18L18 6M6 6l12 12'
-                        )
-                      end,
-                      'Badge'
-                    ])
-        end
+        render(BadgeComponent.new('Icon Badge', icon: chevron_down_icon('h-6 w-6')))
       end
 
       # In Button

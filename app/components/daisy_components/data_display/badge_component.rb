@@ -6,22 +6,29 @@ module DaisyComponents
       VARIANTS = %w[neutral primary secondary accent ghost info success warning error].freeze
       SIZES = %w[lg md sm xs].freeze
 
-      def initialize(text = nil, variant: nil, size: nil, outline: false, **system_arguments)
+      def initialize(text = nil, variant: nil, size: nil, outline: false, icon: nil, **system_arguments)
         @text = text
         @variant = variant if VARIANTS.include?(variant.to_s)
         @size = size if SIZES.include?(size.to_s)
         @outline = outline
+        @icon = icon
 
         super(**system_arguments)
       end
 
       def call
         tag.div(**html_attributes) do
-          content || @text
+          safe_join([render_icon, content || @text].compact)
         end
       end
 
       private
+
+      def render_icon
+        return unless @icon
+
+        raw(@icon)
+      end
 
       def default_classes
         class_names('badge', system_arguments[:class], variant_classes)
