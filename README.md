@@ -45,6 +45,11 @@ Run the test suite:
 $ bin/rails test
 ```
 
+With coverage:
+```bash
+$ COVERAGE=true bin/rails test
+```
+
 ## Contributing
 
 1. Fork it
