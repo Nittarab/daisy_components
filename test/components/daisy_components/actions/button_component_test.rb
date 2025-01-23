@@ -192,6 +192,96 @@ module DaisyComponents
         button = ButtonComponent.new(text: 'Test', classes: nil)
         assert_equal '', button.send(:classes)
       end
+
+      def test_link_without_turbo_method
+        render_inline(ButtonComponent.new(
+                        text: 'No Method',
+                        href: '/path'
+                      ))
+
+        refute_selector('a[data-turbo-method]')
+      end
+
+      def test_link_with_non_blank_target
+        render_inline(ButtonComponent.new(
+                        text: 'Self Target',
+                        href: '/path',
+                        target: '_self'
+                      ))
+
+        assert_selector('a[target="_self"]')
+        refute_selector('a[rel]')
+      end
+
+      def test_link_with_nil_href
+        render_inline(ButtonComponent.new(
+                        text: 'No Href',
+                        href: nil
+                      ))
+
+        assert_selector('button.btn')
+        refute_selector('a')
+      end
+
+      def test_link_with_disabled_and_loading
+        render_inline(ButtonComponent.new(
+                        text: 'Disabled and Loading',
+                        href: '/path',
+                        disabled: true,
+                        loading: true
+                      ))
+        assert_selector('a.btn.btn-disabled.loading')
+        assert_selector('a[tabindex="-1"]')
+      end
+
+      def test_link_with_nil_name_when_disabled
+        render_inline(ButtonComponent.new(
+                        text: 'No Name',
+                        name: 'test-name',
+                        disabled: true
+                      ))
+
+        assert_selector('button.btn')
+        refute_selector('button[name]')
+      end
+
+      def test_variant_type_conversion
+        render_inline(ButtonComponent.new(
+                        text: 'Symbol Variant',
+                        variant: :primary
+                      ))
+
+        assert_selector('button.btn.btn-primary')
+      end
+
+      def test_size_type_conversion
+        render_inline(ButtonComponent.new(
+                        text: 'Symbol Size',
+                        size: :lg
+                      ))
+
+        assert_selector('button.btn.btn-lg')
+      end
+
+      def test_type_type_conversion
+        render_inline(ButtonComponent.new(
+                        text: 'Symbol Type',
+                        type: :submit
+                      ))
+
+        assert_selector("button[type='submit']")
+      end
+
+      def test_link_rel_with_nil_rel_and_non_blank_target
+        render_inline(ButtonComponent.new(
+                        text: 'Parent Target',
+                        href: '/path',
+                        target: '_parent'
+                      ))
+
+        assert_selector("a[target='_parent']")
+        refute_selector('a[rel]')
+      end
     end
   end
 end

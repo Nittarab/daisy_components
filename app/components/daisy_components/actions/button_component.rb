@@ -131,7 +131,7 @@ module DaisyComponents
 
       def link_arguments
         shared_arguments.merge(
-          href: @disabled || @loading ? nil : @href,
+          href: @href,
           data: { turbo_method: @method }.compact,
           target: @target,
           rel: link_rel,
