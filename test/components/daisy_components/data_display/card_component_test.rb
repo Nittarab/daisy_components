@@ -115,6 +115,16 @@ module DaisyComponents
         assert_selector '.card-title', text: 'Title from param'
         assert_text 'Description from param'
       end
+
+      def test_renders_card_with_complex_description
+        render_preview(:complex_description, from: CardComponentPreview)
+        assert_selector('.card')
+        assert_selector('.card-title', text: 'Card with Badge')
+        assert_selector('.badge', text: 'New!')
+        assert_text('This card includes both text and a badge in its description')
+        assert_selector("img[src='https://placehold.co/400x200']")
+        assert_selector('.btn.btn-primary', text: 'Learn More')
+      end
     end
   end
 end
