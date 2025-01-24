@@ -6,8 +6,8 @@ module DaisyComponents
   module DataDisplay
     class BadgeComponentPreview < ViewComponent::Preview
       include DaisyComponents::IconsHelper
-      # @!group Playground
 
+      # @!group Playground
       # Default
       # ---------------
       # Interactive badge component with customizable styling
@@ -27,11 +27,9 @@ module DaisyComponents
       )
         render(BadgeComponent.new(text, variant: variant, size: size, outline: outline, class: classes))
       end
-
       # @!endgroup
 
-      # @!group Examples
-
+      # @!group Simple Examples
       # Basic Badge
       # ---------------
       # Simple badge with default styling
@@ -39,6 +37,15 @@ module DaisyComponents
       # @label Basic
       def default
         render(BadgeComponent.new('Default Badge'))
+      end
+
+      # With Icon
+      # ---------------
+      # Badge with an icon
+      #
+      # @label Icon
+      def with_icon
+        render(BadgeComponent.new('Icon Badge', icon: chevron_down_icon('h-6 w-6')))
       end
 
       # Block Content
@@ -49,11 +56,20 @@ module DaisyComponents
       def with_block
         render(BadgeComponent.new('Block Badge'))
       end
-
       # @!endgroup
 
-      # @!group Variants
+      # @!group Complex Examples
+      # In Button
+      # ---------------
+      # Badge used within a button
+      #
+      # @label In Button
+      def in_button
+        render_with_template
+      end
+      # @!endgroup
 
+      # @!group Variants Gallery
       # Badge Colors
       # ---------------
       # All available badge colors
@@ -71,11 +87,9 @@ module DaisyComponents
       def outline
         render_with_template(locals: { variants: BadgeComponent::VARIANTS })
       end
-
       # @!endgroup
 
-      # @!group Sizes
-
+      # @!group Sizes Gallery
       # Badge Sizes
       # ---------------
       # All available badge sizes
@@ -84,29 +98,6 @@ module DaisyComponents
       def sizes
         render_with_template(locals: { sizes: BadgeComponent::SIZES })
       end
-
-      # @!endgroup
-
-      # @!group Examples
-
-      # With Icon
-      # ---------------
-      # Badge with an icon
-      #
-      # @label Icon
-      def with_icon
-        render(BadgeComponent.new('Icon Badge', icon: chevron_down_icon('h-6 w-6')))
-      end
-
-      # In Button
-      # ---------------
-      # Badge used within a button
-      #
-      # @label In Button
-      def in_button
-        render_with_template
-      end
-
       # @!endgroup
     end
   end

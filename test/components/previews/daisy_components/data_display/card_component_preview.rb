@@ -138,14 +138,14 @@ module DaisyComponents
         )
       end
 
+      # @!group Complex Description
+
       # Complex Description
       # ---------------
       # Card with a complex description containing a badge and text content
       #
       # @label Complex Description
-      def complex_description
-        render_with_template
-      end
+      def complex_description; end
     end
   end
 end
