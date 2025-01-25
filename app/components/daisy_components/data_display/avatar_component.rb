@@ -6,14 +6,20 @@ module DaisyComponents
       renders_one :image
       renders_one :placeholder
 
-      attr_reader :size, :shape, :online, :offline, :src
+      VALID_SIZES = [8, 12, 16, 20, 24, 32].freeze
+      VALID_SHAPES = %i[circle squircle hexagon triangle].freeze
+      VALID_STATUSES = %i[online offline].freeze
 
-      def initialize(size: nil, shape: nil, online: false, offline: false, src: nil, **system_arguments)
-        @size = size
-        @shape = shape
-        @online = online
-        @offline = offline
-        @src = src
+      attr_reader :size, :shape, :status, :img_src, :img_alt, :placeholder_text
+
+      def initialize(size: nil, shape: nil, status: nil, img_src: nil, img_alt: nil, placeholder_text: nil,
+                     **system_arguments)
+        @size = VALID_SIZES.include?(size) ? size : nil
+        @shape = VALID_SHAPES.include?(shape) ? shape : nil
+        @status = VALID_STATUSES.include?(status) ? status : nil
+        @img_src = img_src
+        @img_alt = img_alt
+        @placeholder_text = placeholder_text
 
         super(**system_arguments)
       end
@@ -23,28 +29,34 @@ module DaisyComponents
       def default_classes
         class_names(
           'avatar',
+          { placeholder: placeholder_text.present? || placeholder.present? },
           system_arguments[:class],
-          status_classes,
-          size_classes,
-          shape_classes
+          status
         )
       end
 
-      def status_classes
-        { online: online, offline: offline }
-      end
-
-      def size_classes
-        { "w-#{size} h-#{size}": size }
+      def inner_classes
+        class_names(
+          { "w-#{size}": size },
+          shape_classes,
+          'flex items-center justify-center',
+          { 'bg-neutral text-neutral-content': placeholder_text.present? || placeholder.present? }
+        )
       end
 
       def shape_classes
-        {
-          'rounded-full': shape == :circle,
-          'mask mask-squircle': shape == :squircle,
-          'mask mask-hexagon': shape == :hexagon,
-          'mask mask-triangle': shape == :triangle
-        }
+        return 'rounded-full' unless shape
+
+        case shape
+        when :circle then 'rounded-full'
+        when :squircle then 'mask mask-squircle'
+        when :hexagon then 'mask mask-hexagon'
+        when :triangle then 'mask mask-triangle'
+        end
+      end
+
+      def image_classes
+        'w-full h-full object-cover'
       end
 
       def html_attributes

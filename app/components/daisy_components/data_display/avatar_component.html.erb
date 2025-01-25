@@ -1,11 +1,13 @@
 <%= tag.div(**html_attributes) do %>
-  <% if image %>
-    <%= image %>
-  <% elsif src %>
-    <%= tag.img(src: src, alt: system_arguments[:alt] || 'Avatar', class: 'w-full h-full object-cover') %>
-  <% else %>
-    <div class="bg-neutral text-neutral-content rounded-full w-full h-full flex items-center justify-center">
-      <%= placeholder %>
-    </div>
-  <% end %>
+  <div class="<%= inner_classes %>">
+    <% if image %>
+      <%= image %>
+    <% elsif img_src %>
+      <%= tag.img(src: img_src, alt: img_alt || 'Avatar', class: image_classes) %>
+    <% elsif placeholder_text.present? %>
+      <span class="text-3xl"><%= placeholder_text %></span>
+    <% else %>
+      <span class="text-3xl"><%= placeholder %></span>
+    <% end %>
+  </div>
 <% end %> 
