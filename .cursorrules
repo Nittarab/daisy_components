@@ -46,11 +46,13 @@ For every component create:
  - Ruy class
  - html template
  - lookbook preview with a playground method and the description as Lookbook description with group and label 
- - test
+ - TEST: in the test we test the component behavior and the preview (just the fact that they render). Don't duplicate tests to much, but give precedence to the preview but be sure to test the behavior)
  - documentation
 
 For images, use placehold.co to generate placeholder images.
 
 When you want to check the coverage, run:
 COVERAGE=true bin/rails test
+
+Every component preview should be organized into groups that separate HTML and Ruby source rendering.
 

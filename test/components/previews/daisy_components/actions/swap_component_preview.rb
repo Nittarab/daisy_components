@@ -3,110 +3,122 @@
 module DaisyComponents
   module Actions
     # @label Swap
+    # @display bg_color "#fff"
     class SwapComponentPreview < ViewComponent::Preview
       include DaisyComponents::IconsHelper
 
       # @!group Playground
 
-      # Hamburger Menu
+      # Playground
       # ---------------
-      # Swap component used as a hamburger menu button
+      # Interactive swap component with different effects
       #
-      # @label Hamburger Menu
-      # @param effect select ["none", "rotate", "flip"]
-      # @param size select ["sm", "md", "lg"]
-      def hamburger(effect: 'none', size: 'md')
-        render_swap_with_icons(effect, size) do |size_class|
-          [hamburger_icon(size_class), close_icon(size_class)]
-        end
+      # @param variant select { choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost] } "Color variant"
+      # @param size select { choices: [xs, sm, md, lg] } "Size of the content"
+      # @param effect select { choices: [none, rotate, flip] } "Animation effect"
+      # @param value toggle "Current state"
+      # @param button toggle "Show as button"
+      def playground(variant: :primary, size: :md, effect: :none, value: false, button: false)
+        render(SwapComponent.new(
+                 states: { on: 'ON', off: 'OFF' },
+                 variant: variant,
+                 size: size,
+                 value: value,
+                 button: button,
+                 effect: effect
+               ))
       end
 
-      # Volume Control
+      # @!endgroup
+
+      # @!group Examples
+
+      # Initially ON
       # ---------------
-      # Volume control with different effects and sizes
+      # Shows how to set initial state to ON
+      def value_on
+        render(SwapComponent.new(
+                 states: { on: 'ON', off: 'OFF' },
+                 variant: :primary,
+                 value: true
+               ))
+      end
+
+      # Simple Text
+      # ---------------
+      # Basic text swap with primary color
       #
-      # @label Volume Control
-      # @param effect select ["none", "rotate", "flip"]
-      # @param size select ["sm", "md", "lg"]
-      def volume(effect: 'none', size: 'md')
-        render_swap_with_icons(effect, size) do |size_class|
-          [volume_on_icon(size_class), volume_off_icon(size_class)]
-        end
+      # @param value toggle "Current state"
+      def text(value: false)
+        render(SwapComponent.new(
+                 states: { on: 'ON', off: 'OFF' },
+                 variant: :primary,
+                 value: value
+               ))
       end
 
       # Theme Toggle
       # ---------------
       # Theme toggle with sun/moon icons
       #
-      # @label Theme Toggle
-      # @param effect select ["none", "rotate", "flip"]
-      # @param size select ["sm", "md", "lg"]
-      def theme(effect: 'none', size: 'md')
-        render_swap_with_icons(effect, size) do |size_class|
-          [sun_icon(size_class), moon_icon(size_class)]
-        end
+      # @param value toggle "Current state"
+      def theme(value: false)
+        render(SwapComponent.new(
+                 states: {
+                   on: sun_icon('h-6 w-6'),
+                   off: moon_icon('h-6 w-6')
+                 },
+                 button: true,
+                 effect: :rotate,
+                 value: value
+               ))
       end
 
-      # @!endgroup
-
-      # @!group Basic Examples
-
-      # Text Swap
+      # Emoji Weather
       # ---------------
-      # Basic text swap with different effects
+      # Fun emoji swap with flip effect
       #
-      # @label Text Swap
-      # @param effect select ["none", "rotate", "flip"]
-      def text(effect: 'none')
+      # @param value toggle "Current state"
+      def weather(value: false)
         render(SwapComponent.new(
-                 rotate: effect == 'rotate',
-                 flip: effect == 'flip'
-               )) do |component|
-          component.with_on { tag.div('ON', class: 'font-bold text-primary') }
-          component.with_off { tag.div('OFF', class: 'font-bold text-base-content') }
-        end
+                 states: { on: '🌞', off: '🌚' },
+                 size: :lg,
+                 effect: :flip,
+                 value: value
+               ))
       end
 
-      # Emoji Swap
+      # Hamburger Menu
       # ---------------
-      # Fun emoji swap with different effects
+      # Hamburger menu button with rotate effect
       #
-      # @label Emoji Swap
-      # @param effect select ["none", "rotate", "flip"]
-      def emoji(effect: 'none')
+      # @param value toggle "Current state"
+      def hamburger(value: false)
         render(SwapComponent.new(
-                 rotate: effect == 'rotate',
-                 flip: effect == 'flip'
-               )) do |component|
-          component.with_on { tag.div('😄', class: 'text-2xl') }
-          component.with_off { tag.div('😴', class: 'text-2xl') }
-        end
+                 states: {
+                   on: hamburger_icon('h-6 w-6'),
+                   off: close_icon('h-6 w-6')
+                 },
+                 button: true,
+                 effect: :rotate,
+                 value: value
+               ))
       end
 
-      # @!endgroup
-
-      private
-
-      def render_swap_with_icons(effect, size)
-        size_class = icon_size_class(size)
-        on_icon, off_icon = yield(size_class)
-        render_swap_component(effect, on_icon, off_icon)
-      end
-
-      def icon_size_class(size)
-        sizes = { 'sm' => 4, 'md' => 6, 'lg' => 8 }
-        "h-#{sizes[size]} w-#{sizes[size]}"
-      end
-
-      def render_swap_component(effect, on_icon, off_icon)
+      # Volume Control
+      # ---------------
+      # Volume control button
+      #
+      # @param value toggle "Current state"
+      def volume(value: false)
         render(SwapComponent.new(
-                 rotate: effect == 'rotate',
-                 flip: effect == 'flip',
-                 class: 'btn btn-ghost btn-circle'
-               )) do |component|
-          component.with_on { on_icon }
-          component.with_off { off_icon }
-        end
+                 states: {
+                   on: volume_on_icon('h-6 w-6'),
+                   off: volume_off_icon('h-6 w-6')
+                 },
+                 button: true,
+                 value: value
+               ))
       end
     end
   end
