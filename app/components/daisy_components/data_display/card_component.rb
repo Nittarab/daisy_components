@@ -7,7 +7,8 @@ module DaisyComponents
         FigureComponent.new(image_url: @image_url, **system_arguments)
       }
       renders_one :body, lambda { |**system_arguments|
-        BodyComponent.new(style: @style, title: @title, description: @description, button_text: @button_text, button_class: @button_class, **system_arguments)
+        BodyComponent.new(style: @style, title: @title, description: @description, button_text: @button_text,
+                          button_class: @button_class, **system_arguments)
       }
 
       STYLES = %w[normal compact side].freeze

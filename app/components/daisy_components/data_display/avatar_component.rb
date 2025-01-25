@@ -5,9 +5,6 @@ module DaisyComponents
     class AvatarComponent < DaisyComponents::BaseComponent
       renders_one :image
       renders_one :placeholder
-      renders_many :groups, lambda { |**system_arguments|
-        AvatarComponent.new(**system_arguments)
-      }
 
       attr_reader :size, :shape, :online, :offline, :src
 
@@ -24,20 +21,13 @@ module DaisyComponents
       private
 
       def default_classes
-        if group?
-          class_names(
-            'avatar-group',
-            system_arguments[:class]
-          )
-        else
-          class_names(
-            'avatar',
-            system_arguments[:class],
-            status_classes,
-            size_classes,
-            shape_classes
-          )
-        end
+        class_names(
+          'avatar',
+          system_arguments[:class],
+          status_classes,
+          size_classes,
+          shape_classes
+        )
       end
 
       def status_classes
@@ -61,10 +51,6 @@ module DaisyComponents
         attrs = system_arguments.except(:class)
         attrs[:class] = default_classes
         attrs
-      end
-
-      def group?
-        groups.any?
       end
     end
   end

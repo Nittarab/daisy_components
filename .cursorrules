@@ -51,9 +51,6 @@ For every component create:
 
 For images, use placehold.co to generate placeholder images.
 
-After you make a change run the test with Coverage:
-
+When you want to check the coverage, run:
 COVERAGE=true bin/rails test
-
-and read the /coverage/coverage.xml file to see if you missed something.
 

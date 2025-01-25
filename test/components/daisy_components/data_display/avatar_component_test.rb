@@ -45,16 +45,6 @@ module DaisyComponents
         assert_text('JD')
       end
 
-      def test_renders_avatar_group
-        render_preview(:group)
-        assert_selector('.avatar-group')
-        assert_selector('.avatar', count: 4) # Including the counter avatar
-        assert_selector('img[src="https://placehold.co/400x400/3B82F6/FFFFFF?text=1"]')
-        assert_selector('img[src="https://placehold.co/400x400/22C55E/FFFFFF?text=2"]')
-        assert_selector('img[src="https://placehold.co/400x400/EF4444/FFFFFF?text=3"]')
-        assert_text('+2')
-      end
-
       def test_renders_with_custom_classes
         render_inline(AvatarComponent.new(class: 'custom-class', size: 12)) do |component|
           component.with_image do
