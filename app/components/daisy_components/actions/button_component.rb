@@ -108,10 +108,31 @@ module DaisyComponents
         **system_arguments
       )
         @text = text
-        @variant = variant if VARIANTS.include?(variant.to_s)
-        @size = size if SIZES.include?(size.to_s)
-        @style = style if STYLES.include?(style.to_s)
-        @shape = shape if SHAPES.include?(shape.to_s)
+
+        if variant && !VARIANTS.include?(variant.to_s)
+          raise ArgumentError, "Invalid variant: #{variant}. Must be one of: #{VARIANTS.join(', ')}"
+        end
+
+        @variant = variant
+
+        if size && !SIZES.include?(size.to_s)
+          raise ArgumentError, "Invalid size: #{size}. Must be one of: #{SIZES.join(', ')}"
+        end
+
+        @size = size
+
+        if style && !STYLES.include?(style.to_s)
+          raise ArgumentError, "Invalid style: #{style}. Must be one of: #{STYLES.join(', ')}"
+        end
+
+        @style = style
+
+        if shape && !SHAPES.include?(shape.to_s)
+          raise ArgumentError, "Invalid shape: #{shape}. Must be one of: #{SHAPES.join(', ')}"
+        end
+
+        @shape = shape
+
         @disabled = disabled
         @href = href
         @type = BUTTON_TYPES.include?(type.to_s) ? type : 'button'

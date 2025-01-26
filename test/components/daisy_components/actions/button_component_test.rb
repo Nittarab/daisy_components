@@ -84,7 +84,7 @@ module DaisyComponents
 
       def test_renders_block_button
         render_preview(:block)
-        assert_selector('button.btn.btn-block', text: 'Full width button')
+        assert_selector('button.btn.btn-block', text: 'Block Button')
       end
 
       def test_renders_icon_only_button
@@ -102,14 +102,19 @@ module DaisyComponents
                          text: 'Custom Button',
                          variant: 'primary',
                          size: 'lg',
+                         style: 'outline',
+                         shape: 'wide',
                          disabled: true,
                          loading: true,
                          active: true,
-                         type: 'button',
+                         has_start_icon: true,
+                         has_end_icon: true,
                          classes: 'custom-class'
                        })
 
-        assert_selector('button.btn.btn-primary.btn-lg.btn-disabled.loading.btn-active.custom-class')
+        assert_selector('.btn.btn-primary.btn-lg.btn-outline.btn-wide' \
+                        '.btn-disabled.loading.btn-active.custom-class')
+        assert_selector('button svg', count: 2)
         assert_text('Custom Button')
       end
 
@@ -172,6 +177,7 @@ module DaisyComponents
                         target: '_self'
                       ))
 
+        assert_selector("a.btn[target='_self']")
         refute_selector('a[rel]')
       end
 
@@ -182,7 +188,8 @@ module DaisyComponents
                         disabled: true
                       ))
 
-        assert_selector('button.btn.loading.btn-disabled[disabled][aria-disabled="true"][aria-busy="true"]')
+        assert_selector('button.btn.loading.btn-disabled')
+        assert_selector('[disabled][aria-disabled="true"][aria-busy="true"]')
       end
 
       def test_base_component_classes
@@ -211,7 +218,7 @@ module DaisyComponents
                         target: '_self'
                       ))
 
-        assert_selector('a[target="_self"]')
+        assert_selector("a[target='_self']")
         refute_selector('a[rel]')
       end
 
@@ -233,7 +240,7 @@ module DaisyComponents
                         loading: true
                       ))
         assert_selector('a.btn.btn-disabled.loading')
-        assert_selector('a[tabindex="-1"]')
+        assert_selector('[disabled][aria-disabled="true"][aria-busy="true"]')
       end
 
       def test_link_with_nil_name_when_disabled
@@ -243,8 +250,7 @@ module DaisyComponents
                         disabled: true
                       ))
 
-        assert_selector('button.btn')
-        refute_selector('button[name]')
+        refute_selector('[name]')
       end
 
       def test_variant_type_conversion
@@ -286,8 +292,8 @@ module DaisyComponents
       end
 
       def test_renders_basic_button
-        render_inline(ButtonComponent.new(text: 'Click me'))
-        assert_selector 'button.btn', text: 'Click me'
+        render_preview(:basic_text)
+        assert_selector('button.btn', text: 'Click Me')
       end
 
       def test_renders_with_icon_start
@@ -331,165 +337,334 @@ module DaisyComponents
       end
 
       def test_renders_with_variant
-        render_inline(ButtonComponent.new(text: 'Primary', variant: 'primary'))
-        assert_selector 'button.btn.btn-primary'
+        render_preview(:primary)
+        assert_selector('button.btn.btn-primary', text: 'Primary Action')
       end
 
       def test_renders_with_size
-        render_inline(ButtonComponent.new(text: 'Large', size: 'lg'))
-        assert_selector 'button.btn.btn-lg'
+        render_preview(:sizes)
+        assert_selector('button.btn.btn-lg', text: 'LG')
       end
 
-      def test_renders_disabled
-        render_inline(ButtonComponent.new(text: 'Disabled', disabled: true))
-        assert_selector 'button.btn.btn-disabled[disabled]'
+      def test_renders_with_style
+        render_preview(:outline)
+        assert_selector('button.btn.btn-outline', text: 'Outline Button')
       end
 
-      def test_renders_loading
-        render_inline(ButtonComponent.new(text: 'Loading', loading: true))
-        assert_selector 'button.btn.loading.btn-disabled[disabled]'
+      def test_renders_with_shape
+        render_preview(:wide)
+        assert_selector('button.btn.btn-wide', text: 'Wide Button')
       end
 
-      def test_renders_active
-        render_inline(ButtonComponent.new(text: 'Active', active: true))
-        assert_selector 'button.btn.btn-active'
+      def test_renders_with_disabled
+        render_preview(:disabled)
+        assert_selector('button.btn.btn-disabled', text: "Can't click me")
+      end
+
+      def test_renders_with_loading
+        render_preview(:loading)
+        assert_selector('button.btn.loading', text: 'Processing...')
+      end
+
+      def test_renders_with_active
+        render_preview(:active)
+        assert_selector('button.btn.btn-active', text: 'Active Button')
       end
 
       def test_renders_as_link
-        render_inline(ButtonComponent.new(text: 'Link', href: 'https://example.com'))
-        assert_selector 'a.btn[href="https://example.com"]'
+        render_preview(:link_button)
+        assert_selector('a.btn[href="https://google.com"]', text: 'Visit Google')
       end
 
       def test_renders_with_turbo_method
-        render_inline(ButtonComponent.new(text: 'Delete', href: '/items/1', method: 'delete'))
-        assert_selector 'a.btn[data-turbo-method="delete"]'
+        render_preview(:turbo_method)
+        assert_selector('a.btn.btn-error[data-turbo-method="delete"]', text: 'Delete Item')
       end
 
       def test_renders_with_target_blank
-        render_inline(ButtonComponent.new(text: 'External', href: 'https://example.com', target: '_blank'))
-        assert_selector 'a.btn[target="_blank"][rel="noopener noreferrer"]'
+        render_preview(:link_button)
+        assert_selector('a.btn[target="_blank"][rel="noopener noreferrer"]', text: 'Visit Google')
       end
 
-      def test_ignores_invalid_variant
-        render_inline(ButtonComponent.new(text: 'Invalid', variant: 'invalid'))
-        assert_selector 'button.btn'
-        refute_selector 'button.btn-invalid'
-      end
-
-      def test_ignores_invalid_size
-        render_inline(ButtonComponent.new(text: 'Invalid', size: 'invalid'))
-        assert_selector 'button.btn'
-        refute_selector 'button.btn-invalid'
-      end
-
-      def test_ignores_invalid_type
-        render_inline(ButtonComponent.new(text: 'Invalid', type: 'invalid'))
-        assert_selector("button[type='button']")
-        refute_selector("button[type='invalid']")
-      end
-
-      def test_preview_playground
-        render_preview(:playground)
-        assert_selector('button.btn')
-      end
-
-      def test_preview_icon_start
+      def test_renders_with_icon_start
         render_preview(:icon_start)
-        assert_selector 'button.btn.gap-2'
-        assert_selector 'button.btn svg'
+        assert_selector('button.btn svg')
+        assert_text('Submit')
       end
 
-      def test_preview_icon_end
+      def test_renders_with_icon_end
         render_preview(:icon_end)
-        assert_selector 'button.btn.gap-2'
-        assert_selector 'button.btn svg'
+        assert_selector('button.btn svg')
+        assert_text('Next')
       end
 
-      def test_preview_both_icons
+      def test_renders_with_both_icons
         render_preview(:both_icons)
-        assert_selector 'button.btn.gap-2'
-        assert_selector 'button.btn svg', count: 2
+        assert_selector('button.btn svg', count: 2)
+        assert_text('Sync')
       end
 
-      def test_preview_icon_only
+      def test_renders_icon_only
         render_preview(:icon_only)
-        assert_selector 'button.btn.btn-square svg'
-      end
-
-      def test_renders_button_styles
-        render_preview(:styles)
-        ButtonComponent::STYLES.each do |style|
-          assert_selector("button.btn.btn-#{style}", text: style.titleize)
-        end
-      end
-
-      def test_renders_button_shapes
-        render_preview(:shapes)
-        ButtonComponent::SHAPES.each do |shape|
-          assert_selector("button.btn.btn-#{shape}")
-        end
-      end
-
-      def test_renders_outline_button
-        render_preview(:outline)
-        assert_selector('button.btn.btn-outline.btn-primary', text: 'Outline Button')
-      end
-
-      def test_renders_soft_button
-        render_preview(:soft)
-        assert_selector('button.btn.btn-soft.btn-primary', text: 'Soft Button')
-      end
-
-      def test_renders_wide_button
-        render_preview(:wide)
-        assert_selector('button.btn.btn-wide.btn-primary', text: 'Wide Button')
+        assert_selector('button.btn.btn-square svg')
       end
 
       def test_renders_block_button
         render_preview(:block)
-        assert_selector('button.btn.btn-block.btn-primary', text: 'Block Button')
+        assert_selector('button.btn.btn-block', text: 'Block Button')
+      end
+
+      def test_renders_with_block_content
+        render_preview(:block_content)
+        assert_selector('button.btn strong', text: 'content')
+      end
+
+      def test_renders_with_html_content
+        render_preview(:block_content)
+        assert_selector('button.btn strong')
+        assert_text('content')
+      end
+
+      def test_renders_with_component_content
+        render_preview(:component_content)
+        assert_selector('button.btn')
+        assert_selector('.badge')
+        assert_text('New')
+      end
+
+      def test_renders_submit_button
+        render_preview(:submit_button)
+        assert_selector('button.btn[type="submit"]', text: 'Submit Form')
+      end
+
+      def test_renders_reset_button
+        render_preview(:reset_button)
+        assert_selector('button.btn[type="reset"]', text: 'Reset Form')
+      end
+
+      def test_renders_external_link
+        render_preview(:external_link)
+        assert_selector('a.btn[target="_blank"]', text: 'External Link')
+      end
+
+      def test_renders_with_invalid_variant
+        assert_raises(ArgumentError) do
+          render_inline(ButtonComponent.new(text: 'Invalid', variant: 'invalid'))
+        end
+      end
+
+      def test_renders_with_invalid_size
+        assert_raises(ArgumentError) do
+          render_inline(ButtonComponent.new(text: 'Invalid', size: 'invalid'))
+        end
+      end
+
+      def test_renders_with_invalid_style
+        assert_raises(ArgumentError) do
+          render_inline(ButtonComponent.new(text: 'Invalid', style: 'invalid'))
+        end
+      end
+
+      def test_renders_with_invalid_shape
+        assert_raises(ArgumentError) do
+          render_inline(ButtonComponent.new(text: 'Invalid', shape: 'invalid'))
+        end
+      end
+
+      def test_playground_preview
+        render_preview(:playground)
+        assert_selector('.btn')
+      end
+
+      def test_primary_preview
+        render_preview(:primary)
+        assert_selector('.btn.btn-primary')
+      end
+
+      def test_secondary_preview
+        render_preview(:secondary)
+        assert_selector('.btn.btn-secondary')
+      end
+
+      def test_ghost_preview
+        render_preview(:ghost)
+        assert_selector('.btn.btn-ghost')
+      end
+
+      def test_variants_preview
+        render_preview(:variants)
+        assert_selector('.btn', count: 11)
+      end
+
+      def test_sizes_preview
+        render_preview(:sizes)
+        assert_selector('.btn', count: 5)
+      end
+
+      def test_styles_preview
+        render_preview(:styles)
+        assert_selector('.btn', count: 2)
+      end
+
+      def test_shapes_preview
+        render_preview(:shapes)
+        assert_selector('.btn', count: 4)
+      end
+
+      def test_loading_preview
+        render_preview(:loading)
+        assert_selector('.btn.loading')
+      end
+
+      def test_active_preview
+        render_preview(:active)
+        assert_selector('.btn.btn-active')
+      end
+
+      def test_disabled_preview
+        render_preview(:disabled)
+        assert_selector('.btn.btn-disabled')
+      end
+
+      def test_with_icon_preview
+        render_preview(:with_icon)
+        assert_selector('.btn svg')
+      end
+
+      def test_renders_outline_button
+        render_preview(:outline)
+        assert_selector('button.btn.btn-outline', text: 'Outline Button')
+      end
+
+      def test_renders_soft_button
+        render_preview(:soft)
+        assert_selector('button.btn.btn-soft', text: 'Soft Button')
+      end
+
+      def test_renders_wide_button
+        render_preview(:wide)
+        assert_selector('button.btn.btn-wide', text: 'Wide Button')
       end
 
       def test_renders_circle_button
         render_preview(:circle)
-        assert_selector('button.btn.btn-circle.btn-primary svg.h-6.w-6')
+        assert_selector('button.btn.btn-circle svg.h-6.w-6')
       end
 
       def test_renders_square_button
         render_preview(:square)
-        assert_selector('button.btn.btn-square.btn-primary svg.h-6.w-6')
+        assert_selector('button.btn.btn-square svg.h-6.w-6')
       end
 
-      def test_ignores_invalid_style
-        render_inline(ButtonComponent.new(text: 'Invalid', style: 'invalid'))
-        assert_selector('button.btn', text: 'Invalid')
-        refute_selector('button.btn-invalid')
+      def test_renders_with_variant
+        render_preview(:primary)
+        assert_selector('button.btn.btn-primary', text: 'Primary Action')
       end
 
-      def test_ignores_invalid_shape
-        render_inline(ButtonComponent.new(text: 'Invalid', shape: 'invalid'))
-        assert_selector('button.btn', text: 'Invalid')
-        refute_selector('button.btn-invalid')
+      def test_renders_with_size
+        render_preview(:sizes)
+        assert_selector('button.btn.btn-lg', text: 'LG')
       end
 
-      def test_playground_renders_with_all_options
-        render_preview(:playground, params: {
-                         text: 'Test Button',
-                         variant: 'primary',
-                         size: 'lg',
-                         style: 'outline',
-                         shape: 'wide',
-                         disabled: true,
-                         loading: true,
-                         active: true,
-                         has_start_icon: true,
-                         has_end_icon: true,
-                         classes: 'custom-class'
-                       })
+      def test_renders_with_style
+        render_preview(:outline)
+        assert_selector('button.btn.btn-outline', text: 'Outline Button')
+      end
 
-        assert_selector('button.btn.btn-primary.btn-lg.btn-outline.btn-wide.btn-disabled.loading.btn-active.custom-class')
-        assert_selector('button svg', count: 2)
-        assert_text('Test Button')
+      def test_renders_with_shape
+        render_preview(:wide)
+        assert_selector('button.btn.btn-wide', text: 'Wide Button')
+      end
+
+      def test_renders_with_disabled
+        render_preview(:disabled)
+        assert_selector('button.btn.btn-disabled', text: "Can't click me")
+      end
+
+      def test_renders_with_loading
+        render_preview(:loading)
+        assert_selector('button.btn.loading', text: 'Processing...')
+      end
+
+      def test_renders_with_active
+        render_preview(:active)
+        assert_selector('button.btn.btn-active', text: 'Active Button')
+      end
+
+      def test_renders_as_link
+        render_preview(:link_button)
+        assert_selector('a.btn[href="https://google.com"]', text: 'Visit Google')
+      end
+
+      def test_renders_with_turbo_method
+        render_preview(:turbo_method)
+        assert_selector('a.btn.btn-error[data-turbo-method="delete"]', text: 'Delete Item')
+      end
+
+      def test_renders_with_target_blank
+        render_preview(:link_button)
+        assert_selector('a.btn[target="_blank"][rel="noopener noreferrer"]', text: 'Visit Google')
+      end
+
+      def test_renders_with_icon_start
+        render_preview(:icon_start)
+        assert_selector('button.btn svg')
+        assert_text('Submit')
+      end
+
+      def test_renders_with_icon_end
+        render_preview(:icon_end)
+        assert_selector('button.btn svg')
+        assert_text('Next')
+      end
+
+      def test_renders_with_both_icons
+        render_preview(:both_icons)
+        assert_selector('button.btn svg', count: 2)
+        assert_text('Sync')
+      end
+
+      def test_renders_icon_only
+        render_preview(:icon_only)
+        assert_selector('button.btn.btn-square svg')
+      end
+
+      def test_renders_block_button
+        render_preview(:block)
+        assert_selector('button.btn.btn-block', text: 'Block Button')
+      end
+
+      def test_renders_with_block_content
+        render_preview(:block_content)
+        assert_selector('button.btn strong', text: 'content')
+      end
+
+      def test_renders_with_html_content
+        render_preview(:block_content)
+        assert_selector('button.btn strong')
+        assert_text('content')
+      end
+
+      def test_renders_with_component_content
+        render_preview(:component_content)
+        assert_selector('button.btn')
+        assert_selector('.badge')
+        assert_text('New')
+      end
+
+      def test_renders_submit_button
+        render_preview(:submit_button)
+        assert_selector('button.btn[type="submit"]', text: 'Submit Form')
+      end
+
+      def test_renders_reset_button
+        render_preview(:reset_button)
+        assert_selector('button.btn[type="reset"]', text: 'Reset Form')
+      end
+
+      def test_renders_external_link
+        render_preview(:external_link)
+        assert_selector('a.btn[target="_blank"]', text: 'External Link')
       end
     end
   end

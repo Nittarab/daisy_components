@@ -15,12 +15,38 @@ module DaisyComponents
       # @param arrow toggle "Show arrow indicator"
       # @param plus toggle "Show plus/minus indicator"
       # @param radio toggle "Use radio buttons for exclusive selection"
+      # @param bg_color select { choices: [bg-base-200, bg-primary, bg-secondary, bg-accent, bg-neutral] }
+      #                      "Background color"
+      # @param text_color select {
+      #   choices: [
+      #     text-base-content,
+      #     text-primary-content,
+      #     text-secondary-content,
+      #     text-accent-content,
+      #     text-neutral-content
+      #   ]
+      # } "Text color"
+      # @param border_color select {
+      #   choices: [
+      #     border-base-300,
+      #     border-primary,
+      #     border-secondary,
+      #     border-accent,
+      #     border-neutral
+      #   ]
+      # } "Border color"
+      # @param padding select { choices: [p-0, p-2, p-4, p-6, p-8] }
+      #                     "Padding"
       # @param classes text "Additional CSS classes"
       def playground(
         join: false,
         arrow: false,
         plus: false,
         radio: false,
+        bg_color: nil,
+        text_color: nil,
+        border_color: nil,
+        padding: nil,
         classes: ''
       )
         render(AccordionComponent.new(
@@ -28,6 +54,10 @@ module DaisyComponents
                  arrow:,
                  plus:,
                  radio:,
+                 bg_color:,
+                 text_color:,
+                 border_color:,
+                 padding:,
                  class: classes
                )) do |component|
           component.with_item(title: 'Item 1', name: 'group1') { 'Content for item 1' }
@@ -111,6 +141,24 @@ module DaisyComponents
           component.with_item(title: 'Option 1', name: 'radio-group') { 'Content for option 1' }
           component.with_item(title: 'Option 2', name: 'radio-group') { 'Content for option 2' }
           component.with_item(title: 'Option 3', name: 'radio-group', checked: true) { 'Content for option 3' }
+        end
+      end
+
+      # Custom Colors
+      # ---------------
+      # Accordion with custom colors
+      #
+      # @label Colors
+      def custom_colors
+        render(AccordionComponent.new(
+                 arrow: true,
+                 bg_color: 'bg-primary',
+                 text_color: 'text-primary-content',
+                 border_color: 'border-primary',
+                 padding: 'p-4'
+               )) do |component|
+          component.with_item(title: 'Primary Theme') { 'Content with primary theme' }
+          component.with_item(title: 'Click me too') { 'More themed content' }
         end
       end
 

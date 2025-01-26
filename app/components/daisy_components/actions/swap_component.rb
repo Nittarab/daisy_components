@@ -28,6 +28,10 @@ module DaisyComponents
       def initialize(states:, value: false, variant: nil, size: :md, effect: :none, button: false,
                      indeterminate: false, **system_arguments)
         validate_states!(states)
+        validate_effect!(effect)
+        validate_variant!(variant) if variant
+        validate_size!(size)
+
         @states = states
         @value = ActiveModel::Type::Boolean.new.cast(value)
         @variant = variant.to_sym if variant
@@ -55,6 +59,24 @@ module DaisyComponents
         raise ArgumentError, 'states cannot be nil' if states.nil?
         raise ArgumentError, 'states cannot be empty' if states.empty?
         raise ArgumentError, 'states must have both :on and :off keys' unless states.key?(:on) && states.key?(:off)
+      end
+
+      def validate_effect!(effect)
+        return if VALID_EFFECTS.include?(effect.to_sym)
+
+        raise ArgumentError,
+              "effect must be one of: #{VALID_EFFECTS.join(', ')}"
+      end
+
+      def validate_variant!(variant)
+        return if VALID_VARIANTS.include?(variant.to_sym)
+
+        raise ArgumentError,
+              "variant must be one of: #{VALID_VARIANTS.join(', ')}"
+      end
+
+      def validate_size!(size)
+        raise ArgumentError, "size must be one of: #{VALID_SIZES.join(', ')}" unless VALID_SIZES.include?(size.to_sym)
       end
 
       def input_html_attributes
