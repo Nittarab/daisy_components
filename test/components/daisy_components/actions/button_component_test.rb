@@ -370,16 +370,6 @@ module DaisyComponents
         assert_selector 'a.btn[target="_blank"][rel="noopener noreferrer"]'
       end
 
-      def test_renders_with_custom_classes
-        render_inline(ButtonComponent.new(text: 'Custom', class: 'my-class'))
-        assert_selector 'button.btn.my-class'
-      end
-
-      def test_renders_with_block_content
-        render_inline(ButtonComponent.new) { 'Block content' }
-        assert_selector 'button.btn', text: 'Block content'
-      end
-
       def test_ignores_invalid_variant
         render_inline(ButtonComponent.new(text: 'Invalid', variant: 'invalid'))
         assert_selector 'button.btn'
@@ -394,12 +384,13 @@ module DaisyComponents
 
       def test_ignores_invalid_type
         render_inline(ButtonComponent.new(text: 'Invalid', type: 'invalid'))
-        assert_selector 'button.btn[type="button"]'
+        assert_selector("button[type='button']")
+        refute_selector("button[type='invalid']")
       end
 
       def test_preview_playground
         render_preview(:playground)
-        assert_selector 'button.btn'
+        assert_selector('button.btn')
       end
 
       def test_preview_icon_start

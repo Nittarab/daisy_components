@@ -18,7 +18,8 @@ use Gemfile to manage dependencies no gemspec
 Use Minitest and Fixtures for testing
 Use Capybara for testing
 
-Create SVG for icons
+Create SVG for icons, and use the IconHelper to render them
+The IconHelper should not be used in the component, but in the test and the preview, Icon are passed, to the component
 
 DONT delete documentation comments in the code, update them instead
 

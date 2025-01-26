@@ -14,7 +14,9 @@ module DaisyComponents
       # Interactive button component with customizable styling
       #
       # @param text text "Text content inside the button"
-      # @param variant select { choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost, link] }
+      # @param variant select {
+      #   choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost, link]
+      # }
       # @param size select { choices: [xs, sm, md, lg] }
       # @param disabled toggle "Disable the button"
       # @param loading toggle "Show loading state"

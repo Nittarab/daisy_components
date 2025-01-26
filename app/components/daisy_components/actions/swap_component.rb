@@ -76,27 +76,27 @@ module DaisyComponents
       end
 
       def size_classes
-        case size
-        when :xs then 'text-xs'
-        when :sm then 'text-sm'
-        when :md then 'text-base'
-        when :lg then 'text-lg'
-        end
+        {
+          xs: 'text-xs',
+          sm: 'text-sm',
+          md: 'text-base',
+          lg: 'text-lg'
+        }[size]
       end
 
       def variant_classes
         return unless variant
 
-        case variant
-        when :primary then 'text-primary'
-        when :secondary then 'text-secondary'
-        when :accent then 'text-accent'
-        when :info then 'text-info'
-        when :success then 'text-success'
-        when :warning then 'text-warning'
-        when :error then 'text-error'
-        when :ghost then 'text-base-content'
-        end
+        {
+          primary: 'text-primary',
+          secondary: 'text-secondary',
+          accent: 'text-accent',
+          info: 'text-info',
+          success: 'text-success',
+          warning: 'text-warning',
+          error: 'text-error',
+          ghost: 'text-base-content'
+        }[variant]
       end
     end
   end

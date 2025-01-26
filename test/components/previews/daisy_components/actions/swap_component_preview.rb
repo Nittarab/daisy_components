@@ -13,7 +13,9 @@ module DaisyComponents
       # ---------------
       # Interactive swap component with different effects
       #
-      # @param variant select { choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost] } "Color variant"
+      # @param variant select {
+      #   choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost]
+      # } "Color variant"
       # @param size select { choices: [xs, sm, md, lg] } "Size of the content"
       # @param effect select { choices: [none, rotate, flip] } "Animation effect"
       # @param value toggle "Current state"

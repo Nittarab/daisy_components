@@ -53,7 +53,7 @@ module DaisyComponents
     #     method: :delete,
     #     variant: "error"
     #   )) %>
-    class ButtonComponent < BaseComponent
+    class ButtonComponent < BaseComponent # rubocop:disable Metrics/ClassLength
       renders_one :start_icon
       renders_one :end_icon
 
@@ -142,24 +142,32 @@ module DaisyComponents
       end
 
       def shared_arguments
-        classes = class_names(
-          'btn',
-          "btn-#{@variant}" => @variant,
-          "btn-#{@size}" => @size,
-          'btn-disabled' => @disabled || @loading,
-          'loading' => @loading,
-          'btn-active' => @active,
-          'gap-2' => (start_icon || end_icon) && (@text || content)
-        )
-
         {
-          class: [classes, system_arguments[:class]].compact.join(' '),
+          class: computed_classes,
           disabled: @disabled || @loading,
           'aria-disabled': @disabled || @loading,
           'aria-busy': @loading,
           role: @href ? 'button' : nil,
           **system_arguments.except(:class)
         }
+      end
+
+      def computed_classes
+        base_classes = class_names(
+          'btn',
+          "btn-#{@variant}" => @variant,
+          "btn-#{@size}" => @size,
+          'btn-disabled' => @disabled || @loading,
+          'loading' => @loading,
+          'btn-active' => @active,
+          'gap-2' => icon_and_content?
+        )
+
+        [base_classes, system_arguments[:class]].compact.join(' ')
+      end
+
+      def icon_and_content?
+        (start_icon || end_icon) && (@text || content)
       end
 
       def button_arguments

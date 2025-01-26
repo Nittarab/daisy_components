@@ -47,12 +47,12 @@ module DaisyComponents
       def shape_classes
         return 'rounded-full' unless shape
 
-        case shape
-        when :circle then 'rounded-full'
-        when :squircle then 'mask mask-squircle'
-        when :hexagon then 'mask mask-hexagon'
-        when :triangle then 'mask mask-triangle'
-        end
+        {
+          circle: 'rounded-full',
+          squircle: 'mask mask-squircle',
+          hexagon: 'mask mask-hexagon',
+          triangle: 'mask mask-triangle'
+        }[shape]
       end
 
       def image_classes
