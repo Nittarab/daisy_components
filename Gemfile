@@ -26,3 +26,6 @@ end
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"
+
+gem 'nokogiri', '~> 1.18', group: :development
+gem 'terminal-table', '~> 1.6', group: :development

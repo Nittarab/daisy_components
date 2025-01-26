@@ -54,6 +54,7 @@ For images, use placehold.co to generate placeholder images.
 
 When you want to check the coverage, run:
 COVERAGE=true bin/rails test
+Read the coverage report by using ./bin/parse_coverage.rb
 
 Every component preview should be organized into groups that separate HTML and Ruby source rendering.
 
