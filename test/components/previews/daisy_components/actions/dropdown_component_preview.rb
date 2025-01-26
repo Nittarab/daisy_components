@@ -27,7 +27,7 @@ module DaisyComponents
       # @param trigger_icon toggle "Show icon in trigger button"
       # @param show_header toggle "Show header in dropdown"
       # @param show_footer toggle "Show footer in dropdown"
-      def playground(
+      def playground( # rubocop:disable Metrics/MethodLength
         position: nil,
         hover: false,
         open: false,

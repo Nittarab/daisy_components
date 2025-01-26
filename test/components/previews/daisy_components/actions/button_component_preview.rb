@@ -255,9 +255,7 @@ module DaisyComponents
       # ---------------
       # Button with nested component
       def component_content
-        render(ButtonComponent.new) do
-          render(DaisyComponents::DataDisplay::BadgeComponent.new('New', variant: 'secondary'))
-        end
+        render_with_template
       end
 
       # @!endgroup

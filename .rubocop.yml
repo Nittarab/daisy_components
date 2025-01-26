@@ -19,4 +19,3 @@ Metrics/ClassLength:
 
 Metrics/MethodLength:
   Max: 20
-  

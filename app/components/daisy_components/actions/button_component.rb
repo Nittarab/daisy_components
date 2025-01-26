@@ -89,7 +89,7 @@ module DaisyComponents
       # @param icon_start [String] SVG icon to display before the text
       # @param icon_end [String] SVG icon to display after the text
       # @param system_arguments [Hash] Additional HTML attributes to be applied to the button
-      def initialize(
+      def initialize( # rubocop:disable Metrics/ParameterLists
         text: nil,
         variant: nil,
         size: nil,
@@ -108,34 +108,10 @@ module DaisyComponents
         **system_arguments
       )
         @text = text
-
-        if variant && !VARIANTS.include?(variant.to_s)
-          raise ArgumentError, "Invalid variant: #{variant}. Must be one of: #{VARIANTS.join(', ')}"
-        end
-
-        @variant = variant
-
-        if size && !SIZES.include?(size.to_s)
-          raise ArgumentError, "Invalid size: #{size}. Must be one of: #{SIZES.join(', ')}"
-        end
-
-        @size = size
-
-        if style && !STYLES.include?(style.to_s)
-          raise ArgumentError, "Invalid style: #{style}. Must be one of: #{STYLES.join(', ')}"
-        end
-
-        @style = style
-
-        if shape && !SHAPES.include?(shape.to_s)
-          raise ArgumentError, "Invalid shape: #{shape}. Must be one of: #{SHAPES.join(', ')}"
-        end
-
-        @shape = shape
+        validate_and_assign_attributes(variant, size, style, shape, type)
 
         @disabled = disabled
         @href = href
-        @type = BUTTON_TYPES.include?(type.to_s) ? type : 'button'
         @method = method
         @target = target
         @rel = rel
@@ -157,6 +133,20 @@ module DaisyComponents
       end
 
       private
+
+      def validate_and_assign_attributes(variant, size, style, shape, type)
+        @variant = validate_attribute(variant, VARIANTS, 'variant')
+        @size = validate_attribute(size, SIZES, 'size')
+        @style = validate_attribute(style, STYLES, 'style')
+        @shape = validate_attribute(shape, SHAPES, 'shape')
+        @type = BUTTON_TYPES.include?(type.to_s) ? type : 'button'
+      end
+
+      def validate_attribute(value, valid_values, attr_name)
+        return value if !value || valid_values.include?(value.to_s)
+
+        raise ArgumentError, "Invalid #{attr_name}: #{value}. Must be one of: #{valid_values.join(', ')}"
+      end
 
       def button_tag
         tag.button(**button_arguments) { button_content }
