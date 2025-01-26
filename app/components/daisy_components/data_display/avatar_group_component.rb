@@ -16,7 +16,7 @@ module DaisyComponents
 
       attr_reader :size, :shape, :spacing, :max_display
 
-      def initialize(size: nil, shape: nil, spacing: -6, max_display: nil, **system_arguments)
+      def initialize(size: nil, shape: nil, spacing: 1.5, max_display: nil, **system_arguments)
         @size = VALID_SIZES.include?(size) ? size : nil
         @shape = VALID_SHAPES.include?(shape) ? shape : nil
         @spacing = spacing
@@ -30,6 +30,7 @@ module DaisyComponents
       def default_classes
         class_names(
           'avatar-group',
+          spacing_class,
           system_arguments[:class]
         )
       end
@@ -37,7 +38,6 @@ module DaisyComponents
       def html_attributes
         attrs = system_arguments.except(:class)
         attrs[:class] = default_classes
-        attrs[:style] = "#{attrs[:style]} --avatar-spacing: #{spacing}px;".strip
         attrs
       end
 
@@ -72,6 +72,11 @@ module DaisyComponents
           hexagon: 'mask mask-hexagon',
           triangle: 'mask mask-triangle'
         }[shape]
+      end
+
+      def spacing_class
+        rem = (spacing * 4).round # Convert rem to tailwind spacing units (1rem = 4 units)
+        "-space-x-#{rem}"
       end
     end
   end

@@ -2,9 +2,12 @@
   <% displayed_avatars.each do |avatar| %>
     <%= avatar %>
   <% end %>
+
   <% if remaining_count %>
-    <%= tag.div(class: counter_classes) do %>
-      +<%= remaining_count %>
-    <% end %>
+    <div class="<%= counter_classes %>">
+      <div class="<%= "w-#{size}" if size %>">
+        +<%= remaining_count %>
+      </div>
+    </div>
   <% end %>
 <% end %> 

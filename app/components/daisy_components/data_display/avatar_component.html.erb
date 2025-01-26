@@ -1,13 +1,13 @@
-<%= tag.div(**html_attributes) do %>
+<div class="<%= default_classes %>">
   <div class="<%= inner_classes %>">
-    <% if image %>
+    <% if image.present? %>
       <%= image %>
-    <% elsif img_src %>
-      <%= tag.img(src: img_src, alt: img_alt || 'Avatar', class: image_classes) %>
+    <% elsif img_src.present? %>
+      <%= tag.img src: img_src, alt: img_alt || 'Avatar', class: image_classes %>
+    <% elsif placeholder.present? %>
+      <%= placeholder %>
     <% elsif placeholder_text.present? %>
-      <span class="text-3xl"><%= placeholder_text %></span>
-    <% else %>
-      <span class="text-3xl"><%= placeholder %></span>
+      <%= placeholder_text %>
     <% end %>
   </div>
-<% end %> 
+</div> 

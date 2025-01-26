@@ -1,0 +1,39 @@
+<%# Circle %>
+<div class="mb-8">
+  <h3 class="text-lg font-semibold mb-4">Circle</h3>
+  <%= render(DaisyComponents::DataDisplay::AvatarGroupComponent.new(shape: :circle)) do |group| %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1') %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2') %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3') %>
+  <% end %>
+</div>
+
+<%# Squircle %>
+<div class="mb-8">
+  <h3 class="text-lg font-semibold mb-4">Squircle</h3>
+  <%= render(DaisyComponents::DataDisplay::AvatarGroupComponent.new(shape: :squircle)) do |group| %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1') %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2') %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3') %>
+  <% end %>
+</div>
+
+<%# Hexagon %>
+<div class="mb-8">
+  <h3 class="text-lg font-semibold mb-4">Hexagon</h3>
+  <%= render(DaisyComponents::DataDisplay::AvatarGroupComponent.new(shape: :hexagon)) do |group| %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1') %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2') %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3') %>
+  <% end %>
+</div>
+
+<%# Triangle %>
+<div class="mb-8">
+  <h3 class="text-lg font-semibold mb-4">Triangle</h3>
+  <%= render(DaisyComponents::DataDisplay::AvatarGroupComponent.new(shape: :triangle)) do |group| %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1') %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2') %>
+    <% group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3') %>
+  <% end %>
+</div> 

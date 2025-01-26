@@ -13,13 +13,13 @@ module DaisyComponents
       #
       # @param size select { choices: [8, 12, 16, 20, 24, 32] } "Size of avatars"
       # @param shape select { choices: [circle, squircle, hexagon, triangle] } "Shape of avatars"
-      # @param spacing number "Spacing between avatars in pixels"
+      # @param spacing number { default: "1.5" } "Spacing between avatars in rem"
       # @param max_display number "Maximum number of avatars to display"
-      def playground(size: nil, shape: nil, spacing: -6, max_display: nil)
+      def playground(size: nil, shape: nil, spacing: '1.5', max_display: nil)
         render(DaisyComponents::DataDisplay::AvatarGroupComponent.new(
                  size: size,
                  shape: shape,
-                 spacing: spacing,
+                 spacing: spacing.to_f,
                  max_display: max_display
                )) do |group|
           group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1')
@@ -28,6 +28,19 @@ module DaisyComponents
           group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 4')
           group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 5')
         end
+      end
+
+      # @!endgroup
+
+      # @!group Template Examples
+
+      # Avatar Shapes
+      # ---------------
+      # Different shape variations for avatar groups
+      #
+      # @label Shapes
+      def shapes
+        render_with_template
       end
 
       # @!endgroup
@@ -71,7 +84,7 @@ module DaisyComponents
       # ---------------
       # Avatar group with custom spacing
       def with_spacing
-        render(AvatarGroupComponent.new(spacing: -12)) do |group|
+        render(AvatarGroupComponent.new(spacing: 3)) do |group|
           group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1')
           group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2')
           group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3')
