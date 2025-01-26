@@ -10,10 +10,10 @@ gem 'view_component', '3.21.0'
 
 group :development do
   gem 'lookbook', '2.3.4'
-  gem 'rubocop', '1.69.2'
-  gem 'rubocop-capybara', '2.19.0'
-  gem 'rubocop-performance', '1.23.0'
-  gem 'rubocop-rails', '2.28.0'
+  gem 'rubocop', '1.71.0'
+  gem 'rubocop-capybara', '2.21.0'
+  gem 'rubocop-performance', '1.23.1'
+  gem 'rubocop-rails', '2.29.1'
   gem 'ruby-lsp'
 end
 
@@ -28,4 +28,4 @@ end
 # gem "debug", ">= 1.0.0"
 
 gem 'nokogiri', '~> 1.18', group: :development
-gem 'terminal-table', '~> 1.6', group: :development
+gem 'terminal-table', '~> 3.0.2', group: :development
