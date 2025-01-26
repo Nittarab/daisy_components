@@ -11,11 +11,5 @@ module DaisyComponents
       super
       @routes = DaisyComponents::Engine.routes
     end
-
-    # def render_preview(name, params: {})
-    #   preview_class = "DaisyComponents::Actions::#{self.class.name.demodulize.gsub('Test', '')}Preview".constantize
-    #   preview = preview_class.new
-    #   render_inline(preview.public_send(name, **params))
-    # end
   end
 end
