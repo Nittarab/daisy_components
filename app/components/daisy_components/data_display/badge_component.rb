@@ -22,6 +22,8 @@ module DaisyComponents
         end
       end
 
+      delegate :to_s, to: :call
+
       private
 
       def render_icon

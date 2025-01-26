@@ -40,7 +40,10 @@ module DaisyComponents
 
       def test_renders_in_button
         render_preview(:in_button)
-        assert_selector 'button.btn .badge', text: '99+'
+        assert_selector '.badge', text: '99+'
+        assert_selector '.badge', text: '8'
+        assert_selector 'button.btn', text: /Inbox/
+        assert_selector 'button.btn', text: /Notifications/
       end
 
       def test_renders_with_block_content

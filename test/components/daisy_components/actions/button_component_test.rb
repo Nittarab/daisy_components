@@ -5,6 +5,8 @@ require 'test_helper'
 module DaisyComponents
   module Actions
     class ButtonComponentTest < DaisyComponents::ComponentTestCase
+      include DaisyComponents::IconsHelper
+
       def test_renders_primary_button
         render_preview(:primary)
         assert_selector('button.btn.btn-primary', text: 'Primary Action')
@@ -76,7 +78,7 @@ module DaisyComponents
 
       def test_renders_with_icon
         render_preview(:with_icon)
-        assert_selector('button.btn i.fas.fa-heart')
+        assert_selector('button.btn svg')
         assert_text('Like')
       end
 
@@ -281,6 +283,146 @@ module DaisyComponents
 
         assert_selector("a[target='_parent']")
         refute_selector('a[rel]')
+      end
+
+      def test_renders_basic_button
+        render_inline(ButtonComponent.new(text: 'Click me'))
+        assert_selector 'button.btn', text: 'Click me'
+      end
+
+      def test_renders_with_icon_start
+        render_inline(ButtonComponent.new(
+                        text: 'Submit',
+                        icon_start: warning_icon('h-5 w-5')
+                      ))
+        assert_selector 'button.btn.gap-2'
+        assert_selector 'button.btn svg'
+        assert_text 'Submit'
+      end
+
+      def test_renders_with_icon_end
+        render_inline(ButtonComponent.new(
+                        text: 'Next',
+                        icon_end: warning_icon('h-5 w-5')
+                      ))
+        assert_selector 'button.btn.gap-2'
+        assert_selector 'button.btn svg'
+        assert_text 'Next'
+      end
+
+      def test_renders_with_both_icons
+        render_inline(ButtonComponent.new(
+                        text: 'Sync',
+                        icon_start: warning_icon('h-5 w-5'),
+                        icon_end: chevron_down_icon('h-5 w-5')
+                      ))
+        assert_selector 'button.btn.gap-2'
+        assert_selector 'button.btn svg', count: 2
+        assert_text 'Sync'
+      end
+
+      def test_renders_icon_only
+        render_inline(ButtonComponent.new(
+                        icon_start: warning_icon('h-6 w-6'),
+                        class: 'btn-square'
+                      ))
+        assert_selector 'button.btn.btn-square svg'
+        assert_selector 'button.btn svg', count: 1
+      end
+
+      def test_renders_with_variant
+        render_inline(ButtonComponent.new(text: 'Primary', variant: 'primary'))
+        assert_selector 'button.btn.btn-primary'
+      end
+
+      def test_renders_with_size
+        render_inline(ButtonComponent.new(text: 'Large', size: 'lg'))
+        assert_selector 'button.btn.btn-lg'
+      end
+
+      def test_renders_disabled
+        render_inline(ButtonComponent.new(text: 'Disabled', disabled: true))
+        assert_selector 'button.btn.btn-disabled[disabled]'
+      end
+
+      def test_renders_loading
+        render_inline(ButtonComponent.new(text: 'Loading', loading: true))
+        assert_selector 'button.btn.loading.btn-disabled[disabled]'
+      end
+
+      def test_renders_active
+        render_inline(ButtonComponent.new(text: 'Active', active: true))
+        assert_selector 'button.btn.btn-active'
+      end
+
+      def test_renders_as_link
+        render_inline(ButtonComponent.new(text: 'Link', href: 'https://example.com'))
+        assert_selector 'a.btn[href="https://example.com"]'
+      end
+
+      def test_renders_with_turbo_method
+        render_inline(ButtonComponent.new(text: 'Delete', href: '/items/1', method: 'delete'))
+        assert_selector 'a.btn[data-turbo-method="delete"]'
+      end
+
+      def test_renders_with_target_blank
+        render_inline(ButtonComponent.new(text: 'External', href: 'https://example.com', target: '_blank'))
+        assert_selector 'a.btn[target="_blank"][rel="noopener noreferrer"]'
+      end
+
+      def test_renders_with_custom_classes
+        render_inline(ButtonComponent.new(text: 'Custom', class: 'my-class'))
+        assert_selector 'button.btn.my-class'
+      end
+
+      def test_renders_with_block_content
+        render_inline(ButtonComponent.new) { 'Block content' }
+        assert_selector 'button.btn', text: 'Block content'
+      end
+
+      def test_ignores_invalid_variant
+        render_inline(ButtonComponent.new(text: 'Invalid', variant: 'invalid'))
+        assert_selector 'button.btn'
+        refute_selector 'button.btn-invalid'
+      end
+
+      def test_ignores_invalid_size
+        render_inline(ButtonComponent.new(text: 'Invalid', size: 'invalid'))
+        assert_selector 'button.btn'
+        refute_selector 'button.btn-invalid'
+      end
+
+      def test_ignores_invalid_type
+        render_inline(ButtonComponent.new(text: 'Invalid', type: 'invalid'))
+        assert_selector 'button.btn[type="button"]'
+      end
+
+      def test_preview_playground
+        render_preview(:playground)
+        assert_selector 'button.btn'
+      end
+
+      def test_preview_icon_start
+        render_preview(:icon_start)
+        assert_selector 'button.btn.gap-2'
+        assert_selector 'button.btn svg'
+      end
+
+      def test_preview_icon_end
+        render_preview(:icon_end)
+        assert_selector 'button.btn.gap-2'
+        assert_selector 'button.btn svg'
+      end
+
+      def test_preview_both_icons
+        render_preview(:both_icons)
+        assert_selector 'button.btn.gap-2'
+        assert_selector 'button.btn svg', count: 2
+      end
+
+      def test_preview_icon_only
+        render_preview(:icon_only)
+        assert_selector 'button.btn.btn-square svg'
       end
     end
   end

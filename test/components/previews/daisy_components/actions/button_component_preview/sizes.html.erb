@@ -1,11 +1,9 @@
 <%# @label Button Sizes %>
 <%# @display height 200 %>
 
-<div class="flex flex-wrap items-center gap-2">
-  <% sizes.each do |size| %>
-    <%= render DaisyComponents::Actions::ButtonComponent.new(
-      text: size.upcase,
-      size: size
-    ) %>
-  <% end %>
+<div class="flex flex-wrap gap-4 items-center">
+  <%= render DaisyComponents::Actions::ButtonComponent.new(text: "XS", size: "xs") %>
+  <%= render DaisyComponents::Actions::ButtonComponent.new(text: "SM", size: "sm") %>
+  <%= render DaisyComponents::Actions::ButtonComponent.new(text: "MD", size: "md") %>
+  <%= render DaisyComponents::Actions::ButtonComponent.new(text: "LG", size: "lg") %>
 </div> 
