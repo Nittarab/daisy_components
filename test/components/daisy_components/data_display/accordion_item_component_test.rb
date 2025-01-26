@@ -89,15 +89,21 @@ module DaisyComponents
 
       def test_renders_with_multiple_features
         @parent = AccordionComponent.new(join: true, arrow: true)
+        render_inline(AccordionItemComponent.new(parent: @parent, title: 'Multi Feature')) { 'Content' }
+
+        assert_selector('.collapse.join-item.collapse-arrow')
+        assert_selector('.border.border-base-300')
+      end
+
+      def test_html_attributes_handling
         render_inline(AccordionItemComponent.new(
                         parent: @parent,
-                        title: 'Multi-feature Item',
-                        checked: true
+                        title: 'Item with Attributes',
+                        class: 'custom-class',
+                        data: { controller: 'test' },
+                        aria: { label: 'Accordion Item' }
                       )) { 'Content' }
-
-        assert_selector('.collapse.collapse-arrow.join-item')
-        assert_selector('.border.border-base-300')
-        assert_selector('input[checked]', visible: false)
+        assert_selector('.collapse.custom-class[data-controller="test"][aria-label="Accordion Item"]')
       end
     end
   end

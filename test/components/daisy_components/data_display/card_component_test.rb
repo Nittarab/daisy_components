@@ -125,6 +125,19 @@ module DaisyComponents
         assert_selector("img[src='https://placehold.co/400x200']")
         assert_selector('.btn.btn-primary', text: 'Learn More')
       end
+
+      def test_html_attributes_handling
+        render_inline(CardComponent.new(
+                        class: 'custom-class',
+                        data: { controller: 'test' },
+                        aria: { label: 'Card' }
+                      )) do |component|
+          component.with_body do |body|
+            body.with_description { 'Content' }
+          end
+        end
+        assert_selector('.card.custom-class[data-controller="test"][aria-label="Card"]')
+      end
     end
   end
 end

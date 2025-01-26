@@ -1,4 +1,4 @@
-<div class="<%= default_classes %>">
+<%= tag.div(**html_attributes) do %>
   <div class="<%= inner_classes %>">
     <% if image.present? %>
       <%= image %>
@@ -10,4 +10,4 @@
       <%= placeholder_text %>
     <% end %>
   </div>
-</div> 
+<% end %> 

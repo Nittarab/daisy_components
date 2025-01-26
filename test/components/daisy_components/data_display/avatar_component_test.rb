@@ -127,6 +127,17 @@ module DaisyComponents
         assert_selector('img[src="https://placehold.co/400x400"]')
         refute_text('JD')
       end
+
+      def test_html_attributes_handling
+        render_inline(AvatarComponent.new(
+                        class: 'custom-class',
+                        data: { controller: 'test' },
+                        aria: { label: 'Avatar' },
+                        img_src: 'https://placehold.co/400x400',
+                        size: 12
+                      ))
+        assert_selector('.avatar.custom-class[data-controller="test"][aria-label="Avatar"]')
+      end
     end
   end
 end

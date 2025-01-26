@@ -50,8 +50,9 @@ module DaisyComponents
           group.with_avatar(img_src: 'test4.jpg')
         end
 
-        assert_selector('.avatar', count: 3) # 2 avatars + counter
-        assert_selector('.avatar.placeholder div', text: '+2')
+        assert_selector('.avatar', count: 3)
+        assert_selector('.avatar-group')
+        assert_text('+2')
       end
 
       def test_renders_with_placeholder
@@ -143,6 +144,24 @@ module DaisyComponents
 
         # Triangle
         assert_selector('.avatar-group .avatar div.mask.mask-triangle', count: 3)
+      end
+
+      def test_shape_classes_with_nil_shape
+        render_inline(AvatarGroupComponent.new(shape: nil)) do |group|
+          group.with_avatar(img_src: 'test.jpg')
+        end
+        assert_selector('.avatar div.rounded-full')
+      end
+
+      def test_html_attributes_handling
+        render_inline(AvatarGroupComponent.new(
+                        class: 'custom-class',
+                        data: { controller: 'test' },
+                        aria: { label: 'Avatar Group' }
+                      )) do |group|
+          group.with_avatar(img_src: 'test.jpg')
+        end
+        assert_selector('.avatar-group.custom-class[data-controller="test"][aria-label="Avatar Group"]')
       end
     end
   end

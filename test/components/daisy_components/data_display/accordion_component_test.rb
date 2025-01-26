@@ -95,6 +95,17 @@ module DaisyComponents
         assert_selector('.collapse.collapse-arrow')
         assert_selector('.custom-class')
       end
+
+      def test_html_attributes_handling
+        render_inline(AccordionComponent.new(
+                        class: 'custom-class',
+                        data: { controller: 'test' },
+                        aria: { label: 'Accordion' }
+                      )) do |component|
+          component.with_item(title: 'Item 1') { 'Content 1' }
+        end
+        assert_selector('.custom-class[data-controller="test"][aria-label="Accordion"]')
+      end
     end
   end
 end

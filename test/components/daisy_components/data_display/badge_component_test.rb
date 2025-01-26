@@ -72,6 +72,17 @@ module DaisyComponents
         render_inline(BadgeComponent.new('Custom Classes', class: 'custom-class'))
         assert_selector '.badge.custom-class', text: 'Custom Classes'
       end
+
+      def test_html_attributes_handling
+        render_inline(BadgeComponent.new(
+                        'Badge with Attributes',
+                        class: 'custom-class',
+                        data: { controller: 'test' },
+                        aria: { label: 'Badge' }
+                      ))
+        assert_selector('.badge.custom-class[data-controller="test"][aria-label="Badge"]',
+                        text: 'Badge with Attributes')
+      end
     end
   end
 end
