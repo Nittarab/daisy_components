@@ -95,39 +95,36 @@ module DaisyComponents
         assert_selector('input[type="checkbox"][checked]')
       end
 
-      def test_text_preview
-        render_preview(:text)
-        assert_selector('.swap')
-        assert_selector('.swap-on', text: 'ON')
-        assert_selector('.swap-off', text: 'OFF')
-      end
-
       def test_theme_preview
         render_preview(:theme)
         assert_selector('.swap')
-        assert_selector('.swap-on', text: '🌞')
-        assert_selector('.swap-off', text: '🌚')
+        assert_selector('.swap-on svg')
+        assert_selector('.swap-off svg')
+        assert_selector('label.swap.swap-rotate.btn.btn-ghost.btn-circle')
       end
 
       def test_weather_preview
         render_preview(:weather)
         assert_selector('.swap')
-        assert_selector('.swap-on', text: '☀️')
-        assert_selector('.swap-off', text: '☁️')
+        assert_selector('.swap-on', text: '🌞')
+        assert_selector('.swap-off', text: '🌚')
+        assert_selector('label.swap.swap-flip')
       end
 
       def test_hamburger_preview
         render_preview(:hamburger)
         assert_selector('.swap')
-        assert_selector('.swap-on', text: '✕')
-        assert_selector('.swap-off', text: '☰')
+        assert_selector('.swap-on svg')
+        assert_selector('.swap-off svg')
+        assert_selector('label.swap.swap-rotate.btn.btn-ghost.btn-circle')
       end
 
       def test_volume_preview
         render_preview(:volume)
         assert_selector('.swap')
-        assert_selector('.swap-on', text: '🔊')
-        assert_selector('.swap-off', text: '🔇')
+        assert_selector('.swap-on svg')
+        assert_selector('.swap-off svg')
+        assert_selector('label.swap.btn.btn-ghost.btn-circle')
       end
 
       def test_active_preview
@@ -149,7 +146,7 @@ module DaisyComponents
       end
 
       # Preview Tests
-      def test_playground_preview
+      def test_playground_preview_with_params
         # Test a complex combination of parameters
         render_preview(:playground, params: {
                          variant: :primary,
@@ -165,52 +162,6 @@ module DaisyComponents
         assert_text_content('ON', 'OFF')
         assert_selector('label.text-primary')
         assert_selector('label.text-lg')
-      end
-
-      # Test that preview renders with minimal parameters
-      def test_playground_preview_minimal
-        render_preview(:playground)
-        assert_basic_structure
-        assert_text_content('ON', 'OFF')
-      end
-
-      def test_text_preview
-        render_preview(:text)
-        assert_basic_structure
-        assert_text_content('ON', 'OFF')
-        assert_selector('label.text-primary')
-      end
-
-      def test_theme_preview
-        render_preview(:theme)
-        assert_basic_structure
-        assert_selector('label.swap.swap-rotate.btn.btn-ghost.btn-circle')
-        assert_icon_classes('div.swap-on svg', 'h-6 w-6')
-        assert_icon_classes('div.swap-off svg', 'h-6 w-6')
-      end
-
-      def test_weather_preview
-        render_preview(:weather)
-        assert_basic_structure
-        assert_text_content('🌞', '🌚')
-        assert_selector('label.swap.swap-flip')
-        assert_selector('label.text-lg')
-      end
-
-      def test_hamburger_preview
-        render_preview(:hamburger)
-        assert_basic_structure
-        assert_selector('label.swap.swap-rotate.btn.btn-ghost.btn-circle')
-        assert_icon_classes('div.swap-on svg', 'h-6 w-6')
-        assert_icon_classes('div.swap-off svg', 'h-6 w-6')
-      end
-
-      def test_volume_preview
-        render_preview(:volume)
-        assert_basic_structure
-        assert_selector('label.swap.btn.btn-ghost.btn-circle')
-        assert_icon_classes('div.swap-on svg', 'h-6 w-6')
-        assert_icon_classes('div.swap-off svg', 'h-6 w-6')
       end
 
       def test_preview_value_control

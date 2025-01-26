@@ -18,7 +18,7 @@ module DaisyComponents
     #     button: true,
     #     effect: :rotate
     #   )) %>
-    class SwapComponent < DaisyComponents::BaseComponent
+    class SwapComponent < DaisyComponents::BaseComponent # rubocop:disable Metrics/ClassLength
       VALID_VARIANTS = %i[neutral primary secondary accent info success warning error ghost].freeze
       VALID_SIZES = %i[xs sm md lg].freeze
       VALID_EFFECTS = %i[none rotate flip active flip-active].freeze

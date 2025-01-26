@@ -120,17 +120,9 @@ module DaisyComponents
       end
 
       def test_playground_renders_with_all_options
-        render_preview(:playground, params: {
-                         join: true,
-                         arrow: true,
-                         plus: false,
-                         radio: true,
-                         bg_color: 'bg-primary',
-                         text_color: 'text-primary-content',
-                         border_color: 'border-primary',
-                         padding: 'p-4',
-                         classes: 'custom-class'
-                       })
+        render_preview(:playground, params: { join: true, arrow: true, plus: false, radio: true,
+                                              bg_color: 'bg-primary', text_color: 'text-primary-content',
+                                              border_color: 'border-primary', padding: 'p-4', classes: 'custom-class' })
 
         assert_selector('.w-full.custom-class')
         assert_selector('.join.join-vertical')
