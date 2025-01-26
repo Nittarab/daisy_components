@@ -102,7 +102,7 @@ module DaisyComponents
       def render_menu
         return unless @items.any?
 
-        tag.ul(class: 'dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52') do
+        tag.ul(class: 'dropdown-content menu menu-sm z-[1] p-2 shadow bg-base-100 rounded-box w-52') do
           safe_join(@items.map { |item| render_menu_item(item) })
         end
       end

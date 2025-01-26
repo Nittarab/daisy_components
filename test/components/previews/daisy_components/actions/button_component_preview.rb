@@ -17,7 +17,9 @@ module DaisyComponents
       # @param variant select {
       #   choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost, link]
       # }
-      # @param size select { choices: [xs, sm, md, lg] }
+      # @param size select { choices: [xs, sm, md, lg, xl] }
+      # @param style select { choices: [outline, soft] }
+      # @param shape select { choices: [wide, block, circle, square] }
       # @param disabled toggle "Disable the button"
       # @param loading toggle "Show loading state"
       # @param active toggle "Show active state"
@@ -28,6 +30,8 @@ module DaisyComponents
         text: 'Button',
         variant: nil,
         size: nil,
+        style: nil,
+        shape: nil,
         disabled: false,
         loading: false,
         active: false,
@@ -39,6 +43,8 @@ module DaisyComponents
                  text:,
                  variant:,
                  size:,
+                 style:,
+                 shape:,
                  disabled:,
                  loading:,
                  active:,
@@ -239,8 +245,9 @@ module DaisyComponents
       # Full-width button
       def block
         render(ButtonComponent.new(
-                 text: 'Full width button',
-                 class: 'btn-block'
+                 text: 'Block Button',
+                 shape: 'block',
+                 variant: 'primary'
                ))
       end
 
@@ -320,6 +327,87 @@ module DaisyComponents
       end
 
       # @!endgroup
+
+      # @!group Styles
+
+      # Outline Button
+      # ---------------
+      # Button with outline style
+      def outline
+        render(ButtonComponent.new(
+                 text: 'Outline Button',
+                 style: 'outline',
+                 variant: 'primary'
+               ))
+      end
+
+      # Soft Button
+      # ---------------
+      # Button with soft style
+      def soft
+        render(ButtonComponent.new(
+                 text: 'Soft Button',
+                 style: 'soft',
+                 variant: 'primary'
+               ))
+      end
+
+      # All Styles
+      # ---------------
+      # All available button styles
+      def styles
+        render_with_template(locals: {
+                               buttons: ButtonComponent::STYLES.map do |style|
+                                 { text: style.titleize, style: style, variant: 'primary' }
+                               end
+                             })
+      end
+
+      # @!group Shapes
+
+      # Wide Button
+      # ---------------
+      # Button with wide shape
+      def wide
+        render(ButtonComponent.new(
+                 text: 'Wide Button',
+                 shape: 'wide',
+                 variant: 'primary'
+               ))
+      end
+
+      # Circle Button
+      # ---------------
+      # Circle shaped button with icon
+      def circle
+        render(ButtonComponent.new(
+                 icon_start: check_icon('h-6 w-6'),
+                 shape: 'circle',
+                 variant: 'primary'
+               ))
+      end
+
+      # Square Button
+      # ---------------
+      # Square shaped button with icon
+      def square
+        render(ButtonComponent.new(
+                 icon_start: check_icon('h-6 w-6'),
+                 shape: 'square',
+                 variant: 'primary'
+               ))
+      end
+
+      # All Shapes
+      # ---------------
+      # All available button shapes
+      def shapes
+        render_with_template(locals: {
+                               buttons: ButtonComponent::SHAPES.map do |shape|
+                                 { text: shape.titleize, shape: shape, variant: 'primary' }
+                               end
+                             })
+      end
     end
   end
 end

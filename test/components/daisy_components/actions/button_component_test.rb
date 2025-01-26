@@ -415,6 +415,82 @@ module DaisyComponents
         render_preview(:icon_only)
         assert_selector 'button.btn.btn-square svg'
       end
+
+      def test_renders_button_styles
+        render_preview(:styles)
+        ButtonComponent::STYLES.each do |style|
+          assert_selector("button.btn.btn-#{style}", text: style.titleize)
+        end
+      end
+
+      def test_renders_button_shapes
+        render_preview(:shapes)
+        ButtonComponent::SHAPES.each do |shape|
+          assert_selector("button.btn.btn-#{shape}")
+        end
+      end
+
+      def test_renders_outline_button
+        render_preview(:outline)
+        assert_selector('button.btn.btn-outline.btn-primary', text: 'Outline Button')
+      end
+
+      def test_renders_soft_button
+        render_preview(:soft)
+        assert_selector('button.btn.btn-soft.btn-primary', text: 'Soft Button')
+      end
+
+      def test_renders_wide_button
+        render_preview(:wide)
+        assert_selector('button.btn.btn-wide.btn-primary', text: 'Wide Button')
+      end
+
+      def test_renders_block_button
+        render_preview(:block)
+        assert_selector('button.btn.btn-block.btn-primary', text: 'Block Button')
+      end
+
+      def test_renders_circle_button
+        render_preview(:circle)
+        assert_selector('button.btn.btn-circle.btn-primary svg.h-6.w-6')
+      end
+
+      def test_renders_square_button
+        render_preview(:square)
+        assert_selector('button.btn.btn-square.btn-primary svg.h-6.w-6')
+      end
+
+      def test_ignores_invalid_style
+        render_inline(ButtonComponent.new(text: 'Invalid', style: 'invalid'))
+        assert_selector('button.btn', text: 'Invalid')
+        refute_selector('button.btn-invalid')
+      end
+
+      def test_ignores_invalid_shape
+        render_inline(ButtonComponent.new(text: 'Invalid', shape: 'invalid'))
+        assert_selector('button.btn', text: 'Invalid')
+        refute_selector('button.btn-invalid')
+      end
+
+      def test_playground_renders_with_all_options
+        render_preview(:playground, params: {
+                         text: 'Test Button',
+                         variant: 'primary',
+                         size: 'lg',
+                         style: 'outline',
+                         shape: 'wide',
+                         disabled: true,
+                         loading: true,
+                         active: true,
+                         has_start_icon: true,
+                         has_end_icon: true,
+                         classes: 'custom-class'
+                       })
+
+        assert_selector('button.btn.btn-primary.btn-lg.btn-outline.btn-wide.btn-disabled.loading.btn-active.custom-class')
+        assert_selector('button svg', count: 2)
+        assert_text('Test Button')
+      end
     end
   end
 end

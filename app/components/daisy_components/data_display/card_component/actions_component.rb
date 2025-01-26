@@ -16,7 +16,6 @@ module DaisyComponents
         def default_classes
           class_names(
             'card-actions',
-            'mt-4',
             system_arguments[:class],
             "justify-#{@justify}": @justify
           )

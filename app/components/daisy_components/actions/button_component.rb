@@ -58,10 +58,16 @@ module DaisyComponents
       renders_one :end_icon
 
       # Available button variants from DaisyUI
-      VARIANTS = %w[neutral primary secondary accent info success warning error ghost link].freeze
+      VARIANTS = %w[primary secondary accent neutral ghost link info success warning error].freeze
 
       # Available button sizes from DaisyUI
-      SIZES = %w[lg md sm xs].freeze
+      SIZES = %w[xl lg md sm xs].freeze
+
+      # Available button styles from DaisyUI
+      STYLES = %w[outline soft].freeze
+
+      # Available button shape modifiers
+      SHAPES = %w[wide block circle square].freeze
 
       # Valid HTML button types
       BUTTON_TYPES = %w[button submit reset].freeze
@@ -69,7 +75,9 @@ module DaisyComponents
       # @param text [String] The text content to display inside the button
       # @param variant [String] Visual style of the button
       #    (neutral/primary/secondary/accent/info/success/warning/error/ghost/link)
-      # @param size [String] Size of the button (lg/md/sm/xs)
+      # @param size [String] Size of the button (xl/lg/md/sm/xs)
+      # @param style [String] Style of the button (outline/soft)
+      # @param shape [String] Shape modifier of the button (wide/block/circle/square)
       # @param disabled [Boolean] When true, prevents user interaction and grays out the button
       # @param href [String] Turns the button into a link pointing to this URL
       # @param type [String] HTML button type attribute (button/submit/reset)
@@ -85,6 +93,8 @@ module DaisyComponents
         text: nil,
         variant: nil,
         size: nil,
+        style: nil,
+        shape: nil,
         disabled: false,
         href: nil,
         type: 'button',
@@ -100,6 +110,8 @@ module DaisyComponents
         @text = text
         @variant = variant if VARIANTS.include?(variant.to_s)
         @size = size if SIZES.include?(size.to_s)
+        @style = style if STYLES.include?(style.to_s)
+        @shape = shape if SHAPES.include?(shape.to_s)
         @disabled = disabled
         @href = href
         @type = BUTTON_TYPES.include?(type.to_s) ? type : 'button'
@@ -157,6 +169,8 @@ module DaisyComponents
           'btn',
           "btn-#{@variant}" => @variant,
           "btn-#{@size}" => @size,
+          "btn-#{@style}" => @style,
+          "btn-#{@shape}" => @shape,
           'btn-disabled' => @disabled || @loading,
           'loading' => @loading,
           'btn-active' => @active,

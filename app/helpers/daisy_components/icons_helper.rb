@@ -68,5 +68,13 @@ module DaisyComponents
                  d: 'M19 9l-7 7-7-7')
       end
     end
+
+    def check_icon(size_class)
+      tag.svg(xmlns: 'http://www.w3.org/2000/svg', class: size_class, fill: 'none',
+              viewBox: '0 0 24 24', stroke: 'currentColor') do
+        tag.path(stroke_linecap: 'round', stroke_linejoin: 'round', stroke_width: '2',
+                 d: 'M5 13l4 4L19 7')
+      end
+    end
   end
 end

@@ -3,7 +3,7 @@
 module DaisyComponents
   module DataDisplay
     class BadgeComponent < DaisyComponents::BaseComponent
-      VARIANTS = %w[neutral primary secondary accent ghost info success warning error].freeze
+      VARIANTS = %w[primary secondary accent neutral ghost info success warning error].freeze
       SIZES = %w[lg md sm xs].freeze
 
       def initialize(text = nil, variant: nil, size: nil, outline: false, icon: nil, **system_arguments)
