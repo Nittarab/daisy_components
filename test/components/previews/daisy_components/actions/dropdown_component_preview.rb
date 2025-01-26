@@ -5,6 +5,8 @@ module DaisyComponents
     # @label Dropdown
     # @display bg_color "#fff"
     class DropdownComponentPreview < ViewComponent::Preview
+      include DaisyComponents::IconsHelper
+
       # @!group Playground
 
       # Playground
@@ -16,24 +18,41 @@ module DaisyComponents
       # @param hover toggle "When true, opens the dropdown on hover instead of click"
       # @param open toggle "When true, forces the dropdown to stay open"
       # @param align_end toggle "When true, aligns the dropdown content to the end (right) of the trigger"
-      # @param classes text "Additional CSS classes to apply to the dropdown container"
+      # @param variant select { choices: [primary, secondary, accent, info, success, warning, error, ghost, neutral] }
+      #                      "Button variant for the trigger"
+      # @param size select { choices: [xs, sm, md, lg] }
+      #                   "Size of the trigger button"
+      # @param trigger_text text "Text for the trigger button"
+      # @param trigger_icon toggle "Show icon in trigger button"
       def playground(
         position: nil,
         hover: false,
         open: false,
         align_end: false,
-        classes: ''
+        variant: nil,
+        size: nil,
+        trigger_text: 'Click me',
+        trigger_icon: false
       )
-        render_with_template(
-          template: 'daisy_components/actions/dropdown_component_preview/playground',
-          locals: {
-            position: position,
-            hover: hover,
-            open: open,
-            align_end: align_end,
-            classes: classes
-          }
-        )
+        render(DropdownComponent.new(
+                 position: position,
+                 hover: hover,
+                 open: open,
+                 align_end: align_end,
+                 variant: variant,
+                 size: size,
+                 trigger: {
+                   text: trigger_text,
+                   icon: trigger_icon ? warning_icon('h-5 w-5') : nil
+                 },
+                 items: [
+                   { text: 'Item 1', href: '#' },
+                   { text: 'Item 2', href: '#' },
+                   { type: :divider },
+                   { text: 'Item 3', href: '#', variant: :error }
+                 ],
+                 class: 'mb-40'
+               ))
       end
 
       # @!endgroup
@@ -46,42 +65,55 @@ module DaisyComponents
       #
       # @label All Positions
       def positions
-        render_with_template(
-          template: 'daisy_components/actions/dropdown_component_preview/positions',
-          locals: {
-            positions: ::DaisyComponents::Actions::DropdownComponent::POSITIONS
-          }
-        )
+        render_with_template(locals: {
+                               positions: DropdownComponent::POSITIONS,
+                               helpers: self
+                             })
       end
 
       # @!endgroup
 
-      # @!group Alignments
+      # @!group Variants
 
-      # Dropdown Alignments
+      # Dropdown Variants
       # ---------------
-      # Different dropdown alignments
+      # Different button variants for the trigger
       #
-      # @label Alignments
-      def alignments
-        render_with_template(
-          template: 'daisy_components/actions/dropdown_component_preview/alignments'
-        )
+      # @label Variants
+      def variants
+        render_with_template(locals: {
+                               variants: DropdownComponent::VARIANTS,
+                               helpers: self
+                             })
       end
 
       # @!endgroup
 
-      # @!group Behaviors
+      # @!group Sizes
 
-      # Dropdown Behaviors
+      # Dropdown Sizes
       # ---------------
-      # Different dropdown behaviors: hover and force open
+      # Different sizes for the trigger button
       #
-      # @label Behaviors
-      def behaviors
-        render_with_template(
-          template: 'daisy_components/actions/dropdown_component_preview/behaviors'
-        )
+      # @label Sizes
+      def sizes
+        render_with_template(locals: {
+                               sizes: DropdownComponent::SIZES,
+                               helpers: self
+                             })
+      end
+
+      # @!endgroup
+
+      # @!group Features
+
+      # Dropdown Features
+      # ---------------
+      # Showcase of different dropdown features: icons, dividers, and variants
+      #
+      # @label Features
+      def features
+        render_with_template(locals: { helpers: self })
       end
 
       # @!endgroup

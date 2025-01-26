@@ -27,6 +27,15 @@ module DaisyComponents
           render_inline(ActionsComponent.new(class: 'custom-class'))
           assert_selector('.card-actions.custom-class')
         end
+
+        def test_html_attributes_handling
+          render_inline(ActionsComponent.new(
+                          class: 'custom-class',
+                          data: { controller: 'test' },
+                          aria: { label: 'Card Actions' }
+                        ))
+          assert_selector('.card-actions.custom-class[data-controller="test"][aria-label="Card Actions"]')
+        end
       end
     end
   end

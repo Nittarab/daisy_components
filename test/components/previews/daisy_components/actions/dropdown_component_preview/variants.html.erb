@@ -1,0 +1,15 @@
+<%# @label Dropdown Variants %>
+<%# @display height 300 %>
+
+
+  <% variants.each do |variant| %>
+    <%= render(DaisyComponents::Actions::DropdownComponent.new(
+      variant: variant,
+      trigger: { text: variant.titleize },
+      items: [
+        { text: "Item 1", href: "#" },
+        { text: "Item 2", href: "#" }
+      ],
+      class: 'mb-32'
+    )) %>
+  <% end %>

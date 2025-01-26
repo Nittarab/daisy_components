@@ -5,11 +5,12 @@ module DaisyComponents
     class AccordionItemComponent < ViewComponent::Base
       attr_reader :title, :name, :checked, :parent
 
-      def initialize(parent:, title:, name: nil, checked: false)
+      def initialize(parent:, title:, name: nil, checked: false, **system_arguments)
         @parent = parent
         @title = title
         @name = name
         @checked = checked
+        @system_arguments = system_arguments
         super()
       end
 
@@ -23,14 +24,16 @@ module DaisyComponents
 
       private
 
+      attr_reader :system_arguments
+
       def render_joined_item
-        tag.div(class: 'collapse collapse-arrow join-item border border-base-300') do
+        tag.div(**html_attributes, class: 'collapse collapse-arrow join-item border border-base-300') do
           render_item_content
         end
       end
 
       def render_collapse_item
-        tag.div(class: collapse_classes) do
+        tag.div(**html_attributes, class: collapse_classes) do
           render_item_content
         end
       end
@@ -38,10 +41,15 @@ module DaisyComponents
       def collapse_classes
         class_names(
           'collapse',
-          'collapse-arrow': parent.arrow && !parent.plus,
-          'collapse-plus': parent.plus,
-          'border border-base-300 bg-base-200': true
+          { 'collapse-arrow' => parent.arrow && !parent.plus },
+          { 'collapse-plus' => parent.plus },
+          { 'border border-base-300 bg-base-200' => true },
+          system_arguments[:class]
         )
+      end
+
+      def html_attributes
+        system_arguments.except(:class)
       end
 
       def render_item_content

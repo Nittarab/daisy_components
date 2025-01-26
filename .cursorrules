@@ -18,7 +18,8 @@ use Gemfile to manage dependencies no gemspec
 Use Minitest and Fixtures for testing
 Use Capybara for testing
 
-Create SVG for icons
+Create SVG for icons, and use the IconHelper to render them
+The IconHelper should not be used in the component, but in the test and the preview, Icon are passed, to the component
 
 DONT delete documentation comments in the code, update them instead
 
@@ -46,14 +47,14 @@ For every component create:
  - Ruy class
  - html template
  - lookbook preview with a playground method and the description as Lookbook description with group and label 
- - test
+ - TEST: in the test we test the component behavior and the preview (just the fact that they render). Don't duplicate tests to much, but give precedence to the preview but be sure to test the behavior)
  - documentation
 
 For images, use placehold.co to generate placeholder images.
 
-After you make a change run the test with Coverage:
-
+When you want to check the coverage, run:
 COVERAGE=true bin/rails test
+Read the coverage report by using ./bin/parse_coverage.rb
 
-and read the /coverage/coverage.xml file to see if you missed something.
+Every component preview should be organized into groups that separate HTML and Ruby source rendering.
 

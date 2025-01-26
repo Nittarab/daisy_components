@@ -33,7 +33,15 @@ module DaisyComponents
       end
 
       def call
-        tag.div(class: default_classes) { safe_join(items || []) }
+        tag.div(**html_attributes) { safe_join(items || []) }
+      end
+
+      private
+
+      def html_attributes
+        attrs = system_arguments.except(:class)
+        attrs[:class] = default_classes
+        attrs
       end
     end
   end

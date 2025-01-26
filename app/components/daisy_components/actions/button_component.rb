@@ -7,6 +7,26 @@ module DaisyComponents
     # @example Basic usage
     #   <%= render(ButtonComponent.new(text: "Click me")) %>
     #
+    # @example With icons
+    #   <%= render(ButtonComponent.new(
+    #     text: "Submit",
+    #     icon_start: helpers.check_icon("h-5 w-5"),
+    #     variant: "primary"
+    #   )) %>
+    #
+    # @example With both icons
+    #   <%= render(ButtonComponent.new(
+    #     text: "Next",
+    #     icon_start: helpers.sync_icon("h-5 w-5"),
+    #     icon_end: helpers.arrow_right_icon("h-5 w-5")
+    #   )) %>
+    #
+    # @example Icon only button
+    #   <%= render(ButtonComponent.new(
+    #     icon_start: helpers.search_icon("h-6 w-6"),
+    #     class: "btn-square"
+    #   )) %>
+    #
     # @example With block content
     #   <%= render(ButtonComponent.new) do %>
     #     Complex <strong>content</strong>
@@ -33,7 +53,10 @@ module DaisyComponents
     #     method: :delete,
     #     variant: "error"
     #   )) %>
-    class ButtonComponent < BaseComponent
+    class ButtonComponent < BaseComponent # rubocop:disable Metrics/ClassLength
+      renders_one :start_icon
+      renders_one :end_icon
+
       # Available button variants from DaisyUI
       VARIANTS = %w[neutral primary secondary accent info success warning error ghost link].freeze
 
@@ -55,6 +78,8 @@ module DaisyComponents
       # @param rel [String] Link relationship attribute (e.g., noopener, noreferrer)
       # @param loading [Boolean] When true, shows a loading spinner and disables the button
       # @param active [Boolean] When true, gives the button a pressed appearance
+      # @param icon_start [String] SVG icon to display before the text
+      # @param icon_end [String] SVG icon to display after the text
       # @param system_arguments [Hash] Additional HTML attributes to be applied to the button
       def initialize(
         text: nil,
@@ -68,6 +93,8 @@ module DaisyComponents
         rel: nil,
         loading: false,
         active: false,
+        icon_start: nil,
+        icon_end: nil,
         **system_arguments
       )
         @text = text
@@ -81,6 +108,10 @@ module DaisyComponents
         @rel = rel
         @loading = loading
         @active = active
+
+        with_start_icon { icon_start } if icon_start
+        with_end_icon { icon_end } if icon_end
+
         super(**system_arguments)
       end
 
@@ -95,31 +126,48 @@ module DaisyComponents
       private
 
       def button_tag
-        tag.button(**button_arguments) { content || @text }
+        tag.button(**button_arguments) { button_content }
       end
 
       def link_tag
-        tag.a(**link_arguments) { content || @text }
+        tag.a(**link_arguments) { button_content }
+      end
+
+      def button_content
+        parts = []
+        parts << start_icon if start_icon
+        parts << (content || @text)
+        parts << end_icon if end_icon
+        safe_join(parts)
       end
 
       def shared_arguments
-        classes = class_names(
-          'btn',
-          "btn-#{@variant}" => @variant,
-          "btn-#{@size}" => @size,
-          'btn-disabled' => @disabled || @loading,
-          'loading' => @loading,
-          'btn-active' => @active
-        )
-
         {
-          class: [classes, system_arguments[:class]].compact.join(' '),
+          class: computed_classes,
           disabled: @disabled || @loading,
           'aria-disabled': @disabled || @loading,
           'aria-busy': @loading,
           role: @href ? 'button' : nil,
           **system_arguments.except(:class)
         }
+      end
+
+      def computed_classes
+        base_classes = class_names(
+          'btn',
+          "btn-#{@variant}" => @variant,
+          "btn-#{@size}" => @size,
+          'btn-disabled' => @disabled || @loading,
+          'loading' => @loading,
+          'btn-active' => @active,
+          'gap-2' => icon_and_content?
+        )
+
+        [base_classes, system_arguments[:class]].compact.join(' ')
+      end
+
+      def icon_and_content?
+        (start_icon || end_icon) && (@text || content)
       end
 
       def button_arguments

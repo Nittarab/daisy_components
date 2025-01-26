@@ -1,0 +1,8 @@
+<%# @label Active State %>
+<%# @display height 200 %>
+
+<div class="flex flex-wrap gap-2">
+  <% buttons.each do |button| %>
+    <%= render DaisyComponents::Actions::ButtonComponent.new(**button) %>
+  <% end %>
+</div> 

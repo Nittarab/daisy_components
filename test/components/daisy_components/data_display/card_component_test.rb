@@ -106,6 +106,38 @@ module DaisyComponents
 
         assert_selector '.card-body h3.card-title', text: 'Custom Title'
       end
+
+      def test_renders_body_with_title_and_description
+        render_inline(CardComponent.new) do |component|
+          component.with_body(title: 'Title from param', description: 'Description from param')
+        end
+
+        assert_selector '.card-title', text: 'Title from param'
+        assert_text 'Description from param'
+      end
+
+      def test_renders_card_with_complex_description
+        render_preview(:complex_description, from: CardComponentPreview)
+        assert_selector('.card')
+        assert_selector('.card-title', text: 'Card with Badge')
+        assert_selector('.badge', text: 'New!')
+        assert_text('This card includes both text and a badge in its description')
+        assert_selector("img[src='https://placehold.co/400x200']")
+        assert_selector('.btn.btn-primary', text: 'Learn More')
+      end
+
+      def test_html_attributes_handling
+        render_inline(CardComponent.new(
+                        class: 'custom-class',
+                        data: { controller: 'test' },
+                        aria: { label: 'Card' }
+                      )) do |component|
+          component.with_body do |body|
+            body.with_description { 'Content' }
+          end
+        end
+        assert_selector('.card.custom-class[data-controller="test"][aria-label="Card"]')
+      end
     end
   end
 end
