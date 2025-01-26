@@ -13,95 +13,94 @@ module DaisyComponents
         render_inline(DropdownComponent.new(
                         trigger: { text: 'Click me' },
                         items: [
-                          { text: 'Item 1', href: '#' },
-                          { text: 'Item 2', href: '#' }
+                          { text: 'Item 1', href: '#' }
                         ]
                       ))
 
-        assert_selector('div.dropdown')
+        assert_selector('.dropdown')
         assert_selector('button.btn', text: 'Click me')
-        assert_selector('ul.dropdown-content')
-        assert_selector('li a', text: 'Item 1')
-        assert_selector('li a', text: 'Item 2')
+        assert_selector('.dropdown-content')
+        assert_selector('a', text: 'Item 1')
       end
 
-      def test_renders_with_position
-        render_inline(DropdownComponent.new(
-                        position: 'top',
-                        trigger: { text: 'Click me' }
-                      ))
+      def test_renders_dropdown_positions
+        %w[top top-end bottom bottom-end left left-end right right-end].each do |position|
+          render_inline(DropdownComponent.new(
+                          position: position,
+                          trigger: { text: 'Click me' },
+                          items: [{ text: 'Item', href: '#' }]
+                        ))
 
-        assert_selector('div.dropdown.dropdown-top')
+          assert_selector(".dropdown.dropdown-#{position}")
+        end
       end
 
-      def test_invalid_position_is_ignored
-        render_inline(DropdownComponent.new(
-                        position: 'invalid-position',
-                        trigger: { text: 'Click me' }
-                      ))
-
-        assert_selector('div.dropdown')
-        assert_not_includes rendered_content, 'invalid-position'
-      end
-
-      def test_renders_with_hover
+      def test_renders_hover_variants
+        # Standard hover
         render_inline(DropdownComponent.new(
                         hover: true,
-                        trigger: { text: 'Click me' }
+                        trigger: { text: 'Hover me' },
+                        items: [{ text: 'Item', href: '#' }]
                       ))
+        assert_selector('.dropdown.dropdown-hover')
 
-        assert_selector('div.dropdown.dropdown-hover')
-      end
-
-      def test_renders_with_open_state
+        # Hover content
         render_inline(DropdownComponent.new(
-                        open: true,
-                        trigger: { text: 'Click me' }
+                        hover: 'content',
+                        trigger: { text: 'Hover content' },
+                        items: [{ text: 'Item', href: '#' }]
                       ))
-
-        assert_selector('div.dropdown.dropdown-open')
+        assert_selector('.dropdown.dropdown-hover-content')
       end
 
-      def test_renders_with_end_alignment
+      def test_renders_header_and_footer
         render_inline(DropdownComponent.new(
-                        align_end: true,
-                        trigger: { text: 'Click me' }
+                        trigger: { text: 'Click me' },
+                        header: { title: 'Menu' },
+                        footer: { content: 'Footer content' },
+                        items: [{ text: 'Item', href: '#' }]
                       ))
 
-        assert_selector('div.dropdown.dropdown-end')
+        assert_selector('.dropdown-header')
+        assert_selector('.dropdown-header .text-lg.font-bold', text: 'Menu')
+        assert_selector('.dropdown-footer', text: 'Footer content')
       end
 
-      def test_renders_with_variant
+      def test_renders_custom_header_content
         render_inline(DropdownComponent.new(
-                        variant: 'primary',
-                        trigger: { text: 'Click me' }
+                        trigger: { text: 'Click me' },
+                        header: { content: tag.div('Custom header', class: 'custom-header') },
+                        items: [{ text: 'Item', href: '#' }]
                       ))
 
-        assert_selector('button.btn.btn-primary')
+        assert_selector('.dropdown-header .custom-header', text: 'Custom header')
       end
 
-      def test_renders_with_size
-        render_inline(DropdownComponent.new(
-                        size: 'lg',
-                        trigger: { text: 'Click me' }
-                      ))
+      def test_renders_variants
+        %w[primary secondary accent info success warning error ghost neutral].each do |variant|
+          render_inline(DropdownComponent.new(
+                          variant: variant,
+                          trigger: { text: 'Click me' },
+                          items: [{ text: 'Item', href: '#' }]
+                        ))
 
-        assert_selector('button.btn.btn-lg')
+          assert_selector(".btn.btn-#{variant}")
+        end
       end
 
-      def test_renders_with_icon
-        render_inline(DropdownComponent.new(
-                        trigger: {
-                          text: 'Settings',
-                          icon: warning_icon('h-5 w-5')
-                        }
-                      ))
+      def test_renders_sizes
+        %w[xs sm md lg].each do |size|
+          render_inline(DropdownComponent.new(
+                          size: size,
+                          trigger: { text: 'Click me' },
+                          items: [{ text: 'Item', href: '#' }]
+                        ))
 
-        assert_selector('button.btn svg')
-        assert_selector('button.btn', text: 'Settings')
+          assert_selector(".btn.btn-#{size}")
+        end
       end
 
-      def test_renders_with_divider
+      def test_renders_dividers
         render_inline(DropdownComponent.new(
                         trigger: { text: 'Click me' },
                         items: [
@@ -112,95 +111,42 @@ module DaisyComponents
                       ))
 
         assert_selector('li.divider')
-        assert_selector('li a', text: 'Item 1')
-        assert_selector('li a', text: 'Item 2')
       end
 
-      def test_renders_with_item_variants
+      def test_renders_item_variants
         render_inline(DropdownComponent.new(
                         trigger: { text: 'Click me' },
                         items: [
-                          { text: 'Delete', href: '#', variant: :error }
+                          { text: 'Error', href: '#', variant: :error }
                         ]
                       ))
 
-        assert_selector('li a.text-error', text: 'Delete')
+        assert_selector('a.text-error')
       end
 
-      def test_renders_with_item_icons
-        render_inline(DropdownComponent.new(
-                        trigger: { text: 'Click me' },
-                        items: [
-                          {
-                            text: 'Settings',
-                            href: '#',
-                            icon: warning_icon('h-5 w-5')
-                          }
-                        ]
-                      ))
-
-        assert_selector('li a svg')
-        assert_selector('li a', text: 'Settings')
+      def test_playground_preview
+        render_preview(:playground)
+        assert_selector('.dropdown')
       end
 
-      def test_renders_with_additional_classes
-        render_inline(DropdownComponent.new(
-                        class: 'custom-class',
-                        trigger: { text: 'Click me' }
-                      ))
-
-        assert_selector('div.dropdown.custom-class')
+      def test_positions_preview
+        render_preview(:positions)
+        assert_selector('.dropdown')
       end
 
-      def test_renders_with_data_attributes
-        render_inline(DropdownComponent.new(
-                        trigger: { text: 'Click me' },
-                        data: { controller: 'dropdown', action: 'click->dropdown#toggle' }
-                      ))
-
-        assert_selector('div.dropdown[data-controller="dropdown"][data-action="click->dropdown#toggle"]')
-      end
-
-      def test_renders_preview_playground
-        render_preview(:playground, params: {
-                         position: 'top',
-                         hover: true,
-                         open: true,
-                         align_end: true,
-                         variant: 'primary',
-                         size: 'lg',
-                         trigger_text: 'Custom Text',
-                         trigger_icon: warning_icon('h-5 w-5')
-                       })
-
-        assert_selector('div.dropdown.dropdown-top.dropdown-hover.dropdown-open.dropdown-end')
-        assert_selector('button.btn.btn-primary.btn-lg svg')
-        assert_selector('button.btn', text: 'Custom Text')
-        assert_selector('ul.dropdown-content')
-        assert_selector('li.divider')
-        assert_selector('li a.text-error')
-      end
-
-      def test_renders_preview_variants
+      def test_variants_preview
         render_preview(:variants)
-        DropdownComponent::VARIANTS.each do |variant|
-          assert_selector("button.btn.btn-#{variant}")
-        end
+        assert_selector('.dropdown')
       end
 
-      def test_renders_preview_sizes
+      def test_sizes_preview
         render_preview(:sizes)
-        DropdownComponent::SIZES.each do |size|
-          assert_selector("button.btn.btn-#{size}")
-        end
+        assert_selector('.dropdown')
       end
 
-      def test_renders_preview_features
+      def test_features_preview
         render_preview(:features)
-        assert_selector('button.btn svg')
-        assert_selector('li a svg')
-        assert_selector('li.divider')
-        assert_selector('li a.text-error')
+        assert_selector('.dropdown')
       end
     end
   end

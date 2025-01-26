@@ -31,21 +31,24 @@ module DaisyComponents
     #   )) %>
     class DropdownComponent < BaseComponent
       # Available dropdown positions from DaisyUI
-      POSITIONS = %w[top bottom left right].freeze
+      POSITIONS = %w[top top-end bottom bottom-end left left-end right right-end].freeze
       VARIANTS = %w[primary secondary accent info success warning error ghost neutral].freeze
       SIZES = %w[xs sm md lg].freeze
 
       # @param position [String] Position of the dropdown content relative to the trigger (top/bottom/left/right)
-      # @param hover [Boolean] When true, opens the dropdown on hover instead of click
+      # @param hover [Boolean, String] When true or 'content', opens the dropdown on hover instead of click
       # @param open [Boolean] When true, forces the dropdown to stay open
       # @param align_end [Boolean] When true, aligns the dropdown content to the end (right) of the trigger
       # @param variant [String] Button variant for the trigger (primary/secondary/accent/etc)
       # @param size [String] Size of the trigger button (xs/sm/md/lg)
       # @param trigger [Hash] Configuration for the trigger button
       # @param items [Array<Hash>] Array of menu items
+      # @param header [Hash] Configuration for the dropdown header
+      # @param footer [Hash] Configuration for the dropdown footer
       # @param system_arguments [Hash] Additional HTML attributes to be applied to the dropdown container
       def initialize(position: nil, hover: false, open: false, align_end: false,
-                     variant: nil, size: nil, trigger: nil, items: nil, **system_arguments)
+                     variant: nil, size: nil, trigger: nil, items: nil,
+                     header: nil, footer: nil, **system_arguments)
         @position = position if POSITIONS.include?(position.to_s)
         @hover = hover
         @open = open
@@ -54,6 +57,8 @@ module DaisyComponents
         @size = size if SIZES.include?(size.to_s)
         @trigger = trigger || {}
         @items = items || []
+        @header = header
+        @footer = footer
         super(**system_arguments)
       end
 
@@ -72,7 +77,8 @@ module DaisyComponents
         classes = class_names(
           'dropdown',
           "dropdown-#{@position}" => @position,
-          'dropdown-hover' => @hover,
+          'dropdown-hover' => @hover == true,
+          'dropdown-hover-content' => @hover == 'content',
           'dropdown-open' => @open,
           'dropdown-end' => @align_end
         )
@@ -103,8 +109,36 @@ module DaisyComponents
         return unless @items.any?
 
         tag.ul(class: 'dropdown-content menu menu-sm z-[1] p-2 shadow bg-base-100 rounded-box w-52') do
-          safe_join(@items.map { |item| render_menu_item(item) })
+          safe_join([
+            render_header,
+            render_items,
+            render_footer
+          ].compact)
         end
+      end
+
+      def render_header
+        return unless @header
+
+        tag.div(class: 'dropdown-header') do
+          if @header[:title]
+            tag.div(class: 'text-lg font-bold') { @header[:title] }
+          else
+            @header[:content]
+          end
+        end
+      end
+
+      def render_footer
+        return unless @footer
+
+        tag.div(class: 'dropdown-footer mt-2 border-t pt-2') do
+          @footer[:content]
+        end
+      end
+
+      def render_items
+        safe_join(@items.map { |item| render_menu_item(item) })
       end
 
       def render_menu_item(item)

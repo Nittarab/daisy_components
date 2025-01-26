@@ -13,9 +13,10 @@ module DaisyComponents
       # ---------------
       # Interactive dropdown menu with customizable trigger and content
       #
-      # @param position select { choices: [top, bottom, left, right] }
+      # @param position select { choices: [top, top-end, bottom, bottom-end, left, left-end, right, right-end] }
       #                       "Position of the dropdown content relative to the trigger"
-      # @param hover toggle "When true, opens the dropdown on hover instead of click"
+      # @param hover select { choices: [false, true, content] }
+      #                    "How the dropdown opens on hover (false, true, or content)"
       # @param open toggle "When true, forces the dropdown to stay open"
       # @param align_end toggle "When true, aligns the dropdown content to the end (right) of the trigger"
       # @param variant select { choices: [primary, secondary, accent, info, success, warning, error, ghost, neutral] }
@@ -24,6 +25,8 @@ module DaisyComponents
       #                   "Size of the trigger button"
       # @param trigger_text text "Text for the trigger button"
       # @param trigger_icon toggle "Show icon in trigger button"
+      # @param show_header toggle "Show header in dropdown"
+      # @param show_footer toggle "Show footer in dropdown"
       def playground(
         position: nil,
         hover: false,
@@ -32,7 +35,9 @@ module DaisyComponents
         variant: nil,
         size: nil,
         trigger_text: 'Click me',
-        trigger_icon: false
+        trigger_icon: false,
+        show_header: false,
+        show_footer: false
       )
         render(DropdownComponent.new(
                  position: position,
@@ -45,6 +50,11 @@ module DaisyComponents
                    text: trigger_text,
                    icon: trigger_icon ? warning_icon('h-5 w-5') : nil
                  },
+                 header: show_header ? { title: 'Menu' } : nil,
+                 footer: if show_footer
+                           { content: tag.button('Save changes',
+                                                 class: 'btn btn-primary btn-sm w-full') }
+                         end,
                  items: [
                    { text: 'Item 1', href: '#' },
                    { text: 'Item 2', href: '#' },
@@ -109,7 +119,7 @@ module DaisyComponents
 
       # Dropdown Features
       # ---------------
-      # Showcase of different dropdown features: icons, dividers, and variants
+      # Showcase of different dropdown features: icons, dividers, variants, headers, and footers
       #
       # @label Features
       def features

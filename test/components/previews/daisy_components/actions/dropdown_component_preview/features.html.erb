@@ -1,39 +1,55 @@
 <%# @label Dropdown Features %>
 <%# @display height 300 %>
 
-<div class="flex flex-wrap items-center justify-center gap-4">
+<div class="flex flex-wrap gap-4">
+  <%# Basic dropdown with header and footer %>
   <%= render(DaisyComponents::Actions::DropdownComponent.new(
-    trigger: {
-      text: "Settings",
-      icon: helpers.warning_icon('h-5 w-5')
-    },
+    trigger: { text: "Settings", icon: helpers.warning_icon("h-5 w-5") },
+    header: { title: "Settings Menu" },
+    footer: { content: tag.button("Save changes", class: "btn btn-primary btn-sm w-full") },
     items: [
-      { text: "Profile", href: "#", icon: helpers.warning_icon('h-5 w-5') },
-      { text: "Settings", href: "#", icon: helpers.warning_icon('h-5 w-5') },
+      { text: "Profile", href: "#", icon: helpers.warning_icon("h-5 w-5") },
+      { text: "Settings", href: "#", icon: helpers.warning_icon("h-5 w-5") },
       { type: :divider },
-      { text: "Help", href: "#", icon: helpers.warning_icon('h-5 w-5') },
-      { text: "Logout", href: "#", icon: helpers.warning_icon('h-5 w-5'), variant: :error }
-    ],
-    class: 'mb-32'
+      { text: "Logout", href: "#", variant: :error }
+    ]
   )) %>
 
+  <%# Hover content dropdown %>
   <%= render(DaisyComponents::Actions::DropdownComponent.new(
-    variant: :primary,
-    hover: true,
-    trigger: { text: "Hover me" },
+    hover: "content",
+    position: "bottom-end",
+    trigger: { text: "Hover Content", variant: :primary },
     items: [
-      { text: "Auto-open on hover", href: "#" }
-    ],
-    class: 'mb-32'
+      { text: "Item 1", href: "#" },
+      { text: "Item 2", href: "#" }
+    ]
   )) %>
 
+  <%# Custom header content %>
   <%= render(DaisyComponents::Actions::DropdownComponent.new(
-    variant: :ghost,
-    open: true,
-    trigger: { text: "Always open" },
+    position: "right-end",
+    trigger: { text: "Custom Header", variant: :secondary },
+    header: { content: tag.div(class: "p-2 text-center") { "Custom Header Content" } },
     items: [
-      { text: "Forced open state", href: "#" }
-    ],
-    class: 'mb-32'
+      { text: "Item 1", href: "#" },
+      { text: "Item 2", href: "#" }
+    ]
+  )) %>
+
+  <%# Custom footer content %>
+  <%= render(DaisyComponents::Actions::DropdownComponent.new(
+    position: "left-end",
+    trigger: { text: "Custom Footer", variant: :accent },
+    footer: { content: tag.div(class: "flex justify-between") {
+      safe_join([
+        tag.button("Cancel", class: "btn btn-ghost btn-sm"),
+        tag.button("Apply", class: "btn btn-primary btn-sm")
+      ])
+    } },
+    items: [
+      { text: "Item 1", href: "#" },
+      { text: "Item 2", href: "#" }
+    ]
   )) %>
 </div> 
