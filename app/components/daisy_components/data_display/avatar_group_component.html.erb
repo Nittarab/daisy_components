@@ -1,5 +1,10 @@
 <%= tag.div(**html_attributes) do %>
-  <% avatars.each do |avatar| %>
+  <% displayed_avatars.each do |avatar| %>
     <%= avatar %>
+  <% end %>
+  <% if remaining_count %>
+    <%= tag.div(class: counter_classes) do %>
+      +<%= remaining_count %>
+    <% end %>
   <% end %>
 <% end %> 
