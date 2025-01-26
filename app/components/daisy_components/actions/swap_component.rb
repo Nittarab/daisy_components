@@ -2,15 +2,31 @@
 
 module DaisyComponents
   module Actions
+    # Swap component implementing DaisyUI's swap styles
+    #
+    # @example Basic usage
+    #   <%= render(SwapComponent.new(
+    #     states: { on: 'ON', off: 'OFF' }
+    #   )) %>
+    #
+    # @example Theme toggle with icons
+    #   <%= render(SwapComponent.new(
+    #     states: {
+    #       on: helpers.sun_icon('h-6 w-6'),
+    #       off: helpers.moon_icon('h-6 w-6')
+    #     },
+    #     button: true,
+    #     effect: :rotate
+    #   )) %>
     class SwapComponent < DaisyComponents::BaseComponent
       VALID_VARIANTS = %i[neutral primary secondary accent info success warning error ghost].freeze
       VALID_SIZES = %i[xs sm md lg].freeze
-      VALID_EFFECTS = %i[none rotate flip].freeze
+      VALID_EFFECTS = %i[none rotate flip active flip-active].freeze
 
-      attr_reader :states, :value, :variant, :size, :effect, :button
+      attr_reader :states, :value, :variant, :size, :effect, :button, :indeterminate
 
       def initialize(states:, value: false, variant: nil, size: :md, effect: :none, button: false,
-                     **system_arguments)
+                     indeterminate: false, **system_arguments)
         validate_states!(states)
         @states = states
         @value = ActiveModel::Type::Boolean.new.cast(value)
@@ -18,6 +34,7 @@ module DaisyComponents
         @size = size.to_sym if size
         @effect = effect.to_sym
         @button = button
+        @indeterminate = indeterminate
 
         super(**system_arguments)
       end
@@ -47,6 +64,7 @@ module DaisyComponents
           role: 'switch'
         }
         attrs[:checked] = 'checked' if value
+        attrs[:indeterminate] = 'true' if indeterminate
         attrs
       end
 
@@ -63,6 +81,9 @@ module DaisyComponents
           system_arguments[:class],
           { 'swap-rotate': effect == :rotate },
           { 'swap-flip': effect == :flip },
+          { 'swap-active': effect == :active },
+          { 'swap-flip-active': effect == :'flip-active' },
+          { 'swap-indeterminate': indeterminate },
           { 'btn btn-ghost btn-circle': button },
           size_classes,
           variant_classes
@@ -72,7 +93,11 @@ module DaisyComponents
       def render_state(state)
         return unless states[state]
 
-        tag.div(states[state], class: "swap-#{state}")
+        tag.div(states[state], class: class_names(
+          "swap-#{state}",
+          { 'swap-on': state == :on },
+          { 'swap-off': state == :off }
+        ))
       end
 
       def size_classes

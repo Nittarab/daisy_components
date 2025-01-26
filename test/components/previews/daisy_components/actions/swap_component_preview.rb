@@ -17,17 +17,19 @@ module DaisyComponents
       #   choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost]
       # } "Color variant"
       # @param size select { choices: [xs, sm, md, lg] } "Size of the content"
-      # @param effect select { choices: [none, rotate, flip] } "Animation effect"
+      # @param effect select { choices: [none, rotate, flip, active, flip-active] } "Animation effect"
       # @param value toggle "Current state"
       # @param button toggle "Show as button"
-      def playground(variant: :primary, size: :md, effect: :none, value: false, button: false)
+      # @param indeterminate toggle "Show indeterminate state"
+      def playground(variant: :primary, size: :md, effect: :none, value: false, button: false, indeterminate: false)
         render(SwapComponent.new(
                  states: { on: 'ON', off: 'OFF' },
                  variant: variant,
                  size: size,
                  value: value,
                  button: button,
-                 effect: effect
+                 effect: effect,
+                 indeterminate: indeterminate
                ))
       end
 
@@ -120,6 +122,48 @@ module DaisyComponents
                  },
                  button: true,
                  value: value
+               ))
+      end
+
+      # Active Effect
+      # ---------------
+      # Shows the active effect animation
+      #
+      # @param value toggle "Current state"
+      def active(value: false)
+        render(SwapComponent.new(
+                 states: { on: '✓', off: '×' },
+                 size: :lg,
+                 effect: :active,
+                 value: value,
+                 variant: :success
+               ))
+      end
+
+      # Flip Active Effect
+      # ---------------
+      # Shows the flip-active effect animation
+      #
+      # @param value toggle "Current state"
+      def flip_active(value: false)
+        render(SwapComponent.new(
+                 states: { on: '✓', off: '×' },
+                 size: :lg,
+                 effect: :'flip-active',
+                 value: value,
+                 variant: :error
+               ))
+      end
+
+      # Indeterminate State
+      # ---------------
+      # Shows the indeterminate state
+      def indeterminate
+        render(SwapComponent.new(
+                 states: { on: '✓', off: '×' },
+                 size: :lg,
+                 indeterminate: true,
+                 variant: :warning
                ))
       end
     end

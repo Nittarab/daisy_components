@@ -17,84 +17,160 @@ module DaisyComponents
       end
 
       # Basic Rendering Tests
-      def test_renders_basic_swap_component
-        render_inline(SwapComponent.new(states: @default_states))
-        assert_basic_structure
-        assert_text_content('ON', 'OFF')
+      def test_renders_basic_swap
+        render_inline(SwapComponent.new(states: { on: 'ON', off: 'OFF' }))
+
+        assert_selector('.swap')
+        assert_selector('input[type="checkbox"]')
+        assert_selector('.swap-on', text: 'ON')
+        assert_selector('.swap-off', text: 'OFF')
+      end
+
+      def test_renders_with_initial_value
+        render_inline(SwapComponent.new(states: { on: 'ON', off: 'OFF' }, value: true))
+
+        assert_selector('input[type="checkbox"][checked]')
+      end
+
+      def test_renders_with_indeterminate_state
+        render_inline(SwapComponent.new(states: { on: 'ON', off: 'OFF' }, indeterminate: true))
+
+        assert_selector('input[type="checkbox"][indeterminate]')
+        assert_selector('.swap.swap-indeterminate')
+      end
+
+      def test_renders_with_effects
+        %i[rotate flip active flip-active].each do |effect|
+          render_inline(SwapComponent.new(
+                          states: { on: 'ON', off: 'OFF' },
+                          effect: effect
+                        ))
+
+          assert_selector(".swap.swap-#{effect}")
+        end
+      end
+
+      def test_renders_with_variant
+        variant_classes = {
+          primary: 'text-primary',
+          secondary: 'text-secondary',
+          accent: 'text-accent',
+          info: 'text-info',
+          success: 'text-success',
+          warning: 'text-warning',
+          error: 'text-error',
+          ghost: 'text-base-content'
+        }
+
+        variant_classes.each do |variant, class_name|
+          render_inline(SwapComponent.new(
+                          states: { on: 'ON', off: 'OFF' },
+                          variant: variant
+                        ))
+
+          assert_selector(".swap.#{class_name}")
+        end
+      end
+
+      def test_renders_with_size
+        size_classes = {
+          xs: 'text-xs',
+          sm: 'text-sm',
+          md: 'text-base',
+          lg: 'text-lg'
+        }
+
+        size_classes.each do |size, class_name|
+          render_inline(SwapComponent.new(
+                          states: { on: 'ON', off: 'OFF' },
+                          size: size
+                        ))
+
+          assert_selector(".swap.#{class_name}")
+        end
+      end
+
+      def test_renders_as_button
+        render_inline(SwapComponent.new(
+                        states: { on: 'ON', off: 'OFF' },
+                        button: true
+                      ))
+
+        assert_selector('.swap.btn.btn-ghost.btn-circle')
+      end
+
+      def test_validates_states
+        assert_raises(ArgumentError) do
+          render_inline(SwapComponent.new(states: nil))
+        end
+
+        assert_raises(ArgumentError) do
+          render_inline(SwapComponent.new(states: {}))
+        end
+
+        assert_raises(ArgumentError) do
+          render_inline(SwapComponent.new(states: { on: 'ON' }))
+        end
       end
 
       def test_renders_with_custom_classes
         render_inline(SwapComponent.new(
-                        states: @default_states,
-                        class: 'btn btn-ghost btn-circle'
-                      ))
-
-        assert_basic_structure
-        assert_custom_classes(%w[btn btn-ghost btn-circle])
-      end
-
-      def test_combines_multiple_modifiers
-        render_inline(SwapComponent.new(
-                        states: @default_states,
-                        effect: :rotate,
-                        value: true,
+                        states: { on: 'ON', off: 'OFF' },
                         class: 'custom-class'
                       ))
 
-        assert_basic_structure
-        assert_custom_classes(['custom-class'])
-        assert_modifier_classes(['swap-rotate'])
-        assert_checked(true)
+        assert_selector('.swap.custom-class')
       end
 
-      def test_value_control
-        # Test initial state (unchecked)
-        render_inline(SwapComponent.new(states: @default_states))
-        assert_basic_structure
-        assert_selector('input[type="checkbox"]:not([checked])', visible: :all)
-
-        # Test checked state
-        render_inline(SwapComponent.new(states: @default_states, value: true))
-        assert_basic_structure
-        assert_selector('input[type="checkbox"][checked]', visible: :all)
+      def test_playground_preview
+        render_preview(:playground)
+        assert_selector('.swap')
       end
 
-      def test_text_variant
-        render_inline(SwapComponent.new(
-                        states: @default_states,
-                        variant: :primary
-                      ))
-        assert_basic_structure
-        assert_text_content('ON', 'OFF')
-        assert_selector('label.swap')
-        assert_selector('label.text-primary')
-        refute_selector('label.btn')
+      def test_value_on_preview
+        render_preview(:value_on)
+        assert_selector('.swap')
+        assert_selector('input[type="checkbox"][checked]')
       end
 
-      def test_emoji_variant
-        states = { on: '🌞', off: '🌚' }
-        render_inline(SwapComponent.new(
-                        states: states,
-                        size: :lg,
-                        effect: :flip
-                      ))
-        assert_basic_structure
-        assert_text_content('🌞', '🌚')
-        assert_selector('label.swap.swap-flip')
-        assert_selector('label.text-lg')
-        refute_selector('label.btn')
+      def test_text_preview
+        render_preview(:text)
+        assert_selector('.swap')
       end
 
-      def test_icon_variant
-        render_inline(SwapComponent.new(
-                        states: @icon_states,
-                        button: true,
-                        effect: :rotate
-                      ))
-        assert_basic_structure
-        assert_selector('label.swap.swap-rotate.btn.btn-ghost.btn-circle')
-        assert_icon_classes('div.swap-on svg', 'h-6 w-6')
-        assert_icon_classes('div.swap-off svg', 'h-6 w-6')
+      def test_theme_preview
+        render_preview(:theme)
+        assert_selector('.swap.btn')
+      end
+
+      def test_weather_preview
+        render_preview(:weather)
+        assert_selector('.swap')
+      end
+
+      def test_hamburger_preview
+        render_preview(:hamburger)
+        assert_selector('.swap.btn')
+      end
+
+      def test_volume_preview
+        render_preview(:volume)
+        assert_selector('.swap.btn')
+      end
+
+      def test_active_preview
+        render_preview(:active)
+        assert_selector('.swap.swap-active')
+      end
+
+      def test_flip_active_preview
+        render_preview(:flip_active)
+        assert_selector('.swap.swap-flip-active')
+      end
+
+      def test_indeterminate_preview
+        render_preview(:indeterminate)
+        assert_selector('.swap.swap-indeterminate')
       end
 
       # Preview Tests
@@ -176,14 +252,6 @@ module DaisyComponents
         assert_text_content('ON', 'OFF')
       end
 
-      def test_value_on_preview
-        render_preview(:value_on)
-        assert_basic_structure
-        assert_selector('input[type="checkbox"][checked]', visible: :all)
-        assert_text_content('ON', 'OFF')
-        assert_selector('label.text-primary')
-      end
-
       def test_accessibility_attributes
         render_inline(SwapComponent.new(
                         states: @default_states,
@@ -191,23 +259,6 @@ module DaisyComponents
                       ))
         assert_selector('label[aria-label="Toggle theme"]')
         assert_selector('input[type="checkbox"][role="switch"]', visible: :all)
-      end
-
-      def test_edge_cases
-        # Test with empty states
-        assert_raises(ArgumentError) do
-          render_inline(SwapComponent.new(states: {}))
-        end
-
-        # Test with nil states
-        assert_raises(ArgumentError) do
-          render_inline(SwapComponent.new(states: nil))
-        end
-
-        # Test with missing required keys
-        assert_raises(ArgumentError) do
-          render_inline(SwapComponent.new(states: { on: 'ON' }))
-        end
       end
 
       private
