@@ -4,6 +4,10 @@ The Component Library is a Rails Engine.
 It's build with TailwindCSS and DaisyUI, ViewComponent and Rails.
 
 
+We are using tailwindcss for this reason we can't use composed classes with strings interpolation. 
+
+
+
 We take inspiration from the following projects:
 https://github.com/primer/design
 https://github.com/primer/view_components
