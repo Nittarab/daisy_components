@@ -1,4 +1,13 @@
 <%= render(DaisyComponents::DataDisplay::AccordionComponent.new) do |component| %>
+  <% component.with_item(title: 'Card Example') do %>
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Card Title</h2>
+        <p>Card content goes here.</p>
+      </div>
+    </div>
+  <% end %>
+
   <% component.with_item(title: 'Basic Card') do %>
     <%= render(DaisyComponents::DataDisplay::CardComponent.new(
       title: 'Simple Card',
