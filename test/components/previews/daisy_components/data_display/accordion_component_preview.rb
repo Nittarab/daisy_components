@@ -7,15 +7,12 @@ module DaisyComponents
     class AccordionComponentPreview < ViewComponent::Preview
       # @!group Playground
 
-      # Playground
-      # ---------------
-      # Interactive accordion component with customizable behavior and styling
-      #
+      # @label Playground
       # @param join toggle "Join items together without gaps"
       # @param arrow toggle "Show arrow indicator"
       # @param plus toggle "Show plus/minus indicator"
       # @param radio toggle "Use radio buttons for exclusive selection"
-      # @param bg_color select { choices: [bg-base-200, bg-primary, bg-secondary, bg-accent, bg-neutral] }
+      # @param bg_color select { choices: [bg-base-100, bg-primary, bg-secondary, bg-accent, bg-neutral] }
       #                      "Background color"
       # @param text_color select {
       #   choices: [
@@ -28,7 +25,7 @@ module DaisyComponents
       # } "Text color"
       # @param border_color select {
       #   choices: [
-      #     border-base-300,
+      #     border border-base-300,
       #     border-primary,
       #     border-secondary,
       #     border-accent,
@@ -68,50 +65,26 @@ module DaisyComponents
 
       # @!endgroup
 
-      # @!group Examples
+      # @!group Basic
 
-      # Basic Accordion
-      # ---------------
-      # Simple accordion with default styling
-      #
-      # @label Basic
-      def basic
-        render(AccordionComponent.new) do |component|
-          component.with_item(title: 'Click me') { 'Hidden content' }
+      # @label Default
+      # @description Basic accordion example with FAQ style
+      def default
+        render(AccordionComponent.new(arrow: true)) do |component|
+          component.with_item(title: 'How do I create an account?') do
+            'Click the "Sign Up" button in the top right corner and follow the registration process.'
+          end
+          component.with_item(title: 'I forgot my password. What should I do?') do
+            'Click on "Forgot Password" on the login page and follow the instructions sent to your email.'
+          end
+          component.with_item(title: 'How do I update my profile information?') do
+            'Go to "My Account" settings and select "Edit Profile" to make changes.'
+          end
         end
       end
 
-      # Multiple Items
-      # ---------------
-      # Accordion with multiple expandable items
-      #
-      # @label Multiple
-      def multiple
-        render(AccordionComponent.new) do |component|
-          component.with_item(title: 'Item 1') { 'Content 1' }
-          component.with_item(title: 'Item 2') { 'Content 2' }
-          component.with_item(title: 'Item 3', checked: true) { 'Content 3' }
-        end
-      end
-
-      # Joined Items
-      # ---------------
-      # Items joined together without gaps
-      #
-      # @label Joined
-      def joined
-        render(AccordionComponent.new(join: true)) do |component|
-          component.with_item(title: 'Item 1') { 'Content 1' }
-          component.with_item(title: 'Item 2') { 'Content 2' }
-          component.with_item(title: 'Item 3') { 'Content 3' }
-        end
-      end
-
-      # Arrow Indicator
-      # ---------------
-      # Items with arrow indicator
-      #
-      # @label Arrow
+      # @label With Arrow
+      # @description Accordion with arrow icon
       def with_arrow
         render(AccordionComponent.new(arrow: true)) do |component|
           component.with_item(title: 'Expand me') { 'Arrow indicator content' }
@@ -119,11 +92,8 @@ module DaisyComponents
         end
       end
 
-      # Plus/Minus Indicator
-      # ---------------
-      # Items with plus/minus indicator
-      #
-      # @label Plus
+      # @label With Plus
+      # @description Accordion with plus/minus icon
       def with_plus
         render(AccordionComponent.new(plus: true)) do |component|
           component.with_item(title: 'Click to expand') { 'Plus/minus indicator content' }
@@ -131,24 +101,28 @@ module DaisyComponents
         end
       end
 
-      # Radio Selection
-      # ---------------
-      # Only one item can be expanded at a time
-      #
-      # @label Radio
+      # @label Joined
+      # @description Using Accordion and Join together
+      def joined
+        render(AccordionComponent.new(join: true, arrow: true)) do |component|
+          component.with_item(title: 'Item 1') { 'Content 1' }
+          component.with_item(title: 'Item 2') { 'Content 2' }
+          component.with_item(title: 'Item 3') { 'Content 3' }
+        end
+      end
+
+      # @label Radio Selection
+      # @description Only one item can be expanded at a time
       def radio_group
-        render(AccordionComponent.new(radio: true)) do |component|
+        render(AccordionComponent.new(radio: true, arrow: true)) do |component|
           component.with_item(title: 'Option 1', name: 'radio-group') { 'Content for option 1' }
           component.with_item(title: 'Option 2', name: 'radio-group') { 'Content for option 2' }
           component.with_item(title: 'Option 3', name: 'radio-group', checked: true) { 'Content for option 3' }
         end
       end
 
-      # Custom Colors
-      # ---------------
-      # Accordion with custom colors
-      #
-      # @label Colors
+      # @label Custom Colors
+      # @description Accordion with custom colors
       def custom_colors
         render(AccordionComponent.new(
                  arrow: true,
@@ -166,20 +140,14 @@ module DaisyComponents
 
       # @!group Complex Content
 
-      # With List Content
-      # ---------------
-      # Accordion item containing a list
-      #
-      # @label List
+      # @label With List
+      # @description Accordion item containing a list
       def with_list
         render_with_template
       end
 
-      # With Card Content
-      # ---------------
-      # Accordion item containing a card
-      #
-      # @label Card
+      # @label With Card
+      # @description Accordion item containing a card
       def with_card
         render_with_template
       end
