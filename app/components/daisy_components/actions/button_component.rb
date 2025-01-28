@@ -64,7 +64,7 @@ module DaisyComponents
       SIZES = %w[xl lg md sm xs].freeze
 
       # Available button styles from DaisyUI
-      STYLES = %w[outline soft].freeze
+      STYLES = %w[outline soft dash].freeze
 
       # Available button shape modifiers
       SHAPES = %w[wide block circle square].freeze
@@ -125,10 +125,11 @@ module DaisyComponents
       end
 
       def call
-        if @href
-          link_tag
+        tag_type = @href ? :a : :button
+        if simple?
+          tag.send(tag_type, button_content, **simple_arguments)
         else
-          button_tag
+          tag.send(tag_type, **full_arguments) { button_content }
         end
       end
 
@@ -148,68 +149,74 @@ module DaisyComponents
         raise ArgumentError, "Invalid #{attr_name}: #{value}. Must be one of: #{valid_values.join(', ')}"
       end
 
-      def button_tag
-        tag.button(**button_arguments) { button_content }
+      def simple?
+        !@variant && !@style && !@size && !@shape && !@disabled && !@loading && !@active &&
+          system_arguments.keys.empty? && (@type == 'button' || @href) && !@class &&
+          !@method && !@target && !@rel
       end
 
-      def link_tag
-        tag.a(**link_arguments) { button_content }
-      end
-
-      def button_content
-        parts = []
-        parts << start_icon if start_icon
-        parts << (content || @text)
-        parts << end_icon if end_icon
-        safe_join(parts)
-      end
-
-      def shared_arguments
+      def simple_arguments
         {
+          class: 'btn',
+          role: (@href ? 'button' : nil),
+          href: @href
+        }.compact
+      end
+
+      def full_arguments
+        base = {
           class: computed_classes,
           disabled: @disabled || @loading,
           'aria-disabled': @disabled || @loading,
           'aria-busy': @loading,
-          role: @href ? 'button' : nil,
           **system_arguments.except(:class)
         }
+
+        @href ? link_specific_arguments(base) : button_specific_arguments(base)
       end
 
-      def computed_classes
-        base_classes = class_names(
-          'btn',
-          "btn-#{@variant}" => @variant,
-          "btn-#{@size}" => @size,
-          "btn-#{@style}" => @style,
-          "btn-#{@shape}" => @shape,
-          'btn-disabled' => @disabled || @loading,
-          'loading' => @loading,
-          'btn-active' => @active,
-          'gap-2' => icon_and_content?
-        )
-
-        [base_classes, system_arguments[:class]].compact.join(' ')
+      def button_specific_arguments(base)
+        base.merge(type: @type).compact
       end
 
-      def icon_and_content?
-        (start_icon || end_icon) && (@text || content)
-      end
-
-      def button_arguments
-        shared_arguments.merge(
-          type: @type,
-          name: @disabled || @loading ? nil : system_arguments[:name]
-        ).compact
-      end
-
-      def link_arguments
-        shared_arguments.merge(
+      def link_specific_arguments(base)
+        base.merge(
+          role: 'button',
           href: @href,
           data: { turbo_method: @method }.compact,
           target: @target,
           rel: link_rel,
           tabindex: @disabled ? '-1' : '0'
         ).compact
+      end
+
+      def button_content
+        safe_join([
+          start_icon,
+          content || @text,
+          end_icon
+        ].compact)
+      end
+
+      def computed_classes
+        return @class if @class
+
+        # Order: base -> style/state -> variant -> size -> shape
+        modifiers = []
+        modifiers << 'btn'
+        modifiers << "btn-#{@style}" if @style
+        modifiers << 'btn-active' if @active
+        modifiers << "btn-#{@variant}" if @variant
+        modifiers << "btn-#{@size}" if @size
+        modifiers << "btn-#{@shape}" if @shape
+        modifiers << 'loading' if @loading
+        modifiers << 'gap-2' if icon_and_content? && !content.present?
+
+        class_names(modifiers.join(' '), system_arguments[:class])
+      end
+
+      def icon_and_content?
+        (start_icon || end_icon) && (@text || content)
       end
 
       def link_rel
