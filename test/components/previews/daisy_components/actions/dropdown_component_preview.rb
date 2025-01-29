@@ -13,12 +13,13 @@ module DaisyComponents
       # ---------------
       # Interactive dropdown menu with customizable trigger and content
       #
-      # @param position select { choices: [top, top-end, bottom, bottom-end, left, left-end, right, right-end] }
+      # @param position select { choices: [top, top-end, top-center, bottom, bottom-end, bottom-center, left, left-end, left-center, right, right-end, right-center] }
       #                       "Position of the dropdown content relative to the trigger"
       # @param hover select { choices: [false, true, content] }
       #                    "How the dropdown opens on hover (false, true, or content)"
       # @param open toggle "When true, forces the dropdown to stay open"
-      # @param align_end toggle "When true, aligns the dropdown content to the end (right) of the trigger"
+      # @param align select { choices: [start, end, center] }
+      #                    "Alignment of the dropdown content relative to the trigger"
       # @param variant select { choices: [primary, secondary, accent, info, success, warning, error, ghost, neutral] }
       #                      "Button variant for the trigger"
       # @param size select { choices: [xs, sm, md, lg] }
@@ -31,7 +32,7 @@ module DaisyComponents
         position: nil,
         hover: false,
         open: false,
-        align_end: false,
+        align: nil,
         variant: nil,
         size: nil,
         trigger_text: 'Click me',
@@ -43,7 +44,7 @@ module DaisyComponents
                  position: position,
                  hover: hover,
                  open: open,
-                 align_end: align_end,
+                 align: align,
                  variant: variant,
                  size: size,
                  trigger: {
@@ -67,66 +68,154 @@ module DaisyComponents
 
       # @!endgroup
 
-      # @!group Positions
-
-      # Dropdown Positions
+      # Card as dropdown content
       # ---------------
-      # All available dropdown positions
-      #
-      # @label All Positions
-      def positions
-        render_with_template(locals: {
-                               positions: DropdownComponent::POSITIONS,
-                               helpers: self
-                             })
+      # Example showing how to use a card as dropdown content
+      def card_as_dropdown
+        render_with_template
       end
 
-      # @!endgroup
-
-      # @!group Variants
-
-      # Dropdown Variants
-      # ---------------
-      # Different button variants for the trigger
-      #
-      # @label Variants
-      def variants
-        render_with_template(locals: {
-                               variants: DropdownComponent::VARIANTS,
-                               helpers: self
-                             })
+      def dropdown_aligns_to_center_of_button_horizontally
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Click ⬇️', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 align: :center
+               ))
       end
 
-      # @!endgroup
-
-      # @!group Sizes
-
-      # Dropdown Sizes
-      # ---------------
-      # Different sizes for the trigger button
-      #
-      # @label Sizes
-      def sizes
-        render_with_template(locals: {
-                               sizes: DropdownComponent::SIZES,
-                               helpers: self
-                             })
+      def dropdown_aligns_to_end_of_button_horizontally
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Click ⬇️', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 align: :end
+               ))
       end
 
-      # @!endgroup
-
-      # @!group Features
-
-      # Dropdown Features
-      # ---------------
-      # Showcase of different dropdown features: icons, dividers, variants, headers, and footers
-      #
-      # @label Features
-      def features
-        render_with_template(locals: { helpers: self })
+      def dropdown_aligns_to_start_of_button_horizontally
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Click ⬇️', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 align: :start
+               ))
       end
 
-      # @!endgroup
+      def dropdown_left_aligns_to_end_of_button_vertically
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Click  ⬅️', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 position: 'left',
+                 align: :end
+               ))
+      end
+
+      def dropdown_menu
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Click', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ]
+               ))
+      end
+
+      def dropdown_on_hover
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Hover', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 hover: true,
+                 align: nil
+               ))
+      end
+
+      def dropdown_right
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Click  ➡️', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 position: 'right',
+                 align: nil
+               ))
+      end
+
+      def dropdown_right_aligns_to_center_of_button_vertically
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Click  ➡️', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 position: 'right',
+                 align: :center,
+                 class: 'dropdown-center'
+               ))
+      end
+
+      def dropdown_right_aligns_to_end_of_button_vertically
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Click  ➡️', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 position: 'right',
+                 align: :end
+               ))
+      end
+
+      def dropdown_top
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Click  ⬆️', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 position: 'top'
+               ))
+      end
+
+      # def dropdown_using_popover_api_and_anchor_positioning
+      #   render(DaisyComponents::Actions::DropdownComponent.new(
+      #            trigger: { text: 'Click', class: 'm-1' },
+      #            items: [
+      #              { text: 'Item 1' },
+      #              { text: 'Item 2' }
+      #            ],
+      #            menu_tabindex: 0,
+      #            align_end: nil
+      #          ))
+      # end
+
+      def force_open
+        render(DaisyComponents::Actions::DropdownComponent.new(
+                 trigger: { text: 'Button', class: 'm-1' },
+                 items: [
+                   { text: 'Item 1' },
+                   { text: 'Item 2' }
+                 ],
+                 open: true
+               ))
+      end
+
+      # def helper_dropdown
+      #   render_with_template
+      # end
     end
   end
 end
