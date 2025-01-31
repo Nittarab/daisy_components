@@ -261,6 +261,8 @@ GEM
       prism (>= 1.2, < 2.0)
       rbs (>= 3, < 4)
       sorbet-runtime (>= 0.5.10782)
+    ruby-lsp-rails (0.3.31)
+      ruby-lsp (>= 0.23.0, < 0.24.0)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
     simplecov (0.22.0)
@@ -318,6 +320,7 @@ DEPENDENCIES
   rubocop-performance (= 1.23.1)
   rubocop-rails (= 2.29.1)
   ruby-lsp
+  ruby-lsp-rails
   simplecov
   simplecov-cobertura
   terminal-table (~> 3.0.2)
