@@ -7,6 +7,49 @@ module DaisyComponents
     # @example Basic usage
     #   <%= render(ButtonComponent.new(text: "Click me")) %>
     #
+    # @example Primary variant
+    #   <%= render(ButtonComponent.new(text: "Submit", variant: :primary)) %>
+    #
+    # @example Outline button
+    #   <%= render(ButtonComponent.new(text: "Download", style: :outline)) %>
+    #
+    # @example Small size with icon
+    #   <%= render(ButtonComponent.new(
+    #     text: "Save",
+    #     size: :sm,
+    #     icon_start: helpers.check_icon
+    #   )) %>
+    #
+    # @example Block-level button
+    #   <%= render(ButtonComponent.new(
+    #     text: "Full width",
+    #     shape: :block
+    #   )) %>
+    #
+    # @example Icon only button
+    #   <%= render(ButtonComponent.new(
+    #     icon_start: helpers.search_icon,
+    #     shape: :square
+    #   )) %>
+    #
+    # @example Loading state
+    #   <%= render(ButtonComponent.new(
+    #     text: "Processing...",
+    #     loading: true
+    #   )) %>
+    #
+    # @example Disabled state
+    #   <%= render(ButtonComponent.new(
+    #     text: "Disabled",
+    #     disabled: true
+    #   )) %>
+    #
+    # @example Active state
+    #   <%= render(ButtonComponent.new(
+    #     text: "Pressed",
+    #     active: true
+    #   )) %>
+    #
     # @example With icons
     #   <%= render(ButtonComponent.new(
     #     text: "Submit",
@@ -19,12 +62,6 @@ module DaisyComponents
     #     text: "Next",
     #     icon_start: helpers.sync_icon("h-5 w-5"),
     #     icon_end: helpers.arrow_right_icon("h-5 w-5")
-    #   )) %>
-    #
-    # @example Icon only button
-    #   <%= render(ButtonComponent.new(
-    #     icon_start: helpers.search_icon("h-6 w-6"),
-    #     class: "btn-square"
     #   )) %>
     #
     # @example With block content
