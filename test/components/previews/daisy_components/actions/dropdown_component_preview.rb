@@ -14,27 +14,31 @@ module DaisyComponents
       # ---------------
       # Interactive dropdown menu with customizable trigger and content
       #
-      # @param position select { choices: [top, top-end, top-center, bottom, bottom-end, bottom-center, left, left-end, left-center, right, right-end, right-center] }
+      # @param position select { choices: [top, top_end, top_center, bottom, bottom_end, bottom_center, left, left_end, left_center, right, right_end, right_center] } # rubocop:disable Layout/LineLength
       #                       "Position of the dropdown content relative to the trigger"
       # @param hover select { choices: [false, true, content] }
       #                    "How the dropdown opens on hover (false, true, or content)"
       # @param open toggle "When true, forces the dropdown to stay open"
       # @param align select { choices: [start, end, center] }
       #                    "Alignment of the dropdown content relative to the trigger"
-      # @param variant select { choices: [primary, secondary, accent, info, success, warning, error, ghost, neutral] }
-      #                      "Button variant for the trigger"
+      # @param menu_class text "Additional CSS classes for the dropdown menu"
+      # @param menu_tabindex number "HTML tabindex attribute for the dropdown menu (default: 0)"
+      # @param color select { choices: [primary, secondary, accent, info, success, warning, error, ghost, neutral] }
+      #                    "Button color for the trigger"
       # @param size select { choices: [xs, sm, md, lg] }
       #                   "Size of the trigger button"
       # @param trigger_text text "Text for the trigger button"
       # @param trigger_icon toggle "Show icon in trigger button"
       # @param show_header toggle "Show header in dropdown"
       # @param show_footer toggle "Show footer in dropdown"
-      def playground(
+      def playground( # rubocop:disable Metrics/AbcSize
         position: nil,
         hover: false,
         open: false,
         align: nil,
-        variant: nil,
+        menu_class: nil,
+        menu_tabindex: 0,
+        color: nil,
         size: nil,
         trigger_text: 'Click me',
         trigger_icon: false,
@@ -46,12 +50,14 @@ module DaisyComponents
                  hover: hover,
                  open: open,
                  align: align,
+                 menu_class: menu_class,
+                 menu_tabindex: menu_tabindex,
                  class: 'mb-40'
                )) do |d|
-          d.with_trigger(text: trigger_text, variant: variant, size: size,
+          d.with_trigger(text: trigger_text, color: color, size: size,
                          icon_start: trigger_icon ? warning_icon('h-5 w-5') : nil)
           d.with_title { 'Menu' } if show_header
-          d.with_item(href: '#') { safe_join([facebook_icon('h-5 w-5 mr-2'), 'Item 1']) }
+          d.with_item(href: '#') { safe_join([home_icon('h-5 w-5 mr-2'), 'Item 1']) }
           d.with_item(href: '#') { safe_join([email_icon('h-5 w-5 mr-2'), 'Item 2']) }
           d.with_divider
           d.with_item(href: '#', class: 'text-error') { safe_join([sun_icon('h-5 w-5 mr-2'), 'Item 3']) }
