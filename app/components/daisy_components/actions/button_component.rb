@@ -7,6 +7,49 @@ module DaisyComponents
     # @example Basic usage
     #   <%= render(ButtonComponent.new(text: "Click me")) %>
     #
+    # @example Primary variant
+    #   <%= render(ButtonComponent.new(text: "Submit", variant: :primary)) %>
+    #
+    # @example Outline button
+    #   <%= render(ButtonComponent.new(text: "Download", style: :outline)) %>
+    #
+    # @example Small size with icon
+    #   <%= render(ButtonComponent.new(
+    #     text: "Save",
+    #     size: :sm,
+    #     icon_start: helpers.check_icon
+    #   )) %>
+    #
+    # @example Block-level button
+    #   <%= render(ButtonComponent.new(
+    #     text: "Full width",
+    #     shape: :block
+    #   )) %>
+    #
+    # @example Icon only button
+    #   <%= render(ButtonComponent.new(
+    #     icon_start: helpers.search_icon,
+    #     shape: :square
+    #   )) %>
+    #
+    # @example Loading state
+    #   <%= render(ButtonComponent.new(
+    #     text: "Processing...",
+    #     loading: true
+    #   )) %>
+    #
+    # @example Disabled state
+    #   <%= render(ButtonComponent.new(
+    #     text: "Disabled",
+    #     disabled: true
+    #   )) %>
+    #
+    # @example Active state
+    #   <%= render(ButtonComponent.new(
+    #     text: "Pressed",
+    #     active: true
+    #   )) %>
+    #
     # @example With icons
     #   <%= render(ButtonComponent.new(
     #     text: "Submit",
@@ -19,12 +62,6 @@ module DaisyComponents
     #     text: "Next",
     #     icon_start: helpers.sync_icon("h-5 w-5"),
     #     icon_end: helpers.arrow_right_icon("h-5 w-5")
-    #   )) %>
-    #
-    # @example Icon only button
-    #   <%= render(ButtonComponent.new(
-    #     icon_start: helpers.search_icon("h-6 w-6"),
-    #     class: "btn-square"
     #   )) %>
     #
     # @example With block content
@@ -53,30 +90,59 @@ module DaisyComponents
     #     method: :delete,
     #     variant: "error"
     #   )) %>
-    class ButtonComponent < BaseComponent # rubocop:disable Metrics/ClassLength
+    class ButtonComponent < BaseComponent
       renders_one :start_icon
       renders_one :end_icon
 
-      # Available button variants from DaisyUI
-      VARIANTS = %w[primary secondary accent neutral ghost link info success warning error].freeze
+      # Available button colors from DaisyUI
+      COLORS = {
+        primary: 'btn-primary',
+        secondary: 'btn-secondary',
+        accent: 'btn-accent',
+        neutral: 'btn-neutral',
+        ghost: 'btn-ghost',
+        link: 'btn-link',
+        info: 'btn-info',
+        success: 'btn-success',
+        warning: 'btn-warning',
+        error: 'btn-error'
+      }.freeze
 
       # Available button sizes from DaisyUI
-      SIZES = %w[xl lg md sm xs].freeze
+      SIZES = {
+        xl: 'btn-xl',
+        lg: 'btn-lg',
+        md: 'btn-md',
+        sm: 'btn-sm',
+        xs: 'btn-xs'
+      }.freeze
 
-      # Available button styles from DaisyUI
-      STYLES = %w[outline soft].freeze
+      # Available button variants from DaisyUI
+      VARIANTS = {
+        outline: 'btn-outline',
+        soft: 'btn-soft',
+        dash: 'btn-dash',
+        ghost: 'btn-ghost',
+        link: 'btn-link'
+      }.freeze
 
       # Available button shape modifiers
-      SHAPES = %w[wide block circle square].freeze
+      SHAPES = {
+        wide: 'btn-wide',
+        block: 'btn-block',
+        circle: 'btn-circle',
+        square: 'btn-square'
+      }.freeze
 
       # Valid HTML button types
       BUTTON_TYPES = %w[button submit reset].freeze
 
+      # @param tag_type [Symbol] HTML tag to use (:button, :input, :a)
       # @param text [String] The text content to display inside the button
-      # @param variant [String] Visual style of the button
+      # @param color [String] Visual style of the button
       #    (neutral/primary/secondary/accent/info/success/warning/error/ghost/link)
       # @param size [String] Size of the button (xl/lg/md/sm/xs)
-      # @param style [String] Style of the button (outline/soft)
+      # @param variant [String] Variant of the button (outline/soft/dash)
       # @param shape [String] Shape modifier of the button (wide/block/circle/square)
       # @param disabled [Boolean] When true, prevents user interaction and grays out the button
       # @param href [String] Turns the button into a link pointing to this URL
@@ -90,14 +156,15 @@ module DaisyComponents
       # @param icon_end [String] SVG icon to display after the text
       # @param system_arguments [Hash] Additional HTML attributes to be applied to the button
       def initialize( # rubocop:disable Metrics/ParameterLists
+        tag_type: :button,
         text: nil,
-        variant: nil,
+        color: nil,
         size: nil,
-        style: nil,
+        variant: nil,
         shape: nil,
         disabled: false,
         href: nil,
-        type: 'button',
+        type: nil,
         method: nil,
         target: nil,
         rel: nil,
@@ -107,9 +174,11 @@ module DaisyComponents
         icon_end: nil,
         **system_arguments
       )
-        @text = text
-        validate_and_assign_attributes(variant, size, style, shape, type)
-
+        @tag_type = tag_type
+        @color = build_argument(color, COLORS, 'color')
+        @size = build_argument(size, SIZES, 'size')
+        @variant = build_argument(variant, VARIANTS, 'variant')
+        @shape = build_argument(shape, SHAPES, 'shape')
         @disabled = disabled
         @href = href
         @method = method
@@ -117,105 +186,88 @@ module DaisyComponents
         @rel = rel
         @loading = loading
         @active = active
+        @type = type
+        @text = text
 
         with_start_icon { icon_start } if icon_start
         with_end_icon { icon_end } if icon_end
-
         super(**system_arguments)
       end
 
       def call
-        if @href
-          link_tag
-        else
-          button_tag
-        end
+        tag.send(@tag_type, **full_arguments) { button_content }
       end
 
       private
 
-      def validate_and_assign_attributes(variant, size, style, shape, type)
-        @variant = validate_attribute(variant, VARIANTS, 'variant')
-        @size = validate_attribute(size, SIZES, 'size')
-        @style = validate_attribute(style, STYLES, 'style')
-        @shape = validate_attribute(shape, SHAPES, 'shape')
-        @type = BUTTON_TYPES.include?(type.to_s) ? type : 'button'
+      def build_argument(key, valid_values, attr_name)
+        return unless key
+
+        class_name = valid_values[key.to_sym]
+
+        return class_name if class_name
+
+        raise ArgumentError, "Invalid #{attr_name}: #{key}. Must be one of: #{valid_values.keys.join(', ')}"
       end
 
-      def validate_attribute(value, valid_values, attr_name)
-        return value if !value || valid_values.include?(value.to_s)
-
-        raise ArgumentError, "Invalid #{attr_name}: #{value}. Must be one of: #{valid_values.join(', ')}"
-      end
-
-      def button_tag
-        tag.button(**button_arguments) { button_content }
-      end
-
-      def link_tag
-        tag.a(**link_arguments) { button_content }
-      end
-
-      def button_content
-        parts = []
-        parts << start_icon if start_icon
-        parts << (content || @text)
-        parts << end_icon if end_icon
-        safe_join(parts)
-      end
-
-      def shared_arguments
-        {
+      def full_arguments
+        base = {
           class: computed_classes,
-          disabled: @disabled || @loading,
-          'aria-disabled': @disabled || @loading,
-          'aria-busy': @loading,
-          role: @href ? 'button' : nil,
+          disabled: @disabled,
           **system_arguments.except(:class)
         }
+
+        @href || @tag_type.to_s == 'a' ? link_specific_arguments(base) : button_specific_arguments(base)
       end
 
+      # Order: base -> style/state(active) -> variant -> size -> shape
       def computed_classes
-        base_classes = class_names(
-          'btn',
-          "btn-#{@variant}" => @variant,
-          "btn-#{@size}" => @size,
-          "btn-#{@style}" => @style,
-          "btn-#{@shape}" => @shape,
-          'btn-disabled' => @disabled || @loading,
-          'loading' => @loading,
-          'btn-active' => @active,
-          'gap-2' => icon_and_content?
-        )
+        modifiers = ['btn']
+        modifiers << @variant
+        modifiers << 'btn-active' if @active
+        modifiers << @color
+        modifiers << @size
+        modifiers << @shape
 
-        [base_classes, system_arguments[:class]].compact.join(' ')
+        class_names(modifiers, system_arguments[:class])
       end
 
-      def icon_and_content?
-        (start_icon || end_icon) && (@text || content)
+      def button_specific_arguments(base)
+        type = if %w[button input].include?(@tag_type.to_s)
+                 @type || 'button'
+               else
+                 @type
+               end
+        base.merge(type: type).compact
       end
 
-      def button_arguments
-        shared_arguments.merge(
-          type: @type,
-          name: @disabled || @loading ? nil : system_arguments[:name]
-        ).compact
-      end
-
-      def link_arguments
-        shared_arguments.merge(
+      def link_specific_arguments(base)
+        base.merge(
+          role: 'button',
           href: @href,
           data: { turbo_method: @method }.compact,
           target: @target,
-          rel: link_rel,
-          tabindex: @disabled ? '-1' : '0'
+          rel: link_rel
         ).compact
+      end
+
+      def button_content
+        safe_join([
+          loading_spinner,
+          start_icon,
+          content || @text,
+          end_icon
+        ].compact)
       end
 
       def link_rel
         return @rel if @rel
 
         'noopener noreferrer' if @target == '_blank'
+      end
+
+      def loading_spinner
+        tag.span(class: 'loading loading-spinner') if @loading
       end
     end
   end

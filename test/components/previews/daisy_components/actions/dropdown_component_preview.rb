@@ -6,6 +6,7 @@ module DaisyComponents
     # @display bg_color "#fff"
     class DropdownComponentPreview < ViewComponent::Preview
       include DaisyComponents::IconsHelper
+      include ActionView::Helpers::TagHelper
 
       # @!group Playground
 
@@ -13,120 +14,166 @@ module DaisyComponents
       # ---------------
       # Interactive dropdown menu with customizable trigger and content
       #
-      # @param position select { choices: [top, top-end, bottom, bottom-end, left, left-end, right, right-end] }
+      # @param position select { choices: [top, top_end, top_center, bottom, bottom_end, bottom_center, left, left_end, left_center, right, right_end, right_center] } # rubocop:disable Layout/LineLength
       #                       "Position of the dropdown content relative to the trigger"
       # @param hover select { choices: [false, true, content] }
       #                    "How the dropdown opens on hover (false, true, or content)"
       # @param open toggle "When true, forces the dropdown to stay open"
-      # @param align_end toggle "When true, aligns the dropdown content to the end (right) of the trigger"
-      # @param variant select { choices: [primary, secondary, accent, info, success, warning, error, ghost, neutral] }
-      #                      "Button variant for the trigger"
+      # @param align select { choices: [start, end, center] }
+      #                    "Alignment of the dropdown content relative to the trigger"
+      # @param menu_class text "Additional CSS classes for the dropdown menu"
+      # @param menu_tabindex number "HTML tabindex attribute for the dropdown menu (default: 0)"
+      # @param color select { choices: [primary, secondary, accent, info, success, warning, error, ghost, neutral] }
+      #                    "Button color for the trigger"
       # @param size select { choices: [xs, sm, md, lg] }
       #                   "Size of the trigger button"
       # @param trigger_text text "Text for the trigger button"
       # @param trigger_icon toggle "Show icon in trigger button"
       # @param show_header toggle "Show header in dropdown"
       # @param show_footer toggle "Show footer in dropdown"
-      def playground( # rubocop:disable Metrics/MethodLength
+      def playground( # rubocop:disable Metrics/AbcSize
         position: nil,
         hover: false,
         open: false,
-        align_end: false,
-        variant: nil,
+        align: nil,
+        menu_class: nil,
+        menu_tabindex: 0,
+        color: nil,
         size: nil,
         trigger_text: 'Click me',
         trigger_icon: false,
         show_header: false,
         show_footer: false
       )
-        render(DropdownComponent.new(
+        render(DaisyComponents::Actions::DropdownComponent.new(
                  position: position,
                  hover: hover,
                  open: open,
-                 align_end: align_end,
-                 variant: variant,
-                 size: size,
-                 trigger: {
-                   text: trigger_text,
-                   icon: trigger_icon ? warning_icon('h-5 w-5') : nil
-                 },
-                 header: show_header ? { title: 'Menu' } : nil,
-                 footer: if show_footer
-                           { content: tag.button('Save changes',
-                                                 class: 'btn btn-primary btn-sm w-full') }
-                         end,
-                 items: [
-                   { text: 'Item 1', href: '#' },
-                   { text: 'Item 2', href: '#' },
-                   { type: :divider },
-                   { text: 'Item 3', href: '#', variant: :error }
-                 ],
+                 align: align,
+                 menu_class: menu_class,
+                 menu_tabindex: menu_tabindex,
                  class: 'mb-40'
-               ))
+               )) do |d|
+          d.with_trigger(text: trigger_text, color: color, size: size,
+                         icon_start: trigger_icon ? warning_icon('h-5 w-5') : nil)
+          d.with_title { 'Menu' } if show_header
+          d.with_item(href: '#') { safe_join([home_icon('h-5 w-5 mr-2'), 'Item 1']) }
+          d.with_item(href: '#') { safe_join([email_icon('h-5 w-5 mr-2'), 'Item 2']) }
+          d.with_divider
+          d.with_item(href: '#', class: 'text-error') { safe_join([sun_icon('h-5 w-5 mr-2'), 'Item 3']) }
+          d.with_item { tag.button('Save changes', class: 'btn btn-primary btn-sm w-full') } if show_footer
+        end
       end
 
       # @!endgroup
 
-      # @!group Positions
-
-      # Dropdown Positions
+      # Card as dropdown content
       # ---------------
-      # All available dropdown positions
-      #
-      # @label All Positions
-      def positions
-        render_with_template(locals: {
-                               positions: DropdownComponent::POSITIONS,
-                               helpers: self
-                             })
+      # Example showing how to use a card as dropdown content
+      def card_as_dropdown
+        render(DaisyComponents::Actions::DropdownComponent.new) do |d|
+          d.with_trigger(text: 'Click')
+          d.with_custom_content do
+            tag.div(tabindex: 0, class: 'dropdown-content card card-sm bg-base-100 z-1 w-64 shadow-md') do
+              tag.div(class: 'card-body') do
+                tag.p('This is a card. You can use any element as a dropdown.')
+              end
+            end
+          end
+        end
       end
 
-      # @!endgroup
-
-      # @!group Variants
-
-      # Dropdown Variants
-      # ---------------
-      # Different button variants for the trigger
-      #
-      # @label Variants
-      def variants
-        render_with_template(locals: {
-                               variants: DropdownComponent::VARIANTS,
-                               helpers: self
-                             })
+      def dropdown_aligns_to_center_of_button_horizontally
+        render(DaisyComponents::Actions::DropdownComponent.new(align: :center)) do |d|
+          d.with_trigger(text: 'Click ⬇️')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
       end
 
-      # @!endgroup
-
-      # @!group Sizes
-
-      # Dropdown Sizes
-      # ---------------
-      # Different sizes for the trigger button
-      #
-      # @label Sizes
-      def sizes
-        render_with_template(locals: {
-                               sizes: DropdownComponent::SIZES,
-                               helpers: self
-                             })
+      def dropdown_aligns_to_end_of_button_horizontally
+        render(DaisyComponents::Actions::DropdownComponent.new(align: :end)) do |d|
+          d.with_trigger(text: 'Click ⬇️')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
       end
 
-      # @!endgroup
-
-      # @!group Features
-
-      # Dropdown Features
-      # ---------------
-      # Showcase of different dropdown features: icons, dividers, variants, headers, and footers
-      #
-      # @label Features
-      def features
-        render_with_template(locals: { helpers: self })
+      def dropdown_aligns_to_start_of_button_horizontally
+        render(DaisyComponents::Actions::DropdownComponent.new(align: :start)) do |d|
+          d.with_trigger(text: 'Click ⬇️')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
       end
 
-      # @!endgroup
+      def dropdown_left_aligns_to_end_of_button_vertically
+        render(DaisyComponents::Actions::DropdownComponent.new(position: :left, align: :end)) do |d|
+          d.with_trigger(text: 'Click  ⬅️')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
+      end
+
+      def dropdown_menu
+        render(DaisyComponents::Actions::DropdownComponent.new) do |d|
+          d.with_trigger(text: 'Click')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
+      end
+
+      def dropdown_on_hover
+        render(DaisyComponents::Actions::DropdownComponent.new(hover: true)) do |d|
+          d.with_trigger(text: 'Hover')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
+      end
+
+      def dropdown_right
+        render(DaisyComponents::Actions::DropdownComponent.new(position: :right)) do |d|
+          d.with_trigger(text: 'Click  ➡️')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
+      end
+
+      def dropdown_right_aligns_to_center_of_button_vertically
+        render(DaisyComponents::Actions::DropdownComponent.new(position: :right, align: :center)) do |d|
+          d.with_trigger(text: 'Click  ➡️', class: 'm-1')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
+      end
+
+      def dropdown_right_aligns_to_end_of_button_vertically
+        render(DaisyComponents::Actions::DropdownComponent.new(position: :right, align: :end)) do |d|
+          d.with_trigger(text: 'Click  ➡️')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
+      end
+
+      def dropdown_top
+        render(DaisyComponents::Actions::DropdownComponent.new(position: :top)) do |d|
+          d.with_trigger(text: 'Click  ⬆️')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
+      end
+
+      def force_open
+        render(DaisyComponents::Actions::DropdownComponent.new(open: true)) do |d|
+          d.with_trigger(text: 'Button')
+          d.with_item(href: '#') { 'Item 1' }
+          d.with_item(href: '#') { 'Item 2' }
+        end
+      end
+
+      def helper_dropdown
+        render_with_template(locals: { helper: self })
+      end
     end
   end
 end
