@@ -3,20 +3,53 @@
     "configurations": [
         {
             "type": "ruby_lsp",
-            "name": "Debug",
+            "name": "Debug Rails",
             "request": "launch",
-            "program": "ruby ${file}",
+            "program": "${workspaceRoot}/bin/rails",
+            "args": ["server"],
+            "useBundler": true,
+            "env": {
+                "RAILS_ENV": "development"
+            }
         },
         {
             "type": "ruby_lsp",
+            "name": "Debug Test File",
             "request": "launch",
-            "name": "Debug test file",
             "program": "ruby -Itest ${relativeFile}",
+            "useBundler": true,
+            "env": {
+                "RAILS_ENV": "test"
+            }
+        },
+        {
+            "type": "ruby_lsp",
+            "name": "Run Test with Coverage",
+            "request": "launch",
+            "program": "ruby -Itest ${relativeFile}",
+            "useBundler": true,
+            "env": {
+                "RAILS_ENV": "test",
+                "COVERAGE": "true"
+            }
+        },
+        {
+            "type": "ruby_lsp",
+            "name": "Run All Tests with Coverage",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/rails",
+            "args": ["test"],
+            "useBundler": true,
+            "env": {
+                "RAILS_ENV": "test",
+                "COVERAGE": "true"
+            }
         },
         {
             "type": "ruby_lsp",
             "request": "attach",
-            "name": "Attach to existing server",
-        },
-    ],
+            "name": "Attach to Process",
+            "port": 1234
+        }
+    ]
 }

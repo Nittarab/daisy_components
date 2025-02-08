@@ -1,17 +1,19 @@
 {
-    "ruby.useLanguageServer": true,
-    "ruby.lint": {
-        "rubocop": true
-    },
-    "ruby.format": "rubocop",
-    "ruby.intellisense": "rubyLocate",
+    // "ruby.useLanguageServer": true,
+    // "ruby.lint": {
+    //     "rubocop": true
+    // },
+    // "ruby.format": "rubocop",
+    // "ruby.intellisense": "rubyLocate",
     "[ruby]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "Shopify.ruby-lsp",
         "editor.semanticHighlighting.enabled": true,
-        "editor.semanticTokenColorCustomizations": {
-            "enabled": true
-        }
+    },
+    "[erb]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "Shopify.ruby-lsp",
+        "editor.semanticHighlighting.enabled": true
     },
     "rubyLsp.enabledFeatures": {
         "codeActions": true,
@@ -30,5 +32,13 @@
         "codeLens": true,
         "definition": true,
         "workspaceSymbol": true
+    },
+    "rubyLsp.formatter": "auto",
+    "rubyLsp.rubyVersionManager": {
+        "identifier": "mise"
+    },
+    "files.associations": {
+        "*.erb": "erb",
+        "*.html.erb": "erb"
     }
 }
