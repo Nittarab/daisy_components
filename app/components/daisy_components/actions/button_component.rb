@@ -137,6 +137,7 @@ module DaisyComponents
       # Valid HTML button types
       BUTTON_TYPES = %w[button submit reset].freeze
 
+      # @param tag_type [Symbol] HTML tag to use (:button, :input, :a)
       # @param text [String] The text content to display inside the button
       # @param color [String] Visual style of the button
       #    (neutral/primary/secondary/accent/info/success/warning/error/ghost/link)
@@ -232,9 +233,7 @@ module DaisyComponents
       end
 
       def button_specific_arguments(base)
-        type = if @tag_type.to_s == 'button'
-                 @type || 'button'
-               elsif @tag_type.to_s == 'input'
+        type = if %w[button input].include?(@tag_type.to_s)
                  @type || 'button'
                else
                  @type
