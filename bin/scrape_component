@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'nokogiri'
+require 'net/http'
+require 'fileutils'
+require 'optparse'
+
+def sanitize_filename(name)
+  name.downcase.gsub(/[^a-z0-9]+/, '_')
+end
+
+def format_title(id)
+  # Convert kebab-case to title case
+  id.split('-').map(&:capitalize).join(' ')
+end
+
+def scrape_component(component_name)
+  url = URI("https://v5.daisyui.com/components/#{component_name}/")
+  
+  puts "Scraping #{url}..."
+  response = Net::HTTP.get(url)
+  doc = Nokogiri::HTML(response)
+  
+  puts "\n=== PAGE CONTENT ==="
+  puts doc.to_html
+  puts "=== END PAGE CONTENT ===\n\n"
+  
+  # Create fixtures directory
+  fixture_dir = File.expand_path("../test/fixtures/components/#{component_name}", __dir__)
+  FileUtils.mkdir_p(fixture_dir)
+  
+  # Find all sections with examples
+  sections = []
+  doc.css('.component-preview').each do |preview|
+    title = preview['id']
+    next unless title
+    
+    # Get the code example
+    code = preview.css('pre code').first&.text&.gsub('$$', '')
+    next unless code && !code.empty?
+    
+    sections << {
+      title: format_title(title),
+      code: code.strip
+    }
+  end
+  
+  puts "\nFound #{sections.count} examples"
+  
+  sections.each do |section|
+    puts "\n=== Example: #{section[:title]} ==="
+    puts "Content preview:"
+    puts section[:code][0..100]
+    
+    # Save to fixture file
+    filename = "#{sanitize_filename(section[:title])}.html"
+    full_path = File.join(fixture_dir, filename)
+    File.write(full_path, section[:code])
+    puts "\nCreated fixture: #{filename}"
+    puts "Full path: #{full_path}"
+  end
+  
+  puts "\nDone! Fixtures created in test/fixtures/components/#{component_name}/"
+end
+
+# Parse command line arguments
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename(__FILE__)} COMPONENT_NAME"
+  
+  opts.on("-h", "--help", "Show this help message") do
+    puts opts
+    exit
+  end
+end.parse!
+
+if ARGV.empty?
+  puts "Error: Component name is required"
+  puts "Usage: #{File.basename(__FILE__)} COMPONENT_NAME"
+  exit 1
+end
+
+component_name = ARGV[0]
+scrape_component(component_name) 

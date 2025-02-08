@@ -1,0 +1,10 @@
+<%= render(DaisyComponents::Actions::DropdownComponent.new(
+  trigger: { text: "Click", class: "m-1" },
+  align_end: nil
+)) do %>
+  <div tabindex="0" class="dropdown-content card card-sm bg-base-100 z-1 w-64 shadow-md">
+    <div class="card-body">
+      <p>This is a card. You can use any element as a dropdown.</p>
+    </div>
+  </div>
+<% end %> 

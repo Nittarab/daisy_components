@@ -16,16 +16,21 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.0-beta.2/daisyui.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.0-beta.7/daisyui.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application" %>
   </head>
 
   <body>
-    <div class="min-h-screen bg-base-200 p-4" style="background-image: repeating-linear-gradient(-45deg, var(--color-base-100), var(--color-base-100) 13px, var(--color-base-200) 13px, var(--color-base-200) 14px); background-size: 40px 40px;">
-      <div class="preview bg-base-100 relative flex min-h-[6rem] min-w-[18rem] max-w-4xl flex-wrap items-center justify-center gap-2 overflow-x-hidden bg-cover bg-top p-4 xl:py-10">
-        <%= yield %>
+    <div class="min-h-screen bg-base-200 p-4">
+      <div class="bg-base-100 relative h-full min-h-[calc(100vh-2rem)] bg-cover bg-top"
+      style="background-image: repeating-linear-gradient(-45deg, var(--color-base-100), var(--color-base-100) 13px, var(--color-base-200) 13px, var(--color-base-200) 14px); background-size: 40px 40px;">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div id="preview-container" class="flex flex-wrap items-center justify-center gap-2">
+            <%= yield %>
+          </div>
+        </div>
       </div>
     </div>
   </body>

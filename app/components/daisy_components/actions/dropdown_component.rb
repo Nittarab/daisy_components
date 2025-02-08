@@ -4,154 +4,133 @@ module DaisyComponents
   module Actions
     # Dropdown component implementing DaisyUI's dropdown styles
     #
-    # @example Basic usage
-    #   <%= render(DropdownComponent.new(
-    #     trigger: { text: "Click me" },
-    #     items: [
-    #       { text: "Item 1", href: "#" },
-    #       { text: "Item 2", href: "#" }
-    #     ]
-    #   )) %>
+    # @example Basic usage with text trigger
+    #   <%= render(DropdownComponent.new) do |d| %>
+    #     <% d.with_trigger(text: "Click me") %>
+    #     <% d.with_item(href: "#") { "Item 1" } %>
+    #     <% d.with_item(href: "#") { "Item 2" } %>
+    #   <% end %>
     #
-    # @example With position and hover
-    #   <%= render(DropdownComponent.new(
-    #     position: :top,
-    #     hover: true,
-    #     trigger: {
-    #       text: "Settings",
-    #       icon: helpers.cog_icon("h-5 w-5"),
-    #       variant: :ghost
-    #     },
-    #     items: [
-    #       { text: "Profile", href: "/profile", icon: helpers.user_icon("h-5 w-5") },
-    #       { text: "Settings", href: "/settings", icon: helpers.cog_icon("h-5 w-5") },
-    #       { type: :divider },
-    #       { text: "Logout", href: "/logout", variant: :error }
-    #     ]
-    #   )) %>
+    # @example With custom trigger content
+    #   <%= render(DropdownComponent.new) do |d| %>
+    #     <% d.with_trigger do %>
+    #       <%= helpers.cog_icon("h-5 w-5") %> Settings
+    #     <% end %>
+    #     <% d.with_item(href: "#") { "Item 1" } %>
+    #     <% d.with_item(href: "#") { "Item 2" } %>
+    #     <% d.with_divider %>
+    #     <% d.with_item(href: "#", class: "text-error") { "Delete" } %>
+    #   <% end %>
     class DropdownComponent < BaseComponent
-      # Available dropdown positions from DaisyUI
-      POSITIONS = %w[top top-end bottom bottom-end left left-end right right-end].freeze
-      VARIANTS = %w[primary secondary accent info success warning error ghost neutral].freeze
-      SIZES = %w[xs sm md lg].freeze
+      renders_one :trigger, lambda { |**kwargs, &block|
+        return block if block
 
-      # @param position [String] Position of the dropdown content relative to the trigger (top/bottom/left/right)
+        defaults = { tag_type: :div, tabindex: '0', role: :button, class: 'm-1' }
+        args = defaults.merge(kwargs)
+        render(ButtonComponent.new(**args))
+      }
+
+      renders_many :items, types: {
+        item: { renders: DaisyComponents::ItemComponent, as: :item },
+        divider: { renders: DaisyComponents::DividerComponent, as: :divider },
+        title: { renders: DaisyComponents::TitleComponent, as: :title }
+      }
+
+      renders_one :custom_content
+
+      # Available dropdown positions from DaisyUI
+      POSITIONS = {
+        top: 'dropdown-top',
+        top_end: 'dropdown-top-end',
+        top_center: 'dropdown-top-center',
+        bottom: 'dropdown-bottom',
+        bottom_end: 'dropdown-bottom-end',
+        bottom_center: 'dropdown-bottom-center',
+        left: 'dropdown-left',
+        left_end: 'dropdown-left-end',
+        left_center: 'dropdown-left-center',
+        right: 'dropdown-right',
+        right_end: 'dropdown-right-end',
+        right_center: 'dropdown-right-center'
+      }.freeze
+
+      ALIGNMENTS = {
+        start: 'dropdown-start',
+        end: 'dropdown-end',
+        center: 'dropdown-center'
+      }.freeze
+
+      # @param position [Symbol] Position of the dropdown content relative to the trigger
       # @param hover [Boolean, String] When true or 'content', opens the dropdown on hover instead of click
       # @param open [Boolean] When true, forces the dropdown to stay open
-      # @param align_end [Boolean] When true, aligns the dropdown content to the end (right) of the trigger
-      # @param variant [String] Button variant for the trigger (primary/secondary/accent/etc)
-      # @param size [String] Size of the trigger button (xs/sm/md/lg)
-      # @param trigger [Hash] Configuration for the trigger button
-      # @param items [Array<Hash>] Array of menu items
-      # @param header [Hash] Configuration for the dropdown header
-      # @param footer [Hash] Configuration for the dropdown footer
-      # @param system_arguments [Hash] Additional HTML attributes to be applied to the dropdown container
-      def initialize(position: nil, hover: false, open: false, align_end: false,
-                     variant: nil, size: nil, trigger: nil, items: nil,
-                     header: nil, footer: nil, **system_arguments)
-        @position = position if POSITIONS.include?(position.to_s)
+      # @param align [Symbol] When :start, :end, or :center, aligns the dropdown content
+      # @param menu_class [String] Additional classes for the menu
+      # @param menu_tabindex [Integer, nil] Tabindex for the menu (defaults to 0)
+      # @param system_arguments [Hash] Additional HTML attributes
+      def initialize(position: nil, hover: false, open: false, align: nil,
+                     menu_class: nil, menu_tabindex: 0, **system_arguments)
+        @position = build_argument(position, POSITIONS, 'position')
         @hover = hover
         @open = open
-        @align_end = align_end
-        @variant = variant if VARIANTS.include?(variant.to_s)
-        @size = size if SIZES.include?(size.to_s)
-        @trigger = trigger || {}
-        @items = items || []
-        @header = header
-        @footer = footer
+        @align = build_argument(align, ALIGNMENTS, 'align')
+        @menu_class = menu_class
+        @menu_tabindex = menu_tabindex
         super(**system_arguments)
       end
 
       def call
         tag.div(**dropdown_arguments) do
           safe_join([
-                      render_trigger,
-                      render_menu
-                    ])
+            trigger,
+            render_menu
+          ].compact)
         end
       end
 
       private
 
-      def dropdown_arguments
-        classes = class_names(
-          'dropdown',
-          "dropdown-#{@position}" => @position,
-          'dropdown-hover' => @hover == true,
-          'dropdown-hover-content' => @hover == 'content',
-          'dropdown-open' => @open,
-          'dropdown-end' => @align_end
-        )
+      def build_argument(key, valid_values, attr_name)
+        return unless key
 
+        class_name = valid_values[key.to_sym]
+
+        return class_name if class_name
+
+        raise ArgumentError, "Invalid #{attr_name}: #{key}. Must be one of: #{valid_values.keys.join(', ')}"
+      end
+
+      def dropdown_arguments
         {
-          class: [classes, system_arguments[:class]].compact.join(' '),
+          class: computed_dropdown_classes,
           **system_arguments.except(:class)
         }.compact
       end
 
-      def render_trigger
-        trigger_classes = class_names(
-          'btn',
-          "btn-#{@variant}" => @variant,
-          "btn-#{@size}" => @size,
-          @trigger[:class] => @trigger[:class]
-        )
+      def computed_dropdown_classes
+        modifiers = ['dropdown']
+        modifiers << @position if @position
+        modifiers << 'dropdown-hover' if @hover == true
+        modifiers << 'dropdown-hover-content' if @hover == 'content'
+        modifiers << 'dropdown-open' if @open
+        modifiers << @align if @align
 
-        tag.button(class: trigger_classes) do
-          safe_join([
-            @trigger[:icon],
-            @trigger[:text]
-          ].compact)
-        end
+        class_names(modifiers, system_arguments[:class])
       end
 
       def render_menu
-        return unless @items.any?
+        return custom_content if custom_content
+        return unless items.any?
 
-        tag.ul(class: 'dropdown-content menu menu-sm z-[1] p-2 shadow bg-base-100 rounded-box w-52') do
-          safe_join([
-            render_header,
-            render_items,
-            render_footer
-          ].compact)
+        tag.ul(tabindex: @menu_tabindex, class: computed_menu_classes) do
+          safe_join(items)
         end
       end
 
-      def render_header
-        return unless @header
-
-        tag.div(class: 'dropdown-header') do
-          if @header[:title]
-            tag.div(class: 'text-lg font-bold') { @header[:title] }
-          else
-            @header[:content]
-          end
-        end
-      end
-
-      def render_footer
-        return unless @footer
-
-        tag.div(class: 'dropdown-footer mt-2 border-t pt-2') do
-          @footer[:content]
-        end
-      end
-
-      def render_items
-        safe_join(@items.map { |item| render_menu_item(item) })
-      end
-
-      def render_menu_item(item)
-        return tag.li(class: 'divider') if item[:type] == :divider
-
-        tag.li do
-          tag.a(href: item[:href], class: item[:variant] ? "text-#{item[:variant]}" : nil) do
-            safe_join([
-              item[:icon],
-              item[:text]
-            ].compact)
-          end
-        end
+      def computed_menu_classes
+        class_names(
+          'dropdown-content menu',
+          @menu_class || 'bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm'
+        )
       end
     end
   end

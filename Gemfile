@@ -15,6 +15,7 @@ group :development do
   gem 'rubocop-performance', '1.23.1'
   gem 'rubocop-rails', '2.29.1'
   gem 'ruby-lsp'
+  gem 'ruby-lsp-rails'
 end
 
 group :test do

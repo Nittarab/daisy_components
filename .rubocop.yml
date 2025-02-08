@@ -16,6 +16,16 @@ Metrics/ParameterLists:
 Metrics/ClassLength:
   Exclude:
     - test/**/*
-
 Metrics/MethodLength:
   Max: 20
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics:
+  Exclude:
+    - app/helpers/daisy_components/icons_helper.rb
+
+Layout:
+  Exclude:
+    - app/helpers/daisy_components/icons_helper.rb
