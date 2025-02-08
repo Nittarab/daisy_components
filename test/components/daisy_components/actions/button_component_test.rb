@@ -8,7 +8,8 @@ module DaisyComponents
     class ButtonComponentTest < DaisyComponents::ComponentTestCase
       include DaisyComponents::PreviewTestConcern
 
-      test_all_preview_examples(ButtonComponentPreview, 'button')
+      test_all_preview_examples(preview_class: ButtonComponentPreview, component_name: 'button',
+                                exclude: ['login_buttons'])
     end
   end
 end

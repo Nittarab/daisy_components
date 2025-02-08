@@ -1,7 +1,7 @@
-<a role="button" class="btn">Link</a>
-<button class="btn">Button</button>
-<input type="button" value="Input" class="btn" />
-<input type="submit" value="Submit" class="btn" />
-<input type="radio" aria-label="Radio" class="btn" />
-<input type="checkbox" aria-label="Checkbox" class="btn" />
-<input type="reset" value="Reset" class="btn" /> 
+<%=render(DaisyComponents::Actions::ButtonComponent.new(text: "Link", tag_type: 'a'))%>
+<%=render(DaisyComponents::Actions::ButtonComponent.new(text: "Button", type: 'submit'))%>
+<%=render(DaisyComponents::Actions::ButtonComponent.new(tag_type: 'input', type: 'button', value: 'Input'))%>
+<%=render(DaisyComponents::Actions::ButtonComponent.new(tag_type: 'input', type: 'submit', value: 'Submit'))%>
+<%=render(DaisyComponents::Actions::ButtonComponent.new(tag_type: 'input', type: 'radio'))%>
+<%=render(DaisyComponents::Actions::ButtonComponent.new(tag_type: 'input', type: 'checkbox'))%>
+<%=render(DaisyComponents::Actions::ButtonComponent.new(tag_type: 'input', type: 'reset', value: 'Reset'))%>

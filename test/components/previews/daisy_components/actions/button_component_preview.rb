@@ -6,7 +6,6 @@ module DaisyComponents
   module Actions
     class ButtonComponentPreview < ViewComponent::Preview
       include DaisyComponents::IconsHelper
-
       # @!group Playground
 
       # Default
@@ -14,11 +13,9 @@ module DaisyComponents
       # Interactive button component with customizable styling
       #
       # @param text text "Text content inside the button"
-      # @param variant select {
-      #   choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost, link]
-      # }
+      # @param color select {choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost, link]}
       # @param size select { choices: [xs, sm, md, lg, xl] }
-      # @param style select { choices: [outline, soft] }
+      # @param variant select { choices: [outline, soft, dash] }
       # @param shape select { choices: [wide, block, circle, square] }
       # @param disabled toggle "Disable the button"
       # @param loading toggle "Show loading state"
@@ -28,9 +25,9 @@ module DaisyComponents
       # @param classes text "Additional CSS classes"
       def playground(
         text: 'Button',
-        variant: nil,
+        color: nil,
         size: nil,
-        style: nil,
+        variant: nil,
         shape: nil,
         disabled: false,
         loading: false,
@@ -41,9 +38,9 @@ module DaisyComponents
       )
         render(ButtonComponent.new(
                  text:,
-                 variant:,
+                 color:,
                  size:,
-                 style:,
+                 variant:,
                  shape:,
                  disabled:,
                  loading:,
@@ -93,7 +90,7 @@ module DaisyComponents
 
       # Loading Buttons
       # ---------------
-      # Buttons with loading state
+      # Buttons with loading stateb
       def button_with_loading_spinner
         render_with_template
       end
@@ -140,12 +137,12 @@ module DaisyComponents
         render_with_template
       end
 
-      # # Login Buttons
-      # # ---------------
-      # # Social login button examples
-      # def login_buttons
-      #   render_with_template(locals: { helper: self })
-      # end
+      # Login Buttons
+      # ---------------
+      # Social login button examples
+      def login_buttons
+        render_with_template(locals: { helper: self })
+      end
 
       # Outline Buttons
       # ---------------

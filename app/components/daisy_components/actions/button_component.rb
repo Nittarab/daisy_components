@@ -94,8 +94,8 @@ module DaisyComponents
       renders_one :start_icon
       renders_one :end_icon
 
-      # Available button variants from DaisyUI
-      VARIANTS = {
+      # Available button colors from DaisyUI
+      COLORS = {
         primary: 'btn-primary',
         secondary: 'btn-secondary',
         accent: 'btn-accent',
@@ -117,11 +117,13 @@ module DaisyComponents
         xs: 'btn-xs'
       }.freeze
 
-      # Available button styles from DaisyUI
-      STYLES = {
+      # Available button variants from DaisyUI
+      VARIANTS = {
         outline: 'btn-outline',
         soft: 'btn-soft',
-        dash: 'btn-dash'
+        dash: 'btn-dash',
+        ghost: 'btn-ghost',
+        link: 'btn-link'
       }.freeze
 
       # Available button shape modifiers
@@ -136,10 +138,10 @@ module DaisyComponents
       BUTTON_TYPES = %w[button submit reset].freeze
 
       # @param text [String] The text content to display inside the button
-      # @param variant [String] Visual style of the button
+      # @param color [String] Visual style of the button
       #    (neutral/primary/secondary/accent/info/success/warning/error/ghost/link)
       # @param size [String] Size of the button (xl/lg/md/sm/xs)
-      # @param style [String] Style of the button (outline/soft)
+      # @param variant [String] Variant of the button (outline/soft/dash)
       # @param shape [String] Shape modifier of the button (wide/block/circle/square)
       # @param disabled [Boolean] When true, prevents user interaction and grays out the button
       # @param href [String] Turns the button into a link pointing to this URL
@@ -153,14 +155,15 @@ module DaisyComponents
       # @param icon_end [String] SVG icon to display after the text
       # @param system_arguments [Hash] Additional HTML attributes to be applied to the button
       def initialize( # rubocop:disable Metrics/ParameterLists
+        tag_type: :button,
         text: nil,
-        variant: nil,
+        color: nil,
         size: nil,
-        style: nil,
+        variant: nil,
         shape: nil,
         disabled: false,
         href: nil,
-        type: :button,
+        type: nil,
         method: nil,
         target: nil,
         rel: nil,
@@ -170,9 +173,10 @@ module DaisyComponents
         icon_end: nil,
         **system_arguments
       )
-        @variant = build_argument(variant, VARIANTS, 'variant')
+        @tag_type = tag_type
+        @color = build_argument(color, COLORS, 'color')
         @size = build_argument(size, SIZES, 'size')
-        @style = build_argument(style, STYLES, 'style')
+        @variant = build_argument(variant, VARIANTS, 'variant')
         @shape = build_argument(shape, SHAPES, 'shape')
         @disabled = disabled
         @href = href
@@ -190,7 +194,7 @@ module DaisyComponents
       end
 
       def call
-        tag.send(@type, **full_arguments) { button_content }
+        tag.send(@tag_type, **full_arguments) { button_content }
       end
 
       private
@@ -208,30 +212,34 @@ module DaisyComponents
       def full_arguments
         base = {
           class: computed_classes,
-          disabled: @disabled || @loading,
-          'aria-disabled': @disabled || @loading,
-          'aria-busy': @loading,
+          disabled: @disabled,
           **system_arguments.except(:class)
         }
 
-        @href ? link_specific_arguments(base) : button_specific_arguments(base)
+        @href || @tag_type.to_s == 'a' ? link_specific_arguments(base) : button_specific_arguments(base)
       end
 
       # Order: base -> style/state(active) -> variant -> size -> shape
       def computed_classes
         modifiers = ['btn']
-        modifiers << @style
-        modifiers << 'btn-active' if @active
         modifiers << @variant
+        modifiers << 'btn-active' if @active
+        modifiers << @color
         modifiers << @size
         modifiers << @shape
-        modifiers << 'loading' if @loading
 
         class_names(modifiers, system_arguments[:class])
       end
 
       def button_specific_arguments(base)
-        base.merge(type: @type).compact
+        type = if @tag_type.to_s == 'button'
+                 @type || 'button'
+               elsif @tag_type.to_s == 'input'
+                 @type || 'button'
+               else
+                 @type
+               end
+        base.merge(type: type).compact
       end
 
       def link_specific_arguments(base)
@@ -240,13 +248,13 @@ module DaisyComponents
           href: @href,
           data: { turbo_method: @method }.compact,
           target: @target,
-          rel: link_rel,
-          tabindex: @disabled ? '-1' : '0'
+          rel: link_rel
         ).compact
       end
 
       def button_content
         safe_join([
+          loading_spinner,
           start_icon,
           content || @text,
           end_icon
@@ -257,6 +265,10 @@ module DaisyComponents
         return @rel if @rel
 
         'noopener noreferrer' if @target == '_blank'
+      end
+
+      def loading_spinner
+        tag.span(class: 'loading loading-spinner') if @loading
       end
     end
   end

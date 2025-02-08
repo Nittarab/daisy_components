@@ -1,6 +1,2 @@
-<%= render DaisyComponents::Actions::ButtonComponent.new(icon_start: helper.heart_icon('size-[1.2em]')) do %>
-  Like
-<% end %>
-<%= render DaisyComponents::Actions::ButtonComponent.new(icon_end: helper.heart_icon('size-[1.2em]')) do %>
-  Like
-<% end %> 
+<%= render DaisyComponents::Actions::ButtonComponent.new(icon_start: helper.heart_icon('size-[1.2em]'), text: 'Like') %>
+<%= render DaisyComponents::Actions::ButtonComponent.new(icon_end: helper.heart_icon('size-[1.2em]'), text: 'Like') %>  
