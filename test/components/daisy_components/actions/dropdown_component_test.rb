@@ -6,7 +6,7 @@ module DaisyComponents
   module Actions
     class DropdownComponentTest < DaisyComponents::ComponentTestCase
       include DaisyComponents::PreviewTestConcern
-      test_all_preview_examples(DropdownComponentPreview, 'dropdown')
+      test_all_preview_examples(preview_class: DropdownComponentPreview, component_name: 'dropdown')
     end
   end
 end
