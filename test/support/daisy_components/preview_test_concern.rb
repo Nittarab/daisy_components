@@ -51,7 +51,7 @@ module DaisyComponents
       document = Nokogiri::HTML5.fragment(html)
 
       # Convert to HTML and remove all whitespace, including newlines
-      document.to_html.gsub(/\s+/, ' ').delete("\n").squish
+      document.to_html.gsub(/>\s+</, '><').gsub(/\s+/, ' ').delete("\n").squish
     end
   end
 end

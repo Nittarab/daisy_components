@@ -14,7 +14,7 @@ module DaisyComponents
       # ---------------
       # Interactive dropdown menu with customizable trigger and content
       #
-      # @param position select { choices: [top, top_end, top_center, bottom, bottom_end, bottom_center, left, left_end, left_center, right, right_end, right_center] } # rubocop:disable Layout/LineLength
+      # @param position select { choices: [top, top_end, top_center, bottom, bottom_end, bottom_center, left, left_end, left_center, right, right_end, right_center] }
       #                       "Position of the dropdown content relative to the trigger"
       # @param hover select { choices: [false, true, content] }
       #                    "How the dropdown opens on hover (false, true, or content)"

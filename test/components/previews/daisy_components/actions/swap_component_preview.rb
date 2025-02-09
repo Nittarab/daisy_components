@@ -13,158 +13,57 @@ module DaisyComponents
       # ---------------
       # Interactive swap component with different effects
       #
-      # @param variant select {
-      #   choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost]
-      # } "Color variant"
+      # @param variant select { choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost]} "Color variant"
       # @param size select { choices: [xs, sm, md, lg] } "Size of the content"
-      # @param effect select { choices: [none, rotate, flip, active, flip-active] } "Animation effect"
+      # @param effect select { choices: [rotate, flip, flip_active] } "Animation effect"
       # @param value toggle "Current state"
+      # @param active toggle "Active state"
       # @param button toggle "Show as button"
-      # @param indeterminate toggle "Show indeterminate state"
-      def playground(variant: :primary, size: :md, effect: :none, value: false, button: false, indeterminate: false)
+      def playground(variant: :primary, size: :md, effect: nil, value: false, active: false, button: false)
         render(SwapComponent.new(
                  states: { on: 'ON', off: 'OFF' },
                  variant: variant,
                  size: size,
                  value: value,
+                 active: active,
                  button: button,
-                 effect: effect,
-                 indeterminate: indeterminate
+                 effect: effect
                ))
       end
 
       # @!endgroup
 
-      # @!group Examples
-
-      # Initially ON
-      # ---------------
-      # Shows how to set initial state to ON
-      def value_on
-        render(SwapComponent.new(
-                 states: { on: 'ON', off: 'OFF' },
-                 variant: :primary,
-                 value: true
-               ))
-      end
-
-      # Simple Text
-      # ---------------
-      # Basic text swap with primary color
-      #
-      # @param value toggle "Current state"
-      def text(value: false)
-        render(SwapComponent.new(
-                 states: { on: 'ON', off: 'OFF' },
-                 variant: :primary,
-                 value: value
-               ))
-      end
-
-      # Theme Toggle
-      # ---------------
-      # Theme toggle with sun/moon icons
-      #
-      # @param value toggle "Current state"
-      def theme(value: false)
-        render(SwapComponent.new(
-                 states: {
-                   on: sun_icon('h-6 w-6'),
-                   off: moon_icon('h-6 w-6')
-                 },
-                 button: true,
-                 effect: :rotate,
-                 value: value
-               ))
-      end
-
-      # Emoji Weather
-      # ---------------
-      # Fun emoji swap with flip effect
-      #
-      # @param value toggle "Current state"
-      def weather(value: false)
-        render(SwapComponent.new(
-                 states: { on: '🌞', off: '🌚' },
-                 size: :lg,
-                 effect: :flip,
-                 value: value
-               ))
-      end
-
-      # Hamburger Menu
-      # ---------------
-      # Hamburger menu button with rotate effect
-      #
-      # @param value toggle "Current state"
-      def hamburger(value: false)
+      def hamburger_button
         render(SwapComponent.new(
                  states: {
                    on: hamburger_icon('h-6 w-6'),
-                   off: close_icon('h-6 w-6')
+                   off: close_icon('h-10 w-10')
                  },
-                 button: true,
-                 effect: :rotate,
-                 value: value
+                 value: 'on',
+                 button: true
                ))
       end
 
-      # Volume Control
-      # ---------------
-      # Volume control button
-      #
-      # @param value toggle "Current state"
-      def volume(value: false)
+      def swap_icons_with_flip_effect
+        render(SwapComponent.new(states: { on: '😈', off: '😇' }, class: 'text-2xl', effect: :flip))
+      end
+
+      def swap_icons_with_rotate_effect
         render(SwapComponent.new(
                  states: {
-                   on: volume_on_icon('h-6 w-6'),
-                   off: volume_off_icon('h-6 w-6')
+                   on: sun_icon('h-10 w-10'),
+                   off: moon_icon('h-10 w-10')
                  },
-                 button: true,
-                 value: value
+                 effect: :rotate
                ))
       end
 
-      # Active Effect
-      # ---------------
-      # Shows the active effect animation
-      #
-      # @param value toggle "Current state"
-      def active(value: false)
-        render(SwapComponent.new(
-                 states: { on: '✓', off: '×' },
-                 size: :lg,
-                 effect: :active,
-                 value: value,
-                 variant: :success
-               ))
+      def swap_text
+        render(SwapComponent.new(states: { on: 'ON', off: 'OFF' }))
       end
 
-      # Flip Active Effect
-      # ---------------
-      # Shows the flip-active effect animation
-      #
-      # @param value toggle "Current state"
-      def flip_active(value: false)
-        render(SwapComponent.new(
-                 states: { on: '✓', off: '×' },
-                 size: :lg,
-                 effect: :'flip-active',
-                 value: value,
-                 variant: :error
-               ))
-      end
-
-      # Indeterminate State
-      # ---------------
-      # Shows the indeterminate state
-      def indeterminate
-        render(SwapComponent.new(
-                 states: { on: '✓', off: '×' },
-                 size: :lg,
-                 indeterminate: true,
-                 variant: :warning
-               ))
+      def swap_volume_icons
+        render(SwapComponent.new(states: { on: volume_off_icon('h-10'), off: volume_on_icon('h-10') }))
       end
     end
   end
