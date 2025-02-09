@@ -48,7 +48,7 @@ end
 
 Every component preview should have a playground method with all the parameters as options and the description as Lookbook description.
 For every component create:
- - Ruy class
+ - Ruy class with the inizializer documented with YARD doc
  - html template
  - lookbook preview with a playground method and the description as Lookbook description with group and label 
  - TEST: in the test we test the component behavior and the preview (just the fact that they render). Don't duplicate tests to much, but give precedence to the preview but be sure to test the behavior)
