@@ -18,28 +18,52 @@ module DaisyComponents
     #     button: true,
     #     effect: :rotate
     #   )) %>
-    class SwapComponent < DaisyComponents::BaseComponent # rubocop:disable Metrics/ClassLength
-      VALID_VARIANTS = %i[neutral primary secondary accent info success warning error ghost].freeze
-      VALID_SIZES = %i[xs sm md lg].freeze
-      VALID_EFFECTS = %i[none rotate flip active flip-active].freeze
+    class SwapComponent < DaisyComponents::BaseComponent
+      # Available variants from DaisyUI
+      VARIANTS = {
+        primary: 'text-primary',
+        secondary: 'text-secondary',
+        accent: 'text-accent',
+        info: 'text-info',
+        success: 'text-success',
+        warning: 'text-warning',
+        error: 'text-error',
+        ghost: 'text-base-content',
+        neutral: 'text-neutral'
+      }.freeze
 
-      attr_reader :states, :value, :variant, :size, :effect, :button, :indeterminate
+      # Available sizes
+      SIZES = {
+        xs: 'text-xs',
+        sm: 'text-sm',
+        md: 'text-base',
+        lg: 'text-lg'
+      }.freeze
 
-      def initialize(states:, value: false, variant: nil, size: :md, effect: :none, button: false,
-                     indeterminate: false, **system_arguments)
-        validate_states!(states)
-        validate_effect!(effect)
-        validate_variant!(variant) if variant
-        validate_size!(size)
+      # Available effects
+      EFFECTS = {
+        rotate: 'swap-rotate',
+        flip: 'swap-flip',
+        flip_active: 'swap-flip-active'
+      }.freeze
 
-        @states = states
+      # @param states [Hash] Required hash with :on and :off states content
+      # @param value [Boolean] Initial state of the swap
+      # @param variant [Symbol] Color variant (primary/secondary/accent/etc)
+      # @param size [Symbol] Size variant (xs/sm/md/lg)
+      # @param effect [Symbol] Animation effect (rotate/flip/flip-active)
+      # @param active [Boolean] When true, gives the swap an active appearance
+      # @param button [Boolean] When true, renders as a button
+      # @param system_arguments [Hash] Additional HTML attributes
+      def initialize(states:, value: false, variant: nil, size: nil, effect: nil, active: false, button: false,
+                     **system_arguments)
+        @states = validate_states!(states)
         @value = ActiveModel::Type::Boolean.new.cast(value)
-        @variant = variant.to_sym if variant
-        @size = size.to_sym if size
-        @effect = effect.to_sym
+        @variant = build_argument(variant, VARIANTS, 'variant')
+        @size = build_argument(size, SIZES, 'size')
+        @effect = build_argument(effect, EFFECTS, 'effect')
+        @active = active
         @button = button
-        @indeterminate = indeterminate
-
         super(**system_arguments)
       end
 
@@ -55,95 +79,58 @@ module DaisyComponents
 
       private
 
+      def build_argument(key, valid_values, attr_name)
+        return unless key
+
+        class_name = valid_values[key.to_sym]
+        return class_name if class_name
+
+        raise ArgumentError, "Invalid #{attr_name}: #{key}. Must be one of: #{valid_values.keys.join(', ')}"
+      end
+
       def validate_states!(states)
         raise ArgumentError, 'states cannot be nil' if states.nil?
         raise ArgumentError, 'states cannot be empty' if states.empty?
         raise ArgumentError, 'states must have both :on and :off keys' unless states.key?(:on) && states.key?(:off)
-      end
 
-      def validate_effect!(effect)
-        return if VALID_EFFECTS.include?(effect.to_sym)
-
-        raise ArgumentError,
-              "effect must be one of: #{VALID_EFFECTS.join(', ')}"
-      end
-
-      def validate_variant!(variant)
-        return if VALID_VARIANTS.include?(variant.to_sym)
-
-        raise ArgumentError,
-              "variant must be one of: #{VALID_VARIANTS.join(', ')}"
-      end
-
-      def validate_size!(size)
-        raise ArgumentError, "size must be one of: #{VALID_SIZES.join(', ')}" unless VALID_SIZES.include?(size.to_sym)
+        states
       end
 
       def input_html_attributes
-        attrs = {
+        {
           type: 'checkbox',
-          class: 'hidden',
-          role: 'switch'
-        }
-        attrs[:checked] = 'checked' if value
-        attrs[:indeterminate] = 'true' if indeterminate
-        attrs
+          # class: 'hidden',
+          # role: 'switch',
+          checked: @value ? 'checked' : nil
+        }.compact
       end
 
       def label_html_attributes
         {
-          class: default_classes,
+          class: computed_classes,
           **system_arguments.slice(:aria)
         }.compact
       end
 
-      def default_classes
-        class_names(
-          'swap',
-          system_arguments[:class],
-          { 'swap-rotate': effect == :rotate },
-          { 'swap-flip': effect == :flip },
-          { 'swap-active': effect == :active },
-          { 'swap-flip-active': effect == :'flip-active' },
-          { 'swap-indeterminate': indeterminate },
-          { 'btn btn-ghost btn-circle': button },
-          size_classes,
-          variant_classes
-        )
+      def computed_classes
+        modifiers = ['swap']
+        modifiers << @effect if @effect
+        modifiers << 'swap-active' if @active
+        modifiers << 'btn btn-ghost btn-circle' if @button
+        modifiers << @size if @size
+        modifiers << @variant if @variant
+
+        class_names(modifiers, system_arguments[:class])
       end
 
       def render_state(state)
-        return unless states[state]
+        return unless @states[state]
 
-        tag.div(states[state], class: class_names(
+        tag.div(@states[state], class: class_names(
           "swap-#{state}",
           { 'swap-on': state == :on },
           { 'swap-off': state == :off }
         ))
-      end
-
-      def size_classes
-        {
-          xs: 'text-xs',
-          sm: 'text-sm',
-          md: 'text-base',
-          lg: 'text-lg'
-        }[size]
-      end
-
-      def variant_classes
-        return unless variant
-
-        {
-          primary: 'text-primary',
-          secondary: 'text-secondary',
-          accent: 'text-accent',
-          info: 'text-info',
-          success: 'text-success',
-          warning: 'text-warning',
-          error: 'text-error',
-          ghost: 'text-base-content'
-        }[variant]
       end
     end
   end
