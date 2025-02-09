@@ -9,26 +9,68 @@ module DaisyComponents
     #     <% component.with_item(title: "Item 1") do %>
     #       Content for item 1
     #     <% end %>
+    #     <% component.with_item(title: "Item 2") do %>
+    #       Content for item 2
+    #     <% end %>
     #   <% end %>
     #
     # @example With arrow indicator
-    #   <%= render(AccordionComponent.new(arrow: true)) do |component| %>
+    #   <%= render(AccordionComponent.new(indicator: :arrow)) do |component| %>
     #     <% component.with_item(title: "Item 1") do %>
     #       Content for item 1
     #     <% end %>
     #   <% end %>
-    class AccordionComponent < ViewComponent::Base
+    #
+    # @example With plus/minus indicator
+    #   <%= render(AccordionComponent.new(indicator: :plus)) do |component| %>
+    #     <% component.with_item(title: "Item 1") do %>
+    #       Content for item 1
+    #     <% end %>
+    #   <% end %>
+    #
+    # @example Radio group behavior
+    #   <%= render(AccordionComponent.new(input_type: :radio)) do |component| %>
+    #     <% component.with_item(title: "Item 1", checked: true) do %>
+    #       Content for item 1
+    #     <% end %>
+    #     <% component.with_item(title: "Item 2") do %>
+    #       Content for item 2
+    #     <% end %>
+    #   <% end %>
+    #
+    # @example Joined items without gaps
+    #   <%= render(AccordionComponent.new(join: true)) do |component| %>
+    #     <% component.with_item(title: "Item 1") do %>
+    #       Content for item 1
+    #     <% end %>
+    #     <% component.with_item(title: "Item 2") do %>
+    #       Content for item 2
+    #     <% end %>
+    #   <% end %>
+    #
+    # @example Custom colors
+    #   <%= render(AccordionComponent.new(
+    #     bg_color: "bg-primary",
+    #     text_color: "text-primary-content",
+    #     border_color: "border-primary-focus"
+    #   )) do |component| %>
+    #     <% component.with_item(title: "Item 1") do %>
+    #       Content for item 1
+    #     <% end %>
+    #   <% end %>
+    class AccordionComponent < BaseComponent
+      INDICATORS = %i[arrow plus].freeze
+      INPUT_TYPES = %i[radio checkbox].freeze
+
       renders_many :items, lambda { |title:, name: nil, checked: false|
         AccordionItemComponent.new(
-          parent: self,
           title:,
-          name:,
+          name: name || @input_name,
           checked:,
-          arrow: @arrow,
-          plus: @plus,
-          radio: @radio,
+          indicator: @indicator,
+          input_type: @input_type,
           join: @join,
-          bg_color: @bg_color,
+          bg_color: @join ? nil : @bg_color,
           text_color: @text_color,
           border_color: @border_color,
           padding: @padding,
@@ -36,123 +78,52 @@ module DaisyComponents
         )
       }
 
-      attr_reader :join, :arrow, :plus, :radio, :bg_color, :text_color, :border_color, :padding
+      attr_reader :join, :indicator, :input_type, :bg_color, :text_color, :border_color, :padding
 
       # @param join [Boolean] Join items together without gaps
-      # @param arrow [Boolean] Show arrow indicator
-      # @param plus [Boolean] Show plus/minus indicator
-      # @param radio [Boolean] Use radio buttons for exclusive selection
+      # @param indicator [Symbol] Type of indicator to show (:arrow, :plus)
+      # @param input_type [Symbol] Type of input to use (:radio, :checkbox)
       # @param bg_color [String] Background color class
       # @param text_color [String] Text color class
       # @param border_color [String] Border color class
       # @param padding [String] Padding class
-      def initialize(join: false, arrow: false, plus: false, radio: false, bg_color: nil, text_color: nil,
-                     border_color: nil, padding: nil, **system_arguments)
-        super()
+      # @param name [String, nil] Name for radio/checkbox inputs (auto-generated if nil)
+      # @param system_arguments [Hash] Additional HTML attributes
+      def initialize(join: false, indicator: nil, input_type: :checkbox,
+                     bg_color: nil, text_color: nil, border_color: nil,
+                     padding: nil, name: nil, **system_arguments)
         @join = join
-        @arrow = arrow
-        @plus = plus
-        @radio = radio
-        @bg_color = bg_color
+        @indicator = indicator
+        @input_type = input_type
+        @bg_color = bg_color || 'bg-base-100'
         @text_color = text_color
-        @border_color = border_color
+        @border_color = border_color || 'border border-base-300'
         @padding = padding
-        @system_arguments = system_arguments
+        @input_name = name || "accordion-#{SecureRandom.uuid}"
+        super(**system_arguments)
       end
 
       def call
+        return safe_join(items || []) unless @join
+
         tag.div(**html_attributes) do
-          helpers.safe_join(items || [])
+          safe_join(items || [])
         end
       end
 
       private
 
       def html_attributes
-        @system_arguments.merge(
-          class: class_names(
-            { 'join join-vertical' => @join },
-            { 'flex flex-col gap-2' => !@join },
-            @system_arguments[:class]
-          )
+        system_arguments.merge(
+          class: computed_classes
         )
       end
 
-      # @private
-      class AccordionItemComponent < ViewComponent::Base
-        include ActionView::Helpers::TagHelper
-        include ActionView::Helpers::OutputSafetyHelper
-        attr_reader :parent
+      def computed_classes
+        modifiers = ['join join-vertical']
+        modifiers << @bg_color if @bg_color
 
-        def initialize(parent:, title:, name: nil, checked: false, arrow: false, plus: false, radio: false, join: false,
-                       bg_color: nil, text_color: nil, border_color: nil, padding: nil, **system_arguments)
-          super()
-          @parent = parent
-          @title = title
-          @name = name || SecureRandom.uuid
-          @checked = checked
-          @arrow = arrow
-          @plus = plus
-          @radio = radio
-          @join = join
-          @bg_color = bg_color || 'bg-base-100'
-          @text_color = text_color
-          @border_color = border_color || 'border border-base-300'
-          @padding = padding
-          @system_arguments = system_arguments
-        end
-
-        def call
-          tag.div(**html_attributes) do
-            helpers.safe_join([render_input, render_title, render_content].compact)
-          end
-        end
-
-        private
-
-        def html_attributes
-          @system_arguments.merge(
-            class: class_names(
-              'collapse',
-              { 'collapse-arrow' => @arrow && !@plus },
-              { 'collapse-plus' => @plus },
-              { 'join-item' => @join },
-              @bg_color,
-              @border_color,
-              @padding,
-              @system_arguments[:class]
-            )
-          )
-        end
-
-        def item_classes
-          class_names(
-            'collapse',
-            { 'collapse-arrow' => @arrow && !@plus },
-            { 'collapse-plus' => @plus },
-            { 'join-item' => @join },
-            @bg_color,
-            @border_color,
-            @padding
-          )
-        end
-
-        def render_input
-          return unless @radio || @plus
-
-          input_type = @radio ? 'radio' : 'checkbox'
-          tag.input(type: input_type, name: @name, checked: @checked, class: "collapse-#{input_type}")
-        end
-
-        def render_title
-          tag.div(class: class_names('collapse-title font-semibold', @text_color)) do
-            @title
-          end
-        end
-
-        def render_content
-          tag.div(class: class_names('collapse-content text-sm', @text_color)) { content }
-        end
+        class_names(modifiers, system_arguments[:class])
       end
     end
   end
