@@ -50,6 +50,12 @@ module DaisyComponents
       # Parse the HTML fragment
       document = Nokogiri::HTML5.fragment(html)
 
+      # Sort classes alphabetically for all elements with class attributes
+      document.css('[class]').each do |element|
+        classes = element['class'].split.sort.join(' ')
+        element['class'] = classes
+      end
+
       # Convert to HTML and remove all whitespace, including newlines
       document.to_html.gsub(/>\s+</, '><').gsub(/\s+/, ' ').delete("\n").squish
     end
