@@ -79,15 +79,6 @@ module DaisyComponents
 
       private
 
-      def build_argument(key, valid_values, attr_name)
-        return unless key
-
-        class_name = valid_values[key.to_sym]
-        return class_name if class_name
-
-        raise ArgumentError, "Invalid #{attr_name}: #{key}. Must be one of: #{valid_values.keys.join(', ')}"
-      end
-
       def validate_states!(states)
         raise ArgumentError, 'states cannot be nil' if states.nil?
         raise ArgumentError, 'states cannot be empty' if states.empty?
