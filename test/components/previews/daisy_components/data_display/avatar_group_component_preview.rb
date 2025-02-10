@@ -7,115 +7,58 @@ module DaisyComponents
     class AvatarGroupComponentPreview < ViewComponent::Preview
       # @!group Playground
 
-      # Default
+      # Avatar Group Playground
       # ---------------
-      # Interactive avatar group component with customizable styling
+      # Interactive avatar group component with customizable styling. Try different combinations
+      # of sizes, shapes, and spacing to see how the avatars group together.
       #
-      # @param size select { choices: [8, 12, 16, 20, 24, 32] } "Size of avatars"
-      # @param shape select { choices: [circle, squircle, hexagon, triangle] } "Shape of avatars"
-      # @param spacing number { default: "1.5" } "Spacing between avatars in rem"
-      # @param max_display number "Maximum number of avatars to display"
-      def playground(size: nil, shape: nil, spacing: '1.5', max_display: nil)
+      # @param size select { choices: [w8, w12, w16, w20, w24, w32], default: w24 } "Size of avatars"
+      # @param shape select { choices: [circle, squircle, hexagon, triangle], default: circle } "Shape of avatars"
+      # @param spacing number { min: 0, max: 4, step: 0.5, default: 1.5 } "Spacing between avatars in rem"
+      # @param max_display number { min: 1, max: 10, default: nil } "Maximum number of avatars to display"
+      def playground(size: :w24, shape: :circle, spacing: 1.5, max_display: nil)
         render(DaisyComponents::DataDisplay::AvatarGroupComponent.new(
                  size: size,
                  shape: shape,
                  spacing: spacing.to_f,
                  max_display: max_display
                )) do |group|
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 4')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 5')
-        end
-      end
-
-      # @!endgroup
-
-      # @!group Template Examples
-
-      # Avatar Shapes
-      # ---------------
-      # Different shape variations for avatar groups
-      #
-      # @label Shapes
-      def shapes
-        render_with_template
-      end
-
-      # @!endgroup
-
-      # @!group Examples
-
-      # Basic Usage
-      # ---------------
-      # Simple avatar group with default styling
-      def default
-        render(AvatarGroupComponent.new) do |group|
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3')
-        end
-      end
-
-      # With Size
-      # ---------------
-      # Avatar group with custom size
-      def with_size
-        render(AvatarGroupComponent.new(size: 32)) do |group|
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3')
-        end
-      end
-
-      # With Shape
-      # ---------------
-      # Avatar group with custom shape
-      def with_shape
-        render(AvatarGroupComponent.new(shape: :squircle)) do |group|
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3')
-        end
-      end
-
-      # With Spacing
-      # ---------------
-      # Avatar group with custom spacing
-      def with_spacing
-        render(AvatarGroupComponent.new(spacing: 3)) do |group|
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3')
-        end
-      end
-
-      # With Counter
-      # ---------------
-      # Avatar group with max display and counter
-      def with_counter
-        render(AvatarGroupComponent.new(max_display: 2)) do |group|
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 1')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 2')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 3')
-          group.with_avatar(img_src: 'https://placehold.co/100', img_alt: 'User 4')
-        end
-      end
-
-      # With Placeholders
-      # ---------------
-      # Avatar group with text and custom placeholders
-      def with_placeholders
-        render(AvatarGroupComponent.new) do |group|
-          group.with_avatar(placeholder_text: 'JD')
-          group.with_avatar(placeholder_text: 'AB')
-          group.with_avatar do |avatar|
-            avatar.with_placeholder { 'CD' }
+          5.times do |i|
+            group.with_avatar(
+              img_src: "https://picsum.photos/seed/user#{i}/200/200",
+              img_alt: "User #{i + 1}"
+            )
           end
         end
       end
 
+      # @!endgroup
+
+      def avatar_group_with_counter
+        render(DaisyComponents::DataDisplay::AvatarGroupComponent.new(
+                 size: :w24,
+                 shape: :circle,
+                 spacing: 1.5,
+                 max_display: 2
+               )) do |group|
+          group.with_avatar(img_src: 'https://picsum.photos/200/200')
+          group.with_avatar(img_src: 'https://picsum.photos/200/200')
+          group.with_avatar(img_src: 'https://picsum.photos/200/200')
+        end
+      end
+
+      def avatar_group
+        render(DaisyComponents::DataDisplay::AvatarGroupComponent.new(
+                 size: :w12,
+                 shape: :circle,
+                 spacing: 1.5
+               )) do |group|
+          group.with_avatar(placeholder_text: 'A')
+          group.with_avatar(placeholder_text: 'B')
+          group.with_avatar(placeholder_text: 'C')
+          group.with_avatar(placeholder_text: 'D')
+        end
+      end
       # @!endgroup
     end
   end
