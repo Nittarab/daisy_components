@@ -54,7 +54,7 @@ For every component create:
  - TEST: in the test we test the component behavior and the preview (just the fact that they render). Don't duplicate tests to much, but give precedence to the preview but be sure to test the behavior)
  - documentation
 
-For images, use placehold.co to generate placeholder images.
+For images, use picsum.photos/ to generate placeholder images.
 
 When you want to check the coverage, run:
 COVERAGE=true bin/rails test
