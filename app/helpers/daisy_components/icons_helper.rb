@@ -11,8 +11,17 @@ module DaisyComponents
       end
     end
 
+    def error_icon(size_class)
+      tag.svg(xmlns: 'http://www.w3.org/2000/svg', class: size_class, fill: 'currentColor', viewBox: '0 0 24 24') do
+        tag.g(fill: 'currentColor') do
+          tag.rect(x: '1.972', y: '11', width: '20.056', height: '2', transform: 'translate(-4.971 12) rotate(-45)', fill: 'currentColor', stroke_width: 0)
+          tag.path(d: 'm12,23c-6.065,0-11-4.935-11-11S5.935,1,12,1s11,4.935,11,11-4.935,11-11,11Zm0-20C7.038,3,3,7.037,3,12s4.038,9,9,9,9-4.037,9-9S16.962,3,12,3Z', stroke_width: 0, fill: 'currentColor')
+        end
+      end
+    end
+
     def close_icon(size_class)
-      tag.svg(xmlns: 'http://www.w3.org/2000/svg', class: size_class, fill: 'none',
+      tag.svg(xmlns: 'http://www.w3.org/2000/svg', class: size_class, fill: 'currentColor',
               viewBox: '0 0 24 24', stroke: 'currentColor') do
         tag.path(stroke_linecap: 'round', stroke_linejoin: 'round', stroke_width: '2',
                  d: 'M6 18L18 6M6 6l12 12')
@@ -76,7 +85,7 @@ module DaisyComponents
     end
 
     def check_icon(size_class)
-      tag.svg(xmlns: 'http://www.w3.org/2000/svg', class: size_class, fill: 'none',
+      tag.svg(xmlns: 'http://www.w3.org/2000/svg', class: size_class, fill: 'currentColor',
               viewBox: '0 0 24 24', stroke: 'currentColor') do
         tag.path(stroke_linecap: 'round', stroke_linejoin: 'round', stroke_width: '2',
                  d: 'M5 13l4 4L19 7')

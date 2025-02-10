@@ -13,92 +13,62 @@ module DaisyComponents
       # Interactive badge component with customizable styling
       #
       # @param text text "Text content inside the badge"
-      # @param variant select { choices: [neutral, primary, secondary, accent, ghost, info, success, warning, error] }
-      #  "Visual style"
-      # @param size select { choices: [xs, sm, md, lg] } "Badge size"
-      # @param outline toggle "Show outlined style"
+      # @param color select {choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost]}
+      # @param size select { choices: [xs, sm, md, lg, xl] }
+      # @param variant select { choices: [outline, soft, dash, ghost] }
+      # @param has_icon toggle "Add icon"
       # @param classes text "Additional CSS classes"
       def playground(
         text: 'Badge',
-        variant: nil,
+        color: nil,
         size: nil,
-        outline: false,
+        variant: nil,
+        has_icon: false,
         classes: ''
       )
-        render(BadgeComponent.new(text, variant: variant, size: size, outline: outline, class: classes))
+        render(BadgeComponent.new(
+                 text,
+                 color: color,
+                 size: size,
+                 variant: variant,
+                 icon: has_icon ? check_icon('h-4 w-4') : nil,
+                 class: classes
+               ))
       end
+
       # @!endgroup
-
-      # @!group Simple Examples
-      # Basic Badge
-      # ---------------
-      # Simple badge with default styling
       #
-      # @label Basic
-      def default
-        render(BadgeComponent.new('Default Badge'))
+      def badge
+        render(BadgeComponent.new('Badge', tag_type: :span))
       end
 
-      # With Icon
-      # ---------------
-      # Badge with an icon
-      #
-      # @label Icon
-      def with_icon
-        render(BadgeComponent.new('Icon Badge', icon: chevron_down_icon('h-6 w-6')))
+      def badge_ghost
+        render(BadgeComponent.new('ghost', variant: :ghost))
       end
 
-      # Block Content
-      # ---------------
-      # Badge with custom block content
-      #
-      # @label Block
-      def with_block
-        render(BadgeComponent.new('Block Badge'))
-      end
-      # @!endgroup
-
-      # @!group Complex Examples
-      # In Button
-      # ---------------
-      # Badge used within a button
-      #
-      # @label In Button
-      def in_button
+      def badge_sizes
         render_with_template
       end
-      # @!endgroup
 
-      # @!group Variants Gallery
-      # Badge Colors
-      # ---------------
-      # All available badge colors
-      #
-      # @label Colors
-      def colors
-        render_with_template(locals: { variants: BadgeComponent::VARIANTS })
+      def badge_with_colors
+        render_with_template
       end
 
-      # Outline Style
-      # ---------------
-      # Badges with outline style
-      #
-      # @label Outline
-      def outline
-        render_with_template(locals: { variants: BadgeComponent::VARIANTS })
+      def badge_with_icon
+        render_with_template(locals: { helper: self })
       end
-      # @!endgroup
 
-      # @!group Sizes Gallery
-      # Badge Sizes
-      # ---------------
-      # All available badge sizes
-      #
-      # @label Sizes
-      def sizes
-        render_with_template(locals: { sizes: BadgeComponent::SIZES })
+      def badge_with_outline_style
+        render_with_template
       end
-      # @!endgroup
+
+      def badge_with_soft_style
+        render_with_template
+      end
+
+      def empty_badge
+        render_with_template
+      end
     end
   end
 end
