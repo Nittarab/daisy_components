@@ -1,0 +1,13 @@
+A normal text and a helper dropdown
+
+<%= render(DaisyComponents::Actions::DropdownComponent.new(align: 'end')) do |d| %>
+  <%= d.with_trigger(icon_start: helper.info_icon('h-4 w-4 stroke-current'), shape: :circle, variant: :ghost, size: :xs, class: 'text-info') %>
+  <%= d.with_custom_content do %>
+    <div class="card card-sm dropdown-content bg-base-100 rounded-box z-1 w-64 shadow-sm" tabindex="0">
+      <div class="card-body" tabindex="0">
+        <h2 class="card-title">You needed more info?</h2>
+        <p>Here is a description!</p>
+      </div>
+    </div>
+  <% end %>
+<% end %>

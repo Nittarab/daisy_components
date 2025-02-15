@@ -13,10 +13,15 @@ Style/Documentation:
 Metrics/ParameterLists:
   Max: 15
 
+    
+Metrics/MethodLength:
+  Max: 20
+
 Metrics/ClassLength:
+  Max: 150
   Exclude:
     - test/**/*
 
-Metrics/MethodLength:
-  Max: 20
-  
+Layout/LineLength:
+  Exclude:
+    - test/components/previews/**/*

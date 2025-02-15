@@ -6,7 +6,6 @@ module DaisyComponents
   module Actions
     class ButtonComponentPreview < ViewComponent::Preview
       include DaisyComponents::IconsHelper
-
       # @!group Playground
 
       # Default
@@ -14,10 +13,10 @@ module DaisyComponents
       # Interactive button component with customizable styling
       #
       # @param text text "Text content inside the button"
-      # @param variant select {
-      #   choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost, link]
-      # }
-      # @param size select { choices: [xs, sm, md, lg] }
+      # @param color select {choices: [neutral, primary, secondary, accent, info, success, warning, error, ghost, link]}
+      # @param size select { choices: [xs, sm, md, lg, xl] }
+      # @param variant select { choices: [outline, soft, dash] }
+      # @param shape select { choices: [wide, block, circle, square] }
       # @param disabled toggle "Disable the button"
       # @param loading toggle "Show loading state"
       # @param active toggle "Show active state"
@@ -26,8 +25,10 @@ module DaisyComponents
       # @param classes text "Additional CSS classes"
       def playground(
         text: 'Button',
-        variant: nil,
+        color: nil,
         size: nil,
+        variant: nil,
+        shape: nil,
         disabled: false,
         loading: false,
         active: false,
@@ -37,8 +38,10 @@ module DaisyComponents
       )
         render(ButtonComponent.new(
                  text:,
-                 variant:,
+                 color:,
                  size:,
+                 variant:,
+                 shape:,
                  disabled:,
                  loading:,
                  active:,
@@ -50,273 +53,123 @@ module DaisyComponents
 
       # @!endgroup
 
-      # @!group Variants
-
-      # Primary Button
+      # Active Buttons
       # ---------------
-      # Main call-to-action button style
-      def primary
-        render(ButtonComponent.new(
-                 text: 'Primary Action',
-                 variant: 'primary'
-               ))
+      # Buttons with active state
+      def active_buttons
+        render_with_template
       end
 
-      # Secondary Button
+      # Basic Button
       # ---------------
-      # Alternative action button style
-      def secondary
-        render(ButtonComponent.new(
-                 text: 'Secondary Action',
-                 variant: 'secondary'
-               ))
-      end
-
-      # Ghost Button
-      # ---------------
-      # Subtle button style for less important actions
-      def ghost
-        render(ButtonComponent.new(
-                 text: 'Ghost Button',
-                 variant: 'ghost'
-               ))
-      end
-
-      # All Variants
-      # ---------------
-      # All available button variants
-      def variants
-        render_with_template(locals: {
-                               buttons: ButtonComponent::VARIANTS.map do |variant|
-                                 { text: variant.titleize, variant: variant }
-                               end
-                             })
-      end
-
-      # All Sizes
-      # ---------------
-      # All available button sizes
-      def sizes
-        render_with_template(locals: {
-                               buttons: ButtonComponent::SIZES.map do |size|
-                                 { text: size.upcase, size: size }
-                               end
-                             })
-      end
-
-      # @!endgroup
-
-      # @!group States
-
-      # Loading State
-      # ---------------
-      # Button with loading animation
-      def loading
-        render_with_template(locals: {
-                               buttons: [
-                                 { text: 'Processing...', loading: true },
-                                 { text: 'Loading Primary', variant: 'primary', loading: true },
-                                 { text: 'Loading Secondary', variant: 'secondary', loading: true }
-                               ]
-                             })
-      end
-
-      # Disabled State
-      # ---------------
-      # Button in disabled state
-      def disabled
-        render_with_template(locals: {
-                               buttons: [
-                                 { text: "Can't click me", disabled: true },
-                                 { text: 'Disabled Primary', variant: 'primary', disabled: true },
-                                 { text: 'Disabled Secondary', variant: 'secondary', disabled: true }
-                               ]
-                             })
-      end
-
-      # Active State
-      # ---------------
-      # Button in active state
-      def active
-        render_with_template(locals: {
-                               buttons: [
-                                 { text: 'Active Button', active: true },
-                                 { text: 'Active Primary', variant: 'primary', active: true },
-                                 { text: 'Active Secondary', variant: 'secondary', active: true }
-                               ]
-                             })
-      end
-
-      # @!endgroup
-
-      # @!group Links
-
-      # Link Button
-      # ---------------
-      # Button that acts as a link
-      def link_button
-        render(ButtonComponent.new(
-                 text: 'Visit Google',
-                 href: 'https://google.com',
-                 variant: 'primary',
-                 target: '_blank'
-               ))
-      end
-
-      # External Link
-      # ---------------
-      # Link button that opens in new tab
-      def external_link
-        render(ButtonComponent.new(
-                 text: 'External Link',
-                 href: 'https://example.com',
-                 target: '_blank',
-                 variant: 'primary',
-                 icon_end: close_icon('h-5 w-5')
-               ))
-      end
-
-      # Turbo Method
-      # ---------------
-      # Link button with Turbo method
-      def turbo_method
-        render(ButtonComponent.new(
-                 text: 'Delete Item',
-                 href: '/items/1',
-                 method: 'delete',
-                 variant: 'error'
-               ))
-      end
-
-      # @!endgroup
-
-      # @!group Forms
-
-      # Submit Button
-      # ---------------
-      # Form submit button
-      def submit_button
-        render(ButtonComponent.new(
-                 text: 'Submit Form',
-                 type: 'submit',
-                 variant: 'primary',
-                 icon_end: chevron_down_icon('h-5 w-5')
-               ))
-      end
-
-      # Reset Button
-      # ---------------
-      # Form reset button
-      def reset_button
-        render(ButtonComponent.new(
-                 text: 'Reset Form',
-                 type: 'reset',
-                 variant: 'ghost',
-                 icon_start: close_icon('h-5 w-5')
-               ))
-      end
-
-      # @!endgroup
-
-      # @!group Content
-
-      # Basic Text
-      # ---------------
-      # Button with simple text content
-      def basic_text
-        render(ButtonComponent.new(text: 'Click Me'))
-      end
-
-      # Block Content
-      # ---------------
-      # Button with HTML content
-      def block_content
-        render(ButtonComponent.new) { 'Complex <strong>content</strong>'.html_safe }
+      # Simple button with default styling
+      def button
+        render_with_template
       end
 
       # Block Button
       # ---------------
-      # Full-width button
-      def block
-        render(ButtonComponent.new(
-                 text: 'Full width button',
-                 class: 'btn-block'
-               ))
+      # Button that spans full width
+      def button_block
+        render_with_template
       end
 
-      # Component Content
+      # Button Sizes
       # ---------------
-      # Button with nested component
-      def component_content
-        render(ButtonComponent.new) do
-          render(DaisyComponents::DataDisplay::BadgeComponent.new('New', variant: 'secondary'))
-        end
+      # Different button size variations
+      def button_sizes
+        render_with_template
       end
 
-      # @!endgroup
-
-      # @!group Icons
-
-      # With Icon
+      # Button with Icon
       # ---------------
-      # Button with icon and text
-      def with_icon
-        render(ButtonComponent.new(
-                 text: 'Like',
-                 icon_start: warning_icon('h-5 w-5')
-               ))
+      # Button with icon examples
+      def button_with_icon
+        render_with_template(locals: { helper: self })
       end
 
-      # Icon Start
+      # Loading Buttons
       # ---------------
-      # Button with icon before text
-      #
-      # @label Start Icon
-      def icon_start
-        render(ButtonComponent.new(
-                 text: 'Submit',
-                 icon_start: warning_icon('h-5 w-5'),
-                 variant: 'primary'
-               ))
+      # Buttons with loading stateb
+      def button_with_loading_spinner
+        render_with_template
       end
 
-      # Icon End
+      # Button Colors
       # ---------------
-      # Button with icon after text
-      #
-      # @label End Icon
-      def icon_end
-        render(ButtonComponent.new(
-                 text: 'Next',
-                 icon_end: chevron_down_icon('h-5 w-5'),
-                 variant: 'primary'
-               ))
+      # Different button color variations
+      def buttons_colors
+        render_with_template
       end
 
-      # Both Icons
+      # Ghost and Link Buttons
       # ---------------
-      # Button with icons on both sides
-      #
-      # @label Both Icons
-      def both_icons
-        render(ButtonComponent.new(
-                 text: 'Sync',
-                 icon_start: warning_icon('h-5 w-5'),
-                 icon_end: chevron_down_icon('h-5 w-5'),
-                 variant: 'primary'
-               ))
+      # Ghost and link style buttons
+      def buttons_ghost_and_button_link
+        render_with_template
       end
 
-      # Icon Only
+      # Buttons with HTML Content
       # ---------------
-      # Square button with only an icon
-      #
-      # @label Icon Only
-      def icon_only
-        render(ButtonComponent.new(
-                 icon_start: warning_icon('h-6 w-6'),
-                 class: 'btn-square'
-               ))
+      # Buttons with custom HTML content
+      def buttons_with_any_html_tags
+        render_with_template
+      end
+
+      # Circle and Square Buttons
+      # ---------------
+      # Circle and square shaped buttons
+      def circle_button_and_square_button
+        render_with_template(locals: { helper: self })
+      end
+
+      # Dash Buttons
+      # ---------------
+      # Buttons with dashed border style
+      def dash_buttons
+        render_with_template
+      end
+
+      # Disabled Buttons
+      # ---------------
+      # Buttons in disabled state
+      def disabled_buttons
+        render_with_template
+      end
+
+      # Login Buttons
+      # ---------------
+      # Social login button examples
+      def login_buttons
+        render_with_template(locals: { helper: self })
+      end
+
+      # Outline Buttons
+      # ---------------
+      # Buttons with outline style
+      def outline_buttons
+        render_with_template
+      end
+
+      # Responsive Button
+      # ---------------
+      # Button that adapts to screen size
+      def responsive_button
+        render_with_template
+      end
+
+      # Soft Buttons
+      # ---------------
+      # Buttons with soft color style
+      def soft_buttons
+        render_with_template
+      end
+
+      # Wide Button
+      # ---------------
+      # Extra wide button
+      def wide_button
+        render_with_template
       end
 
       # @!endgroup

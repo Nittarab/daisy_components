@@ -4,6 +4,7 @@
 ENV['RAILS_ENV'] = 'test'
 
 require_relative '../test/dummy/config/environment'
+require_relative 'support/daisy_components/preview_test_concern'
 require 'rails/test_help'
 require 'capybara'
 require 'view_component/test_helpers'

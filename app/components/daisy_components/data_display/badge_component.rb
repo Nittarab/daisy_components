@@ -2,22 +2,98 @@
 
 module DaisyComponents
   module DataDisplay
+    # Badge component implementing DaisyUI's badge styles
+    #
+    # @example Basic usage
+    #   <%= render(BadgeComponent.new(text: "Badge")) %>
+    #
+    # @example Primary variant
+    #   <%= render(BadgeComponent.new(text: "Primary", color: :primary)) %>
+    #
+    # @example Outline style
+    #   <%= render(BadgeComponent.new(text: "Outline", variant: :outline)) %>
+    #
+    # @example Small size with icon
+    #   <%= render(BadgeComponent.new(
+    #     text: "Icon",
+    #     size: :sm,
+    #     icon: helpers.check_icon
+    #   )) %>
+    #
+    # @example Soft style with color
+    #   <%= render(BadgeComponent.new(
+    #     text: "Soft",
+    #     variant: :soft,
+    #     color: :primary
+    #   )) %>
+    #
+    # @example With block content
+    #   <%= render(BadgeComponent.new) do %>
+    #     Complex <strong>content</strong>
+    #   <% end %>
+    #
+    # @example With custom tag type
+    #   <%= render(BadgeComponent.new(text: "Badge", tag_type: :span)) %>
     class BadgeComponent < DaisyComponents::BaseComponent
-      VARIANTS = %w[neutral primary secondary accent ghost info success warning error].freeze
-      SIZES = %w[lg md sm xs].freeze
+      # Available badge colors from DaisyUI
+      COLORS = {
+        primary: 'badge-primary',
+        secondary: 'badge-secondary',
+        accent: 'badge-accent',
+        neutral: 'badge-neutral',
+        ghost: 'badge-ghost',
+        info: 'badge-info',
+        success: 'badge-success',
+        warning: 'badge-warning',
+        error: 'badge-error'
+      }.freeze
 
-      def initialize(text = nil, variant: nil, size: nil, outline: false, icon: nil, **system_arguments)
+      # Available badge sizes from DaisyUI
+      SIZES = {
+        xl: 'badge-xl',
+        lg: 'badge-lg',
+        md: 'badge-md',
+        sm: 'badge-sm',
+        xs: 'badge-xs'
+      }.freeze
+
+      # Available badge variants from DaisyUI
+      VARIANTS = {
+        outline: 'badge-outline',
+        soft: 'badge-soft',
+        dash: 'badge-dash',
+        ghost: 'badge-ghost'
+      }.freeze
+
+      # @param text [String] The text content to display inside the badge
+      # @param color [String] Visual style of the badge
+      #    (neutral/primary/secondary/accent/info/success/warning/error/ghost)
+      # @param size [String] Size of the badge (xl/lg/md/sm/xs)
+      # @param variant [String] Variant of the badge (outline/soft/dash/ghost)
+      # @param icon [String] SVG icon to display before the text
+      # @param tag_type [Symbol] HTML tag to use for the badge (default: :div)
+      # @param system_arguments [Hash] Additional HTML attributes to be applied to the badge
+      def initialize(
+        text = nil,
+        color: nil,
+        size: nil,
+        variant: nil,
+        icon: nil,
+        tag_type: :div,
+        **system_arguments
+      )
         @text = text
-        @variant = variant if VARIANTS.include?(variant.to_s)
-        @size = size if SIZES.include?(size.to_s)
-        @outline = outline
+        @color = build_argument(color, COLORS, 'color')
+        @size = build_argument(size, SIZES, 'size')
+        @variant = build_argument(variant, VARIANTS, 'variant')
         @icon = icon
+        @tag_type = tag_type
 
         super(**system_arguments)
       end
 
       def call
-        tag.div(**html_attributes) do
+        tag.public_send(@tag_type, **html_attributes) do
           safe_join([render_icon, content || @text].compact)
         end
       end
@@ -33,21 +109,18 @@ module DaisyComponents
                                 attributes: %w[class viewBox fill stroke d])
       end
 
-      def default_classes
-        class_names('badge', system_arguments[:class], variant_classes)
-      end
+      def computed_classes
+        modifiers = ['badge']
+        modifiers << @variant
+        modifiers << @color
+        modifiers << @size
 
-      def variant_classes
-        {
-          "badge-#{@variant}": @variant,
-          "badge-#{@size}": @size,
-          'badge-outline': @outline
-        }
+        class_names(modifiers, system_arguments[:class])
       end
 
       def html_attributes
         attrs = system_arguments.except(:class)
-        attrs[:class] = default_classes
+        attrs[:class] = computed_classes
         attrs
       end
     end
