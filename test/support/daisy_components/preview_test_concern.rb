@@ -47,27 +47,34 @@ module DaisyComponents
     end
 
     def normalize_html(html)
-      # Parse the HTML fragment
       document = Nokogiri::HTML5.fragment(html)
+      normalize_classes(document)
+      normalize_attributes(document)
+      normalize_whitespace(document.to_html)
+    end
 
-      # Sort classes alphabetically for all elements with class attributes
+    def normalize_classes(document)
       document.css('[class]').each do |element|
-        classes = element['class'].split.sort.join(' ')
-        element['class'] = classes
+        element['class'] = element['class'].split.sort.join(' ')
       end
+    end
 
-      # Reorder all attributes alphabetically
+    def normalize_attributes(document)
       document.css('*').each do |element|
-        attributes = element.attributes.keys.sort
-        attributes.each do |attr|
-          value = element[attr]
-          element.remove_attribute(attr)
-          element.set_attribute(attr, value)
-        end
+        reorder_attributes(element)
       end
+    end
 
-      # Convert to HTML and remove all whitespace, including newlines
-      document.to_html.gsub(/>\s+</, '><').gsub(/\s+/, ' ').delete("\n").squish
+    def reorder_attributes(element)
+      element.attributes.keys.sort.each do |attr|
+        value = element[attr]
+        element.remove_attribute(attr)
+        element.set_attribute(attr, value)
+      end
+    end
+
+    def normalize_whitespace(html)
+      html.gsub(/>\s+</, '><').gsub(/\s+/, ' ').delete("\n").squish
     end
   end
 end
