@@ -69,37 +69,83 @@ module DaisyComponents
       # @label Chat Bubble with Colors
       # @description Chat bubbles with different color variants
       def chat_bubble_with_colors
-        render_with_template
+        messages = [
+          { text: 'What kind of nonsense is this', user_id: 2, color: :primary },
+          { text: 'Put me on the Council and not make me a Master!??', user_id: 2, color: :secondary },
+          { text: "That's never been done in the history of the Jedi.", user_id: 2, color: :accent },
+          { text: "It's insulting!", user_id: 2, color: :neutral },
+          { text: 'Calm down, Anakin.', user_id: 1, color: :info },
+          { text: 'You have been given a great honor.', user_id: 1, color: :success },
+          { text: 'To be on the Council at your age.', user_id: 1, color: :warning },
+          { text: "It's never happened before.", user_id: 1, color: :error }
+        ]
+
+        render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Chat with Header and Footer
       # @description Chat bubbles with header and footer information
       def chat_with_header_and_footer
-        render_with_template
+        messages = [
+          { text: 'You were the Chosen One!', user_id: 2, header: { text: 'Obi-Wan Kenobi', time: '2 hours ago' }, footer: { text: 'Seen' } },
+          { text: 'I loved you.', user_id: 2, header: { text: 'Obi-Wan Kenobi', time: '2 hour ago' }, footer: { text: 'Delivered' } }
+        ]
+
+        render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Chat with Image
       # @description Chat bubbles with avatar images
       def chat_with_image
-        render_with_template
+        avatar = {
+          img_src: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
+          img_alt: 'Tailwind CSS chat bubble component'
+        }
+        messages = [
+          { text: 'It was said that you would, destroy the Sith, not join them.', user_id: 2, avatar: avatar },
+          { text: 'It was you who would bring balance to the Force', user_id: 2, avatar: avatar },
+          { text: 'Not leave it in Darkness', user_id: 2, avatar: avatar }
+        ]
+
+        render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Chat with Image, Header and Footer
       # @description Chat bubbles with avatar, header and footer
       def chat_with_image_header_and_footer
-        render_with_template
+        avatar = {
+          img_src: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
+          img_alt: 'Tailwind CSS chat bubble component'
+        }
+        messages = [
+          { text: 'You were the Chosen One!', position: :start, avatar: avatar, header: { text: 'Obi-Wan Kenobi', time: '12:45' }, footer: { text: 'Delivered' } },
+          { text: 'I hate you!', position: :end, avatar: avatar, header: { text: 'Anakin', time: '12:46' }, footer: { text: 'Seen at 12:46' } }
+        ]
+
+        render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Basic Chat Start and End
       # @description Chat bubbles with different positions
       def chat_start_and_chat_end
-        render_with_template
+        messages = [
+          { text: "It's over Anakin,\nI have the high ground.", user_id: 2 },
+          { text: 'You underestimate my power!', user_id: 1 }
+        ]
+
+        render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Basic Chat
       # @description Simple chat with start and end positions
       def basic_chat
-        render_with_template
+        messages = [
+          { text: 'Hi! How can I help you today?', user_id: 2 },
+          { text: "I'm looking for pricing information.", user_id: 1 },
+          { text: "I'll be happy to help you with pricing details.", user_id: 2 }
+        ]
+
+        render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Rich Chat
