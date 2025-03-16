@@ -22,45 +22,11 @@ module DaisyComponents
         with_footer: false,
         use_auto_positioning: false
       )
-        avatar_options = with_avatar ? { img_src: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp', img_alt: 'User avatar' } : nil
-        header_options = with_header ? { text: 'User', time: '12:45' } : nil
-        footer_options = with_footer ? { text: 'Delivered', time: '12:46' } : nil
-
-        messages = []
-
         if use_auto_positioning
-          # Example with automatic positioning
-          messages = [
-            {
-              text: 'Hello! This is your message.',
-              user_id: 1,
-              color: color,
-              avatar: avatar_options,
-              header: header_options,
-              footer: footer_options
-            },
-            {
-              text: 'Hi there! This is a message from someone else.',
-              user_id: 2,
-              color: color,
-              avatar: avatar_options,
-              header: header_options,
-              footer: footer_options
-            }
-          ]
+          messages = create_auto_positioned_messages(color, with_avatar, with_header, with_footer)
           render(DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1))
         else
-          # Example with manual positioning
-          messages = [
-            {
-              text: 'Hello! This is a sample message.',
-              position: position == :auto ? :start : position,
-              color: color,
-              avatar: avatar_options,
-              header: header_options,
-              footer: footer_options
-            }
-          ]
+          messages = create_manually_positioned_messages(position, color, with_avatar, with_header, with_footer)
           render(DaisyComponents::DataDisplay::ChatComponent.new(messages: messages))
         end
       end
@@ -98,7 +64,7 @@ module DaisyComponents
       # @description Chat bubbles with avatar images
       def chat_with_image
         avatar = {
-          img_src: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
+          img_src: 'https://picsum.photos/seed/avatar/100/100',
           img_alt: 'Tailwind CSS chat bubble component'
         }
         messages = [
@@ -114,7 +80,7 @@ module DaisyComponents
       # @description Chat bubbles with avatar, header and footer
       def chat_with_image_header_and_footer
         avatar = {
-          img_src: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
+          img_src: 'https://picsum.photos/seed/avatar/100/100',
           img_alt: 'Tailwind CSS chat bubble component'
         }
         messages = [
@@ -152,6 +118,48 @@ module DaisyComponents
       # @description Chat with all features combined
       def rich_chat
         render_with_template
+      end
+
+      private
+
+      def create_auto_positioned_messages(color, with_avatar, with_header, with_footer)
+        avatar_opts = build_avatar_options(with_avatar)
+        header_opts = build_header_options(with_header)
+        footer_opts = build_footer_options(with_footer)
+
+        [
+          { text: 'Hello! This is your message.', user_id: 1, color: color, avatar: avatar_opts, header: header_opts, footer: footer_opts },
+          { text: 'Hi there! This is a message from someone else.', user_id: 2, color: color, avatar: avatar_opts, header: header_opts, footer: footer_opts }
+        ]
+      end
+
+      def create_manually_positioned_messages(position, color, with_avatar, with_header, with_footer)
+        avatar_opts = build_avatar_options(with_avatar)
+        header_opts = build_header_options(with_header)
+        footer_opts = build_footer_options(with_footer)
+
+        [
+          {
+            text: 'Hello! This is a sample message.',
+            position: position == :auto ? :start : position,
+            color: color,
+            avatar: avatar_opts,
+            header: header_opts,
+            footer: footer_opts
+          }
+        ]
+      end
+
+      def build_avatar_options(with_avatar)
+        with_avatar ? { img_src: 'https://picsum.photos/seed/avatar/100/100', img_alt: 'User avatar' } : nil
+      end
+
+      def build_header_options(with_header)
+        with_header ? { text: 'User', time: '12:45' } : nil
+      end
+
+      def build_footer_options(with_footer)
+        with_footer ? { text: 'Delivered', time: '12:46' } : nil
       end
     end
   end

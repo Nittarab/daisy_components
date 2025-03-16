@@ -6,8 +6,8 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'puma'
-gem 'view_component', '3.21.0'
 gem 'redcarpet', '3.6.1'
+gem 'view_component', '3.21.0'
 
 group :development do
   gem 'lookbook', '2.3.4'

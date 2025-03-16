@@ -63,11 +63,6 @@ module DaisyComponents
         )
       }
 
-      # Text content for the bubble
-      attr_accessor :content_text
-
-      attr_writer :position, :color
-
       # @param text [String] The text content to display inside the chat bubble
       # @param position [Symbol] Position of the chat bubble (:start, :end)
       # @param color [Symbol] Color variant of the chat bubble
@@ -99,14 +94,6 @@ module DaisyComponents
         with_footer(**@footer_options) if @footer_options&.any?
       end
 
-      def position=(pos)
-        @position = build_argument(pos, POSITIONS, 'position')
-      end
-
-      def color=(col)
-        @color = build_argument(col, COLORS, 'color') if col
-      end
-
       # Set the text content
       def with_text(content = nil, &)
         @content_text = if block_given?
@@ -121,20 +108,22 @@ module DaisyComponents
           components = []
           components << avatar if avatar?
           components << header if header?
-
-          # Add chat bubble with text content if present
-          if @content_text.present?
-            components << tag.div(class: bubble_classes) do
-              markdown_renderer.render(@content_text).html_safe
-            end
-          end
-
+          components << render_bubble if @content_text.present?
           components << footer if footer?
           safe_join(components)
         end
       end
 
       private
+
+      def render_bubble
+        tag.div(class: bubble_classes) do
+          helpers.sanitize(markdown_renderer.render(@content_text),
+                           tags: %w[p br a ul ol li strong em del ins code pre blockquote h1 h2 h3 h4 h5 h6 img
+                                    span div],
+                           attributes: %w[href target rel src alt class])
+        end
+      end
 
       def markdown_renderer
         @markdown_renderer ||= Redcarpet::Markdown.new(

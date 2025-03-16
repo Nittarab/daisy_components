@@ -1,6 +1,7 @@
+#!/usr/bin/env ruby
+
 # frozen_string_literal: true
 
-# !/usr/bin/env ruby
 require 'nokogiri'
 require 'terminal-table'
 

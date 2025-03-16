@@ -22,7 +22,11 @@ module DaisyComponents
         exclude: ['playground'] # Optional: exclude specific examples
       )
 
+
       # Additional component-specific tests...
+      def test_complex_method
+      #...
+      end
     end
   end
 end
@@ -39,8 +43,7 @@ end
 ## Test Organization
 - Test files: `test/components/daisy_components/<module>/<component_name>_test.rb`
 - Fixtures: `test/fixtures/components/<component_name>/<example_name>.html`
-- One test file per component
-- One fixture file per preview method
+- NO: test files inside test/components/previews
 
 ## Best Practices
 1. Always include `PreviewTestConcern`

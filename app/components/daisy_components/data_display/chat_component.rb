@@ -50,25 +50,7 @@ module DaisyComponents
         super(**system_arguments)
 
         # Pre-populate bubbles from messages array if provided
-        @messages.each do |message|
-          # Determine position based on user_id if position is not explicitly specified
-          position = message[:position]
-          if position.nil? && !@current_user_id.nil? && message[:user_id].present?
-            position = message[:user_id] == @current_user_id ? :end : :start
-          elsif position.nil?
-            position = :start # Default position if no positioning info is available
-          end
-
-          # Create a chat bubble for this message
-          bubble = with_bubble(
-            message[:text],
-            position: position,
-            color: message[:color],
-            avatar: message[:avatar],
-            header: message[:header],
-            footer: message[:footer]
-          )
-        end
+        @messages.each { |message| add_bubble(message) }
       end
 
       def call
@@ -80,6 +62,29 @@ module DaisyComponents
       end
 
       private
+
+      def add_bubble(message)
+        position = determine_position(message)
+
+        with_bubble(
+          message[:text],
+          position: position,
+          color: message[:color],
+          avatar: message[:avatar],
+          header: message[:header],
+          footer: message[:footer]
+        )
+      end
+
+      def determine_position(message)
+        return message[:position] if message[:position].present?
+
+        if @current_user_id.present? && message[:user_id].present?
+          message[:user_id] == @current_user_id ? :end : :start
+        else
+          :start # Default position if no positioning info is available
+        end
+      end
 
       def html_attributes
         system_arguments
