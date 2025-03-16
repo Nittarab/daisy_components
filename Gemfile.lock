@@ -229,7 +229,7 @@ GEM
       logger
     rdoc (6.12.0)
       psych (>= 4.0.0)
-    redcarpet (3.6.0)
+    redcarpet (3.6.1)
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
@@ -316,6 +316,7 @@ DEPENDENCIES
   lookbook (= 2.3.4)
   nokogiri (~> 1.18)
   puma
+  redcarpet (= 3.6.1)
   rubocop (= 1.71.0)
   rubocop-capybara (= 2.21.0)
   rubocop-performance (= 1.23.1)

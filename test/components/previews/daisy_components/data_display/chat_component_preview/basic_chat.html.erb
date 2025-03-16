@@ -1,0 +1,8 @@
+<%
+messages = [
+  { text: "Hi! How can I help you today?", user_id: 2 },
+  { text: "I'm looking for pricing information.", user_id: 1 },
+  { text: "I'll be happy to help you with pricing details.", user_id: 2 }
+]
+%>
+<%= render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1) %> 

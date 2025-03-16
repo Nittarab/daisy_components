@@ -28,7 +28,7 @@ module DaisyComponents
       #       <% body.with_title { "Title" } %>
       #       <% body.with_actions(justify: :between) do |actions| %>
       #         <% actions.with_button(text: "Cancel", variant: :ghost) %>
-      #         <% actions.with_button(text: "Submit", color: :primary) %>
+      #         <% actions.with_bage(text: "Submit", color: :primary) %>
       #       <% end %>
       #     <% end %>
       #   <% end %>

@@ -36,6 +36,7 @@ module DaisyComponents
       SIZES = {
         w8: 'w-8',
         w12: 'w-12',
+        w10: 'w-10',
         w16: 'w-16',
         w20: 'w-20',
         w24: 'w-24',

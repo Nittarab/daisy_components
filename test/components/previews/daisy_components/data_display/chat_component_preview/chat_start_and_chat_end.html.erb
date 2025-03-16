@@ -1,0 +1,13 @@
+<%
+messages = [
+  {
+    text: "It's over Anakin,\nI have the high ground.",
+    user_id: 2
+  },
+  {
+    text: "You underestimate my power!",
+    user_id: 1
+  }
+]
+%>
+<%= render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1) %> 

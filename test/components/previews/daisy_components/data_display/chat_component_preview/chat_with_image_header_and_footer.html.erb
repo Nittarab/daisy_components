@@ -1,0 +1,34 @@
+<%
+avatar = {
+  img_src: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
+  img_alt: "Tailwind CSS chat bubble component"
+}
+
+messages = [
+  {
+    text: "You were the Chosen One!",
+    position: :start,
+    avatar: avatar,
+    header: {
+      text: "Obi-Wan Kenobi",
+      time: "12:45"
+    },
+    footer: {
+      text: "Delivered"
+    }
+  },
+  {
+    text: "I hate you!",
+    position: :end,
+    avatar: avatar,
+    header: {
+      text: "Anakin",
+      time: "12:46"
+    },
+    footer: {
+      text: "Seen at 12:46"
+    }
+  }
+]
+%>
+<%= render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages) %> 

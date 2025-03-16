@@ -1,0 +1,25 @@
+<%
+avatar = {
+  img_src: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
+  img_alt: "Tailwind CSS chat bubble component"
+}
+
+messages = [
+  {
+    text: "It was said that you would, destroy the Sith, not join them.",
+    user_id: 2,
+    avatar: avatar
+  },
+  {
+    text: "It was you who would bring balance to the Force",
+    user_id: 2,
+    avatar: avatar
+  },
+  {
+    text: "Not leave it in Darkness",
+    user_id: 2,
+    avatar: avatar
+  }
+]
+%>
+<%= render DaisyComponents::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1) %> 
