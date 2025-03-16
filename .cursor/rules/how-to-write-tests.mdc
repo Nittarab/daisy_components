@@ -1,0 +1,64 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Component Testing Structure
+
+## Overview
+Each component should have automated tests that verify both the component behavior and its preview examples. The `PreviewTestConcern` provides automated testing of all preview examples against their corresponding fixtures.
+
+## Basic Test Structure
+```ruby
+module DaisyComponents
+  module DataDisplay
+    class CardComponentTest < DaisyComponents::ComponentTestCase
+      include DaisyComponents::PreviewTestConcern
+
+      # Test all preview examples automatically
+      test_all_preview_examples(
+        preview_class: CardComponentPreview,
+        component_name: 'card',
+        exclude: ['playground'] # Optional: exclude specific examples
+      )
+
+      # Additional component-specific tests...
+    end
+  end
+end
+```
+
+## What Gets Tested
+1. All preview methods (except playground) are automatically tested
+2. Each preview's rendered output is compared against its fixture
+3. HTML is normalized before comparison (classes, attributes, whitespace)
+4. Failures indicate either:
+   - Missing fixture file
+   - Mismatch between preview output and fixture
+
+## Test Organization
+- Test files: `test/components/daisy_components/<module>/<component_name>_test.rb`
+- Fixtures: `test/fixtures/components/<component_name>/<example_name>.html`
+- One test file per component
+- One fixture file per preview method
+
+## Best Practices
+1. Always include `PreviewTestConcern`
+2. Use `test_all_preview_examples` for comprehensive coverage
+3. Add component-specific tests for behavior not covered by previews
+4. Keep fixtures up to date with component changes
+5. Don't duplicate preview tests unnecessarily
+6. Give precedence to preview tests for visual examples
+7. Focus component tests on behavior and edge cases
+
+## Coverage Checking
+```bash
+# Run tests with coverage
+COVERAGE=true bin/rails test
+
+# Parse coverage report
+./bin/parse_coverage.rb
+```
+```
+
+This rule provides a clear structure for how component testing should be set up and what gets tested automatically through the `PreviewTestConcern`.

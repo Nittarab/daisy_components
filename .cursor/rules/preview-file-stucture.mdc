@@ -1,0 +1,95 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Preview File Structurex
+## Overview
+Each preview file corresponds to a DaisyUI component and includes examples that match DaisyUI's documentation. The examples are tested against HTML fixtures that are scraped from the actual rendered output.
+
+## File Organization
+- Preview files: `test/components/previews/daisy_components/`
+- Fixture files: `test/fixtures/components/<component_name>/`
+- Each preview method has a corresponding fixture file
+
+## Preview Class Structure
+
+### Header
+```ruby
+# @label ComponentName
+module DaisyComponents
+  module Actions
+    class ComponentNamePreview < ViewComponent::Preview
+      include DaisyComponents::IconsHelper # if icons needed
+```
+
+### Playground Section
+1. Must start with `# @!group Playground`
+2. Interactive playground with all possible parameters
+3. Must end with `# @!endgroup`
+## DaisyUI Example Methods
+- Each method corresponds to a DaisyUI example from DaisyUI's documentation
+- Two main patterns for rendering:
+
+1. Direct Component Rendering (Preferred for single component examples):
+```ruby
+# Card with custom color
+# ---------------
+# Card with primary background color
+def card_with_custom_color
+  render CardComponent.new(
+    title: 'Card title!',
+    description: 'Some description',
+    button: { text: 'Buy Now', justify: :end },
+    color: :primary
+  )
+end
+```
+
+2. Template Rendering (For multiple components or complex layouts):
+```ruby
+# Button Sizes
+# ---------------
+# Different button size variations
+def button_sizes
+  render_with_template
+end
+```
+
+## Fixtures
+- Location: `test/fixtures/components/<component_name>/`
+- Naming: Must match preview method name (e.g. `active_buttons.html`)
+- Content: Contains the expected HTML output
+- Used by `PreviewTestConcern` to verify preview rendering
+- Example:
+  ```html
+  <button class="btn btn-active" type="button">Default</button>
+  ```
+
+## Testing
+- Uses `PreviewTestConcern` to automatically test all examples
+- Compares rendered preview output with fixture files
+- Normalizes HTML for consistent comparison
+- Example:
+  ```ruby
+  test_all_preview_examples(
+    preview_class: ButtonComponentPreview,
+    component_name: 'button',
+    exclude: ['playground']
+  )
+  ```
+### Template Organization
+- Template files should be in: `test/components/previews/daisy_components/<module>/<component_name>_preview/`
+- Template names should match method names (e.g. `button_sizes.html.erb`)
+- Example path: `test/components/previews/daisy_components/actions/button_component_preview/button_sizes.html.erb`
+
+
+## Best Practices
+1. Use direct component rendering when possible (clearer and more maintainable)
+2. Use template rendering for:
+   - Multiple component variations (like sizes, colors)
+   - Complex layouts
+   - Examples requiring custom HTML structure
+4. Pass helpers via locals if needed: `render_with_template(locals: { helper: self }
+
+
