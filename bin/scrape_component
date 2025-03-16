@@ -17,7 +17,7 @@ def format_title(id)
 end
 
 def scrape_component(component_name)
-  url = URI("https://v5.daisyui.com/components/#{component_name}/")
+  url = URI("https://daisyui.com/components/#{component_name}/")
   
   puts "Scraping #{url}..."
   response = Net::HTTP.get(url)
