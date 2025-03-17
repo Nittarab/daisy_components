@@ -7,136 +7,112 @@ module DaisyComponents
     class AccordionComponentPreview < ViewComponent::Preview
       # @!group Playground
 
-      # Playground
-      # ---------------
-      # Interactive accordion component with customizable behavior and styling
-      #
+      # @label Playground
       # @param join toggle "Join items together without gaps"
-      # @param arrow toggle "Show arrow indicator"
-      # @param plus toggle "Show plus/minus indicator"
-      # @param radio toggle "Use radio buttons for exclusive selection"
+      # @param indicator select { choices: [none, arrow, plus] } "Toggle indicator type"
+      # @param input_type select { choices: [checkbox, radio] } "Input type"
+      # @param bg_color text "Background color"
+      # @param text_color text "Text color"
+      # @param border_color text "Border color"
+      # @param padding select { choices: ["", p-0, p-1, p-2, p-3, p-4, p-6, p-8] } "Padding"
       # @param classes text "Additional CSS classes"
       def playground(
         join: false,
-        arrow: false,
-        plus: false,
-        radio: false,
+        indicator: nil,
+        input_type: :checkbox,
+        bg_color: 'nil',
+        text_color: nil,
+        border_color: nil,
+        padding: nil,
         classes: ''
       )
         render(AccordionComponent.new(
                  join:,
-                 arrow:,
-                 plus:,
-                 radio:,
+                 indicator: indicator == 'none' ? nil : indicator&.to_sym,
+                 input_type: input_type&.to_sym,
+                 bg_color:,
+                 text_color:,
+                 border_color:,
+                 padding:,
                  class: classes
                )) do |component|
-          component.with_item(title: 'Item 1', name: 'group1') { 'Content for item 1' }
-          component.with_item(title: 'Item 2', name: 'group1') { 'Content for item 2' }
-          component.with_item(title: 'Item 3', name: 'group1', checked: true) { 'Content for item 3' }
+          component.with_item(title: 'How do I create an account?', name: 'group1') do
+            'Click the "Sign Up" button in the top right corner and follow the registration process.'
+          end
+          component.with_item(title: 'I forgot my password. What should I do?', name: 'group1') do
+            'Click on "Forgot Password" on the login page and follow the instructions sent to your email.'
+          end
+          component.with_item(title: 'How do I update my profile information?', name: 'group1', checked: true) do
+            'Go to "My Account" settings and select "Edit Profile" to make changes.'
+          end
         end
       end
 
       # @!endgroup
 
-      # @!group Examples
-
-      # Basic Accordion
-      # ---------------
-      # Simple accordion with default styling
-      #
-      # @label Basic
-      def basic
-        render(AccordionComponent.new) do |component|
-          component.with_item(title: 'Click me') { 'Hidden content' }
+      # @label Radio Group
+      # @description Only one item can be expanded at a time
+      def accordion_using_radio_inputs
+        render(AccordionComponent.new(input_type: :radio)) do |accordion|
+          accordion.with_item(title: 'How do I create an account?', checked: true, name: 'my-accordion-1') do
+            'Click the "Sign Up" button in the top right corner and follow the registration process.'
+          end
+          accordion.with_item(title: 'I forgot my password. What should I do?', name: 'my-accordion-1') do
+            'Click on "Forgot Password" on the login page and follow the instructions sent to your email.'
+          end
+          accordion.with_item(title: 'How do I update my profile information?', name: 'my-accordion-1') do
+            'Go to "My Account" settings and select "Edit Profile" to make changes.'
+          end
         end
       end
 
-      # Multiple Items
-      # ---------------
-      # Accordion with multiple expandable items
-      #
-      # @label Multiple
-      def multiple
-        render(AccordionComponent.new) do |component|
-          component.with_item(title: 'Item 1') { 'Content 1' }
-          component.with_item(title: 'Item 2') { 'Content 2' }
-          component.with_item(title: 'Item 3', checked: true) { 'Content 3' }
+      # @label Plus/Minus Icon
+      # @description Accordion with plus/minus indicator
+      def accordion_with_plusminus_icon
+        render(AccordionComponent.new(indicator: :plus, input_type: :radio)) do |accordion|
+          accordion.with_item(title: 'How do I create an account?', checked: true, name: 'my-accordion-3') do
+            'Click the "Sign Up" button in the top right corner and follow the registration process.'
+          end
+          accordion.with_item(title: 'I forgot my password. What should I do?', name: 'my-accordion-3') do
+            'Click on "Forgot Password" on the login page and follow the instructions sent to your email.'
+          end
+          accordion.with_item(title: 'How do I update my profile information?', name: 'my-accordion-3') do
+            'Go to "My Account" settings and select "Edit Profile" to make changes.'
+          end
         end
       end
 
-      # Joined Items
-      # ---------------
-      # Items joined together without gaps
-      #
-      # @label Joined
-      def joined
-        render(AccordionComponent.new(join: true)) do |component|
-          component.with_item(title: 'Item 1') { 'Content 1' }
-          component.with_item(title: 'Item 2') { 'Content 2' }
-          component.with_item(title: 'Item 3') { 'Content 3' }
+      # @label Joined Items
+      # @description Using Accordion and Join together
+      def using_accordion_and_join_together
+        render(AccordionComponent.new(join: true, indicator: :arrow, input_type: :radio)) do |accordion|
+          accordion.with_item(title: 'How do I create an account?', checked: true, name: 'my-accordion-4') do
+            'Click the "Sign Up" button in the top right corner and follow the registration process.'
+          end
+          accordion.with_item(title: 'I forgot my password. What should I do?', name: 'my-accordion-4') do
+            'Click on "Forgot Password" on the login page and follow the instructions sent to your email.'
+          end
+          accordion.with_item(title: 'How do I update my profile information?', name: 'my-accordion-4') do
+            'Go to "My Account" settings and select "Edit Profile" to make changes.'
+          end
         end
       end
 
-      # Arrow Indicator
-      # ---------------
-      # Items with arrow indicator
-      #
-      # @label Arrow
-      def with_arrow
-        render(AccordionComponent.new(arrow: true)) do |component|
-          component.with_item(title: 'Expand me') { 'Arrow indicator content' }
-          component.with_item(title: 'Expand me too') { 'More arrow indicator content' }
+      # @label Arrow Icon
+      # @description Accordion with arrow indicator
+      def accordion_with_arrow_icon
+        render(AccordionComponent.new(indicator: :arrow, input_type: :radio)) do |accordion|
+          accordion.with_item(title: 'How do I create an account?', checked: true, name: 'my-accordion-2') do
+            'Click the "Sign Up" button in the top right corner and follow the registration process.'
+          end
+          accordion.with_item(title: 'I forgot my password. What should I do?', name: 'my-accordion-2') do
+            'Click on "Forgot Password" on the login page and follow the instructions sent to your email.'
+          end
+          accordion.with_item(title: 'How do I update my profile information?', name: 'my-accordion-2') do
+            'Go to "My Account" settings and select "Edit Profile" to make changes.'
+          end
         end
       end
-
-      # Plus/Minus Indicator
-      # ---------------
-      # Items with plus/minus indicator
-      #
-      # @label Plus
-      def with_plus
-        render(AccordionComponent.new(plus: true)) do |component|
-          component.with_item(title: 'Click to expand') { 'Plus/minus indicator content' }
-          component.with_item(title: 'Click me as well') { 'More plus/minus indicator content' }
-        end
-      end
-
-      # Radio Selection
-      # ---------------
-      # Only one item can be expanded at a time
-      #
-      # @label Radio
-      def radio_group
-        render(AccordionComponent.new(radio: true)) do |component|
-          component.with_item(title: 'Option 1', name: 'radio-group') { 'Content for option 1' }
-          component.with_item(title: 'Option 2', name: 'radio-group') { 'Content for option 2' }
-          component.with_item(title: 'Option 3', name: 'radio-group', checked: true) { 'Content for option 3' }
-        end
-      end
-
-      # @!endgroup
-
-      # @!group Complex Content
-
-      # With List Content
-      # ---------------
-      # Accordion item containing a list
-      #
-      # @label List
-      def with_list
-        render_with_template
-      end
-
-      # With Card Content
-      # ---------------
-      # Accordion item containing a card
-      #
-      # @label Card
-      def with_card
-        render_with_template
-      end
-
-      # @!endgroup
     end
   end
 end

@@ -1,4 +1,13 @@
 <%= render(DaisyComponents::DataDisplay::AccordionComponent.new) do |component| %>
+  <% component.with_item(title: 'Card Example') do %>
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Card Title</h2>
+        <p>Card content goes here.</p>
+      </div>
+    </div>
+  <% end %>
+
   <% component.with_item(title: 'Basic Card') do %>
     <%= render(DaisyComponents::DataDisplay::CardComponent.new(
       title: 'Simple Card',
@@ -21,7 +30,7 @@
           <%= render(DaisyComponents::DataDisplay::BadgeComponent.new('Demo', variant: 'outline')) %>
         </div>
       <% end,
-      image_url: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Card+Image',
+      img_url: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Card+Image',
       button_text: 'Primary Action',
       button_class: 'btn btn-primary'
     )) %>
@@ -32,7 +41,7 @@
       style: :side,
       title: 'Side Card',
       description: 'A card with a side image layout.',
-      image_url: 'https://placehold.co/300x200/3B82F6/FFFFFF?text=Side+Image',
+      img_url: 'https://placehold.co/300x200/3B82F6/FFFFFF?text=Side+Image',
       button_text: 'Learn More',
       button_class: 'btn btn-ghost'
     )) %>

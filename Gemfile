@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'puma'
+gem 'redcarpet', '3.6.1'
 gem 'view_component', '3.21.0'
 
 group :development do
@@ -15,6 +16,7 @@ group :development do
   gem 'rubocop-performance', '1.23.1'
   gem 'rubocop-rails', '2.29.1'
   gem 'ruby-lsp'
+  gem 'ruby-lsp-rails'
 end
 
 group :test do

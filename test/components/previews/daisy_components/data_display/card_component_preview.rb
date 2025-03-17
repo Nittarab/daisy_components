@@ -5,147 +5,226 @@ module DaisyComponents
     # @label Card
     # @display bg_color "#fff"
     class CardComponentPreview < ViewComponent::Preview
+      include DaisyComponents::IconsHelper
       # @!group Playground
 
       # Playground
       # ---------------
       # Interactive card component with customizable content and styling
       #
-      # @param style select [normal, compact, side] "Card layout style"
-      # @param bordered toggle "Add a border around the card"
-      # @param glass toggle "Apply a glass morphism effect"
+      # @param variant select [compact, side, bordered] "Card layout variant"
       # @param image_full toggle "Make the figure/image span full width"
       # @param title text "Card title"
       # @param description text "Card description"
-      # @param image_url text "URL for the card image"
+      # @param img_url text "URL for the card image" default: "https://picsum.photos/400/200"
       # @param button_text text "Text for the action button"
-      # @param button_class text "CSS classes for the button" default: "btn btn-primary"
+      # @param button_color select [primary, secondary, accent, neutral, ghost, link, info, success, warning, error] "Button color"
+      # @param button_variant select [outline, soft, dash, ghost, link] "Button variant"
+      # @param button_size select [xs, sm, md, lg, xl] "Button size"
+      # @param button_justify select [start, end, center, between, around, evenly] "Button justification"
+      # @param bottom_image toggle "Display the image at the bottom of the card"
       def playground(
-        style: :normal,
-        bordered: false,
-        glass: false,
+        variant: nil,
         image_full: false,
         title: 'Card Title',
         description: 'Card content goes here.',
-        image_url: 'https://placehold.co/400x200',
+        img_url: 'https://picsum.photos/seed/card/400/200',
+        img_alt: 'Card image',
         button_text: 'Action',
-        button_class: 'btn btn-primary'
+        button_color: :primary,
+        button_variant: nil,
+        button_size: nil,
+        button_justify: :end,
+        bottom_image: false
       )
         render CardComponent.new(
-          style: style,
-          bordered: bordered,
-          glass: glass,
+          variant: variant,
           image_full: image_full,
+          img_url: img_url,
+          img_alt: img_alt,
           title: title,
           description: description,
-          image_url: image_url,
-          button_text: button_text,
-          button_class: button_class
+          bottom_image: bottom_image,
+          button: {
+            text: button_text,
+            color: button_color,
+            variant: button_variant,
+            size: button_size,
+            justify: button_justify
+          }
         )
       end
 
-      # @!group Variants
+      # @!endgroup
 
-      # Basic Card
-      # ---------------
-      # Basic card with title and description
-      #
-      # @label Default
-      def default
-        render CardComponent.new(title: 'Card Title', description: 'Card content goes here.')
+      def card_sizes
+        render_with_template
       end
 
-      # Card with Image
+      # Card with a card border
       # ---------------
-      # Card with an image, title, description and action button
-      #
-      # @label With Image
-      def with_image
+      # Example of a card with a card-style border
+      def card_with_a_card_border
         render CardComponent.new(
-          title: 'Image Card',
-          description: 'Here is a description of the image above.',
-          image_url: 'https://placehold.co/400x200',
-          button_text: 'View Details',
-          button_class: 'btn btn-primary'
+          title: 'Card Title',
+          description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
+          button: { text: 'Buy Now', color: :primary, justify: :end },
+          variant: :bordered
         )
       end
 
-      # Side Image Layout
+      # Card with a dash border
       # ---------------
-      # Card with image placed on the side
-      #
-      # @label Side Image
-      def side_image
+      # Example of a card with a dashed border
+      def card_with_a_dash_border
         render CardComponent.new(
-          style: :side,
-          title: 'Side Image Card',
-          description: 'This card uses a side image layout.',
-          image_url: 'https://placehold.co/200x200',
-          button_text: 'Learn More',
-          button_class: 'btn btn-primary'
+          title: 'Card Title',
+          description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
+          button: { text: 'Buy Now', color: :primary, justify: :end },
+          variant: :dash
         )
       end
 
-      # Card with Border
+      # # Card with badge
+      # # ---------------
+      # # Card with badges in title and actions
+      def card_with_badge
+        render_with_template
+      end
+
+      # Card with bottom image
       # ---------------
-      # Card with a border around its edges
-      #
-      # @label Bordered
-      def bordered
+      # Card with image displayed at the bottom
+      def card_with_bottom_image
         render CardComponent.new(
-          bordered: true,
-          description: 'This card has a border.'
+          title: 'Card Title',
+          description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
+          img_url: 'https://picsum.photos/seed/card/400/200',
+          img_alt: 'Card image',
+          bottom_image: true,
+          shadow: true
         )
       end
 
-      # Glass Effect
-      # ---------------
-      # Card with glass morphism effect
-      #
-      # @label Glass
-      def glass
+      # # Card with centered content and paddings
+      # # ---------------
+      # # Card with centered content and image padding
+      def card_with_centered_content_and_paddings
+        render_with_template
+      end
+
+      # # Card with custom color
+      # # ---------------
+      # # Card with primary background color
+      def card_with_custom_color
         render CardComponent.new(
-          glass: true,
-          description: 'This card has a glass effect.'
+          title: 'Card title!',
+          description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
+          button: { text: 'Buy Now', justify: :end },
+          color: :primary
         )
       end
 
-      # Full Width Image
+      # Card with image on side
       # ---------------
-      # Card with image spanning full width
-      #
-      # @label Image Full
-      def image_full
+      # Card with image displayed on the side
+      def card_with_image_on_side
+        render CardComponent.new(
+          variant: :side,
+          title: 'New movie is released!',
+          description: 'Click the button to watch on Jetflix app.',
+          button: { text: 'Watch', justify: :end, color: :primary },
+          img_url: 'https://picsum.photos/seed/card/400/200',
+          img_alt: 'Movie',
+          shadow: true
+        )
+      end
+
+      # # Card with image overlay
+      # # ---------------
+      # # Card with image as a full background
+      def card_with_image_overlay
         render CardComponent.new(
           image_full: true,
-          title: 'Full Image Card',
-          description: 'This card has a full image background.',
-          image_url: 'https://placehold.co/400x200',
-          button_text: 'Read More',
-          button_class: 'btn btn-primary'
+          title: 'Card Title',
+          description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
+          button: { text: 'Buy Now', color: :primary, justify: :end },
+          img_url: 'https://picsum.photos/seed/card/400/200',
+          img_alt: 'Card image',
+          shadow: true
         )
       end
 
-      # Compact Layout
+      # Card with no image
       # ---------------
-      # Card with reduced padding
-      #
-      # @label Compact
-      def compact
+      # Basic card without an image
+      def card_with_no_image
         render CardComponent.new(
-          style: :compact,
-          description: 'This card uses compact padding.'
+          title: 'Card title!',
+          description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
+          button: { text: 'Buy Now', color: :primary, justify: :end },
+          shadow: true
         )
       end
 
-      # @!group Complex Description
-
-      # Complex Description
+      # Default card
       # ---------------
-      # Card with a complex description containing a badge and text content
-      #
-      # @label Complex Description
-      def complex_description; end
+      # Basic card with title, description, image and actions
+      def card
+        render CardComponent.new(
+          img_url: 'https://picsum.photos/seed/card/400/200',
+          title: 'Card Title',
+          description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
+          button: {
+            text: 'Buy Now',
+            color: :primary,
+            justify: :end
+          },
+          shadow: true
+        )
+      end
+
+      # Centered card with neutral color
+      # ---------------
+      # Card with centered content and neutral background color
+      def centered_card_with_neutral_color
+        render CardComponent.new(
+          title: 'Cookies!',
+          description: 'We are using cookies for no reason.',
+          color: :neutral
+        ) do |component|
+          component.with_body(class: 'items-center text-center') do |body|
+            body.with_actions(justify: :end) do |actions|
+              actions.with_button(text: 'Accept', color: :primary)
+              actions.with_button(text: 'Deny', color: :ghost)
+            end
+          end
+        end
+      end
+
+      # Pricing card
+      # ---------------
+      # Card with pricing information and feature list
+      def pricing_card
+        render_with_template(locals: { helpers: self })
+      end
+
+      # Responsive card
+      # ---------------
+      # # Card that changes layout based on screen size
+      def responsive_card_vertical_on_small_screen_horizontal_on_large_screen
+        render CardComponent.new(
+          title: 'New album is released!',
+          description: 'Click the button to listen on Spotiwhy app.',
+          button: { text: 'Listen', color: :primary, justify: :end },
+          img_url: 'https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp',
+          img_alt: 'Album',
+          shadow: true,
+          variant: :side_responsive
+        )
+      end
+
+      # def responsive_card_vertical_on_small_screen_horizontal_on_large_screen
     end
   end
 end
