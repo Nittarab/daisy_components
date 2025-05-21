@@ -36,6 +36,7 @@ $ bin/rails server
 
 ![alt text](<docs/assets/2025-01_screeshot_1.png>)
 ![alt text](<docs/assets/2025-01_screeshot_2.png>)
+![alt text](<docs/assets/2025-01_screeshot_3.png>)
 
 ## Testing
 
