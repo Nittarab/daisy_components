@@ -8,14 +8,14 @@ module DaisyUI
       class ActionsComponentTest < DaisyUI::ComponentTestCase
         def test_renders_content
           content_text = 'Test content'
-          render_inline(DaisyUI::CardComponent::ActionsComponent.new) { content_text }
+          render_inline(DaisyUI::Card::Actions.new) { content_text }
 
           assert_selector '.card-actions', text: content_text
         end
 
         def test_raises_error_for_invalid_justify_value
           error = assert_raises(ArgumentError) do
-            DaisyUI::CardComponent::ActionsComponent.new(justify: :invalid)
+            DaisyUI::Card::Actions.new(justify: :invalid)
           end
 
           assert_equal 'Invalid justify: invalid. Must be one of: start, end, center, between, around, evenly',
@@ -23,37 +23,37 @@ module DaisyUI
         end
 
         def test_renders_with_justify_start
-          render_inline(DaisyUI::CardComponent::ActionsComponent.new(justify: :start)) { 'Actions' }
+          render_inline(DaisyUI::Card::Actions.new(justify: :start)) { 'Actions' }
 
           assert_selector '.card-actions.justify-start'
         end
 
         def test_renders_with_justify_end
-          render_inline(DaisyUI::CardComponent::ActionsComponent.new(justify: :end)) { 'Actions' }
+          render_inline(DaisyUI::Card::Actions.new(justify: :end)) { 'Actions' }
 
           assert_selector '.card-actions.justify-end'
         end
 
         def test_renders_with_justify_center
-          render_inline(DaisyUI::CardComponent::ActionsComponent.new(justify: :center)) { 'Actions' }
+          render_inline(DaisyUI::Card::Actions.new(justify: :center)) { 'Actions' }
 
           assert_selector '.card-actions.justify-center'
         end
 
         def test_renders_with_justify_between
-          render_inline(DaisyUI::CardComponent::ActionsComponent.new(justify: :between)) { 'Actions' }
+          render_inline(DaisyUI::Card::Actions.new(justify: :between)) { 'Actions' }
 
           assert_selector '.card-actions.justify-between'
         end
 
         def test_renders_with_custom_class
-          render_inline(DaisyUI::CardComponent::ActionsComponent.new(class: 'custom-class')) { 'Actions' }
+          render_inline(DaisyUI::Card::Actions.new(class: 'custom-class')) { 'Actions' }
 
           assert_selector '.card-actions.custom-class'
         end
 
         def test_renders_with_multiple_actions
-          component = DaisyUI::CardComponent::ActionsComponent.new
+          component = DaisyUI::Card::Actions.new
           component.with_button(text: 'Button 1')
           component.with_button(text: 'Button 2')
 
@@ -65,7 +65,7 @@ module DaisyUI
         end
 
         def test_renders_with_badge_actions
-          component = DaisyUI::CardComponent::ActionsComponent.new
+          component = DaisyUI::Card::Actions.new
           component.with_badge('Badge 1')
           component.with_badge('Badge 2')
 

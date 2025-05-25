@@ -28,9 +28,9 @@ module DaisyUI
   #     ],
   #     current_user_id: 2
   #   )) %>
-  class ChatComponent < BaseComponent
+  class Chat < BaseComponent
     # Define a slot for multiple messages
-    renders_many :bubbles, DaisyUI::ChatBubbleComponent
+    renders_many :bubbles, DaisyUI::ChatBubble
 
     include ActionView::Helpers::TagHelper
 

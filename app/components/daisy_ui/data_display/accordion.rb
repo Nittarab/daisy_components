@@ -57,12 +57,12 @@ module DaisyUI
   #       Content for item 1
   #     <% end %>
   #   <% end %>
-  class AccordionComponent < BaseComponent
+  class Accordion < BaseComponent
     INDICATORS = %i[arrow plus].freeze
     INPUT_TYPES = %i[radio checkbox].freeze
 
     renders_many :items, lambda { |title:, name: nil, checked: false|
-      AccordionItemComponent.new(
+      AccordionItem.new(
         title:,
         name: name || @input_name,
         checked:,

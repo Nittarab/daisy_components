@@ -15,13 +15,13 @@ module DaisyUI
   #     <% group.with_avatar(img_src: "path/to/image.jpg", img_alt: "User 2") %>
   #     <% group.with_avatar(img_src: "path/to/image.jpg", img_alt: "User 3") %>
   #   <% end %>
-  class AvatarGroupComponent < DaisyUI::BaseComponent
-    SIZES = AvatarComponent::SIZES
-    SHAPES = AvatarComponent::SHAPES
+  class AvatarGroup < DaisyUI::BaseComponent
+    SIZES = Avatar::SIZES
+    SHAPES = Avatar::SHAPES
     DEFAULT_SPACING = 1.5
 
     renders_many :avatars, lambda { |**system_arguments|
-      AvatarComponent.new(
+      Avatar.new(
         size: @size,
         shape: @shape&.to_sym,
         inner_class: system_arguments.delete(:inner_class),
@@ -84,7 +84,7 @@ module DaisyUI
     end
 
     def render_counter
-      AvatarComponent.new(
+      Avatar.new(
         size: @size,
         shape: @shape,
         placeholder_text: "+#{remaining_count}",

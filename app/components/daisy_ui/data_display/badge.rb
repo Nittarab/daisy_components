@@ -33,7 +33,7 @@ module DaisyUI
   #
   # @example With custom tag type
   #   <%= render(BadgeComponent.new(text: "Badge", tag_type: :span)) %>
-  class BadgeComponent < DaisyUI::BaseComponent
+  class Badge < DaisyUI::BaseComponent
     # Available badge colors from DaisyUI
     COLORS = {
       primary: 'badge-primary',

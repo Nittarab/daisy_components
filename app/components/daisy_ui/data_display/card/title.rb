@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DaisyUI
-  class CardComponent
+  class Card
     # Title component for the card, handling the title display
     #
     # @example Basic usage
@@ -24,7 +24,7 @@ module DaisyUI
     #       <% body.with_title("Simple Title") %>
     #     <% end %>
     #   <% end %>
-    class TitleComponent < BaseComponent
+    class Title < BaseComponent
       # @param text [String] The title text (optional if block given)
       # @param tag_name [Symbol] HTML tag to use for the title
       # @param system_arguments [Hash] Additional HTML attributes

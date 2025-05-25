@@ -36,7 +36,7 @@ module DaisyUI
         has_end_icon: false,
         classes: ''
       )
-        render(DaisyUI::ButtonComponent.new(
+        render(DaisyUI::Button.new(
                  text:,
                  color:,
                  size:,

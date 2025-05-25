@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DaisyUI
-  class CardComponent
+  class Card
     # Actions component for the card, handling action buttons layout
     #
     # @example Basic usage
@@ -32,7 +32,7 @@ module DaisyUI
     #       <% end %>
     #     <% end %>
     #   <% end %>
-    class ActionsComponent < BaseComponent
+    class Actions < BaseComponent
       # Available justification options for actions layout
       JUSTIFY_OPTIONS = {
         start: 'justify-start',
@@ -45,8 +45,8 @@ module DaisyUI
 
       # Renders multiple actions (buttons or badges)
       renders_many :actions, types: {
-        button: { renders: DaisyUI::ButtonComponent, as: :button },
-        badge: { renders: DaisyUI::BadgeComponent, as: :badge }
+        button: { renders: DaisyUI::Button, as: :button },
+        badge: { renders: DaisyUI::Badge, as: :badge }
       }
 
       # @param justify [Symbol] Justification for action buttons layout

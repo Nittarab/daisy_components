@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DaisyUI
-  class TitleComponent < ViewComponent::Base
+  class Title < ViewComponent::Base
     def call
       tag.li(class: 'menu-title') { content }
     end

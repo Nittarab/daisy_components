@@ -5,7 +5,7 @@ require 'test_helper'
 module DaisyUI
   class DividerComponentTest < DaisyUI::ComponentTestCase
     def test_renders_divider
-      component = DividerComponent.new
+      component = Divider.new
 
       render_inline(component)
       assert_selector 'li.divider'

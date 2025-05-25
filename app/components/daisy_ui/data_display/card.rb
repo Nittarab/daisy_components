@@ -39,7 +39,7 @@ module DaisyUI
   #       <% end %>
   #     <% end %>
   #   <% end %>
-  class CardComponent < BaseComponent
+  class Card < BaseComponent
     # Available card variants
     VARIANTS = {
       compact: 'card-compact',
@@ -66,11 +66,11 @@ module DaisyUI
     }.freeze
 
     renders_one :figure, lambda { |**system_arguments|
-      FigureComponent.new(img_url: @img_url, img_alt: @img_alt, **system_arguments)
+      Figure.new(img_url: @img_url, img_alt: @img_alt, **system_arguments)
     }
 
     renders_one :body, lambda { |**system_arguments|
-      BodyComponent.new(
+      Body.new(
         variant: @variant,
         title: @title,
         description: @description,

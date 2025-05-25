@@ -1,9 +1,9 @@
 <%# frozen_string_literal: true %>
 
-<%= render DaisyUI::CardComponent.new(shadow: true) do |component| %>
+<%= render DaisyUI::Card.new(shadow: true) do |component| %>
   <% component.with_body do |body| %>
     <% body.with_description do %>
-      <%= render DaisyUI::BadgeComponent.new('Most Popular', color: :warning, size: :xs, tag_type: :span) %>
+      <%= render DaisyUI::Badge.new('Most Popular', color: :warning, size: :xs, tag_type: :span) %>
 
       <div class="flex justify-between">
         <h2 class="font-bold text-3xl">Premium</h2>
@@ -28,7 +28,7 @@
       </ul>
 
       <div class="mt-6">
-        <%= render DaisyUI::ButtonComponent.new(
+        <%= render DaisyUI::Button.new(
           text: 'Subscribe',
           color: :primary,
           class: 'btn-block'

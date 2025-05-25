@@ -1,5 +1,5 @@
 <%# Complex Description %>
-<%= render DaisyUI::CardComponent.new(
+<%= render DaisyUI::Card.new(
   title: "Card with Badge",
   img_url: "https://placehold.co/400x200",
   button_text: "Learn More",
@@ -7,7 +7,7 @@
 ) do |c| %>
   <% c.with_body do |b| %>
     <% b.with_description do %>
-      <%= render(DaisyUI::BadgeComponent.new(variant: :primary)) { "New!" } %>
+      <%= render(DaisyUI::Badge.new(variant: :primary)) { "New!" } %>
       This card includes both text and a badge in its description.
     <% end %>
   <% end %>

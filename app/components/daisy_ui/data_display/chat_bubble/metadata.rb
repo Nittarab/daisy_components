@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DaisyUI
-  class ChatBubbleComponent
+  class ChatBubble
     # Component for chat bubble metadata (header/footer)
     #
     # @example Header usage
@@ -9,7 +9,7 @@ module DaisyUI
     #
     # @example Footer usage
     #   <%= render(MetadataComponent.new(text: "Delivered", time: "12:46", type: :footer)) %>
-    class MetadataComponent < BaseComponent
+    class Metadata < BaseComponent
       TYPES = %i[header footer].freeze
 
       TYPE_CLASSES = {
