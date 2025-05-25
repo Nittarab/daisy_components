@@ -32,9 +32,9 @@ Style/ClassAndModuleChildren
 
 good:
 ```ruby
-module DaisyComponents
+module DaisyUI
   module Actions
-    class SwapComponentTest < DaisyComponents::ComponentTestCase
+    class SwapComponentTest < DaisyUI::ComponentTestCase
     end
   end
 end

@@ -1,0 +1,14 @@
+ 
+ 
+<%= render DaisyUI::DataDisplay::CardComponent.new(
+          title: 'Card Title',
+          description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
+          button: { text: 'Buy Now', color: :primary },
+          shadow: true
+) do |component| %>
+          <%= component.with_figure(class: 'px-10 pt-10') do |figure| %>  
+          <%= tag.img(src: 'https://picsum.photos/seed/card/400/200', alt: 'Card image', class: 'rounded-xl') %>
+          <% end %>
+          <%= component.with_body(class: 'items-center text-center') %> 
+        <% end %>
+

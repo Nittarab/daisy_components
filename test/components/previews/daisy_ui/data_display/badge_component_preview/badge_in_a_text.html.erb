@@ -1,0 +1,5 @@
+<div class="flex flex-wrap gap-2">
+  <% variants.each do |variant| %>
+    <%= render DaisyUI::DataDisplay::BadgeComponent.new("badge-#{variant}", variant: variant, outline: true) %>
+  <% end %>
+</div> 

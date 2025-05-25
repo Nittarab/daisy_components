@@ -8,7 +8,7 @@ alwaysApply: true
 Each preview file corresponds to a DaisyUI component and includes examples that match DaisyUI's documentation. The examples are tested against HTML fixtures that are scraped from the actual rendered output.
 
 ## File Organization
-- Preview files: `test/components/previews/daisy_components/`
+- Preview files: `test/components/previews/daisy_ui/`
 - Fixture files: `test/fixtures/components/<component_name>/`
 - Each preview method has a corresponding fixture file
 
@@ -79,9 +79,9 @@ end
   )
   ```
 ### Template Organization
-- Template files should be in: `test/components/previews/daisy_components/<module>/<component_name>_preview/`
+- Template files should be in: `test/components/previews/daisy_ui/<module>/<component_name>_preview/`
 - Template names should match method names (e.g. `button_sizes.html.erb`)
-- Example path: `test/components/previews/daisy_components/actions/button_component_preview/button_sizes.html.erb`
+- Example path: `test/components/previews/daisy_ui/actions/button_component_preview/button_sizes.html.erb`
 
 
 ## Best Practices

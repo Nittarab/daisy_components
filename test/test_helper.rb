@@ -4,7 +4,7 @@
 ENV['RAILS_ENV'] = 'test'
 
 require_relative '../test/dummy/config/environment'
-require_relative 'support/daisy_components/preview_test_concern'
+require_relative 'support/daisy_ui/preview_test_concern'
 require 'rails/test_help'
 require 'capybara'
 require 'view_component/test_helpers'
@@ -13,7 +13,7 @@ require 'view_component/test_helpers'
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Load component test case
-require_relative 'components/daisy_components/component_test_case'
+require_relative 'components/daisy_ui/component_test_case'
 
 module ActiveSupport
   class TestCase

@@ -5,7 +5,7 @@
 # installed from the root of your application.
 
 ENGINE_ROOT = File.expand_path('..', __dir__)
-ENGINE_PATH = File.expand_path('../lib/daisy_components/engine', __dir__)
+ENGINE_PATH = File.expand_path('../lib/daisy_ui/engine', __dir__)
 APP_PATH = File.expand_path('../test/dummy/config/application', __dir__)
 
 # Set up gems listed in the Gemfile.
@@ -27,7 +27,7 @@ if ENV['COVERAGE'] == 'true'
     add_filter '/test/models/'
     add_filter '/test/support/'
     add_filter '/test/test_helper.rb'
-    add_filter '/test/daisy_components_test.rb'
+    add_filter '/test/daisy_ui_test.rb'
     add_filter '/app/helpers/'
     add_group 'Components', 'app/components'
     add_group 'Previews', 'test/components/previews'
