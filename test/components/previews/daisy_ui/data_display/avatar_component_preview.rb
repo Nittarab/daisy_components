@@ -30,7 +30,7 @@ module DaisyUI
         default_img = 'https://picsum.photos/200/300'
         img_src = img_src.presence || (placeholder_text.blank? ? default_img : nil)
 
-        render(AvatarComponent.new(
+        render(DaisyUI::AvatarComponent.new(
                  size:,
                  shape:,
                  status:,
@@ -45,7 +45,7 @@ module DaisyUI
       #
 
       def avatar
-        render(AvatarComponent.new(
+        render(DaisyUI::AvatarComponent.new(
                  size: :w24,
                  img_src: 'https://picsum.photos/200/300'
                ))

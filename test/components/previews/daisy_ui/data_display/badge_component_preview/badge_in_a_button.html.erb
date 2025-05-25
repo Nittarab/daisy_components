@@ -1,12 +1,12 @@
 <div class="flex flex-wrap gap-2">
-  <%= render DaisyUI::Actions::ButtonComponent.new(
+  <%= render DaisyUI::ButtonComponent.new(
     text: 'Inbox',
-    icon_end: render(DaisyUI::DataDisplay::BadgeComponent.new('99+', variant: 'secondary'))
+    icon_end: render(DaisyUI::BadgeComponent.new('99+', variant: 'secondary'))
   ) %>
 
-  <%= render DaisyUI::Actions::ButtonComponent.new(
+  <%= render DaisyUI::ButtonComponent.new(
     text: 'Notifications',
     variant: 'primary',
-    icon_end: render(DaisyUI::DataDisplay::BadgeComponent.new('8', variant: 'secondary'))
+    icon_end: render(DaisyUI::BadgeComponent.new('8', variant: 'secondary'))
   ) %>
 </div> 

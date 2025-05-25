@@ -26,7 +26,7 @@ module DaisyUI
         has_icon: false,
         classes: ''
       )
-        render(BadgeComponent.new(
+        render(DaisyUI::BadgeComponent.new(
                  text,
                  color: color,
                  size: size,
@@ -39,11 +39,11 @@ module DaisyUI
       # @!endgroup
       #
       def badge
-        render(BadgeComponent.new('Badge', tag_type: :span))
+        render(DaisyUI::BadgeComponent.new('Badge', tag_type: :span))
       end
 
       def badge_ghost
-        render(BadgeComponent.new('ghost', variant: :ghost))
+        render(DaisyUI::BadgeComponent.new('ghost', variant: :ghost))
       end
 
       def badge_sizes

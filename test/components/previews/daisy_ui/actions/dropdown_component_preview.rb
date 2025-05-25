@@ -45,7 +45,7 @@ module DaisyUI
         show_header: false,
         show_footer: false
       )
-        render(DaisyUI::Actions::DropdownComponent.new(
+        render(DaisyUI::DropdownComponent.new(
                  position: position,
                  hover: hover,
                  open: open,
@@ -71,7 +71,7 @@ module DaisyUI
       # ---------------
       # Example showing how to use a card as dropdown content
       def card_as_dropdown
-        render(DaisyUI::Actions::DropdownComponent.new) do |d|
+        render(DaisyUI::DropdownComponent.new) do |d|
           d.with_trigger(text: 'Click')
           d.with_custom_content do
             tag.div(tabindex: 0, class: 'dropdown-content card card-sm bg-base-100 z-1 w-64 shadow-md') do
@@ -84,7 +84,7 @@ module DaisyUI
       end
 
       def dropdown_aligns_to_center_of_button_horizontally
-        render(DaisyUI::Actions::DropdownComponent.new(align: :center)) do |d|
+        render(DaisyUI::DropdownComponent.new(align: :center)) do |d|
           d.with_trigger(text: 'Click ⬇️')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -92,7 +92,7 @@ module DaisyUI
       end
 
       def dropdown_aligns_to_end_of_button_horizontally
-        render(DaisyUI::Actions::DropdownComponent.new(align: :end)) do |d|
+        render(DaisyUI::DropdownComponent.new(align: :end)) do |d|
           d.with_trigger(text: 'Click ⬇️')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -100,7 +100,7 @@ module DaisyUI
       end
 
       def dropdown_aligns_to_start_of_button_horizontally
-        render(DaisyUI::Actions::DropdownComponent.new(align: :start)) do |d|
+        render(DaisyUI::DropdownComponent.new(align: :start)) do |d|
           d.with_trigger(text: 'Click ⬇️')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -108,7 +108,7 @@ module DaisyUI
       end
 
       def dropdown_left_aligns_to_end_of_button_vertically
-        render(DaisyUI::Actions::DropdownComponent.new(position: :left, align: :end)) do |d|
+        render(DaisyUI::DropdownComponent.new(position: :left, align: :end)) do |d|
           d.with_trigger(text: 'Click  ⬅️')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -116,7 +116,7 @@ module DaisyUI
       end
 
       def dropdown_menu
-        render(DaisyUI::Actions::DropdownComponent.new) do |d|
+        render(DaisyUI::DropdownComponent.new) do |d|
           d.with_trigger(text: 'Click')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -124,7 +124,7 @@ module DaisyUI
       end
 
       def dropdown_on_hover
-        render(DaisyUI::Actions::DropdownComponent.new(hover: true)) do |d|
+        render(DaisyUI::DropdownComponent.new(hover: true)) do |d|
           d.with_trigger(text: 'Hover')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -132,7 +132,7 @@ module DaisyUI
       end
 
       def dropdown_right
-        render(DaisyUI::Actions::DropdownComponent.new(position: :right)) do |d|
+        render(DaisyUI::DropdownComponent.new(position: :right)) do |d|
           d.with_trigger(text: 'Click  ➡️')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -140,7 +140,7 @@ module DaisyUI
       end
 
       def dropdown_right_aligns_to_center_of_button_vertically
-        render(DaisyUI::Actions::DropdownComponent.new(position: :right, align: :center)) do |d|
+        render(DaisyUI::DropdownComponent.new(position: :right, align: :center)) do |d|
           d.with_trigger(text: 'Click  ➡️', class: 'm-1')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -148,7 +148,7 @@ module DaisyUI
       end
 
       def dropdown_right_aligns_to_end_of_button_vertically
-        render(DaisyUI::Actions::DropdownComponent.new(position: :right, align: :end)) do |d|
+        render(DaisyUI::DropdownComponent.new(position: :right, align: :end)) do |d|
           d.with_trigger(text: 'Click  ➡️')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -156,7 +156,7 @@ module DaisyUI
       end
 
       def dropdown_top
-        render(DaisyUI::Actions::DropdownComponent.new(position: :top)) do |d|
+        render(DaisyUI::DropdownComponent.new(position: :top)) do |d|
           d.with_trigger(text: 'Click  ⬆️')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }
@@ -164,7 +164,7 @@ module DaisyUI
       end
 
       def force_open
-        render(DaisyUI::Actions::DropdownComponent.new(open: true)) do |d|
+        render(DaisyUI::DropdownComponent.new(open: true)) do |d|
           d.with_trigger(text: 'Button')
           d.with_item(href: '#') { 'Item 1' }
           d.with_item(href: '#') { 'Item 2' }

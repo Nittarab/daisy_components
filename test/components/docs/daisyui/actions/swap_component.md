@@ -5,7 +5,7 @@ The Swap component allows you to toggle between two states with a smooth animati
 ## Basic Usage
 
 ```erb
-<%= render(DaisyComponents::Actions::SwapComponent.new) do |component| %>
+<%= render(DaisyComponents::SwapComponent.new) do |component| %>
   <%= component.with_on { "ON" } %>
   <%= component.with_off { "OFF" } %>
 <% end %>
@@ -33,7 +33,7 @@ The Swap component allows you to toggle between two states with a smooth animati
 Basic text swap with primary color:
 
 ```erb
-<%= render(DaisyComponents::Actions::SwapComponent.new) do |component| %>
+<%= render(DaisyComponents::SwapComponent.new) do |component| %>
   <%= component.with_on do %>
     <div class="font-bold text-primary">ON</div>
   <% end %>
@@ -48,7 +48,7 @@ Basic text swap with primary color:
 Fun emoji swap with flip animation:
 
 ```erb
-<%= render(DaisyComponents::Actions::SwapComponent.new(flip: true)) do |component| %>
+<%= render(DaisyComponents::SwapComponent.new(flip: true)) do |component| %>
   <%= component.with_on do %>
     <div class="text-2xl">😄</div>
   <% end %>
@@ -63,7 +63,7 @@ Fun emoji swap with flip animation:
 Classic hamburger menu with rotate animation:
 
 ```erb
-<%= render(DaisyComponents::Actions::SwapComponent.new(rotate: true, class: "btn btn-ghost btn-circle")) do |component| %>
+<%= render(DaisyComponents::SwapComponent.new(rotate: true, class: "btn btn-ghost btn-circle")) do |component| %>
   <%= component.with_on do %>
     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -82,7 +82,7 @@ Classic hamburger menu with rotate animation:
 Theme toggle with sun/moon icons and rotate animation:
 
 ```erb
-<%= render(DaisyComponents::Actions::SwapComponent.new(rotate: true, class: "btn btn-ghost btn-circle")) do |component| %>
+<%= render(DaisyComponents::SwapComponent.new(rotate: true, class: "btn btn-ghost btn-circle")) do |component| %>
   <%= component.with_on do %>
     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -101,7 +101,7 @@ Theme toggle with sun/moon icons and rotate animation:
 Example using the indeterminate state for loading:
 
 ```erb
-<%= render(DaisyComponents::Actions::SwapComponent.new(class: "btn")) do |component| %>
+<%= render(DaisyComponents::SwapComponent.new(class: "btn")) do |component| %>
   <%= component.with_on do %>
     <span class="flex items-center gap-2">
       Save

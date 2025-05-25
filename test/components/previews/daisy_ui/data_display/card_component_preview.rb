@@ -37,7 +37,7 @@ module DaisyUI
         button_justify: :end,
         bottom_image: false
       )
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           variant: variant,
           image_full: image_full,
           img_url: img_url,
@@ -65,7 +65,7 @@ module DaisyUI
       # ---------------
       # Example of a card with a card-style border
       def card_with_a_card_border
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           title: 'Card Title',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
           button: { text: 'Buy Now', color: :primary, justify: :end },
@@ -77,7 +77,7 @@ module DaisyUI
       # ---------------
       # Example of a card with a dashed border
       def card_with_a_dash_border
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           title: 'Card Title',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
           button: { text: 'Buy Now', color: :primary, justify: :end },
@@ -96,7 +96,7 @@ module DaisyUI
       # ---------------
       # Card with image displayed at the bottom
       def card_with_bottom_image
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           title: 'Card Title',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
           img_url: 'https://picsum.photos/seed/card/400/200',
@@ -117,7 +117,7 @@ module DaisyUI
       # # ---------------
       # # Card with primary background color
       def card_with_custom_color
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           title: 'Card title!',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
           button: { text: 'Buy Now', justify: :end },
@@ -129,7 +129,7 @@ module DaisyUI
       # ---------------
       # Card with image displayed on the side
       def card_with_image_on_side
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           variant: :side,
           title: 'New movie is released!',
           description: 'Click the button to watch on Jetflix app.',
@@ -144,7 +144,7 @@ module DaisyUI
       # # ---------------
       # # Card with image as a full background
       def card_with_image_overlay
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           image_full: true,
           title: 'Card Title',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
@@ -159,7 +159,7 @@ module DaisyUI
       # ---------------
       # Basic card without an image
       def card_with_no_image
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           title: 'Card title!',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
           button: { text: 'Buy Now', color: :primary, justify: :end },
@@ -171,7 +171,7 @@ module DaisyUI
       # ---------------
       # Basic card with title, description, image and actions
       def card
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           img_url: 'https://picsum.photos/seed/card/400/200',
           title: 'Card Title',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
@@ -188,7 +188,7 @@ module DaisyUI
       # ---------------
       # Card with centered content and neutral background color
       def centered_card_with_neutral_color
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           title: 'Cookies!',
           description: 'We are using cookies for no reason.',
           color: :neutral
@@ -213,7 +213,7 @@ module DaisyUI
       # ---------------
       # # Card that changes layout based on screen size
       def responsive_card_vertical_on_small_screen_horizontal_on_large_screen
-        render CardComponent.new(
+        render DaisyUI::CardComponent.new(
           title: 'New album is released!',
           description: 'Click the button to listen on Spotiwhy app.',
           button: { text: 'Listen', color: :primary, justify: :end },

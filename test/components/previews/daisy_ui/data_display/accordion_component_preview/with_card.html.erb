@@ -1,4 +1,4 @@
-<%= render(DaisyUI::DataDisplay::AccordionComponent.new) do |component| %>
+<%= render(DaisyUI::AccordionComponent.new) do |component| %>
   <% component.with_item(title: 'Card Example') do %>
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
@@ -9,14 +9,14 @@
   <% end %>
 
   <% component.with_item(title: 'Basic Card') do %>
-    <%= render(DaisyUI::DataDisplay::CardComponent.new(
+    <%= render(DaisyUI::CardComponent.new(
       title: 'Simple Card',
       description: 'A basic card with just title and description.'
     )) %>
   <% end %>
 
   <% component.with_item(title: 'Interactive Card with Image') do %>
-    <%= render(DaisyUI::DataDisplay::CardComponent.new(
+    <%= render(DaisyUI::CardComponent.new(
       glass: true,
       title: 'Feature Card',
       description: content_tag(:div) do %>
@@ -25,9 +25,9 @@
           The card includes an image, description, and multiple actions.
         </p>
         <div class="flex gap-2 items-center text-sm text-base-content/60">
-          <%= render(DaisyUI::DataDisplay::BadgeComponent.new('Feature', variant: 'primary')) %>
-          <%= render(DaisyUI::DataDisplay::BadgeComponent.new('Example', variant: 'ghost')) %>
-          <%= render(DaisyUI::DataDisplay::BadgeComponent.new('Demo', variant: 'outline')) %>
+          <%= render(DaisyUI::BadgeComponent.new('Feature', variant: 'primary')) %>
+          <%= render(DaisyUI::BadgeComponent.new('Example', variant: 'ghost')) %>
+          <%= render(DaisyUI::BadgeComponent.new('Demo', variant: 'outline')) %>
         </div>
       <% end,
       img_url: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Card+Image',
@@ -37,7 +37,7 @@
   <% end %>
 
   <% component.with_item(title: 'Side Image Card') do %>
-    <%= render(DaisyUI::DataDisplay::CardComponent.new(
+    <%= render(DaisyUI::CardComponent.new(
       style: :side,
       title: 'Side Card',
       description: 'A card with a side image layout.',
@@ -48,7 +48,7 @@
   <% end %>
 
   <% component.with_item(title: 'Compact Card with Variants') do %>
-    <%= render(DaisyUI::DataDisplay::CardComponent.new(
+    <%= render(DaisyUI::CardComponent.new(
       style: :compact,
       bordered: true,
       glass: true,
@@ -56,7 +56,7 @@
       title_tag: :h3,
       description: content_tag(:div) do %>
         <p>A compact card with bordered and glass variants.</p>
-        <%= render(DaisyUI::DataDisplay::BadgeComponent.new('Compact', variant: 'secondary')) %>
+        <%= render(DaisyUI::BadgeComponent.new('Compact', variant: 'secondary')) %>
       <% end,
       button_text: 'Action',
       button_class: 'btn btn-outline'

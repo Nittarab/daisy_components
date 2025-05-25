@@ -10,6 +10,10 @@ module DaisyUI
         autoloader.inflector.inflect(
           'daisy_ui' => 'DaisyUI'
         )
+
+        # Collapse directories to avoid nested namespaces
+        autoloader.collapse(root.join('app/components/daisy_ui/actions'))
+        autoloader.collapse(root.join('app/components/daisy_ui/data_display'))
       end
     end
 
@@ -29,8 +33,7 @@ module DaisyUI
             'Data Display' => 'daisyui/data_display/*',
             'Data Input' => 'daisyui/data_input/*',
             'Layout' => 'daisyui/layout/*',
-            'Navigation' => 'daisyui/navigation/*',
-            'Feedback' => 'daisyui/feedback/*'
+            'Navigation' => 'daisyui/navigation/*'
           }
 
           # Configure the default display options

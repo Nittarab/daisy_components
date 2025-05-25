@@ -8,7 +8,7 @@ module DaisyUI
       class MetadataComponentTest < DaisyUI::ComponentTestCase
         def test_raises_error_for_invalid_type
           error = assert_raises(ArgumentError) do
-            MetadataComponent.new(text: 'Test', type: :invalid)
+            DaisyUI::ChatBubbleComponent::MetadataComponent.new(text: 'Test', type: :invalid)
           end
 
           assert_equal 'Invalid type: invalid. Must be one of: header, footer', error.message
