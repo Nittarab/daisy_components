@@ -22,7 +22,7 @@ module DaisyUI
   #
   # @example With color
   #   <%= render(ChatBubbleComponent.new(text: "Hello!", color: :primary)) %>
-  class ChatBubbleComponent < BaseComponent
+  class ChatBubble < BaseComponent
     # Available chat bubble colors from DaisyUI
     COLORS = {
       primary: 'chat-bubble-primary',
@@ -43,11 +43,11 @@ module DaisyUI
 
     renders_one :avatar, lambda { |**system_arguments|
       size = system_arguments.delete(:size) || :w10
-      AvatarComponent.new(**system_arguments, class: 'chat-image', size: size, shape: :circle)
+      Avatar.new(**system_arguments, class: 'chat-image', size: size, shape: :circle)
     }
 
     renders_one :header, lambda { |**system_arguments|
-      MetadataComponent.new(
+      Metadata.new(
         **@header_options, **system_arguments,
         type: :header,
         class: @header_class
@@ -55,7 +55,7 @@ module DaisyUI
     }
 
     renders_one :footer, lambda { |**system_arguments|
-      MetadataComponent.new(
+      Metadata.new(
         **@footer_options, **system_arguments,
         type: :footer,
         class: @footer_class

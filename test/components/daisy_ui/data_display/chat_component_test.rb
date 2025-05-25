@@ -14,7 +14,7 @@ module DaisyUI
       )
 
       def test_renders_nothing_when_no_messages_are_provided
-        render_inline(ChatComponent.new)
+        render_inline(Chat.new)
         assert_no_selector 'div'
       end
 
@@ -24,7 +24,7 @@ module DaisyUI
           { text: 'Hi there', position: :end }
         ]
 
-        render_inline(ChatComponent.new(messages: messages))
+        render_inline(Chat.new(messages: messages))
 
         assert_selector 'div.chat.chat-start', count: 1
         assert_selector 'div.chat.chat-end', count: 1
@@ -36,7 +36,7 @@ module DaisyUI
           { text: 'From the current user', user_id: 1 }
         ]
 
-        render_inline(ChatComponent.new(messages: messages, current_user_id: 1))
+        render_inline(Chat.new(messages: messages, current_user_id: 1))
 
         assert_selector 'div.chat.chat-start', count: 1, text: 'From another user'
         assert_selector 'div.chat.chat-end', count: 1, text: 'From the current user'
@@ -47,7 +47,7 @@ module DaisyUI
           { text: 'Message with no positioning info' }
         ]
 
-        render_inline(ChatComponent.new(messages: messages))
+        render_inline(Chat.new(messages: messages))
 
         assert_selector 'div.chat.chat-start', count: 1
         assert_selector 'div.chat.chat-end', count: 0
@@ -59,7 +59,7 @@ module DaisyUI
           { text: 'Should be at start despite user_id', user_id: 1, position: :start }
         ]
 
-        render_inline(ChatComponent.new(messages: messages, current_user_id: 1))
+        render_inline(Chat.new(messages: messages, current_user_id: 1))
 
         assert_selector 'div.chat.chat-end', count: 1, text: 'Should be at end despite user_id'
         assert_selector 'div.chat.chat-start', count: 1, text: 'Should be at start despite user_id'
@@ -71,7 +71,7 @@ module DaisyUI
           { text: 'Secondary message', user_id: 1, color: :secondary }
         ]
 
-        render_inline(ChatComponent.new(messages: messages, current_user_id: 1))
+        render_inline(Chat.new(messages: messages, current_user_id: 1))
 
         assert_selector 'div.chat-bubble.chat-bubble-primary', count: 1
         assert_selector 'div.chat-bubble.chat-bubble-secondary', count: 1
@@ -82,7 +82,7 @@ module DaisyUI
           { text: 'Test message' }
         ]
 
-        component = ChatComponent.new(messages: messages, id: 'test-id')
+        component = Chat.new(messages: messages, id: 'test-id')
         assert_equal({ id: 'test-id' }, component.send(:html_attributes))
       end
 

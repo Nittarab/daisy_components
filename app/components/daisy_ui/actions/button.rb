@@ -89,7 +89,7 @@ module DaisyUI
   #     method: :delete,
   #     variant: "error"
   #   )) %>
-  class ButtonComponent < BaseComponent
+  class Button < BaseComponent
     renders_one :start_icon
     renders_one :end_icon
 

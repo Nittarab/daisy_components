@@ -17,7 +17,7 @@ module DaisyUI
   #     button: true,
   #     effect: :rotate
   #   )) %>
-  class SwapComponent < DaisyUI::BaseComponent
+  class Swap < DaisyUI::BaseComponent
     # Available variants from DaisyUI
     VARIANTS = {
       primary: 'text-primary',

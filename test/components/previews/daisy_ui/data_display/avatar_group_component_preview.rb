@@ -17,7 +17,7 @@ module DaisyUI
       # @param spacing number { min: 0, max: 4, step: 0.5, default: 1.5 } "Spacing between avatars in rem"
       # @param max_display number { min: 1, max: 10, default: nil } "Maximum number of avatars to display"
       def playground(size: :w24, shape: :circle, spacing: 1.5, max_display: nil)
-        render(DaisyUI::AvatarGroupComponent.new(
+        render(DaisyUI::AvatarGroup.new(
                  size: size,
                  shape: shape,
                  spacing: spacing.to_f,
@@ -35,7 +35,7 @@ module DaisyUI
       # @!endgroup
 
       def avatar_group_with_counter
-        render(DaisyUI::AvatarGroupComponent.new(
+        render(DaisyUI::AvatarGroup.new(
                  size: :w24,
                  shape: :circle,
                  spacing: 1.5,
@@ -48,7 +48,7 @@ module DaisyUI
       end
 
       def avatar_group
-        render(DaisyUI::AvatarGroupComponent.new(
+        render(DaisyUI::AvatarGroup.new(
                  size: :w12,
                  shape: :circle,
                  spacing: 1.5

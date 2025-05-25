@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DaisyUI
-  class ItemComponent < BaseComponent
+  class Item < BaseComponent
     def initialize(href: nil, **system_arguments)
       @href = href
       super(**system_arguments)

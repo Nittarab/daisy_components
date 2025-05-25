@@ -20,7 +20,7 @@ module DaisyUI
       # @param active toggle "Active state"
       # @param button toggle "Show as button"
       def playground(variant: :primary, size: :md, effect: nil, value: false, active: false, button: false)
-        render(DaisyUI::SwapComponent.new(
+        render(DaisyUI::Swap.new(
                  states: { on: 'ON', off: 'OFF' },
                  variant: variant,
                  size: size,
@@ -34,7 +34,7 @@ module DaisyUI
       # @!endgroup
 
       def hamburger_button
-        render(DaisyUI::SwapComponent.new(
+        render(DaisyUI::Swap.new(
                  states: {
                    on: hamburger_icon('h-6 w-6'),
                    off: close_icon('h-10 w-10')
@@ -45,11 +45,11 @@ module DaisyUI
       end
 
       def swap_icons_with_flip_effect
-        render(DaisyUI::SwapComponent.new(states: { on: '😈', off: '😇' }, class: 'text-2xl', effect: :flip))
+        render(DaisyUI::Swap.new(states: { on: '😈', off: '😇' }, class: 'text-2xl', effect: :flip))
       end
 
       def swap_icons_with_rotate_effect
-        render(DaisyUI::SwapComponent.new(
+        render(DaisyUI::Swap.new(
                  states: {
                    on: sun_icon('h-10 w-10'),
                    off: moon_icon('h-10 w-10')
@@ -59,11 +59,11 @@ module DaisyUI
       end
 
       def swap_text
-        render(DaisyUI::SwapComponent.new(states: { on: 'ON', off: 'OFF' }))
+        render(DaisyUI::Swap.new(states: { on: 'ON', off: 'OFF' }))
       end
 
       def swap_volume_icons
-        render(DaisyUI::SwapComponent.new(states: { on: volume_off_icon('h-10'), off: volume_on_icon('h-10') }))
+        render(DaisyUI::Swap.new(states: { on: volume_off_icon('h-10'), off: volume_on_icon('h-10') }))
       end
     end
   end

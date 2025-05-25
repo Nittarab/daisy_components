@@ -43,7 +43,7 @@ module DaisyUI
   #   )) do %>
   #     Content for item 1
   #   <% end %>
-  class AccordionItemComponent < BaseComponent
+  class AccordionItem < BaseComponent
     INDICATORS = %i[arrow plus].freeze
     INPUT_TYPES = %i[radio checkbox].freeze
 

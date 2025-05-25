@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DaisyUI
-  class CardComponent
+  class Card
     # Figure component for the card, handling image display
     #
     # @example Basic usage with URL
@@ -17,7 +17,7 @@ module DaisyUI
     #       <% end %>
     #     <% end %>
     #   <% end %>
-    class FigureComponent < BaseComponent
+    class Figure < BaseComponent
       # Image is a content slot that can contain any image content
       renders_one :image
 

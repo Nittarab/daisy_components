@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DaisyUI
-  class CardComponent
+  class Card
     # Body component for the card, containing title, description and actions
     #
     # @example Basic usage
@@ -31,12 +31,12 @@ module DaisyUI
     #       <% end %>
     #     <% end %>
     #   <% end %>
-    class BodyComponent < BaseComponent
+    class Body < BaseComponent
       # Title is a component slot that renders TitleComponent
-      renders_one :title, DaisyUI::CardComponent::TitleComponent
+      renders_one :title, DaisyUI::Card::Title
 
       # Actions is a component slot that renders ActionsComponent
-      renders_one :actions, DaisyUI::CardComponent::ActionsComponent
+      renders_one :actions, DaisyUI::Card::Actions
 
       # Description is a content slot that can contain any content
       renders_one :description

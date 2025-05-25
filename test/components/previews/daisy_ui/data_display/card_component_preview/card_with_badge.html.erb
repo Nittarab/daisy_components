@@ -1,8 +1,8 @@
-<%= render DaisyUI::CardComponent.new(img_url: 'https://picsum.photos/seed/card/400/200', img_alt: 'Alt text', shadow: true) do |component| %>
+<%= render DaisyUI::Card.new(img_url: 'https://picsum.photos/seed/card/400/200', img_alt: 'Alt text', shadow: true) do |component| %>
   <% component.with_body do |body| %>
     <% body.with_title do %>
       Card Title
-      <%= render(DaisyUI::BadgeComponent.new('NEW', color: :secondary)) %>
+      <%= render(DaisyUI::Badge.new('NEW', color: :secondary)) %>
     <% end %>
     <% body.with_description do %>
       <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>

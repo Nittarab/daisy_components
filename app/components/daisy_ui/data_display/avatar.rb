@@ -30,7 +30,7 @@ module DaisyUI
   #       helpers.user_icon
   #     end
   #   end %>
-  class AvatarComponent < DaisyUI::BaseComponent
+  class Avatar < DaisyUI::BaseComponent
     # Available avatar sizes in pixels
     SIZES = {
       w8: 'w-8',

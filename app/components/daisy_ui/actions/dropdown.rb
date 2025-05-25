@@ -20,19 +20,19 @@ module DaisyUI
   #     <% d.with_divider %>
   #     <% d.with_item(href: "#", class: "text-error") { "Delete" } %>
   #   <% end %>
-  class DropdownComponent < BaseComponent
+  class Dropdown < BaseComponent
     renders_one :trigger, lambda { |**kwargs, &block|
       return block if block
 
       defaults = { tag_type: :div, tabindex: '0', role: :button, class: 'm-1' }
       args = defaults.merge(kwargs)
-      render(ButtonComponent.new(**args))
+      render(Button.new(**args))
     }
 
     renders_many :items, types: {
-      item: { renders: DaisyUI::ItemComponent, as: :item },
-      divider: { renders: DaisyUI::DividerComponent, as: :divider },
-      title: { renders: DaisyUI::TitleComponent, as: :title }
+      item: { renders: DaisyUI::Item, as: :item },
+      divider: { renders: DaisyUI::Divider, as: :divider },
+      title: { renders: DaisyUI::Title, as: :title }
     }
 
     renders_one :custom_content
