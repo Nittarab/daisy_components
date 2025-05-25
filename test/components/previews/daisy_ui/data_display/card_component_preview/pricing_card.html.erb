@@ -1,0 +1,39 @@
+<%# frozen_string_literal: true %>
+
+<%= render DaisyUI::DataDisplay::CardComponent.new(shadow: true) do |component| %>
+  <% component.with_body do |body| %>
+    <% body.with_description do %>
+      <%= render DaisyUI::DataDisplay::BadgeComponent.new('Most Popular', color: :warning, size: :xs, tag_type: :span) %>
+
+      <div class="flex justify-between">
+        <h2 class="font-bold text-3xl">Premium</h2>
+        <span class="text-xl">$29/mo</span>
+      </div>
+
+      <ul class="flex flex-col gap-2 mt-6 text-xs">
+        <% [
+          ['High-resolution image generation', true],
+          ['Customizable style templates', true],
+          ['Batch processing capabilities', true],
+          ['AI-driven image enhancements', true],
+          ['Seamless cloud integration', false],
+          ['Real-time collaboration tools', false]
+        ].each do |text, enabled| %>
+        
+          <li class="<%= enabled ? nil : 'opacity-50' %>">
+            <%= helpers.check_icon("size-4 me-2 inline-block #{enabled ? 'text-success' : 'text-base-content/50'}", stroke: 'currentColor') %>
+            <span class="<%= enabled ? nil : 'line-through' %>"><%= text %></span>
+          </li>
+        <% end %>
+      </ul>
+
+      <div class="mt-6">
+        <%= render DaisyUI::Actions::ButtonComponent.new(
+          text: 'Subscribe',
+          color: :primary,
+          class: 'btn-block'
+        ) %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %> 

@@ -41,7 +41,7 @@ end
    - Mismatch between preview output and fixture
 
 ## Test Organization
-- Test files: `test/components/daisy_components/<module>/<component_name>_test.rb`
+- Test files: `test/components/daisy_ui/<module>/<component_name>_test.rb`
 - Fixtures: `test/fixtures/components/<component_name>/<example_name>.html`
 - NO: test files inside test/components/previews
 

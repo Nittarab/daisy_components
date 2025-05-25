@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/daisy_components/version'
+require_relative 'lib/daisy_ui/version'
 
 Gem::Specification.new do |spec|
   spec.name        = 'daisy_components'
-  spec.version     = DaisyComponents::VERSION
+  spec.version     = DaisyUI::VERSION
   spec.authors     = ['Patrick Barattin']
   spec.email       = ['pbarattin@gmail.com']
   spec.homepage    = 'https://github.com/pbarattin/daisy_components'
@@ -31,4 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rails', '>= 8.0.1'
   spec.metadata['rubygems_mfa_required'] = 'true'
+
+  # This tells Bundler what file to require when the gem is loaded
+  spec.require_paths = ['lib']
 end

@@ -1,9 +1,0 @@
-<%= render DaisyComponents::DataDisplay::CardComponent.new do |component| %>
-  <%= component.with_body do |body| %>
-    <%= body.with_description do %>
-      <%= render DaisyComponents::DataDisplay::BadgeComponent.new('Badge') %>
-      <p>Text content</p>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %> 

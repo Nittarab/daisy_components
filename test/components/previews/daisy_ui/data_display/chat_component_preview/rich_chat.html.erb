@@ -1,0 +1,48 @@
+<%
+avatar = {
+  img_src: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
+  img_alt: "User avatar"
+}
+
+messages = [
+  {
+    text: "# Hello!\nWelcome to our **support chat**. We now support *Markdown* formatting.",
+    user_id: 2,
+    color: :primary,
+    avatar: avatar,
+    header: {
+      text: "Support Agent",
+      time: "10:30"
+    },
+    footer: {
+      text: "Sent"
+    }
+  },
+  {
+    text: "Hi there! I need help with my account.\n\nCan I use Markdown?\n- List item 1\n- List item 2\n\nOr [links](https://example.com)?",
+    user_id: 1,
+    avatar: avatar,
+    header: {
+      text: "You",
+      time: "10:31"
+    },
+    footer: {
+      text: "Delivered"
+    }
+  },
+  {
+    text: "Yes, you can use:\n\n```ruby\ndef markdown_example\n  puts 'Code blocks too!'\nend\n```\n\nAnd ~~strikethrough~~ and `inline code`.",
+    user_id: 2,
+    color: :secondary,
+    avatar: avatar,
+    header: {
+      text: "Support Agent",
+      time: "10:32"
+    },
+    footer: {
+      text: "Sent"
+    }
+  }
+]
+%>
+<%= render DaisyUI::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1) %>

@@ -36,7 +36,7 @@ Rails.application.configure do
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
   # Add engine paths to watchlist for auto-reloading
-  engine_root = DaisyComponents::Engine.root
+  engine_root = DaisyUI::Engine.root
   config.watchable_dirs[engine_root.join('test/components').to_s] = %i[rb erb]
 
   # Add engine paths to autoload paths
