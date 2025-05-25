@@ -26,7 +26,7 @@ module DaisyUI
         padding: nil,
         classes: ''
       )
-        render(AccordionComponent.new(
+        render(DaisyUI::AccordionComponent.new(
                  join:,
                  indicator: indicator == 'none' ? nil : indicator&.to_sym,
                  input_type: input_type&.to_sym,
@@ -53,7 +53,7 @@ module DaisyUI
       # @label Radio Group
       # @description Only one item can be expanded at a time
       def accordion_using_radio_inputs
-        render(AccordionComponent.new(input_type: :radio)) do |accordion|
+        render(DaisyUI::AccordionComponent.new(input_type: :radio)) do |accordion|
           accordion.with_item(title: 'How do I create an account?', checked: true, name: 'my-accordion-1') do
             'Click the "Sign Up" button in the top right corner and follow the registration process.'
           end
@@ -69,7 +69,7 @@ module DaisyUI
       # @label Plus/Minus Icon
       # @description Accordion with plus/minus indicator
       def accordion_with_plusminus_icon
-        render(AccordionComponent.new(indicator: :plus, input_type: :radio)) do |accordion|
+        render(DaisyUI::AccordionComponent.new(indicator: :plus, input_type: :radio)) do |accordion|
           accordion.with_item(title: 'How do I create an account?', checked: true, name: 'my-accordion-3') do
             'Click the "Sign Up" button in the top right corner and follow the registration process.'
           end
@@ -85,7 +85,7 @@ module DaisyUI
       # @label Joined Items
       # @description Using Accordion and Join together
       def using_accordion_and_join_together
-        render(AccordionComponent.new(join: true, indicator: :arrow, input_type: :radio)) do |accordion|
+        render(DaisyUI::AccordionComponent.new(join: true, indicator: :arrow, input_type: :radio)) do |accordion|
           accordion.with_item(title: 'How do I create an account?', checked: true, name: 'my-accordion-4') do
             'Click the "Sign Up" button in the top right corner and follow the registration process.'
           end
@@ -101,7 +101,7 @@ module DaisyUI
       # @label Arrow Icon
       # @description Accordion with arrow indicator
       def accordion_with_arrow_icon
-        render(AccordionComponent.new(indicator: :arrow, input_type: :radio)) do |accordion|
+        render(DaisyUI::AccordionComponent.new(indicator: :arrow, input_type: :radio)) do |accordion|
           accordion.with_item(title: 'How do I create an account?', checked: true, name: 'my-accordion-2') do
             'Click the "Sign Up" button in the top right corner and follow the registration process.'
           end

@@ -7,7 +7,7 @@ module DaisyUI
     class CardComponent
       class BodyComponentTest < DaisyUI::ComponentTestCase
         def test_renders_description_when_provided
-          component = BodyComponent.new(description: 'Test description')
+          component = DaisyUI::CardComponent::BodyComponent.new(description: 'Test description')
 
           render_inline(component)
           assert_selector 'p', text: 'Test description'

@@ -42,7 +42,7 @@ end
 
 bad:
 ```ruby
-class DaisyComponents::Actions::SwapComponentTest < DaisyComponents::ComponentTestCase
+class DaisyComponents::SwapComponentTest < DaisyComponents::ComponentTestCase
 end
 ```
 

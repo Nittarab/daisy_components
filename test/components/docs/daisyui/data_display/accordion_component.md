@@ -5,7 +5,7 @@ The Accordion component allows you to create collapsible content sections. It's 
 ## Basic Usage
 
 ```erb
-<%= render(DaisyComponents::DataDisplay::AccordionComponent.new) do |component| %>
+<%= render(DaisyComponents::AccordionComponent.new) do |component| %>
   <%= component.with_item(title: "Section 1") do %>
     Content for section 1
   <% end %>
@@ -38,7 +38,7 @@ The Accordion component allows you to create collapsible content sections. It's 
 ### Arrow Style
 
 ```erb
-<%= render(DaisyComponents::DataDisplay::AccordionComponent.new(arrow: true)) do |component| %>
+<%= render(DaisyComponents::AccordionComponent.new(arrow: true)) do |component| %>
   <%= component.with_item(title: "Click me") do %>
     This content can be shown or hidden
   <% end %>
@@ -48,7 +48,7 @@ The Accordion component allows you to create collapsible content sections. It's 
 ### Plus/Minus Style
 
 ```erb
-<%= render(DaisyComponents::DataDisplay::AccordionComponent.new(plus: true)) do |component| %>
+<%= render(DaisyComponents::AccordionComponent.new(plus: true)) do |component| %>
   <%= component.with_item(title: "Expand me") do %>
     Expandable content here
   <% end %>
@@ -58,7 +58,7 @@ The Accordion component allows you to create collapsible content sections. It's 
 ### Radio Style (Single Open)
 
 ```erb
-<%= render(DaisyComponents::DataDisplay::AccordionComponent.new(radio: true)) do |component| %>
+<%= render(DaisyComponents::AccordionComponent.new(radio: true)) do |component| %>
   <%= component.with_item(title: "Item 1", name: "group1", checked: true) do %>
     First item content
   <% end %>
@@ -71,7 +71,7 @@ The Accordion component allows you to create collapsible content sections. It's 
 ### Joined Style
 
 ```erb
-<%= render(DaisyComponents::DataDisplay::AccordionComponent.new(join: true, arrow: true)) do |component| %>
+<%= render(DaisyComponents::AccordionComponent.new(join: true, arrow: true)) do |component| %>
   <%= component.with_item(title: "Section 1") do %>
     First section content
   <% end %>
@@ -84,7 +84,7 @@ The Accordion component allows you to create collapsible content sections. It's 
 ### Rich Content
 
 ```erb
-<%= render(DaisyComponents::DataDisplay::AccordionComponent.new(arrow: true)) do |component| %>
+<%= render(DaisyComponents::AccordionComponent.new(arrow: true)) do |component| %>
   <%= component.with_item(title: tag.div(class: "flex items-center gap-2") do %>
     <%= tag.svg(class: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor") do %>
       <%= tag.path(stroke_linecap: "round", stroke_linejoin: "round", stroke_width: 2,

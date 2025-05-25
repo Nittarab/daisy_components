@@ -24,10 +24,10 @@ module DaisyUI
       )
         if use_auto_positioning
           messages = create_auto_positioned_messages(color, with_avatar, with_header, with_footer)
-          render(DaisyUI::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1))
+          render(DaisyUI::ChatComponent.new(messages: messages, current_user_id: 1))
         else
           messages = create_manually_positioned_messages(position, color, with_avatar, with_header, with_footer)
-          render(DaisyUI::DataDisplay::ChatComponent.new(messages: messages))
+          render(DaisyUI::ChatComponent.new(messages: messages))
         end
       end
       # @!endgroup
@@ -46,7 +46,7 @@ module DaisyUI
           { text: "It's never happened before.", user_id: 1, color: :error }
         ]
 
-        render DaisyUI::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
+        render DaisyUI::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Chat with Header and Footer
@@ -57,7 +57,7 @@ module DaisyUI
           { text: 'I loved you.', user_id: 2, header: { text: 'Obi-Wan Kenobi', time: '2 hour ago' }, footer: { text: 'Delivered' } }
         ]
 
-        render DaisyUI::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
+        render DaisyUI::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Chat with Image
@@ -73,7 +73,7 @@ module DaisyUI
           { text: 'Not leave it in Darkness', user_id: 2, avatar: avatar }
         ]
 
-        render DaisyUI::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
+        render DaisyUI::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Chat with Image, Header and Footer
@@ -88,7 +88,7 @@ module DaisyUI
           { text: 'I hate you!', position: :end, avatar: avatar, header: { text: 'Anakin', time: '12:46' }, footer: { text: 'Seen at 12:46' } }
         ]
 
-        render DaisyUI::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
+        render DaisyUI::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Basic Chat Start and End
@@ -99,7 +99,7 @@ module DaisyUI
           { text: 'You underestimate my power!', user_id: 1 }
         ]
 
-        render DaisyUI::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
+        render DaisyUI::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Basic Chat
@@ -111,7 +111,7 @@ module DaisyUI
           { text: "I'll be happy to help you with pricing details.", user_id: 2 }
         ]
 
-        render DaisyUI::DataDisplay::ChatComponent.new(messages: messages, current_user_id: 1)
+        render DaisyUI::ChatComponent.new(messages: messages, current_user_id: 1)
       end
 
       # @label Rich Chat
