@@ -7,8 +7,9 @@ module DaisyUI
     class AvatarComponentPreview < ViewComponent::Preview
       # @!group Playground
 
-      # @label Playground
-      # @description Interactive avatar component with customizable appearance and status
+      # Playground
+      # ---------------
+      # Interactive avatar component with customizable appearance and status
       #
       # @param size select { choices: [w8, w12, w16, w20, w24, w32] } "Size in pixels"
       # @param shape select { choices: [circle, squircle, hexagon, triangle] } "Shape of the avatar"

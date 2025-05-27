@@ -32,8 +32,9 @@ module DaisyUI
       end
       # @!endgroup
 
-      # @label Chat Bubble with Colors
-      # @description Chat bubbles with different color variants
+      # Chat Bubble with Colors
+      # ---------------
+      # Chat bubbles with different color variants
       def chat_bubble_with_colors
         messages = [
           { text: 'What kind of nonsense is this', user_id: 2, color: :primary },
@@ -49,8 +50,9 @@ module DaisyUI
         render DaisyUI::Chat.new(messages: messages, current_user_id: 1)
       end
 
-      # @label Chat with Header and Footer
-      # @description Chat bubbles with header and footer information
+      # Chat with Header and Footer
+      # ---------------
+      # Chat bubbles with header and footer information
       def chat_with_header_and_footer
         messages = [
           { text: 'You were the Chosen One!', user_id: 2, header: { text: 'Obi-Wan Kenobi', time: '2 hours ago' }, footer: { text: 'Seen' } },
@@ -60,8 +62,9 @@ module DaisyUI
         render DaisyUI::Chat.new(messages: messages, current_user_id: 1)
       end
 
-      # @label Chat with Image
-      # @description Chat bubbles with avatar images
+      # Chat with Image
+      # ---------------
+      # Chat bubbles with avatar images
       def chat_with_image
         avatar = {
           img_src: 'https://picsum.photos/seed/avatar/100/100',
@@ -76,8 +79,9 @@ module DaisyUI
         render DaisyUI::Chat.new(messages: messages, current_user_id: 1)
       end
 
-      # @label Chat with Image, Header and Footer
-      # @description Chat bubbles with avatar, header and footer
+      # Chat with Image, Header and Footer
+      # ---------------
+      # Chat bubbles with avatar, header and footer
       def chat_with_image_header_and_footer
         avatar = {
           img_src: 'https://picsum.photos/seed/avatar/100/100',
@@ -91,8 +95,9 @@ module DaisyUI
         render DaisyUI::Chat.new(messages: messages, current_user_id: 1)
       end
 
-      # @label Basic Chat Start and End
-      # @description Chat bubbles with different positions
+      # Basic Chat Start and End
+      # ---------------
+      # Chat bubbles with different positions
       def chat_start_and_chat_end
         messages = [
           { text: "It's over Anakin,\nI have the high ground.", user_id: 2 },
@@ -102,8 +107,9 @@ module DaisyUI
         render DaisyUI::Chat.new(messages: messages, current_user_id: 1)
       end
 
-      # @label Basic Chat
-      # @description Simple chat with start and end positions
+      # Basic Chat
+      # ---------------
+      # Simple chat with start and end positions
       def basic_chat
         messages = [
           { text: 'Hi! How can I help you today?', user_id: 2 },
@@ -114,8 +120,9 @@ module DaisyUI
         render DaisyUI::Chat.new(messages: messages, current_user_id: 1)
       end
 
-      # @label Rich Chat
-      # @description Chat with all features combined
+      # Rich Chat
+      # ---------------
+      # Chat with all features combined
       def rich_chat
         render_with_template
       end
