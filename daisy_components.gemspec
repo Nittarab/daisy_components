@@ -25,7 +25,10 @@ Gem::Specification.new do |spec|
     f.match(%r{^(test|spec|tmp|\.|Gemfile\.lock|\.rubocop\.yml)/}) || f == '.rubocop.yml'
   end
 
-  spec.add_dependency 'rails', '>= 8.0.1'
+  spec.add_dependency 'lookbook', '>= 2.3.4'
+  spec.add_dependency 'rails', '>= 7.0'
+  spec.add_dependency 'redcarpet', '>= 3.6.1'
+  spec.add_dependency 'view_component', '>= 3.21.0'
   spec.metadata['rubygems_mfa_required'] = 'true'
 
   # This tells Bundler what file to require when the gem is loaded

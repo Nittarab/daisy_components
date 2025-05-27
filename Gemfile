@@ -5,11 +5,8 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'puma'
-gem 'redcarpet', '3.6.1'
-gem 'view_component', '3.21.0'
 
 group :development do
-  gem 'lookbook', '2.3.4'
   gem 'rubocop', '1.71.0'
   gem 'rubocop-capybara', '2.21.0'
   gem 'rubocop-performance', '1.23.1'
