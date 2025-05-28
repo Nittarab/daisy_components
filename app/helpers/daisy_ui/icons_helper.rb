@@ -34,7 +34,7 @@ module DaisyUI
       twitch: 'ph-twitch-logo',
       slack: 'ph-slack-logo',
       wechat: 'ph-wechat-logo'
-    }
+    }.freeze
 
     def phosphor_icon(icon_class, options = {})
       additional_classes = options.delete(:class) || ''
