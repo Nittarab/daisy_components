@@ -59,7 +59,7 @@ module DaisyUI
 
       def test_playground_preview_with_trigger_icon
         render_preview('playground', params: { trigger_icon: true })
-        assert_selector '.dropdown svg'
+        assert_selector '.dropdown i'
       end
 
       def test_playground_preview_with_header

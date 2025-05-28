@@ -21,7 +21,7 @@
         ].each do |text, enabled| %>
         
           <li class="<%= enabled ? nil : 'opacity-50' %>">
-            <%= helpers.check_icon("size-4 me-2 inline-block #{enabled ? 'text-success' : 'text-base-content/50'}", stroke: 'currentColor') %>
+            <%= helpers.check_icon(class: "size-4 me-2 inline-block #{enabled ? 'text-success' : 'text-base-content/50'}", stroke: 'currentColor') %>
             <span class="<%= enabled ? nil : 'line-through' %>"><%= text %></span>
           </li>
         <% end %>

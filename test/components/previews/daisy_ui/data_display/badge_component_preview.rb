@@ -31,7 +31,7 @@ module DaisyUI
                  color: color,
                  size: size,
                  variant: variant,
-                 icon: has_icon ? check_icon('h-4 w-4') : nil,
+                 icon: has_icon ? check_icon : nil,
                  class: classes
                ))
       end

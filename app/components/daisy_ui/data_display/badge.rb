@@ -34,6 +34,8 @@ module DaisyUI
   # @example With custom tag type
   #   <%= render(BadgeComponent.new(text: "Badge", tag_type: :span)) %>
   class Badge < DaisyUI::BaseComponent
+    renders_one :icon
+
     # Available badge colors from DaisyUI
     COLORS = {
       primary: 'badge-primary',
@@ -85,28 +87,21 @@ module DaisyUI
       @color = build_argument(color, COLORS, 'color')
       @size = build_argument(size, SIZES, 'size')
       @variant = build_argument(variant, VARIANTS, 'variant')
-      @icon = icon
       @tag_type = tag_type
 
+      with_icon { icon } if icon
       super(**system_arguments)
     end
 
     def call
       tag.public_send(@tag_type, **html_attributes) do
-        safe_join([render_icon, content || @text].compact)
+        safe_join([icon, content || @text].compact)
       end
     end
 
     delegate :to_s, to: :call
 
     private
-
-    def render_icon
-      return unless @icon
-
-      helpers.sanitize(@icon, tags: %w[svg path g circle],
-                              attributes: %w[class viewBox fill stroke d])
-    end
 
     def computed_classes
       modifiers = ['badge']

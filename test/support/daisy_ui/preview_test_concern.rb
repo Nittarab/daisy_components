@@ -25,7 +25,7 @@ module DaisyUI
             assert_equal(
               normalized_fixture,
               normalized_preview,
-              error_message(example, normalized_fixture, normalized_preview)
+              error_message(example, normalized_fixture, normalized_preview, fixture_path)
             )
           end
         end
@@ -34,9 +34,10 @@ module DaisyUI
 
     private
 
-    def error_message(example, fixture, preview)
+    def error_message(example, fixture, preview, fixture_path)
       [
         "Preview '#{example}' does not match fixture.",
+        "Fixture path:\n#{fixture_path}",
         "Expected:\n#{fixture}",
         "Got:\n#{preview}"
       ].join("\n")

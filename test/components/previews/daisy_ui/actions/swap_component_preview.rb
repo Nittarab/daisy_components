@@ -36,8 +36,8 @@ module DaisyUI
       def hamburger_button
         render(DaisyUI::Swap.new(
                  states: {
-                   on: hamburger_icon('h-6 w-6'),
-                   off: close_icon('h-10 w-10')
+                   on: hamburger_icon(class: 'text-xl'),
+                   off: close_icon(class: 'text-xl')
                  },
                  value: 'on',
                  button: true
@@ -51,8 +51,8 @@ module DaisyUI
       def swap_icons_with_rotate_effect
         render(DaisyUI::Swap.new(
                  states: {
-                   on: sun_icon('h-10 w-10'),
-                   off: moon_icon('h-10 w-10')
+                   on: sun_icon(class: 'text-xl'),
+                   off: moon_icon(class: 'text-xl')
                  },
                  effect: :rotate
                ))
@@ -63,7 +63,7 @@ module DaisyUI
       end
 
       def swap_volume_icons
-        render(DaisyUI::Swap.new(states: { on: volume_off_icon('h-10'), off: volume_on_icon('h-10') }))
+        render(DaisyUI::Swap.new(states: { on: volume_off_icon(class: 'text-xl'), off: volume_on_icon(class: 'text-xl') }))
       end
     end
   end
