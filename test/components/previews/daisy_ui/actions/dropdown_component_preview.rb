@@ -55,12 +55,12 @@ module DaisyUI
                  class: 'mb-40'
                )) do |d|
           d.with_trigger(text: trigger_text, color: color, size: size,
-                         icon_start: trigger_icon ? warning_icon('h-5 w-5') : nil)
+                         icon_start: trigger_icon ? warning_icon : nil)
           d.with_title { 'Menu' } if show_header
-          d.with_item(href: '#') { safe_join([home_icon('h-5 w-5 mr-2'), 'Item 1']) }
-          d.with_item(href: '#') { safe_join([email_icon('h-5 w-5 mr-2'), 'Item 2']) }
+          d.with_item(href: '#') { safe_join([home_icon, 'Item 1']) }
+          d.with_item(href: '#') { safe_join([email_icon, 'Item 2']) }
           d.with_divider
-          d.with_item(href: '#', class: 'text-error') { safe_join([sun_icon('h-5 w-5 mr-2'), 'Item 3']) }
+          d.with_item(href: '#', class: 'text-error') { safe_join([sun_icon, 'Item 3']) }
           d.with_item { tag.button('Save changes', class: 'btn btn-primary btn-sm w-full') } if show_footer
         end
       end

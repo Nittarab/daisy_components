@@ -45,8 +45,8 @@ module DaisyUI
                  disabled:,
                  loading:,
                  active:,
-                 icon_start: has_start_icon ? warning_icon('h-5 w-5') : nil,
-                 icon_end: has_end_icon ? chevron_down_icon('h-5 w-5') : nil,
+                 icon_start: has_start_icon ? warning_icon : nil,
+                 icon_end: has_end_icon ? chevron_down_icon : nil,
                  class: classes
                ))
       end

@@ -80,12 +80,12 @@ module DaisyUI
 
       def test_playground_preview_with_start_icon
         render_preview('playground', params: { has_start_icon: true })
-        assert_selector 'button.btn svg:first-child.h-5.w-5', count: 1
+        assert_selector 'button.btn i', count: 1
       end
 
       def test_playground_preview_with_end_icon
         render_preview('playground', params: { has_end_icon: true })
-        assert_selector 'button.btn svg:last-child.h-5.w-5', count: 1
+        assert_selector 'button.btn i', count: 1
       end
 
       def test_playground_preview_with_custom_classes
@@ -123,7 +123,7 @@ module DaisyUI
                        })
 
         assert_selector 'button.btn.btn-primary.btn-lg.btn-outline', count: 1
-        assert_selector 'button.btn svg:first-child.h-5.w-5', count: 1
+        assert_selector 'button.btn i', count: 1
         assert_text 'Test'
       end
     end
