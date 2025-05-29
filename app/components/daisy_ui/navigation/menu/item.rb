@@ -26,6 +26,9 @@ module DaisyUI
     class Item < BaseComponent
       renders_one :start_icon
       renders_one :end_icon
+      renders_one :badge, lambda { |**system_arguments|
+        DaisyUI::Badge.new(**system_arguments)
+      }
 
       # @param text [String] Item text content
       # @param href [String] Link URL
@@ -64,6 +67,7 @@ module DaisyUI
         @method = method
 
         with_start_icon { icon_start } if icon_start
+        with_badge { badge } if badge
         with_end_icon { icon_end } if icon_end
 
         super(**system_arguments)
@@ -119,7 +123,7 @@ module DaisyUI
         safe_join([
           start_icon,
           content_with_text,
-          badge_content,
+          badge,
           end_icon
         ].compact)
       end

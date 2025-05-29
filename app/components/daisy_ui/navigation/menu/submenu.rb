@@ -15,10 +15,17 @@ module DaisyUI
     #     <% submenu.with_item(text: "Laptops", href: "/laptops") %>
     #     <% submenu.with_item(text: "Phones", href: "/phones") %>
     #   <% end %>
+    #
+    # @example Collapsible submenu
+    #   <%= render(DaisyUI::Menu::Submenu.new(parent_text: "Products", collapsible: true, open: true)) do |submenu| %>
+    #     <% submenu.with_item(text: "Laptops", href: "/laptops") %>
+    #     <% submenu.with_item(text: "Phones", href: "/phones") %>
+    #   <% end %>
     class Submenu < BaseComponent
-      renders_many :items, lambda { |**system_arguments|
-        DaisyUI::Menu::Item.new(**system_arguments)
-      }
+      attr_accessor :collapsible, :open
+
+      renders_many :items, 'DaisyUI::Menu::Item'
+      renders_one :summary, 'DaisyUI::Menu::Item'
 
       renders_many :submenus, lambda { |**system_arguments|
         DaisyUI::Menu::Submenu.new(**system_arguments)
@@ -27,18 +34,24 @@ module DaisyUI
       # @param parent_text [String] Text for the parent menu item
       # @param parent_href [String] Link for the parent menu item
       # @param parent_active [Boolean] Whether parent item is active
+      # @param collapsible [Boolean] Whether submenu is collapsible using details/summary
+      # @param open [Boolean] Whether collapsible submenu is open by default
       # @param items [Array<Hash>] Simple array of submenu items (optional)
       # @param system_arguments [Hash] Additional HTML attributes
       def initialize(
         parent_text: nil,
         parent_href: nil,
         parent_active: false,
+        collapsible: false,
+        open: false,
         items: nil,
         **system_arguments
       )
         @parent_text = parent_text
         @parent_href = parent_href
         @parent_active = parent_active
+        @collapsible = collapsible
+        @open = open
         @items_data = items
 
         super(**system_arguments)
@@ -53,11 +66,10 @@ module DaisyUI
       end
 
       def call
-        tag.li(**html_attributes) do
-          safe_join([
-            parent_link,
-            submenu_content
-          ].compact)
+        if @collapsible
+          render_collapsible_submenu
+        else
+          render_regular_submenu
         end
       end
 
@@ -65,6 +77,29 @@ module DaisyUI
 
       def html_attributes
         system_arguments.except(:class).merge(class: system_arguments[:class])
+      end
+
+      def render_collapsible_submenu
+        tag.li(**html_attributes) do
+          details_attrs = {}
+          details_attrs[:open] = '' if @open
+
+          tag.details(**details_attrs) do
+            safe_join([
+                        tag.summary(summary),
+                        submenu_content
+                      ])
+          end
+        end
+      end
+
+      def render_regular_submenu
+        tag.li(**html_attributes) do
+          safe_join([
+            parent_link,
+            submenu_content
+          ].compact)
+        end
       end
 
       def parent_link

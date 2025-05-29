@@ -65,38 +65,34 @@ module DaisyUI
       DaisyUI::Menu::Title.new(**system_arguments)
     }
 
-    renders_many :submenus, lambda { |**system_arguments|
-      DaisyUI::Menu::Submenu.new(**system_arguments)
+    renders_many :submenus, lambda { |collapsible: false, open: false, **system_arguments|
+      DaisyUI::Menu::Submenu.new(collapsible: collapsible, open: open, **system_arguments)
     }
 
     # @param items [Array<Hash>] Simple array of menu items (optional)
     # @param size [Symbol] Menu size (:xs, :sm, :md, :lg, :xl)
     # @param direction [Symbol] Menu direction (:vertical, :horizontal)
     # @param responsive_direction [Symbol] Responsive direction (:lg_horizontal, :xl_horizontal)
-    # @param bg_color [String] Background color classes
-    # @param rounded [Boolean] Whether to apply rounded-box styling
-    # @param width [String] Width classes (e.g., 'w-56', 'w-full')
-    # @param padding [Boolean] Whether to include default padding
-    # @param system_arguments [Hash] Additional HTML attributes
+    # @param padding [Boolean] Whether to include default padding (default: true)
+    # @param rounded [Boolean] Whether to apply `rounded-box` styling (default: true).
+    #   Only applies if menu is not horizontal and no other `rounded-*` class is provided via `system_arguments[:class]`.
+    # @param system_arguments [Hash] Additional HTML attributes.
+    #   Use `class` to pass specific `bg-*` (defaults to `bg-base-200` if none provided)
+    #   and `w-*` (defaults to `w-56` for non-horizontal menus if none provided) utility classes.
+    #   Also, providing a `rounded-*` class here will override the `rounded` parameter.
     def initialize(
       items: nil,
       size: nil,
       direction: nil,
       responsive_direction: nil,
-      bg_color: 'bg-base-200',
       rounded: true,
-      width: 'w-56',
-      padding: true,
       **system_arguments
     )
       @items_data = items
       @size = build_argument(size, SIZES, 'size')
       @direction = build_argument(direction, DIRECTIONS, 'direction') if direction
       @responsive_direction = build_argument(responsive_direction, RESPONSIVE_DIRECTIONS, 'responsive_direction')
-      @bg_color = bg_color
       @rounded = rounded
-      @width = width
-      @padding = padding
 
       super(**system_arguments)
     end
@@ -120,6 +116,29 @@ module DaisyUI
       end
     end
 
+    # # Override with_item to track order
+    # def with_item(**system_arguments)
+    #   item = super
+    #   @ordered_elements << { type: :item, element: item }
+    #   item
+    # end
+
+    # # Override with_submenu to track order
+    # def with_submenu(collapsible: false, open: false, **system_arguments, &)
+    #   submenu = super(**system_arguments, &)
+    #   submenu.collapsible = collapsible
+    #   submenu.open = open
+    #   @ordered_elements << { type: :submenu, element: submenu }
+    #   submenu
+    # end
+
+    # # Override with_title to track order
+    # def with_title(**system_arguments)
+    #   title = super
+    #   @ordered_elements << { type: :title, element: title }
+    #   title
+    # end
+
     private
 
     def computed_classes
@@ -127,9 +146,7 @@ module DaisyUI
       modifiers << @size if @size.present?
       modifiers << @direction if @direction.present?
       modifiers << @responsive_direction if @responsive_direction.present?
-      modifiers << @bg_color if @bg_color.present?
       modifiers << 'rounded-box' if @rounded
-      modifiers << @width if @width.present? && @direction != DIRECTIONS[:horizontal]
 
       class_names(modifiers, system_arguments[:class])
     end
