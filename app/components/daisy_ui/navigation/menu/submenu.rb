@@ -70,16 +70,19 @@ module DaisyUI
       def parent_link
         return unless @parent_text
 
-        if @parent_href
-          tag.a(@parent_text, href: @parent_href, class: parent_classes)
-        else
-          tag.a(@parent_text, class: parent_classes)
-        end
+        attrs = {}
+        attrs[:href] = @parent_href if @parent_href
+        classes = parent_classes
+        attrs[:class] = classes if classes.present?
+
+        tag.a(@parent_text, **attrs)
       end
 
       def parent_classes
         modifiers = []
         modifiers << 'menu-active' if @parent_active
+        return nil if modifiers.empty?
+
         class_names(modifiers)
       end
 

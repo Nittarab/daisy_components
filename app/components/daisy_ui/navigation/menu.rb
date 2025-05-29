@@ -124,9 +124,9 @@ module DaisyUI
 
     def computed_classes
       modifiers = ['menu']
+      modifiers << @size if @size.present?
       modifiers << @direction if @direction.present?
       modifiers << @responsive_direction if @responsive_direction.present?
-      modifiers << @size if @size.present?
       modifiers << @bg_color if @bg_color.present?
       modifiers << 'rounded-box' if @rounded
       modifiers << @width if @width.present? && @direction != DIRECTIONS[:horizontal]
