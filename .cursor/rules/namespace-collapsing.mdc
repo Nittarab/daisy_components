@@ -1,0 +1,56 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# DaisyUI Component Namespace Collapsing
+
+## Overview
+This project uses Zeitwerk autoloader with namespace collapsing to simplify component class names. Understanding this is crucial for correctly referencing components throughout the codebase.
+
+## How It Works
+The autoloader configuration in [lib/daisy_ui/engine.rb](mdc:lib/daisy_ui/engine.rb) collapses specific directories:
+
+```ruby
+autoloader.collapse(root.join('app/components/daisy_ui/actions'))
+autoloader.collapse(root.join('app/components/daisy_ui/data_display'))
+autoloader.collapse(root.join('app/components/daisy_ui/navigation'))
+```
+
+## Impact on Component Classes
+
+### File Path vs Class Name
+- **File location**: `app/components/daisy_ui/actions/button.rb`
+- **Class definition**: `DaisyUI::Button` (NOT `DaisyUI::Actions::Button`)
+- **Usage**: `DaisyUI::Button.new` (ONLY correct way)
+
+### Examples
+| File Path | Collapsed Class Name | Wrong Class Name |
+|-----------|---------------------|------------------|
+| `app/components/daisy_ui/actions/button.rb` | `DaisyUI::Button` | ~~`DaisyUI::Actions::Button`~~ |
+| `app/components/daisy_ui/data_display/card.rb` | `DaisyUI::Card` | ~~`DaisyUI::DataDisplay::Card`~~ |
+| `app/components/daisy_ui/navigation/menu.rb` | `DaisyUI::Menu` | ~~`DaisyUI::Navigation::Menu`~~ |
+
+## Component Usage
+When referencing components in code:
+
+```ruby
+# Correct - collapsed namespace
+render DaisyUI::Button.new(text: "Click me")
+
+# Wrong - includes collapsed directory
+render DaisyUI::Actions::Button.new(text: "Click me") # ❌ Will fail
+
+# Wrong - Component suffix conflicts with preview classes
+render ButtonComponent.new(text: "Click me") # ❌ Conflicts with ButtonComponentPreview
+```
+
+## Key Points
+1. **Directory structure** is for organization only
+2. **Class namespaces** are flattened due to autoloader collapse
+3. **Always use** `DaisyUI::ComponentName.new` - no other naming convention
+4. **Component suffix** is reserved for preview classes (e.g., `ButtonComponentPreview`)
+
+## Reference Files
+- Engine configuration: [lib/daisy_ui/engine.rb](mdc:lib/daisy_ui/engine.rb)
+- Example component: [app/components/daisy_ui/actions/button.rb](mdc:app/components/daisy_ui/actions/button.rb)
