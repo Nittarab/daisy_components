@@ -1,6 +1,6 @@
 ---
 description: 
-globs: 
+globs: test/**/*_test.rb
 alwaysApply: false
 ---
 # Component Testing Structure
