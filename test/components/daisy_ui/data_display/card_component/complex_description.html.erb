@@ -1,7 +1,7 @@
 <%= render DaisyUI::Card.new do |component| %>
   <%= component.with_body do |body| %>
     <%= body.with_description do %>
-      <%= render DaisyUI::Badge.new('Badge') %>
+      <%= render DaisyUI::Badge.new(text: 'Badge') %>
       <p>Text content</p>
       <% end %>
     <% end %>

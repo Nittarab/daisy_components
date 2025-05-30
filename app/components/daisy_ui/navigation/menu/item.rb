@@ -32,8 +32,9 @@ module DaisyUI
     class Item < BaseComponent
       renders_one :start_icon
       renders_one :end_icon
-      renders_one :badge, lambda { |text = nil, **system_arguments|
-        DaisyUI::Badge.new(text: text, **system_arguments)
+      renders_one :badge, lambda { |options = {}|
+        puts "options: #{options}"
+        DaisyUI::Badge.new(tag_type: :span, **options)
       }
 
       # @param text [String] Item text content. Can also be provided as block content.

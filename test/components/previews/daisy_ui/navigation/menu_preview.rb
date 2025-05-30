@@ -155,9 +155,9 @@ module DaisyUI
           class: 'bg-base-200',
           rounded: true,
           items: [
-            { href: '#', icon_start: phosphor_icon('ph-envelope', class: 'text-2xl') },
-            { href: '#', icon_start: phosphor_icon('ph-info', class: 'text-2xl') },
-            { href: '#', icon_start: phosphor_icon('ph-chart-bar', class: 'text-2xl') }
+            { href: '#', icon_start: phosphor_icon('ph-envelope', class: 'text-2xl'), text: 'Inbox', badge: { text: '99+', size: :xs } },
+            { href: '#', icon_start: phosphor_icon('ph-info', class: 'text-2xl'), text: 'Updates', badge: { text: 'New', color: :warning, size: :xs } },
+            { href: '#', icon_start: phosphor_icon('ph-chart-bar', class: 'text-2xl'), text: 'Stats', badge: { text: 'New', color: :info, size: :xs } }
           ]
         )
       end
