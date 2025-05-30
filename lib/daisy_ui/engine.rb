@@ -14,6 +14,7 @@ module DaisyUI
         # Collapse directories to avoid nested namespaces
         autoloader.collapse(root.join('app/components/daisy_ui/actions'))
         autoloader.collapse(root.join('app/components/daisy_ui/data_display'))
+        autoloader.collapse(root.join('app/components/daisy_ui/navigation'))
       end
     end
 

@@ -66,8 +66,8 @@ module DaisyUI
 
         def test_renders_with_badge_actions
           component = DaisyUI::Card::Actions.new
-          component.with_badge('Badge 1')
-          component.with_badge('Badge 2')
+          component.with_badge(text: 'Badge 1')
+          component.with_badge(text: 'Badge 2')
 
           render_inline(component)
 

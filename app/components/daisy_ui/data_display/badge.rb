@@ -75,7 +75,7 @@ module DaisyUI
     # @param tag_type [Symbol] HTML tag to use for the badge (default: :div)
     # @param system_arguments [Hash] Additional HTML attributes to be applied to the badge
     def initialize(
-      text = nil,
+      text: nil,
       color: nil,
       size: nil,
       variant: nil,

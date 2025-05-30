@@ -39,11 +39,11 @@ module DaisyUI
       # @!endgroup
       #
       def badge
-        render(DaisyUI::Badge.new('Badge', tag_type: :span))
+        render(DaisyUI::Badge.new(text: 'Badge', tag_type: :span))
       end
 
       def badge_ghost
-        render(DaisyUI::Badge.new('ghost', variant: :ghost))
+        render(DaisyUI::Badge.new(text: 'ghost', variant: :ghost))
       end
 
       def badge_sizes

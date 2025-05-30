@@ -2,14 +2,14 @@
   <% component.with_body do |body| %>
     <% body.with_title do %>
       Card Title
-      <%= render(DaisyUI::Badge.new('NEW', color: :secondary)) %>
+      <%= render(DaisyUI::Badge.new(text: 'NEW', color: :secondary)) %>
     <% end %>
     <% body.with_description do %>
       <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
     <% end %>
     <% body.with_actions(justify: :end) do |actions|%>
-    <% actions.with_badge('Fashion', variant: :outline)%>
-    <% actions.with_badge('Products', variant: :outline)%>
+    <% actions.with_badge(text: 'Fashion', variant: :outline)%>
+    <% actions.with_badge(text: 'Products', variant: :outline)%>
     <% end %>
   <% end %>
 <% end %>

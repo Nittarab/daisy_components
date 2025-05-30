@@ -3,7 +3,7 @@
 <%= render DaisyUI::Card.new(shadow: true) do |component| %>
   <% component.with_body do |body| %>
     <% body.with_description do %>
-      <%= render DaisyUI::Badge.new('Most Popular', color: :warning, size: :xs, tag_type: :span) %>
+      <%= render DaisyUI::Badge.new(text: 'Most Popular', color: :warning, size: :xs, tag_type: :span) %>
 
       <div class="flex justify-between">
         <h2 class="font-bold text-3xl">Premium</h2>
