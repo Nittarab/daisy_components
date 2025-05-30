@@ -162,11 +162,45 @@ module DaisyUI
         )
       end
 
-      # def menu_with_icons_and_badge_responsive; end # combined with responsive_menu + menu_with_icons_and_badge
-      # def menu_with_icons; end # covered by menu_with_icons_and_badge
-      # def menu_with_title_as_a_parent; end # covered by menu_with_title
-      # def menu_without_padding_and_border_radius; end
-      # def responsive_vertical_on_small_screen_horizontal_on_large_screen; end # covered by responsive_menu
+      def menu_with_icons
+        render DaisyUI::Menu.new(
+          class: 'bg-base-200 w-56',
+          rounded: true,
+          items: [
+            { href: '#', icon_start: phosphor_icon('ph-house', class: 'text-2xl'), text: 'Item 1' },
+            { href: '#', icon_start: phosphor_icon('ph-info', class: 'text-2xl'), text: 'Item 2' },
+            { href: '#', icon_start: phosphor_icon('ph-chart-bar', class: 'text-2xl'), text: 'Item 3' }
+          ]
+        )
+      end
+
+      # def menu_with_title_as_a_parent; end # TODO
+      def menu_without_padding_and_border_radius
+        render DaisyUI::Menu.new(
+          class: 'bg-base-200 w-56',
+          padding: false,
+          border_radius: false,
+          items: [
+            { href: '#', text: 'Item 1' },
+            { href: '#', text: 'Item 2' },
+            { href: '#', text: 'Item 3' }
+          ]
+        )
+      end
+
+      def responsive_vertical_on_small_screen_horizontal_on_large_screen
+        render DaisyUI::Menu.new(
+          direction: :vertical,
+          responsive_direction: :lg_horizontal,
+          class: 'bg-base-200',
+          rounded: true,
+          items: [
+            { href: '#', text: 'Item 1' },
+            { href: '#', text: 'Item 2' },
+            { href: '#', text: 'Item 3' }
+          ]
+        )
+      end
     end
   end
 end

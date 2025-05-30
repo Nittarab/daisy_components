@@ -85,6 +85,8 @@ module DaisyUI
     # @param direction [Symbol] Menu direction (:vertical, :horizontal)
     # @param responsive_direction [Symbol] Responsive direction (:lg_horizontal, :xl_horizontal)
     # @param rounded [Boolean] Whether to apply `rounded-box` styling (default: false).
+    # @param padding [Boolean] Whether to apply `p-2` styling (default: true).
+    # @param border_radius [Boolean] Whether to apply `rounded-box` styling (default: true).
     # @param system_arguments [Hash] Additional HTML attributes.
     def initialize(
       title: nil,
@@ -93,6 +95,8 @@ module DaisyUI
       direction: nil,
       responsive_direction: nil,
       rounded: false,
+      padding: true,
+      border_radius: true,
       **system_arguments
     )
       super(**system_arguments)
@@ -106,6 +110,8 @@ module DaisyUI
       @direction = build_argument(direction, DIRECTIONS, 'direction') if direction
       @responsive_direction = build_argument(responsive_direction, RESPONSIVE_DIRECTIONS, 'responsive_direction')
       @rounded = rounded
+      @padding = padding
+      @border_radius = border_radius
     end
 
     def call
@@ -125,6 +131,8 @@ module DaisyUI
       modifiers << @direction if @direction.present?
       modifiers << @responsive_direction if @responsive_direction.present?
       modifiers << 'rounded-box' if @rounded
+      modifiers << 'p-0' unless @padding
+      modifiers << '[&_li>*]:rounded-none' unless @border_radius
 
       class_names(modifiers, system_arguments[:class])
     end

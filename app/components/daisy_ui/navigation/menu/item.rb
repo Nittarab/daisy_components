@@ -33,7 +33,6 @@ module DaisyUI
       renders_one :start_icon
       renders_one :end_icon
       renders_one :badge, lambda { |options = {}|
-        puts "options: #{options}"
         DaisyUI::Badge.new(tag_type: :span, **options)
       }
 
