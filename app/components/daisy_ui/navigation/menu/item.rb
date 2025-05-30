@@ -41,8 +41,10 @@ module DaisyUI
       # @param active [Boolean] Active state (adds `menu-active` class to the link).
       # @param disabled [Boolean] Disabled state (adds `menu-disabled` class to the `<li>` element).
       # @param focused [Boolean] Focus state (adds `menu-focus` class to the link).
-      # @param icon_start [String, ActiveSupport::SafeBuffer] HTML for the leading icon. Alternatively, use the `with_start_icon` slot.
-      # @param icon_end [String, ActiveSupport::SafeBuffer] HTML for the trailing icon. Alternatively, use the `with_end_icon` slot.
+      # @param icon_start [String, ActiveSupport::SafeBuffer] HTML for the leading icon.
+      #   Alternatively, use the `with_start_icon` slot.
+      # @param icon_end [String, ActiveSupport::SafeBuffer] HTML for the trailing icon.
+      #   Alternatively, use the `with_end_icon` slot.
       # @param badge [String, Hash] Badge content or options for `DaisyUI::Badge`.
       #   If a String is passed, it's used as the badge text.
       #   If a Hash is passed, it's used as arguments for `DaisyUI::Badge.new`.
@@ -107,11 +109,13 @@ module DaisyUI
         ).presence
       end
 
+      # TODO: not sure this is needed
       def li_attributes
         {
-          **system_arguments.except(:class, :title), # Exclude class as it's handled in computed_li_classes, title is for tooltip
+          # Exclude class as it's handled in computed_li_classes, title is for tooltip
+          **system_arguments.except(:class, :title),
           class: computed_li_classes,
-          title: @tooltip # Apply tooltip to the li element
+          title: @tooltip
         }.compact
       end
 

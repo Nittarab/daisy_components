@@ -79,8 +79,8 @@ module DaisyUI
     }
 
     # @param title [String] Optional title text. If provided, a title element is added at the beginning of the menu.
-    # @param items [Array<Hash>] Optional array of item hashes. Each hash is passed as keyword arguments to `DaisyUI::Menu::Item.new`.
-    #   If provided, item elements are added after the title (if any).
+    # @param items [Array<Hash>] Optional array of item hashes. Each hash is passed as keyword arguments to
+    #   `DaisyUI::Menu::Item.new`.  If provided, item elements are added after the title (if any).
     # @param size [Symbol] Menu size (:xs, :sm, :md, :lg, :xl)
     # @param direction [Symbol] Menu direction (:vertical, :horizontal)
     # @param responsive_direction [Symbol] Responsive direction (:lg_horizontal, :xl_horizontal)
