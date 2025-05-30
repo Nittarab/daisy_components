@@ -84,19 +84,15 @@ module DaisyUI
     # @param size [Symbol] Menu size (:xs, :sm, :md, :lg, :xl)
     # @param direction [Symbol] Menu direction (:vertical, :horizontal)
     # @param responsive_direction [Symbol] Responsive direction (:lg_horizontal, :xl_horizontal)
-    # @param rounded [Boolean] Whether to apply `rounded-box` styling (default: true).
-    #   Only applies if menu is not horizontal and no other `rounded-*` class is provided via `system_arguments[:class]`.
+    # @param rounded [Boolean] Whether to apply `rounded-box` styling (default: false).
     # @param system_arguments [Hash] Additional HTML attributes.
-    #   Use `class` to pass specific `bg-*` (defaults to `bg-base-200` if none provided)
-    #   and `w-*` (defaults to `w-56` for non-horizontal menus if none provided) utility classes.
-    #   Also, providing a `rounded-*` class here will override the `rounded` parameter.
     def initialize(
       title: nil,
       items: nil,
       size: nil,
       direction: nil,
       responsive_direction: nil,
-      rounded: true,
+      rounded: false,
       **system_arguments
     )
       super(**system_arguments)
@@ -113,7 +109,7 @@ module DaisyUI
     end
 
     def call
-      tag.ul(**html_attributes) do
+      tag.ul(class: computed_classes, **system_arguments.except(:class)) do
         safe_join([
                     content,
                     elements
@@ -128,21 +124,9 @@ module DaisyUI
       modifiers << @size if @size.present?
       modifiers << @direction if @direction.present?
       modifiers << @responsive_direction if @responsive_direction.present?
-      if @rounded && !(@direction == 'menu-horizontal' || system_arguments[:class]&.match?(/rounded-/))
-        modifiers << 'rounded-box'
-      end
+      modifiers << 'rounded-box' if @rounded
 
       class_names(modifiers, system_arguments[:class])
-    end
-
-    def html_attributes
-      default_classes = []
-      default_classes << 'bg-base-200' unless system_arguments[:class]&.match?(/bg-/)
-      default_classes << 'w-56' unless @direction == 'menu-horizontal' || system_arguments[:class]&.match?(/w-/)
-
-      merged_classes = class_names(computed_classes, default_classes)
-
-      system_arguments.merge(class: merged_classes)
     end
   end
 end

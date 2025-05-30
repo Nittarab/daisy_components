@@ -76,7 +76,7 @@ module DaisyUI
         @method = method
 
         with_start_icon { icon_start } if icon_start
-        with_badge { badge } if badge
+        with_badge(badge) if badge
         with_end_icon { icon_end } if icon_end
 
         super(**system_arguments)
@@ -145,22 +145,6 @@ module DaisyUI
           content
         elsif @text.present?
           @text # Use the text parameter if no block content
-        end
-      end
-
-      def badge_content
-        return unless @badge
-
-        # This method is kept for compatibility if badge was passed directly as a simple string
-        # But the `renders_one :badge` with the lambda is the primary way badges are now handled
-        # if `with_badge` slot or initializer `badge:` hash is used.
-        if @badge.is_a?(String)
-          tag.span(@badge, class: 'badge badge-xs') # Basic badge if string
-        else
-          # If @badge is a Hash, it means it was intended for the DaisyUI::Badge component
-          # and should have been handled by `with_badge(**@badge)` or the slot.
-          # This path should ideally not be hit if using the component correctly.
-          nil
         end
       end
     end

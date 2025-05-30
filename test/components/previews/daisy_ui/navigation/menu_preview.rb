@@ -31,9 +31,9 @@ module DaisyUI
           rounded: rounded,
           class: custom_classes,
           items: [
-            { text: 'Home', href: '#', active: true, icon_start: home_icon(class: 'w-4 h-4') },
-            { text: 'Messages', href: '#', badge: { text: '99+', class: 'badge-primary' }, icon_start: email_icon(class: 'w-4 h-4') },
-            { text: 'Analytics', href: '#', icon_start: phosphor_icon('ph-chart-bar', class: 'w-4 h-4'), icon_end: chevron_down_icon(class: 'w-4 h-4') }
+            { text: 'Home', href: '#', active: true, icon_start: home_icon(class: 'text-2xl') },
+            { text: 'Messages', href: '#', badge: '99+', icon_start: email_icon(class: 'text-2xl') },
+            { text: 'Analytics', href: '#', icon_start: phosphor_icon('ph-chart-bar', class: 'text-2xl'), badge: { text: 'New', class: 'badge-neutral' } }
           ]
         )
       end
@@ -68,7 +68,8 @@ module DaisyUI
       # Basic menu with items, using the `items` parameter.
       def menu
         render DaisyUI::Menu.new(
-          class: 'bg-base-200 w-56', # Added default styling for better visual
+          class: 'bg-base-200 w-56',
+          rounded: true,
           items: [
             { text: 'Item 1', href: '#' },
             { text: 'Item 2', href: '#' },
@@ -97,6 +98,7 @@ module DaisyUI
       def menu_with_disabled_items
         render DaisyUI::Menu.new(
           class: 'bg-base-200 w-56',
+          rounded: true,
           items: [
             { text: 'Enabled item', href: '#' },
             { text: 'disabled item', href: '#', disabled: true },
@@ -120,10 +122,46 @@ module DaisyUI
         )
       end
 
-      # def menu_with_icon_only_horizontal_with_tooltip; end
-      # def menu_with_icon_only_horizontal; end
-      # def menu_with_icon_only_with_tooltip; end
-      # def menu_with_icon_only; end
+      # def menu_with_icon_only_horizontal_with_tooltip; end TODO once we have tooltip
+
+      def menu_with_icon_only_horizontal
+        render DaisyUI::Menu.new(
+          direction: :horizontal,
+          class: 'bg-base-200 rounded-box',
+          items: [
+            { href: '#', icon_start: home_icon(class: 'text-2xl') },
+            { href: '#', icon_start: info_icon(class: 'text-2xl') },
+            { href: '#', icon_start: phosphor_icon('ph-chart-bar', class: 'text-2xl') }
+          ]
+        )
+      end
+
+      # def menu_with_icon_only_with_tooltip; end TODO once we have tooltip
+      def menu_with_icon_only
+        render DaisyUI::Menu.new(
+          class: 'bg-base-200',
+          rounded: true,
+          items: [
+            { href: '#', icon_start: home_icon(class: 'text-2xl') },
+            { href: '#', icon_start: info_icon(class: 'text-2xl') },
+            { href: '#', icon_start: phosphor_icon('ph-chart-bar', class: 'text-2xl') }
+          ]
+        )
+      end
+
+      def menu_with_icons_and_badge_responsive
+        render DaisyUI::Menu.new(
+          responsive_direction: :lg_horizontal,
+          class: 'bg-base-200',
+          rounded: true,
+          items: [
+            { href: '#', icon_start: phosphor_icon('ph-envelope', class: 'text-2xl') },
+            { href: '#', icon_start: phosphor_icon('ph-info', class: 'text-2xl') },
+            { href: '#', icon_start: phosphor_icon('ph-chart-bar', class: 'text-2xl') }
+          ]
+        )
+      end
+
       # def menu_with_icons_and_badge_responsive; end # combined with responsive_menu + menu_with_icons_and_badge
       # def menu_with_icons; end # covered by menu_with_icons_and_badge
       # def menu_with_title_as_a_parent; end # covered by menu_with_title
