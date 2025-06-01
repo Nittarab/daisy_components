@@ -70,8 +70,8 @@ module DaisyUI
 
     # Polymorphic slot for menu elements.
     # Allows rendering different types of content like items or titles.
-    # To add an item: `menu.with_item_element(**options)`
-    # To add a title: `menu.with_title_element(**options)`
+    # To add an item: `menu.with_element_item(**options)`
+    # To add a title: `menu.with_element_title(**options)`
     renders_many :elements, types: {
       item: 'DaisyUI::Menu::Item',
       title: 'DaisyUI::Menu::Title'
