@@ -4,7 +4,7 @@ module DaisyUI
   module Actions
     # @label Swap
     # @display bg_color "#fff"
-    class SwapComponentPreview < ViewComponent::Preview
+    class SwapPreview < ViewComponent::Preview
       include DaisyUI::IconsHelper
 
       # @!group Playground

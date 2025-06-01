@@ -4,7 +4,7 @@
 # @display bg_color "#fff"
 module DaisyUI
   module DataDisplay
-    class BadgeComponentPreview < ViewComponent::Preview
+    class BadgePreview < ViewComponent::Preview
       include DaisyUI::IconsHelper
 
       # @!group Playground

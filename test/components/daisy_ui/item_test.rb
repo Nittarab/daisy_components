@@ -3,7 +3,7 @@
 require 'test_helper'
 
 module DaisyUI
-  class ItemComponentTest < DaisyUI::ComponentTestCase
+  class ItemTest < DaisyUI::ComponentTestCase
     def test_renders_content
       item_text = 'Item content'
       render_inline(Item.new) { item_text }

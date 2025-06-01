@@ -4,11 +4,11 @@ require 'test_helper'
 
 module DaisyUI
   module Actions
-    class DropdownComponentTest < DaisyUI::ComponentTestCase
+    class DropdownTest < DaisyUI::ComponentTestCase
       include DaisyUI::PreviewTestConcern
 
       test_all_preview_examples(
-        preview_class: DropdownComponentPreview,
+        preview_class: DropdownPreview,
         component_name: 'dropdown',
         exclude: %w[playground]
       )

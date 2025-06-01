@@ -5,10 +5,10 @@ require 'nokogiri'
 
 module DaisyUI
   module Actions
-    class ButtonComponentTest < DaisyUI::ComponentTestCase
+    class ButtonTest < DaisyUI::ComponentTestCase
       include DaisyUI::PreviewTestConcern
 
-      test_all_preview_examples(preview_class: ButtonComponentPreview, component_name: 'button',
+      test_all_preview_examples(preview_class: ButtonPreview, component_name: 'button',
                                 exclude: ['login_buttons'])
 
       # Begin playground preview tests

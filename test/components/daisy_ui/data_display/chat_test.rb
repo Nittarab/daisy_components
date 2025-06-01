@@ -4,11 +4,11 @@ require 'test_helper'
 
 module DaisyUI
   module DataDisplay
-    class ChatComponentTest < DaisyUI::ComponentTestCase
+    class ChatTest < DaisyUI::ComponentTestCase
       include DaisyUI::PreviewTestConcern
 
       test_all_preview_examples(
-        preview_class: ChatComponentPreview,
+        preview_class: ChatPreview,
         component_name: 'chat',
         exclude: %w[playground rich_chat]
       )

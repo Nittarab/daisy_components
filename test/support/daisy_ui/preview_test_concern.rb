@@ -9,7 +9,7 @@ module DaisyUI
         exclude = Array(exclude).push('playground')
         preview_class.examples.reject { |e| exclude.include?(e) }.each do |example|
           define_method(:"test_#{example}_preview") do
-            render_preview(example.to_sym)
+            render_preview(example.to_sym, from: preview_class)
             preview_container = page.find_by_id('preview-container')
             fixture_path = fixture_path(component_name, example)
 

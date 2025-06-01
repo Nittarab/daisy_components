@@ -3,7 +3,7 @@
 module DaisyUI
   module DataDisplay
     # @label Chat
-    class ChatComponentPreview < ViewComponent::Preview
+    class ChatPreview < ViewComponent::Preview
       include DaisyUI::IconsHelper
 
       # @!group Playground

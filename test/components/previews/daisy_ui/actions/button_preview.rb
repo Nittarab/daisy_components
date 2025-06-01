@@ -4,7 +4,7 @@
 # @display bg_color "#fff"
 module DaisyUI
   module Actions
-    class ButtonComponentPreview < ViewComponent::Preview
+    class ButtonPreview < ViewComponent::Preview
       include DaisyUI::IconsHelper
       # @!group Playground
 

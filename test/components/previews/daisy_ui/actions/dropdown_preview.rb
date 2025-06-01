@@ -4,7 +4,7 @@ module DaisyUI
   module Actions
     # @label Dropdown
     # @display bg_color "#fff"
-    class DropdownComponentPreview < ViewComponent::Preview
+    class DropdownPreview < ViewComponent::Preview
       include DaisyUI::IconsHelper
       include ActionView::Helpers::TagHelper
 

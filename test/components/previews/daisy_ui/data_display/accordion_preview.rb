@@ -4,7 +4,7 @@
 # @display bg_color "#fff"
 module DaisyUI
   module DataDisplay
-    class AccordionComponentPreview < ViewComponent::Preview
+    class AccordionPreview < ViewComponent::Preview
       # @!group Playground
 
       # Playground

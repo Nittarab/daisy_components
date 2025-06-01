@@ -4,11 +4,11 @@ require 'test_helper'
 
 module DaisyUI
   module DataDisplay
-    class AccordionComponentTest < DaisyUI::ComponentTestCase
+    class AccordionTest < DaisyUI::ComponentTestCase
       include DaisyUI::PreviewTestConcern
 
       test_all_preview_examples(
-        preview_class: AccordionComponentPreview,
+        preview_class: AccordionPreview,
         component_name: 'accordion',
         exclude: %w[playground]
       )

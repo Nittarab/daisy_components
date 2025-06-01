@@ -5,7 +5,7 @@ require 'redcarpet'
 
 module DaisyUI
   module DataDisplay
-    class ChatBubbleComponentTest < DaisyUI::ComponentTestCase
+    class ChatBubbleTest < DaisyUI::ComponentTestCase
       def test_renders_basic_text_content
         render_inline(DaisyUI::ChatBubble.new('Hello World'))
 
