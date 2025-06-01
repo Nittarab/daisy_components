@@ -10,6 +10,11 @@ module DaisyUI
       test_all_preview_examples(preview_class: StackPreview,
                                 component_name: 'stack',
                                 exclude: ['playground'])
+
+      def test_playground
+        render_preview(:playground, from: StackPreview)
+        assert_selector 'div.stack'
+      end
     end
   end
 end
