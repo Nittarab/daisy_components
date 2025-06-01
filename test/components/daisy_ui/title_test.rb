@@ -3,7 +3,7 @@
 require 'test_helper'
 
 module DaisyUI
-  class TitleComponentTest < DaisyUI::ComponentTestCase
+  class TitleTest < DaisyUI::ComponentTestCase
     def test_renders_title
       title_text = 'Title content'
       render_inline(Title.new) { title_text }

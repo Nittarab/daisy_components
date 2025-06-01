@@ -4,7 +4,7 @@
 # @display bg_color "#fff"
 module DaisyUI
   module DataDisplay
-    class AvatarGroupComponentPreview < ViewComponent::Preview
+    class AvatarGroupPreview < ViewComponent::Preview
       # @!group Playground
 
       # Avatar Group Playground

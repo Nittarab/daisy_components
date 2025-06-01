@@ -4,7 +4,7 @@ module DaisyUI
   module DataDisplay
     # @label Card
     # @display bg_color "#fff"
-    class CardComponentPreview < ViewComponent::Preview
+    class CardPreview < ViewComponent::Preview
       include DaisyUI::IconsHelper
       # @!group Playground
 

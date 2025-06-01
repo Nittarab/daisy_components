@@ -4,10 +4,10 @@ require 'test_helper'
 
 module DaisyUI
   module DataDisplay
-    class CardComponentTest < DaisyUI::ComponentTestCase
+    class BadgeTest < DaisyUI::ComponentTestCase
       include DaisyUI::PreviewTestConcern
 
-      test_all_preview_examples(preview_class: CardComponentPreview, component_name: 'card')
+      test_all_preview_examples(preview_class: BadgePreview, component_name: 'badge')
     end
   end
 end

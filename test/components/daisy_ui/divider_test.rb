@@ -3,7 +3,7 @@
 require 'test_helper'
 
 module DaisyUI
-  class DividerComponentTest < DaisyUI::ComponentTestCase
+  class DividerTest < DaisyUI::ComponentTestCase
     def test_renders_divider
       component = Divider.new
 

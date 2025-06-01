@@ -4,10 +4,10 @@ require 'test_helper'
 
 module DaisyUI
   module DataDisplay
-    class AvatarComponentTest < DaisyUI::ComponentTestCase
+    class AvatarTest < DaisyUI::ComponentTestCase
       include DaisyUI::PreviewTestConcern
 
-      test_all_preview_examples(preview_class: AvatarComponentPreview, component_name: 'avatar')
+      test_all_preview_examples(preview_class: AvatarPreview, component_name: 'avatar')
 
       # Begin playground preview tests
       def test_playground_preview_default
