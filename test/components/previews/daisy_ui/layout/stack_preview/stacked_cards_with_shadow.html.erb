@@ -1,0 +1,5 @@
+<%= render DaisyUI::Stack.new(direction: @direction,) do %>
+  <%= render DaisyUI::Card.new(class: "shadow-md text-center", description: 'A') %>
+  <%= render DaisyUI::Card.new(class: "shadow text-center",  description: 'B') %>
+  <%= render DaisyUI::Card.new(class: "shadow-sm text-center" , description: 'C') %>
+<% end %>

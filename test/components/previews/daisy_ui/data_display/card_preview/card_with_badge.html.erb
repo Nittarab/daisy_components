@@ -1,4 +1,4 @@
-<%= render DaisyUI::Card.new(img_url: 'https://picsum.photos/seed/card/400/200', img_alt: 'Alt text', shadow: true) do |component| %>
+<%= render DaisyUI::Card.new(class: 'w-96', img_url: 'https://picsum.photos/seed/card/400/200', img_alt: 'Alt text', shadow: true) do |component| %>
   <% component.with_body do |body| %>
     <% body.with_title do %>
       Card Title

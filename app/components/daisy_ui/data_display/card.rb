@@ -144,7 +144,7 @@ module DaisyUI
       modifiers << @variant if @variant.present?
       modifiers << 'image-full' if @image_full
       modifiers << 'shadow-sm' if @shadow
-      modifiers << 'w-96' unless @variant.in?([VARIANTS[:side], VARIANTS[:side_responsive]])
+      # modifiers << 'w-96' unless @variant.in?([VARIANTS[:side], VARIANTS[:side_responsive]])
       modifiers << @size if @size.present?
       class_names(modifiers, system_arguments[:class])
     end
