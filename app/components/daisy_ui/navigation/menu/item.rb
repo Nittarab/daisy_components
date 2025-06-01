@@ -83,7 +83,7 @@ module DaisyUI
       end
 
       def call
-        tag.li(**li_attributes) do
+        tag.li(class: computed_li_classes, **system_arguments.except(:class)) do
           link_content
         end
       end
@@ -105,16 +105,6 @@ module DaisyUI
             # 'active' and 'focus' can be added by users if they mean something else
           }
         ).presence
-      end
-
-      # TODO: not sure this is needed
-      def li_attributes
-        {
-          # Exclude class as it's handled in computed_li_classes, title is for tooltip
-          **system_arguments.except(:class, :title),
-          class: computed_li_classes,
-          title: @tooltip
-        }.compact
       end
 
       def link_content
