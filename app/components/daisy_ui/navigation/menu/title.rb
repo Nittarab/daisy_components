@@ -7,19 +7,14 @@ module DaisyUI
     # @example Basic title
     #   <%= render(DaisyUI::Menu::Title.new(text: "Navigation")) %>
     #
-    # @example Parent title
-    #   <%= render(DaisyUI::Menu::Title.new(text: "Settings", parent: true)) %>
     class Title < BaseComponent
       # @param text [String] Title text content
-      # @param parent [Boolean] Whether it's a parent title with children
       # @param system_arguments [Hash] Additional HTML attributes
       def initialize(
         text: nil,
-        parent: false,
         **system_arguments
       )
         @text = text
-        @parent = parent
 
         super(**system_arguments)
       end
