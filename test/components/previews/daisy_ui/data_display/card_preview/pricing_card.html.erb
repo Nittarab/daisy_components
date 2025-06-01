@@ -1,6 +1,6 @@
 <%# frozen_string_literal: true %>
 
-<%= render DaisyUI::Card.new(shadow: true) do |component| %>
+<%= render DaisyUI::Card.new(shadow: true, class: 'w-96') do |component| %>
   <% component.with_body do |body| %>
     <% body.with_description do %>
       <%= render DaisyUI::Badge.new(text: 'Most Popular', color: :warning, size: :xs, tag_type: :span) %>

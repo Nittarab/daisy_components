@@ -69,7 +69,8 @@ module DaisyUI
           title: 'Card Title',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
           button: { text: 'Buy Now', color: :primary, justify: :end },
-          variant: :bordered
+          variant: :bordered,
+          class: 'w-96'
         )
       end
 
@@ -81,7 +82,8 @@ module DaisyUI
           title: 'Card Title',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
           button: { text: 'Buy Now', color: :primary, justify: :end },
-          variant: :dash
+          variant: :dash,
+          class: 'w-96'
         )
       end
 
@@ -102,7 +104,8 @@ module DaisyUI
           img_url: 'https://picsum.photos/seed/card/400/200',
           img_alt: 'Card image',
           bottom_image: true,
-          shadow: true
+          shadow: true,
+          class: 'w-96'
         )
       end
 
@@ -121,7 +124,8 @@ module DaisyUI
           title: 'Card title!',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
           button: { text: 'Buy Now', justify: :end },
-          color: :primary
+          color: :primary,
+          class: 'w-96'
         )
       end
 
@@ -151,7 +155,8 @@ module DaisyUI
           button: { text: 'Buy Now', color: :primary, justify: :end },
           img_url: 'https://picsum.photos/seed/card/400/200',
           img_alt: 'Card image',
-          shadow: true
+          shadow: true,
+          class: 'w-96'
         )
       end
 
@@ -163,7 +168,8 @@ module DaisyUI
           title: 'Card title!',
           description: 'A card component has a figure, a body part, and inside body there are title and actions parts',
           button: { text: 'Buy Now', color: :primary, justify: :end },
-          shadow: true
+          shadow: true,
+          class: 'w-96'
         )
       end
 
@@ -180,7 +186,8 @@ module DaisyUI
             color: :primary,
             justify: :end
           },
-          shadow: true
+          shadow: true,
+          class: 'w-96'
         )
       end
 
@@ -191,7 +198,8 @@ module DaisyUI
         render DaisyUI::Card.new(
           title: 'Cookies!',
           description: 'We are using cookies for no reason.',
-          color: :neutral
+          color: :neutral,
+          class: 'w-96'
         ) do |component|
           component.with_body(class: 'items-center text-center') do |body|
             body.with_actions(justify: :end) do |actions|
