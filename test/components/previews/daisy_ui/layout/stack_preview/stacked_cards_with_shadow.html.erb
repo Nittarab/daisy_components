@@ -1,0 +1,5 @@
+<%= render DaisyUI::Stack.new(direction: @direction,) do %>
+  <%= render DaisyUI::Card.new(title: 'Card 1', shadow: true, size: :md, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.') %>
+  <%= render DaisyUI::Card.new(title: 'Card 2', shadow: true, size: :md, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.') %>
+  <%= render DaisyUI::Card.new(title: 'Card 3', shadow: true, size: :md, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.') %>
+<% end %>
