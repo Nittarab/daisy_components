@@ -72,13 +72,13 @@ module DaisyUI
         @active = active
         @disabled = disabled
         @focused = focused
-        @badge = badge
+        @badge = badge.is_a?(Hash) ? badge : { text: badge }
         @tooltip = tooltip
         @target = target
         @method = method
 
         with_start_icon { icon_start } if icon_start
-        with_badge(badge) if badge
+        with_badge(@badge)
         with_end_icon { icon_end } if icon_end
 
         super(**system_arguments)
