@@ -25,9 +25,9 @@
           The card includes an image, description, and multiple actions.
         </p>
         <div class="flex gap-2 items-center text-sm text-base-content/60">
-          <%= render(DaisyUI::Badge.new('Feature', variant: 'primary')) %>
-          <%= render(DaisyUI::Badge.new('Example', variant: 'ghost')) %>
-          <%= render(DaisyUI::Badge.new('Demo', variant: 'outline')) %>
+          <%= render(DaisyUI::Badge.new(text: 'Feature', variant: 'primary')) %>
+          <%= render(DaisyUI::Badge.new(text: 'Example', variant: 'ghost')) %>
+          <%= render(DaisyUI::Badge.new(text: 'Demo', variant: 'outline')) %>
         </div>
       <% end,
       img_url: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Card+Image',
@@ -56,7 +56,7 @@
       title_tag: :h3,
       description: content_tag(:div) do %>
         <p>A compact card with bordered and glass variants.</p>
-        <%= render(DaisyUI::Badge.new('Compact', variant: 'secondary')) %>
+        <%= render(DaisyUI::Badge.new(text: 'Compact', variant: 'secondary')) %>
       <% end,
       button_text: 'Action',
       button_class: 'btn btn-outline'

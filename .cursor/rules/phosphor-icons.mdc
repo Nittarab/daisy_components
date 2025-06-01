@@ -1,0 +1,94 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Phosphor Icons Usage Guide
+
+## Overview
+This project uses Phosphor Icons for all iconography. The [icons_helper.rb](mdc:app/helpers/daisy_ui/icons_helper.rb) provides a centralized way to manage and render icons consistently across components.
+
+## Icon Helper Structure
+
+### Available Icons
+The helper defines a comprehensive set of icons in the `ICONS` constant:
+- **UI Icons**: `hamburger`, `error`, `close`, `chevron_down`, `check`, `info`, `warning`
+- **Media Icons**: `volume_on`, `volume_off`, `sun`, `moon`
+- **Social Icons**: `github`, `google`, `facebook`, `x`, `twitter`, `instagram`, `linkedin`, etc.
+- **General Icons**: `heart`, `home`, `email`
+
+### Helper Methods
+Each icon has a dedicated helper method:
+```ruby
+# Usage in previews/tests
+home_icon(class: "w-4 h-4")
+github_icon(class: "text-primary")
+```
+
+## Component Integration Rules
+
+### In Components
+**DO NOT** use the IconsHelper directly in component classes. Icons should be passed as parameters:
+
+```ruby
+# Good - Component accepts icon as parameter
+class DaisyUI::Button < ViewComponent::Base
+  def initialize(text:, icon: nil, **options)
+    @icon = icon
+  end
+end
+```
+
+### In Previews and Tests
+**DO** use the IconsHelper in preview files and tests:
+
+```ruby
+# Good - Preview uses helper
+module DaisyComponents
+  class ButtonComponentPreview < ViewComponent::Preview
+    include DaisyComponents::IconsHelper
+    
+    def with_icon
+      render DaisyUI::Button.new(
+        text: "Home",
+        icon: home_icon(class: "w-4 h-4")
+      )
+    end
+  end
+end
+```
+
+### Template Usage
+In preview templates, access icons via locals or helper inclusion:
+
+```erb
+<!-- Good - Icon passed as parameter -->
+<%= render DaisyUI::Button.new(
+  text: "Settings", 
+  icon: home_icon(class: "w-5 h-5")
+) %>
+```
+
+## Custom Icon Usage
+For icons not in the predefined list, use the base `phosphor_icon` method:
+
+```ruby
+# Custom icon usage
+phosphor_icon('ph-custom-icon', class: 'w-4 h-4')
+```
+
+## Best Practices
+1. **Consistency**: Always use the helper methods for predefined icons
+2. **Sizing**: Use Tailwind classes for consistent sizing (`w-4 h-4`, `w-5 h-5`, etc.)
+3. **Separation**: Keep icon logic in previews/tests, not in component classes
+4. **Accessibility**: Consider adding appropriate ARIA labels when needed
+
+## Adding New Icons
+To add new icons:
+1. Add to the `ICONS` constant in [icons_helper.rb](mdc:app/helpers/daisy_ui/icons_helper.rb)
+2. Use the Phosphor Icons naming convention (`ph-icon-name`)
+3. The helper method will be automatically generated
+
+## Reference
+- Phosphor Icons: https://phosphoricons.com/
+- Helper file: [app/helpers/daisy_ui/icons_helper.rb](mdc:app/helpers/daisy_ui/icons_helper.rb)
