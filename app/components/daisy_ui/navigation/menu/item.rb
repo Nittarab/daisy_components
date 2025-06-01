@@ -45,9 +45,7 @@ module DaisyUI
       #   Alternatively, use the `with_start_icon` slot.
       # @param icon_end [String, ActiveSupport::SafeBuffer] HTML for the trailing icon.
       #   Alternatively, use the `with_end_icon` slot.
-      # @param badge [String, Hash] Badge content or options for `DaisyUI::Badge`.
-      #   If a String is passed, it's used as the badge text.
-      #   If a Hash is passed, it's used as arguments for `DaisyUI::Badge.new`.
+      # @param badge [Hash] Options for `DaisyUI::Badge`.
       #   Alternatively, use the `with_badge` slot.
       # @param tooltip [String] Tooltip text (HTML `title` attribute on the `<li>` element).
       # @param target [String] Link target (e.g., `_blank`).
@@ -72,13 +70,13 @@ module DaisyUI
         @active = active
         @disabled = disabled
         @focused = focused
-        @badge = badge.is_a?(Hash) ? badge : { text: badge }
+        @badge = badge
         @tooltip = tooltip
         @target = target
         @method = method
 
         with_start_icon { icon_start } if icon_start
-        with_badge(@badge)
+        with_badge(@badge) if @badge.present?
         with_end_icon { icon_end } if icon_end
 
         super(**system_arguments)
