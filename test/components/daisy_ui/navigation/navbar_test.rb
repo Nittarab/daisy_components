@@ -12,11 +12,11 @@ module DaisyUI
         component_name: 'navbar',
         exclude: %w[playground]
       )
-    end
 
-    def test_playground
-      render_preview(:playground, from: NavbarPreview)
-      assert_selector 'div.navbar'
+      def test_playground
+        render_preview(:playground, from: NavbarPreview)
+        assert_selector 'div.navbar'
+      end
     end
   end
 end
