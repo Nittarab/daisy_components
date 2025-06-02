@@ -3,6 +3,7 @@
 module DaisyUI
   module Navigation
     class NavbarPreview < ViewComponent::Preview
+      include DaisyUI::IconsHelper
       # layout 'full_width'
       # @!group Playground
 
@@ -20,6 +21,13 @@ module DaisyUI
       # Navbar with different colors
       def navbar_with_colors
         render_with_template
+      end
+
+      # Navbar with dropdown center logo and icon
+      # ---
+      # Navbar with dropdown center logo and icon
+      def navbar_with_dropdown_center_logo_and_icon
+        render_with_template(locals: { helper: self })
       end
     end
   end

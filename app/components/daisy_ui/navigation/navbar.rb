@@ -11,9 +11,20 @@ module DaisyUI
   #
   #
   class Navbar < BaseComponent
-    renders_one :navbar_start
-    renders_one :navbar_center
-    renders_one :navbar_end
+    renders_one :navbar_start, lambda { |*_args, **system_arguments, &block|
+      system_arguments[:class] = class_names('navbar-start', system_arguments[:class])
+      tag.div(**system_arguments) { block.call }
+    }
+
+    renders_one :navbar_center, lambda { |*_args, **system_arguments, &block|
+      system_arguments[:class] = class_names('navbar-center', system_arguments[:class])
+      tag.div(**system_arguments) { block.call }
+    }
+
+    renders_one :navbar_end, lambda { |*_args, **system_arguments, &block|
+      system_arguments[:class] = class_names('navbar-end', system_arguments[:class])
+      tag.div(**system_arguments) { block.call }
+    }
 
     # @param shadow [Boolean] Whether to add a shadow to the navbar
     # @param **system_arguments [Hash] The system arguments
@@ -23,7 +34,7 @@ module DaisyUI
     end
 
     def call
-      tag.div(**full_arguments) { computed_content }
+      tag.div(**full_arguments) { content }
     end
 
     private
@@ -33,10 +44,6 @@ module DaisyUI
         class: computed_classes
       }
       base.merge(system_arguments.except(:class))
-    end
-
-    def computed_content
-      content.presence || safe_join([navbar_start, navbar_center, navbar_end].compact)
     end
 
     def computed_classes

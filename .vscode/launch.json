@@ -5,8 +5,7 @@
             "type": "ruby_lsp",
             "name": "Debug Rails",
             "request": "launch",
-            "program": "${workspaceRoot}/bin/rails",
-            "args": ["server"],
+            "program": "${workspaceRoot}/bin/rails server",
             "useBundler": true,
             "env": {
                 "RAILS_ENV": "development"
