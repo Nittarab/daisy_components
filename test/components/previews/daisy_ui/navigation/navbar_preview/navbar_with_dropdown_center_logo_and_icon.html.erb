@@ -1,0 +1,24 @@
+<%= render DaisyUI::Navbar.new(class: 'bg-base-100 shadow-sm') do |component| %>
+  <%= component.with_navbar_start do %>
+
+  <%= render DaisyUI::Dropdown.new(menu_class: 'menu-sm bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow' ) do |dropdown| %>
+    <%= dropdown.with_trigger(tag_type: :div, variant: :ghost, shape: :circle, icon_start: helper.phosphor_icon('ph-list', class: 'text-2xl')) %>
+    <%= dropdown.with_item(href: '#') { 'Homepage' } %>
+    <%= dropdown.with_item(href: '#') { 'Portfolio' } %>
+    <%= dropdown.with_item(href: '#') { 'About' } %>
+    <% end %>
+  <% end %>
+  <%= component.with_navbar_center do %>
+    <%= render DaisyUI::Button.new(tag_type: :a, variant: :ghost, text: 'daisyUI', class: 'text-xl') %>
+  <% end %>
+  <%= component.with_navbar_end do %>
+    <%= render DaisyUI::Button.new(shape: :circle, variant: :ghost, icon_start: helper.phosphor_icon('ph-magnifying-glass', class: 'text-2xl')) %>
+    <%# TODO: Refactor once we have the indicator component%>
+    <button class="btn btn-ghost btn-circle m-1">
+      <div class="indicator">
+        <i class="ph ph-bell text-2xl"></i>
+        <span class="badge badge-xs badge-primary indicator-item"></span>
+      </div>
+    </button>
+  <% end %>
+<% end %>

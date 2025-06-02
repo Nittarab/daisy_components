@@ -1,0 +1,41 @@
+<%= render DaisyUI::Navbar.new(class: 'bg-base-100', shadow: true) do |navbar| %>
+  <%= navbar.with_navbar_start do %>
+    <%= render DaisyUI::Dropdown.new(menu_class: 'menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow') do |dropdown| %>
+      <%= dropdown.with_trigger(tag_type: :div, variant: :ghost, icon_start: helper.phosphor_icon('ph-list', class: 'text-2xl'), class: 'lg:hidden') %>
+      <%= dropdown.with_custom_content do %>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li><a>Item 1</a></li>
+        <li>
+          <a>Parent</a>
+          <ul class="p-2">
+            <li><a>Submenu 1</a></li>
+            <li><a>Submenu 2</a></li>
+          </ul>
+        </li>
+        <li><a>Item 3</a></li>
+      </ul>
+      <% end %>
+    <% end %>
+    <%= render DaisyUI::Button.new(tag_type: :a, variant: :ghost, text: 'daisyUI', class: 'text-xl') %>
+  <% end %>
+  <%= navbar.with_navbar_center(class: 'hidden lg:flex') do %>
+    <ul class="menu menu-horizontal px-1">
+      <li><a>Item 1</a></li>
+      <li>
+        <details>
+          <summary>Parent</summary>
+          <ul class="p-2">
+            <li><a>Submenu 1</a></li>
+            <li><a>Submenu 2</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a>Item 3</a></li>
+    </ul>
+  <% end %>
+  <%= navbar.with_navbar_end do %>
+    <%= render DaisyUI::Button.new(tag_type: :a, text: 'Button') %>
+  <% end %>
+<% end %>

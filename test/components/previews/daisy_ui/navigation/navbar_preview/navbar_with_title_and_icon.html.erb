@@ -1,0 +1,8 @@
+<%= render DaisyUI::Navbar.new(class: 'bg-base-100', shadow: true) do |navbar| %>
+  <div class="flex-1">
+    <%= render DaisyUI::Button.new(tag_type: :a, variant: :ghost, text: 'daisyUI', class: 'text-xl') %>
+  </div>
+  <div class="flex-none">
+    <%= render DaisyUI::Button.new(tag_type: :button, variant: :ghost, shape: :square, icon_start: helper.phosphor_icon('ph-dots-three', class: 'text-2xl')) %>
+  </div>
+<% end %>

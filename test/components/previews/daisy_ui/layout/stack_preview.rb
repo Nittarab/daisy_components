@@ -12,6 +12,8 @@ module DaisyUI
         render_with_template
       end
 
+      # @!endgroup
+
       def stacked_divs
         render_with_template
       end

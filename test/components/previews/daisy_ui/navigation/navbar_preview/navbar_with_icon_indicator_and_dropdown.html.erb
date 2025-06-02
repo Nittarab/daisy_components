@@ -1,0 +1,44 @@
+<%= render DaisyUI::Navbar.new(class: 'bg-base-100', shadow: true) do |navbar| %>
+  <div class="flex-1">
+    <%= render DaisyUI::Button.new(tag_type: :a, variant: :ghost, text: 'daisyUI', class: 'text-xl') %>
+  </div>
+
+  <div class="flex-none">
+    <%= render DaisyUI::Dropdown.new(align: :end, menu_class: 'card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow') do |d| %>
+      <% d.with_trigger(variant: :ghost, shape: :circle) do %>
+        <div class="indicator">
+          <%= shopping_cart_icon(class: 'text-2xl') %>
+          <span class="badge badge-sm indicator-item">8</span>
+        </div>
+      <% end %>
+      <% d.with_custom_content do %>
+        <%= render DaisyUI::Card.new(class: "card-body") do |card| %>
+          <% card.with_body do |body| %>
+            <span class="text-lg font-bold">8 Items</span>
+            <span class="text-info">Subtotal: $999</span>
+            <% body.with_actions do %>
+              <%= render DaisyUI::Button.new(text: "View cart", color: :primary, class: "btn-block") %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= render DaisyUI::Dropdown.new(align: :end, menu_class: 'menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow') do |d| %>
+      <% d.with_trigger(variant: :ghost, shape: :circle, class: 'avatar') do %>
+        <div class="w-10 rounded-full">
+          <%= render DaisyUI::Avatar.new(
+            img_src: "https://picsum.photos/600/400",
+            img_alt: "User avatar"
+          ) %>
+        </div>
+      <% end %>
+      <%= d.with_item(href: '#', class: 'justify-between') do %>
+        Profile
+        <span class="badge">New</span>
+      <% end %>
+      <%= d.with_item(href: '#') { 'Settings' } %>
+      <%= d.with_item(href: '#') { 'Logout' } %>
+    <% end %>
+  </div>
+<% end %>
