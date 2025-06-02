@@ -1,0 +1,14 @@
+<%= render DaisyUI::Navbar.new do |component|   %>
+  <%= component.with_navbar_start do %>
+    <%= render DaisyUI::Button.new(variant: :ghost, text: 'Menu')%>
+  <% end %>
+  <%= component.with_navbar_center do %>
+   
+   <div class="flex-1">
+    <h1 class="text-2xl font-bold">Navbar</h1>
+   </div>
+  <% end %>
+  <%= component.with_navbar_end do %>
+    <%= render DaisyUI::Button.new(variant: :ghost, text: 'Login') %>
+  <% end %>
+<% end %>
