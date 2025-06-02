@@ -1,0 +1,21 @@
+<%= render DaisyUI::Navbar.new(class: 'bg-base-100', shadow: true) do |navbar| %>
+  <div class="flex-1">
+    <%= render DaisyUI::Button.new(tag_type: :a, variant: :ghost, text: 'daisyUI', class: 'text-xl') %>
+  </div>
+  <div class="flex gap-2">
+    <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+    <%= render DaisyUI::Dropdown.new(class: 'dropdown-end', menu_class: 'menu-sm bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow') do |d| %>
+      <%= d.with_trigger(class: 'btn btn-ghost btn-circle avatar') do %>
+        <div class="w-10 rounded-full">
+          <%= render DaisyUI::Avatar.new(img_src: 'https://picsum.photos/600/400', img_alt: 'Tailwind CSS Navbar component') %>
+        </div>
+      <% end %>
+      <%= d.with_item(href: '#', class: 'justify-between') do %>
+        Profile <span class='badge'>New</span>
+      <% end %>
+      <%= d.with_item(href: '#') { 'Settings' } %>
+      <%= d.with_item(href: '#') { 'Logout' } %>
+    <% end %>
+  </div>
+<% end %>
+

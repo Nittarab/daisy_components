@@ -13,5 +13,10 @@ module DaisyUI
         exclude: %w[playground]
       )
     end
+
+    def test_playground
+      render_preview(:playground, from: NavbarPreview)
+      assert_selector 'div.navbar'
+    end
   end
 end
