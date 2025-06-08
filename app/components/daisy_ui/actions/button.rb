@@ -206,7 +206,7 @@ module DaisyUI
         **system_arguments.except(:class)
       }
 
-      @href || @tag_type.to_s == 'a' ? link_specific_arguments(base) : button_specific_arguments(base)
+      @tag_type.to_s == 'a' ? link_specific_arguments(base) : button_specific_arguments(base)
     end
 
     # Order: base -> style/state(active) -> variant -> size -> shape
@@ -234,7 +234,6 @@ module DaisyUI
       base.merge(
         role: 'button',
         href: @href,
-        data: { turbo_method: @method }.compact,
         target: @target,
         rel: link_rel
       ).compact
