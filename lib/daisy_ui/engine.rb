@@ -28,11 +28,11 @@ module DaisyUI
 
           # Group components by their namespace
           config.preview_nav_groups = {
-            'Actions' => 'daisyui/actions/*',
-            'Data Display' => 'daisyui/data_display/*',
-            'Data Input' => 'daisyui/data_input/*',
-            'Layout' => 'daisyui/layout/*',
-            'Navigation' => 'daisyui/navigation/*'
+            'Actions' => 'daisy_ui/actions/*',
+            'Data Display' => 'daisy_ui/data_display/*',
+            'Data Input' => 'daisy_ui/data_input/*',
+            'Layout' => 'daisy_ui/layout/*',
+            'Navigation' => 'daisy_ui/navigation/*'
           }
 
           # Configure the default display options
