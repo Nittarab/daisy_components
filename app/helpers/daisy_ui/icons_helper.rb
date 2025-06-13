@@ -33,7 +33,12 @@ module DaisyUI
       discord: 'ph-discord-logo',
       twitch: 'ph-twitch-logo',
       slack: 'ph-slack-logo',
-      wechat: 'ph-wechat-logo'
+      wechat: 'ph-wechat-logo',
+      chart_bar: 'ph-chart-bar',
+      plus: 'ph-plus',
+      shopping_cart: 'ph-shopping-cart',
+      bell: 'ph-bell',
+      magnifying_glass: 'ph-magnifying-glass'
     }.freeze
 
     def phosphor_icon(icon_class, options = {})
