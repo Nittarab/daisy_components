@@ -10,9 +10,9 @@ module DaisyUI
 
     def call
       tag.li do
-        if @href && @href != ''
+        if @href&.not_blank?
           tag.a(href: @href, class: system_arguments[:class]) { content }
-        elsif @href == ''
+        elsif @href.blank?
           # Render as link without href attribute (for breadcrumbs compatibility)
           tag.a(class: system_arguments[:class]) { content }
         elsif @icon_span
