@@ -82,8 +82,8 @@ module DaisyUI
         text = item_options.delete(:text)
         icon = item_options.delete(:icon)
 
-        # Add icon_span parameter if there's an icon and no href
-        item_options[:icon_span] = true if icon && !item_options[:href]
+        # Add icon_span parameter if there's an icon and no href (nil or empty)
+        item_options[:icon_span] = true if icon && item_options[:href].nil?
 
         with_item(**item_options) do
           join_text_and_icon(text, icon)
@@ -115,7 +115,7 @@ module DaisyUI
 
     def join_text_and_icon(text, icon)
       if icon
-        safe_join([icon, ' ', text].compact)
+        safe_join([icon, text].compact)
       else
         text
       end
