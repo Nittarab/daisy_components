@@ -50,7 +50,7 @@ module DaisyUI
         render DaisyUI::Breadcrumbs.new(
           items: [
             { text: 'Home', href: '', icon: tag.i(class: 'ph ph-house h-4 w-4') },
-            { text: 'Documents', href: '', icon: tag.i(class: 'ph ph-house h-4 w-4') },
+            { text: 'Documents', href: '', icon: tag.i(class: 'ph ph-folder h-4 w-4') },
             { text: 'Add Document', icon: tag.i(class: 'ph ph-plus h-4 w-4') }
           ]
         )
