@@ -17,7 +17,7 @@ module DaisyUI
     private
 
     def render_item_content
-      if @href.present? && @href != ''
+      if @href.present?
         tag.a(href: @href, class: system_arguments[:class]) { content }
       elsif @href == ''
         render_empty_href_link
