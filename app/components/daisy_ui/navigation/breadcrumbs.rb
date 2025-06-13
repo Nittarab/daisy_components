@@ -115,7 +115,7 @@ module DaisyUI
 
     def join_text_and_icon(text, icon)
       if icon
-        safe_join([icon, ' ', text, ' '].compact)
+        safe_join([icon, ' ', text].compact)
       else
         text
       end
