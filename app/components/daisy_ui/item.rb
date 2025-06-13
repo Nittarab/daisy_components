@@ -2,8 +2,9 @@
 
 module DaisyUI
   class Item < BaseComponent
-    def initialize(href: nil, **system_arguments)
+    def initialize(href: nil, icon_span: false, **system_arguments)
       @href = href
+      @icon_span = icon_span
       super(**system_arguments)
     end
 
@@ -14,13 +15,11 @@ module DaisyUI
         elsif @href == ''
           # Render as link without href attribute (for breadcrumbs compatibility)
           tag.a(class: system_arguments[:class]) { content }
+        elsif @icon_span
+          # Apply special styling for items with icons (when no href)
+          tag.span(class: 'inline-flex items-center gap-2') { content }
         else
-          # Check if content contains icons to apply special styling for breadcrumbs
-          if content.to_s.include?('<i class=')
-            tag.span(class: 'inline-flex items-center gap-2') { content }
-          else
-            content
-          end
+          content
         end
       end
     end

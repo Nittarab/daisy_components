@@ -78,16 +78,15 @@ module DaisyUI
       super(**system_arguments)
 
       items&.each do |item_options|
-        # Transform 'text' parameter to block content for DaisyUI::Item
+        # Transform 'text' and 'icon' parameters to block content for DaisyUI::Item
         text = item_options.delete(:text)
         icon = item_options.delete(:icon)
-        
+
+        # Add icon_span parameter if there's an icon and no href
+        item_options[:icon_span] = true if icon && !item_options[:href]
+
         with_item(**item_options) do
-          if icon
-            safe_join([icon, ' ', text, ' '].compact)
-          else
-            text
-          end
+          join_text_and_icon(text, icon)
         end
       end
 
@@ -112,6 +111,14 @@ module DaisyUI
       modifiers << @size if @size.present?
 
       class_names(modifiers, system_arguments[:class])
+    end
+
+    def join_text_and_icon(text, icon)
+      if icon
+        safe_join([icon, ' ', text, ' '].compact)
+      else
+        text
+      end
     end
   end
 end

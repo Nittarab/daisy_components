@@ -21,9 +21,9 @@ module DaisyUI
           size: size,
           class: custom_classes,
           items: [
-            { text: safe_join([phosphor_icon('ph-house', class: 'h-4 w-4'), ' Home']), href: '#' },
-            { text: safe_join([phosphor_icon('ph-folder', class: 'h-4 w-4'), ' Documents']), href: '#' },
-            { text: safe_join([phosphor_icon('ph-plus', class: 'h-4 w-4'), ' Add Document']) }
+            { text: 'Home', href: '#', icon: phosphor_icon('ph-house', class: 'h-4 w-4') },
+            { text: 'Documents', href: '#', icon: phosphor_icon('ph-folder', class: 'h-4 w-4') },
+            { text: 'Add Document', icon: phosphor_icon('ph-plus', class: 'h-4 w-4') }
           ]
         )
       end
