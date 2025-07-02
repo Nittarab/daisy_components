@@ -8,6 +8,13 @@ module DaisyUI
       include DaisyUI::PreviewTestConcern
 
       test_all_preview_examples(preview_class: BadgePreview, component_name: 'badge')
+
+      # Begin playground preview tests
+      def test_playground_preview_default
+        render_preview('playground')
+        assert_selector 'div.badge', count: 1
+        assert_text 'Badge'
+      end
     end
   end
 end
