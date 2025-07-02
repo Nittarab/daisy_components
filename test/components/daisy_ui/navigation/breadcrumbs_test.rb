@@ -13,9 +13,10 @@ module DaisyUI
         exclude: %w[playground]
       )
 
-      def test_playground
-        render_preview(:playground, from: BreadcrumbsPreview)
-        assert_selector 'div.breadcrumbs'
+      # Begin playground preview tests
+      def test_playground_preview_default
+        render_preview('playground')
+        assert_selector 'div.breadcrumbs', count: 1
       end
 
       def test_basic_breadcrumbs

@@ -11,9 +11,10 @@ module DaisyUI
                                 component_name: 'stack',
                                 exclude: ['playground'])
 
-      def test_playground
-        render_preview(:playground, from: StackPreview)
-        assert_selector 'div.stack'
+      # Begin playground preview tests
+      def test_playground_preview_default
+        render_preview('playground')
+        assert_selector 'div.stack', count: 1
       end
     end
   end
