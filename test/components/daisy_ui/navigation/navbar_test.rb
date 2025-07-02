@@ -13,9 +13,10 @@ module DaisyUI
         exclude: %w[playground]
       )
 
-      def test_playground
-        render_preview(:playground, from: NavbarPreview)
-        assert_selector 'div.navbar'
+      # Begin playground preview tests
+      def test_playground_preview_default
+        render_preview('playground')
+        assert_selector 'div.navbar', count: 1
       end
     end
   end

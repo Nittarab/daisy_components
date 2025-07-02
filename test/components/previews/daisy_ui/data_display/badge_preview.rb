@@ -27,7 +27,7 @@ module DaisyUI
         classes: ''
       )
         render(DaisyUI::Badge.new(
-                 text,
+                 text: text,
                  color: color,
                  size: size,
                  variant: variant,
