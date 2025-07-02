@@ -32,7 +32,7 @@ module DaisyUI
           class: custom_classes,
           items: [
             { text: 'Home', href: '#', active: true, icon_start: home_icon(class: 'text-2xl') },
-            { text: 'Messages', href: '#', badge: '99+', icon_start: email_icon(class: 'text-2xl') },
+            { text: 'Messages', href: '#', badge: { text: '99+' }, icon_start: email_icon(class: 'text-2xl') },
             { text: 'Analytics', href: '#', icon_start: phosphor_icon('ph-chart-bar', class: 'text-2xl'), badge: { text: 'New', class: 'badge-neutral' } }
           ]
         )
