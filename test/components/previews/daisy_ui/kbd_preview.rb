@@ -3,16 +3,13 @@
 # @label Kbd
 module DaisyUI
   class KbdPreview < ViewComponent::Preview
-    # @!group Playground
     # @title Playground
     # @param text text "Ctrl"
     # @param size select { choices: [null, xs, sm, md, lg, xl] }
     def playground(text: 'Ctrl', size: nil)
       render(DaisyUI::Kbd.new(text: text, size: size&.to_sym))
     end
-    # @!endgroup
 
-    # @!group Examples
     # @title Default Kbd
     def kbd
       render(DaisyUI::Kbd.new(text: 'K'))
@@ -48,6 +45,5 @@ module DaisyUI
     def arrow_keys
       render_with_template
     end
-    # @!endgroup
   end
 end
