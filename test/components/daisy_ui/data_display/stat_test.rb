@@ -19,6 +19,91 @@ module DaisyUI
         assert_text '21% more than last month'
       end
 
+      def test_playground_preview_with_direction_vertical
+        render_preview('playground', params: { direction: 'vertical' })
+        assert_selector 'div.stats.stats-vertical', count: 1
+      end
+
+      def test_playground_preview_with_direction_responsive
+        render_preview('playground', params: { direction: 'responsive' })
+        assert_selector 'div.stats.stats-vertical.lg\\:stats-horizontal', count: 1
+      end
+
+      def test_playground_preview_with_shadow_disabled
+        render_preview('playground', params: { shadow: false })
+        assert_selector 'div.stats:not(.shadow)', count: 1
+      end
+
+      def test_playground_preview_with_centered_items
+        render_preview('playground', params: { centered: true })
+        assert_selector 'div.stat.place-items-center', count: 1
+      end
+
+      def test_playground_preview_with_icon
+        render_preview('playground', params: { has_icon: true })
+        assert_selector 'div.stat-figure', count: 1
+        assert_selector 'div.stat-value.text-primary', count: 1
+      end
+
+      def test_playground_preview_with_custom_title
+        render_preview('playground', params: { title: 'Custom Title' })
+        assert_text 'Custom Title'
+      end
+
+      def test_playground_preview_with_custom_value
+        render_preview('playground', params: { value: '999,999' })
+        assert_text '999,999'
+      end
+
+      def test_playground_preview_with_custom_description
+        render_preview('playground', params: { description: 'Custom description text' })
+        assert_text 'Custom description text'
+      end
+
+      def test_playground_preview_with_custom_classes
+        render_preview('playground', params: { classes: 'test-class' })
+        assert_selector 'div.stats.test-class', count: 1
+      end
+
+      def test_playground_preview_with_multiple_options
+        render_preview('playground', params: {
+                         title: 'Test Stat',
+                         value: '12,345',
+                         description: 'Test description',
+                         direction: 'vertical',
+                         shadow: true,
+                         centered: true,
+                         has_icon: true
+                       })
+
+        assert_selector 'div.stats.stats-vertical.shadow', count: 1
+        assert_selector 'div.stat.place-items-center', count: 1
+        assert_selector 'div.stat-figure', count: 1
+        assert_selector 'div.stat-value.text-primary', count: 1
+        assert_text 'Test Stat'
+        assert_text '12,345'
+        assert_text 'Test description'
+      end
+
+      def test_playground_preview_minimal_configuration
+        render_preview('playground', params: {
+                         title: 'Min',
+                         value: '1',
+                         description: '',
+                         direction: 'horizontal',
+                         shadow: false,
+                         centered: false,
+                         has_icon: false
+                       })
+
+        assert_selector 'div.stats:not(.shadow)', count: 1
+        assert_selector 'div.stat:not(.place-items-center)', count: 1
+        assert_selector 'div.stat-figure', count: 0
+        assert_text 'Min'
+        assert_text '1'
+      end
+
+      # Component unit tests
       def test_basic_stat_rendering
         component = DaisyUI::Stat.new(
           title: 'Test Title',
