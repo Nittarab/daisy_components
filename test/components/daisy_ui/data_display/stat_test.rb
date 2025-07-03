@@ -7,7 +7,7 @@ module DaisyUI
     class StatTest < DaisyUI::ComponentTestCase
       include DaisyUI::PreviewTestConcern
 
-      test_all_preview_examples(preview_class: StatPreview, component_name: 'stat')
+      test_all_preview_examples(preview_class: DaisyUI::DataDisplay::StatPreview, component_name: 'stat')
 
       # Begin playground preview tests
       def test_playground_preview_default

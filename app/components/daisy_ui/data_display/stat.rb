@@ -64,7 +64,7 @@ module DaisyUI
 
     renders_many :stats, lambda { |title: nil, value: nil, description: nil, centered: false,
                                     **system_arguments|
-      StatItem.new(
+      Stat::StatItem.new(
         title: title,
         value: value,
         description: description,
