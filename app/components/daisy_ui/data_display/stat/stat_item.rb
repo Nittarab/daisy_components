@@ -26,7 +26,9 @@ module DaisyUI
     class StatItem < BaseComponent
       renders_one :figure
       renders_one :title
-      renders_one :value, DaisyUI::Stat::StatValue
+      renders_one :value, lambda { |color: nil, **system_arguments|
+        StatValue.new(color: color, **system_arguments)
+      }
       renders_one :description
       renders_one :actions
 

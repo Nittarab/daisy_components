@@ -62,7 +62,16 @@ module DaisyUI
       responsive: 'stats-vertical lg:stats-horizontal'
     }.freeze
 
-    renders_many :stats, DaisyUI::Stat::StatItem
+    renders_many :stats, lambda { |title: nil, value: nil, description: nil, centered: false,
+                                    **system_arguments|
+      StatItem.new(
+        title: title,
+        value: value,
+        description: description,
+        centered: centered,
+        **system_arguments
+      )
+    }
 
     # @param direction [Symbol] Layout direction (:horizontal, :vertical, :responsive)
     # @param shadow [Boolean] Adds shadow to the stats container
@@ -112,7 +121,5 @@ module DaisyUI
     def html_attributes
       system_arguments.merge(class: computed_classes)
     end
-
-
   end
 end
