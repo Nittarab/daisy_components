@@ -62,9 +62,7 @@ module DaisyUI
       responsive: 'stats-vertical lg:stats-horizontal'
     }.freeze
 
-    renders_many :stats, lambda { |title: nil, value: nil, description: nil, centered: false, **system_arguments|
-      StatItem.new(title: title, value: value, description: description, centered: centered, **system_arguments)
-    }
+    renders_many :stats, DaisyUI::Stat::StatItem
 
     # @param direction [Symbol] Layout direction (:horizontal, :vertical, :responsive)
     # @param shadow [Boolean] Adds shadow to the stats container
@@ -115,100 +113,6 @@ module DaisyUI
       system_arguments.merge(class: computed_classes)
     end
 
-    # Individual stat item component
-    class StatItem < BaseComponent
-      # Available colors for stat values
-      COLORS = {
-        primary: 'text-primary',
-        secondary: 'text-secondary',
-        accent: 'text-accent',
-        neutral: 'text-neutral',
-        info: 'text-info',
-        success: 'text-success',
-        warning: 'text-warning',
-        error: 'text-error'
-      }.freeze
 
-      renders_one :figure
-      renders_one :title
-      renders_one :value, lambda { |color: nil, **system_arguments|
-        StatValue.new(color: color, **system_arguments)
-      }
-      renders_one :description
-      renders_one :actions
-
-      # @param title [String] Stat title text
-      # @param value [String] Stat value text
-      # @param description [String] Stat description text
-      # @param centered [Boolean] Center align the stat content
-      # @param system_arguments [Hash] Additional HTML attributes
-      def initialize(title: nil,
-                     value: nil,
-                     description: nil,
-                     centered: false,
-                     **system_arguments)
-        @title = title
-        @value = value
-        @description = description
-        @centered = centered
-        super(**system_arguments)
-      end
-
-      def before_render
-        with_title { @title } if @title && !title?
-        with_value { @value } if @value && !value?
-        with_description { @description } if @description && !description?
-      end
-
-      def call
-        tag.div(**html_attributes) do
-          safe_join([
-            figure ? tag.div(figure, class: 'stat-figure') : nil,
-            title ? tag.div(title, class: 'stat-title') : nil,
-            value,
-            description ? tag.div(description, class: 'stat-desc') : nil,
-            actions ? tag.div(actions, class: 'stat-actions') : nil
-          ].compact)
-        end
-      end
-
-      private
-
-      def computed_classes
-        modifiers = %w[stat]
-        modifiers << 'place-items-center' if @centered
-        class_names(modifiers, system_arguments[:class])
-      end
-
-      def html_attributes
-        system_arguments.merge(class: computed_classes)
-      end
-    end
-
-    # Stat value component with color support
-    class StatValue < BaseComponent
-      # @param color [Symbol] Color variant for the value
-      # @param system_arguments [Hash] Additional HTML attributes
-      def initialize(color: nil, **system_arguments)
-        @color = build_argument(color, COLORS, 'color')
-        super(**system_arguments)
-      end
-
-      def call
-        tag.div(content, **html_attributes)
-      end
-
-      private
-
-      def computed_classes
-        modifiers = %w[stat-value]
-        modifiers << @color if @color.present?
-        class_names(modifiers, system_arguments[:class])
-      end
-
-      def html_attributes
-        system_arguments.merge(class: computed_classes)
-      end
-    end
   end
 end
