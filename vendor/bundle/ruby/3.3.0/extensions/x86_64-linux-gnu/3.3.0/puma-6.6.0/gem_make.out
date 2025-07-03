@@ -1,0 +1,25 @@
+current directory: /workspace/vendor/bundle/ruby/3.3.0/gems/puma-6.6.0/ext/puma_http11
+/usr/bin/ruby3.3 -I/usr/lib/ruby/vendor_ruby extconf.rb
+checking for pkg-config for openssl... not found
+checking for BIO_read() in -llibcrypto... no
+checking for BIO_read() in -lcrypto... no
+checking for BIO_read() in -llibeay32... no
+** Puma will be compiled without SSL support
+creating Makefile
+
+current directory: /workspace/vendor/bundle/ruby/3.3.0/gems/puma-6.6.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20250703-37148-xbve56 sitelibdir\=./.gem.20250703-37148-xbve56 clean
+
+current directory: /workspace/vendor/bundle/ruby/3.3.0/gems/puma-6.6.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20250703-37148-xbve56 sitelibdir\=./.gem.20250703-37148-xbve56
+compiling http11_parser.c
+compiling mini_ssl.c
+compiling puma_http11.c
+linking shared-object puma/puma_http11.so
+
+current directory: /workspace/vendor/bundle/ruby/3.3.0/gems/puma-6.6.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20250703-37148-xbve56 sitelibdir\=./.gem.20250703-37148-xbve56 install
+/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20250703-37148-xbve56/puma
+
+current directory: /workspace/vendor/bundle/ruby/3.3.0/gems/puma-6.6.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20250703-37148-xbve56 sitelibdir\=./.gem.20250703-37148-xbve56 clean
