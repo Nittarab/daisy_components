@@ -9,8 +9,8 @@ module DaisyUI
   class KbdTest < DaisyUI::ComponentTestCase
     include DaisyUI::PreviewTestConcern
 
-    # KbdPreview should be resolved correctly if its own file is updated (DaisyUI::KbdPreview)
-    test_all_preview_examples(preview_class: DaisyUI::KbdPreview, component_name: 'kbd')
+    # KbdPreview should be resolved correctly if its own file is updated (DaisyUI::DataDisplay::KbdPreview)
+    test_all_preview_examples(preview_class: DaisyUI::DataDisplay::KbdPreview, component_name: 'kbd')
 
     # Playground Tests
     def test_playground_default
