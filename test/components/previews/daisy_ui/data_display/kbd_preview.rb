@@ -1,48 +1,64 @@
 # frozen_string_literal: true
 
-# @label Kbd
 module DaisyUI
   module DataDisplay
+    # @label Kbd
     class KbdPreview < ViewComponent::Preview
-      # @title Playground
+      # @!group Playground
+      # @label Playground
       # @param text text "Ctrl"
       # @param size select { choices: [null, xs, sm, md, lg, xl] }
       def playground(text: 'Ctrl', size: nil)
         render(DaisyUI::Kbd.new(text: text, size: size&.to_sym))
       end
+      # @!endgroup
 
-      # @title Default Kbd
+      # Default Kbd
+      # ---------------
+      # Basic keyboard key component
       def kbd
         render(DaisyUI::Kbd.new(text: 'K'))
       end
 
-      # @title Kbd Sizes
+      # Kbd Sizes
+      # ---------------
+      # Keyboard keys with different sizes
       # @param text text "Medium"
       def kbd_sizes(text: 'Medium')
         render_with_template(locals: { text: text })
       end
 
-      # @title In Text
+      # In Text
+      # ---------------
+      # Keyboard keys used within text content
       def in_text
         render_with_template
       end
 
-      # @title Key Combination
+      # Key Combination
+      # ---------------
+      # Multiple keys combined together
       def key_combination
         render_with_template
       end
 
-      # @title Function Keys
+      # Function Keys
+      # ---------------
+      # Function key examples
       def function_keys
         render_with_template
       end
 
-      # @title A Full Keyboard
+      # A Full Keyboard
+      # ---------------
+      # Complete keyboard layout example
       def a_full_keyboard
         render_with_template
       end
 
-      # @title Arrow Keys
+      # Arrow Keys
+      # ---------------
+      # Arrow key navigation examples
       def arrow_keys
         render_with_template
       end
