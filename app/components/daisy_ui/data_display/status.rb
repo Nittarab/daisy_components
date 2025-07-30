@@ -4,25 +4,25 @@ module DaisyUI
   # Status component implementing DaisyUI's status indicator styles
   #
   # @example Basic usage
-  #   <%= render(StatusComponent.new) %>
+  #   <%= render(DaisyUI::Status.new) %>
   #
   # @example Success status (online)
-  #   <%= render(StatusComponent.new(color: :success)) %>
+  #   <%= render(DaisyUI::Status.new(color: :success)) %>
   #
   # @example Error status (offline)
-  #   <%= render(StatusComponent.new(color: :error)) %>
+  #   <%= render(DaisyUI::Status.new(color: :error)) %>
   #
   # @example Primary variant
-  #   <%= render(StatusComponent.new(color: :primary)) %>
+  #   <%= render(DaisyUI::Status.new(color: :primary)) %>
   #
   # @example Large size
-  #   <%= render(StatusComponent.new(size: :lg, color: :success)) %>
+  #   <%= render(DaisyUI::Status.new(size: :lg, color: :success)) %>
   #
   # @example Small size
-  #   <%= render(StatusComponent.new(size: :sm, color: :warning)) %>
+  #   <%= render(DaisyUI::Status.new(size: :sm, color: :warning)) %>
   #
   # @example Custom tag type
-  #   <%= render(StatusComponent.new(color: :info, tag_type: :span)) %>
+  #   <%= render(DaisyUI::Status.new(color: :info, tag_type: :span)) %>
   class Status < DaisyUI::BaseComponent
     # Available status colors from DaisyUI
     COLORS = {
