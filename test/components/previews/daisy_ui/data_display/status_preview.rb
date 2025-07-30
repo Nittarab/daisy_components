@@ -46,6 +46,18 @@ module DaisyUI
       def status_offline
         render(DaisyUI::Status.new(color: :error))
       end
+
+      def status_sizes
+        render_with_template
+      end
+
+      def status_with_bounce_animation
+        render_with_template
+      end
+
+      def status_with_ping_animation
+        render_with_template
+      end
     end
   end
 end
