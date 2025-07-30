@@ -16,26 +16,26 @@ module DaisyUI
       end
 
       def test_color_variants
-        render(DaisyUI::Status.new(color: :success))
+        render_inline(DaisyUI::Status.new(color: :success))
         assert_selector '.status.status-success'
-        
-        render(DaisyUI::Status.new(color: :error))
+
+        render_inline(DaisyUI::Status.new(color: :error))
         assert_selector '.status.status-error'
-        
-        render(DaisyUI::Status.new(color: :primary))
+
+        render_inline(DaisyUI::Status.new(color: :primary))
         assert_selector '.status.status-primary'
       end
 
       def test_size_variants
-        render(DaisyUI::Status.new(size: :xs))
+        render_inline(DaisyUI::Status.new(size: :xs))
         assert_selector '.status.status-xs'
-        
-        render(DaisyUI::Status.new(size: :lg))
+
+        render_inline(DaisyUI::Status.new(size: :lg))
         assert_selector '.status.status-lg'
       end
 
       def test_custom_tag_type
-        render(DaisyUI::Status.new(tag_type: :span, color: :info))
+        render_inline(DaisyUI::Status.new(tag_type: :span, color: :info))
         assert_selector 'span.status.status-info'
       end
 
