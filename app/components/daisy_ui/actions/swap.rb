@@ -11,8 +11,8 @@ module DaisyUI
   # @example Theme toggle with icons
   #   <%= render(SwapComponent.new(
   #     states: {
-  #       on: helpers.sun_icon('h-6 w-6'),
-  #       off: helpers.moon_icon('h-6 w-6')
+  #       on: helpers.sun_icon(class: 'h-6 w-6'),
+  #       off: helpers.moon_icon(class: 'h-6 w-6')
   #     },
   #     button: true,
   #     effect: :rotate

@@ -27,7 +27,7 @@ module DaisyUI
   # @example With custom placeholder content
   #   <%= render(AvatarComponent.new) do |c|
   #     c.with_placeholder do
-  #       helpers.user_icon
+  #       helpers.phosphor_icon("ph-user")
   #     end
   #   end %>
   class Avatar < DaisyUI::BaseComponent
