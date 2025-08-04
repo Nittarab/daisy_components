@@ -27,7 +27,7 @@ module DaisyUI
   #
   # @example Icon only button
   #   <%= render(ButtonComponent.new(
-  #     icon_start: helpers.search_icon,
+  #     icon_start: helpers.magnifying_glass_icon,
   #     shape: :square
   #   )) %>
   #
@@ -52,15 +52,15 @@ module DaisyUI
   # @example With icons
   #   <%= render(ButtonComponent.new(
   #     text: "Submit",
-  #     icon_start: helpers.check_icon("h-5 w-5"),
+  #     icon_start: helpers.check_icon(class: "h-5 w-5"),
   #     variant: "primary"
   #   )) %>
   #
   # @example With both icons
   #   <%= render(ButtonComponent.new(
   #     text: "Next",
-  #     icon_start: helpers.sync_icon("h-5 w-5"),
-  #     icon_end: helpers.arrow_right_icon("h-5 w-5")
+  #     icon_start: helpers.phosphor_icon("ph-arrows-clockwise", class: "h-5 w-5"),
+  #     icon_end: helpers.phosphor_icon("ph-arrow-right", class: "h-5 w-5")
   #   )) %>
   #
   # @example With block content

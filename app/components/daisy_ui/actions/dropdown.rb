@@ -13,7 +13,7 @@ module DaisyUI
   # @example With custom trigger content
   #   <%= render(DropdownComponent.new) do |d| %>
   #     <% d.with_trigger do %>
-  #       <%= helpers.cog_icon("h-5 w-5") %> Settings
+  #       <%= helpers.phosphor_icon("ph-gear", class: "h-5 w-5") %> Settings
   #     <% end %>
   #     <% d.with_item(href: "#") { "Item 1" } %>
   #     <% d.with_item(href: "#") { "Item 2" } %>
