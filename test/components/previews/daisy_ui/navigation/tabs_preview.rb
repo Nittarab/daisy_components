@@ -206,6 +206,23 @@ module DaisyUI
         )
       end
 
+      # JavaScript ready tabs
+      # ---
+      # Tabs with data attributes ready for JavaScript integration
+      def javascript_ready_tabs
+        render DaisyUI::Tabs.new(
+          style: :bordered,
+          class: 'mb-4',
+          data: { controller: 'tabs' },
+          tabs: [
+            { text: 'Profile', content: '<div class="p-4"><h3 class="font-bold">Profile Settings</h3><p>Manage your profile information and preferences.</p></div>'.html_safe, active: true },
+            { text: 'Account', content: '<div class="p-4"><h3 class="font-bold">Account Settings</h3><p>Update your account details and security settings.</p></div>'.html_safe },
+            { text: 'Billing', content: '<div class="p-4"><h3 class="font-bold">Billing Information</h3><p>View and manage your subscription and payment methods.</p></div>'.html_safe },
+            { text: 'Notifications', content: '<div class="p-4"><h3 class="font-bold">Notification Preferences</h3><p>Configure how and when you receive notifications.</p></div>'.html_safe }
+          ]
+        )
+      end
+
       # Responsive tabs
       # ---
       # Tabs that adapt to different screen sizes

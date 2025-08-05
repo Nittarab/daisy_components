@@ -81,6 +81,16 @@ module DaisyUI
         assert_no_selector '.tabs-container'
         assert_no_selector '.tab-content-container'
       end
+
+      def test_javascript_ready_tabs
+        render_preview('javascript_ready_tabs')
+        assert_selector '[data-controller="tabs"]', count: 1
+        assert_selector '.tabs.tabs-bordered', count: 1
+        assert_selector '.tab', count: 4
+        assert_selector '.tab-panel', count: 4
+        assert_text 'Profile Settings'
+        assert_text 'Account Settings'
+      end
     end
   end
 end

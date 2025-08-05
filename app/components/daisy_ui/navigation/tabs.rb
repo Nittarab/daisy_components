@@ -3,6 +3,12 @@
 module DaisyUI
   # Tabs component implementing DaisyUI's tabs styles
   #
+  # This component creates accessible tabs that can work with any JavaScript framework.
+  # For functional tab switching, you'll need to implement JavaScript to:
+  # 1. Listen for clicks on `.tab` elements
+  # 2. Toggle `tab-active` class on tabs
+  # 3. Toggle `hidden` class on `.tab-panel` elements
+  #
   # @example Basic usage with parameters
   #   <%= render DaisyUI::Tabs.new(
   #     tabs: [
@@ -43,6 +49,35 @@ module DaisyUI
   #       { text: "Contact", href: "/contact" }
   #     ]
   #   ) %>
+  #
+  # @example JavaScript Integration (Stimulus example)
+  #   <!-- In your ERB template -->
+  #   <div data-controller="tabs">
+  #     <%= render DaisyUI::Tabs.new(...) %>
+  #   </div>
+  #
+  #   // In your Stimulus controller
+  #   connect() {
+  #     this.element.addEventListener('click', this.handleClick.bind(this))
+  #   }
+  #   
+  #   handleClick(event) {
+  #     if (event.target.matches('.tab')) {
+  #       // Remove active from all tabs
+  #       this.element.querySelectorAll('.tab').forEach(tab => 
+  #         tab.classList.remove('tab-active'))
+  #       // Add active to clicked tab
+  #       event.target.classList.add('tab-active')
+  #       
+  #       // Show corresponding panel
+  #       const targetPanel = event.target.getAttribute('aria-controls')
+  #       if (targetPanel) {
+  #         this.element.querySelectorAll('.tab-panel').forEach(panel => 
+  #           panel.classList.add('hidden'))
+  #         document.getElementById(targetPanel).classList.remove('hidden')
+  #       }
+  #     }
+  #   }
   #
   # @note If both `tabs` parameters and a block with `with_tab` are provided,
   #   the tabs from parameters will be rendered first, followed by tabs defined in the block.
