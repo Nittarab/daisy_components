@@ -1,0 +1,11 @@
+<label for="my_modal_6" class="btn">open modal</label>
+
+<%= render(DaisyUI::Modal.new(type: 'checkbox', modal_id: 'my_modal_6')) do |m| %>
+  <% m.with_body do %>
+    <h3 class="text-lg font-bold">Hello!</h3>
+    <p class="py-4">This modal works with a hidden checkbox!</p>
+  <% end %>
+  <% m.with_actions do %>
+    <label for="my_modal_6" class="btn">Close!</label>
+  <% end %>
+<% end %>

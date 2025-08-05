@@ -79,8 +79,7 @@ module DaisyUI
     # @param width_class [String] Custom width classes for modal-box
     # @param system_arguments [Hash] Additional HTML attributes
     def initialize(
-      type: :dialog,
-      modal_id:,
+      modal_id:, type: :dialog,
       position: nil,
       close_on_backdrop: false,
       close_button: false,
@@ -118,9 +117,9 @@ module DaisyUI
 
     def render_checkbox_modal
       safe_join([
-        checkbox_input,
-        checkbox_modal_wrapper
-      ])
+                  checkbox_input,
+                  checkbox_modal_wrapper
+                ])
     end
 
     def dialog_arguments

@@ -1,0 +1,31 @@
+<% if type == 'checkbox' %>
+  <label for="<%= modal_id %>" class="btn">open modal</label>
+<% else %>
+  <button class="btn" onclick="<%= modal_id %>.showModal()">open modal</button>
+<% end %>
+
+<%= render(DaisyUI::Modal.new(
+      type: type,
+      modal_id: modal_id,
+      position: position,
+      close_on_backdrop: close_on_backdrop,
+      close_button: close_button,
+      width_class: width_class.presence
+    )) do |m| %>
+  <% m.with_body do %>
+    <h3 class="text-lg font-bold">Hello!</h3>
+    <p class="py-4">Press ESC key or use controls to close</p>
+  <% end %>
+  
+  <% unless close_button %>
+    <% m.with_actions do %>
+      <% if type == 'checkbox' %>
+        <label for="<%= modal_id %>" class="btn">Close!</label>
+      <% else %>
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

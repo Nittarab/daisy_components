@@ -1,0 +1,8 @@
+<button class="btn" onclick="my_modal_2.showModal()">open modal</button>
+
+<%= render(DaisyUI::Modal.new(modal_id: 'my_modal_2', close_on_backdrop: true)) do |m| %>
+  <% m.with_body do %>
+    <h3 class="text-lg font-bold">Hello!</h3>
+    <p class="py-4">Press ESC key or click outside to close</p>
+  <% end %>
+<% end %>
