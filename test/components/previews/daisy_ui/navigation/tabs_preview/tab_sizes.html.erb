@@ -1,0 +1,53 @@
+<div class="space-y-8">
+  <div>
+    <h4 class="text-sm font-medium mb-2">Extra Small (xs)</h4>
+    <%= render DaisyUI::Tabs.new(
+      style: :bordered,
+      size: :xs,
+      tabs: [
+        { text: 'Tab 1', content: 'Content for extra small tabs', active: true },
+        { text: 'Tab 2', content: 'More content here' },
+        { text: 'Tab 3', content: 'Even more content' }
+      ]
+    ) %>
+  </div>
+
+  <div>
+    <h4 class="text-sm font-medium mb-2">Small (sm)</h4>
+    <%= render DaisyUI::Tabs.new(
+      style: :bordered,
+      size: :sm,
+      tabs: [
+        { text: 'Tab 1', content: 'Content for small tabs', active: true },
+        { text: 'Tab 2', content: 'More content here' },
+        { text: 'Tab 3', content: 'Even more content' }
+      ]
+    ) %>
+  </div>
+
+  <div>
+    <h4 class="text-sm font-medium mb-2">Medium (md) - Default</h4>
+    <%= render DaisyUI::Tabs.new(
+      style: :bordered,
+      size: :md,
+      tabs: [
+        { text: 'Tab 1', content: 'Content for medium tabs', active: true },
+        { text: 'Tab 2', content: 'More content here' },
+        { text: 'Tab 3', content: 'Even more content' }
+      ]
+    ) %>
+  </div>
+
+  <div>
+    <h4 class="text-sm font-medium mb-2">Large (lg)</h4>
+    <%= render DaisyUI::Tabs.new(
+      style: :bordered,
+      size: :lg,
+      tabs: [
+        { text: 'Tab 1', content: 'Content for large tabs', active: true },
+        { text: 'Tab 2', content: 'More content here' },
+        { text: 'Tab 3', content: 'Even more content' }
+      ]
+    ) %>
+  </div>
+</div>
