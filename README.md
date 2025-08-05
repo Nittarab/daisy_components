@@ -78,13 +78,15 @@ $ ./bin/fix_trailing_newlines.sh --staged-only
 
 ### Git Hooks
 
-A pre-commit hook is available that automatically fixes trailing newline issues. To install it:
+A pre-commit hook is available that automatically performs code quality checks:
 
 ```bash
 $ ./bin/setup_hooks.sh
 ```
 
-Once installed, the hook will run before each commit to ensure code quality standards.
+The hook will run before each commit and will:
+- ✅ **Fix trailing newlines** automatically in staged files
+- 🔧 **Run RuboCop** on staged Ruby files (will block commit if issues found)
 
 **Note:** Git hooks are not automatically shared when cloning a repository. Each developer needs to run the setup script once after cloning.
 
