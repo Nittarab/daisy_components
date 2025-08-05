@@ -11,3 +11,4 @@
 .env*
 coverage/
 .idea/
+vendor/bundle/
