@@ -80,18 +80,12 @@ module DaisyUI
     end
 
     def call
-      tag.div(**full_arguments) { content }
+      tag.div(class: computed_classes, **system_arguments.except(:class), 'data-tip': @tip) do
+        content
+      end
     end
 
     private
-
-    def full_arguments
-      {
-        class: computed_classes,
-        'data-tip': @tip,
-        **system_arguments.except(:class)
-      }.compact
-    end
 
     def computed_classes
       if @responsive

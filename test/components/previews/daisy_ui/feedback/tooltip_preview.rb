@@ -39,7 +39,7 @@ module DaisyUI
                  responsive: responsive,
                  class: classes
                )) do
-          render(DaisyUI::Button.new(text: button_text, color: button_color))
+          DaisyUI::Button.new(text: button_text, color: button_color).render_in(view_context)
         end
       end
 
@@ -47,91 +47,91 @@ module DaisyUI
 
       def tooltip
         render(DaisyUI::Tooltip.new(tip: 'hello')) do
-          render(DaisyUI::Button.new(text: 'Hover me'))
+          DaisyUI::Button.new(text: 'Hover me').render_in(view_context)
         end
       end
 
       def top
         render(DaisyUI::Tooltip.new(position: :top, tip: 'hello', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'Top'))
+          DaisyUI::Button.new(text: 'Top').render_in(view_context)
         end
       end
 
       def bottom
         render(DaisyUI::Tooltip.new(position: :bottom, tip: 'hello', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'Bottom'))
+          DaisyUI::Button.new(text: 'Bottom').render_in(view_context)
         end
       end
 
       def left
         render(DaisyUI::Tooltip.new(position: :left, tip: 'hello', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'Left'))
+          DaisyUI::Button.new(text: 'Left').render_in(view_context)
         end
       end
 
       def right
         render(DaisyUI::Tooltip.new(position: :right, tip: 'hello', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'Right'))
+          DaisyUI::Button.new(text: 'Right').render_in(view_context)
         end
       end
 
       def force_open
         render(DaisyUI::Tooltip.new(tip: 'hello', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'Forced open'))
+          DaisyUI::Button.new(text: 'Forced open').render_in(view_context)
         end
       end
 
       def primary_color
         render(DaisyUI::Tooltip.new(color: :primary, tip: 'primary', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'primary', color: :primary))
+          DaisyUI::Button.new(text: 'primary', color: :primary).render_in(view_context)
         end
       end
 
       def secondary_color
         render(DaisyUI::Tooltip.new(color: :secondary, tip: 'secondary', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'secondary', color: :secondary))
+          DaisyUI::Button.new(text: 'secondary', color: :secondary).render_in(view_context)
         end
       end
 
       def accent_color
         render(DaisyUI::Tooltip.new(color: :accent, tip: 'accent', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'accent', color: :accent))
+          DaisyUI::Button.new(text: 'accent', color: :accent).render_in(view_context)
         end
       end
 
       def neutral_color
         render(DaisyUI::Tooltip.new(color: :neutral, tip: 'neutral', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'neutral', color: :neutral))
+          DaisyUI::Button.new(text: 'neutral', color: :neutral).render_in(view_context)
         end
       end
 
       def info_color
         render(DaisyUI::Tooltip.new(color: :info, tip: 'info', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'info', color: :info))
+          DaisyUI::Button.new(text: 'info', color: :info).render_in(view_context)
         end
       end
 
       def success_color
         render(DaisyUI::Tooltip.new(color: :success, tip: 'success', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'success', color: :success))
+          DaisyUI::Button.new(text: 'success', color: :success).render_in(view_context)
         end
       end
 
       def warning_color
         render(DaisyUI::Tooltip.new(color: :warning, tip: 'warning', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'warning', color: :warning))
+          DaisyUI::Button.new(text: 'warning', color: :warning).render_in(view_context)
         end
       end
 
       def error_color
         render(DaisyUI::Tooltip.new(color: :error, tip: 'error', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'error', color: :error))
+          DaisyUI::Button.new(text: 'error', color: :error).render_in(view_context)
         end
       end
 
       def responsive_tooltip_only_show_for_large_screen
         render(DaisyUI::Tooltip.new(responsive: :lg, tip: 'Large screen and up', force_open: true)) do
-          render(DaisyUI::Button.new(text: 'lg+ only'))
+          DaisyUI::Button.new(text: 'lg+ only').render_in(view_context)
         end
       end
 
