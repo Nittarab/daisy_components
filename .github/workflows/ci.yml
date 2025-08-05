@@ -18,6 +18,9 @@ jobs:
           ruby-version: ruby-3.4.1
           bundler-cache: true
 
+      - name: Check trailing newlines
+        run: ./bin/fix_trailing_newlines.sh --check-only
+
       - name: Lint code for consistent style
         run: bin/rubocop
 
