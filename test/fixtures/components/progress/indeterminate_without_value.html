@@ -1,0 +1,1 @@
+<progress class="progress w-56"></progress>
