@@ -38,7 +38,15 @@ module DaisyUI
       plus: 'ph-plus',
       shopping_cart: 'ph-shopping-cart',
       bell: 'ph-bell',
-      magnifying_glass: 'ph-magnifying-glass'
+      magnifying_glass: 'ph-magnifying-glass',
+      gear: 'ph-gear',
+      settings: 'ph-gear',
+      play: 'ph-play',
+      monitor: 'ph-monitor',
+      computer: 'ph-desktop',
+      caret_right: 'ph-caret-right',
+      line: 'ph-line-logo',
+      vk: 'ph-vk-logo'
     }.freeze
 
     def phosphor_icon(icon_class, options = {})

@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Script to replace hardcoded SVG icons with Phosphor icons in fixture files
+
+require 'fileutils'
+
+# Icon mappings: SVG content pattern => Phosphor replacement
+ICON_REPLACEMENTS = {
+  # Play icon (triangle pointing right)
+  /<svg[^>]*><g[^>]*><path d="M6 3L20 12 6 21 6 3z"[^>]*><\/g><\/svg>/ => '<i class="ph ph-caret-right size-[1.2em]"></i>',
+  
+  # Heart icon  
+  /<svg[^>]*><g[^>]*><path d="M19 14c1\.49-1\.46 3-3\.21 3-5\.5A5\.5 5\.5 0 0 0 16\.5 3c-1\.76 0-3 \.5-4\.5 2-1\.5-1\.5-2\.74-2-4\.5-2A5\.5 5\.5 0 0 0 2 8\.5c0 2\.3 1\.5 4\.05 3 5\.5l7 7Z"[^>]*><\/g><\/svg>/ => '<i class="ph ph-heart size-[1.2em]"></i>',
+  
+  # Home/House icon
+  /<svg[^>]*viewBox="0 0 24 24"><g[^>]*><polyline points="1 11 12 2 23 11"[^>]*><\/polyline><path d="m5,13v7c0,1\.105\.895,2,2,2h10c1\.105,0,2-\.895,2-2v-7"[^>]*><\/path><line[^>]*><\/line><\/g><\/svg>/ => '<i class="ph ph-house size-[1.2em]"></i>',
+  
+  # Settings/Gear icon (complex path)
+  /<svg class="size-\[1\.2em\]"[^>]*><g[^>]*><circle cx="12" cy="12" r="3"[^>]*><\/circle><path d="m22,13\.25v-2\.5l-2\.318-\.966[^"]*Z"[^>]*><\/path><\/g><\/svg>/ => '<i class="ph ph-gear size-[1.2em]"></i>',
+  
+  # Generic brand logo icons in button examples should keep their SVGs for now since they're specific brand logos
+  # We'll only replace generic UI icons
+}
+
+def replace_icons_in_file(file_path)
+  return unless File.exist?(file_path)
+  
+  content = File.read(file_path)
+  original_content = content.dup
+  
+  ICON_REPLACEMENTS.each do |pattern, replacement|
+    content.gsub!(pattern, replacement)
+  end
+  
+  if content != original_content
+    File.write(file_path, content)
+    puts "✅ Updated icons in: #{file_path}"
+    true
+  else
+    false
+  end
+end
+
+def process_all_fixtures
+  fixture_dir = File.expand_path('../test/fixtures/components', __dir__)
+  updated_files = []
+  
+  Dir.glob("#{fixture_dir}/**/*.html").each do |file_path|
+    if replace_icons_in_file(file_path)
+      updated_files << file_path
+    end
+  end
+  
+  puts "\n📊 Summary:"
+  puts "  - Total files processed: #{Dir.glob("#{fixture_dir}/**/*.html").count}"
+  puts "  - Files updated: #{updated_files.count}"
+  
+  if updated_files.any?
+    puts "\n📝 Updated files:"
+    updated_files.each { |file| puts "  - #{File.basename(file)}" }
+  end
+end
+
+if __FILE__ == $0
+  puts "🔄 Replacing hardcoded SVG icons with Phosphor icons..."
+  process_all_fixtures
+  puts "\n✨ Icon replacement complete!"
+end
