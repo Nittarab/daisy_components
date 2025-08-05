@@ -112,13 +112,15 @@ module DaisyUI
     private
 
     def render_checkbox
-      tag.input(
+      attributes = {
         type: 'checkbox',
         value: @value,
-        checked: @checked,
         class: class_names('checkbox', 'theme-controller', @custom_classes, system_arguments[:class]),
         **system_arguments.except(:class)
-      )
+      }
+      attributes[:checked] = true if @checked
+      
+      tag.input(**attributes)
     end
 
     def render_toggle
@@ -127,13 +129,15 @@ module DaisyUI
       content << @icon_before if @icon_before
       
       input_classes = class_names('toggle', 'theme-controller', size_class, @custom_classes, system_arguments[:class])
-      content << tag.input(
+      attributes = {
         type: 'checkbox',
         value: @value,
-        checked: @checked,
         class: input_classes,
         **system_arguments.except(:class)
-      )
+      }
+      attributes[:checked] = true if @checked
+      
+      content << tag.input(**attributes)
       
       content << @icon_after if @icon_after
       content << tag.span(@text_after, class: 'label-text') if @text_after
@@ -155,14 +159,16 @@ module DaisyUI
 
     def render_radio_item(theme)
       tag.label(class: 'flex gap-2 cursor-pointer items-center') do
+        attributes = {
+          type: 'radio',
+          name: @name,
+          value: theme[:value],
+          class: class_names('radio', size_class, 'theme-controller')
+        }
+        attributes[:checked] = true if theme[:checked]
+        
         safe_join([
-          tag.input(
-            type: 'radio',
-            name: @name,
-            value: theme[:value],
-            class: class_names('radio', size_class, 'theme-controller'),
-            checked: theme[:checked]
-          ),
+          tag.input(**attributes),
           theme[:label]
         ])
       end
@@ -177,14 +183,16 @@ module DaisyUI
     end
 
     def render_radio_button_item(theme)
-      tag.input(
+      attributes = {
         type: 'radio',
         name: @name,
         value: theme[:value],
         class: class_names('btn', 'theme-controller', 'join-item'),
-        'aria-label': theme[:label],
-        checked: theme[:checked]
-      )
+        'aria-label': theme[:label]
+      }
+      attributes[:checked] = true if theme[:checked]
+      
+      tag.input(**attributes)
     end
 
     def render_dropdown
@@ -215,40 +223,46 @@ module DaisyUI
 
     def render_dropdown_item(theme)
       tag.li do
-        tag.input(
+        attributes = {
           type: 'radio',
           name: @name,
           value: theme[:value],
           class: 'theme-controller w-full btn btn-sm btn-block btn-ghost justify-start',
-          'aria-label': theme[:label],
-          checked: theme[:checked]
-        )
+          'aria-label': theme[:label]
+        }
+        attributes[:checked] = true if theme[:checked]
+        
+        tag.input(**attributes)
       end
     end
 
     def render_swap
+      attributes = {
+        type: 'checkbox',
+        value: @value,
+        class: 'theme-controller'
+      }
+      attributes[:checked] = true if @checked
+      
       tag.label(class: 'swap swap-rotate') do
         safe_join([
-          tag.input(
-            type: 'checkbox',
-            value: @value,
-            class: 'theme-controller',
-            checked: @checked
-          ),
+          tag.input(**attributes),
           render_swap_icons
         ].flatten)
       end
     end
 
     def render_toggle_icons_inside
+      attributes = {
+        type: 'checkbox',
+        value: @value,
+        class: 'theme-controller'
+      }
+      attributes[:checked] = true if @checked
+      
       tag.label(class: 'toggle text-base-content') do
         safe_join([
-          tag.input(
-            type: 'checkbox',
-            value: @value,
-            class: 'theme-controller',
-            checked: @checked
-          ),
+          tag.input(**attributes),
           tag.i('', class: 'ph ph-sun', 'aria-label': 'sun'),
           tag.i('', class: 'ph ph-moon', 'aria-label': 'moon')
         ])

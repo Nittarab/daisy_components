@@ -90,6 +90,12 @@ module DaisyUI
         assert_selector 'input.checkbox.theme-controller[checked]', count: 1
       end
 
+      def test_playground_preview_unchecked_state  
+        render_preview('playground', params: { checked: false })
+        assert_selector 'input.checkbox.theme-controller', count: 1
+        assert_no_selector 'input.checkbox.theme-controller[checked]'
+      end
+
       def test_playground_preview_custom_value
         render_preview('playground', params: { value: 'dark' })
         assert_selector 'input.checkbox.theme-controller[value="dark"]', count: 1
