@@ -28,11 +28,17 @@ module DaisyUI
         vertical: false,
         classes: ''
       )
+        icon_param = if has_icon
+          color ? nil : info_icon  # Use default icon if no color, custom icon if has color
+        else
+          false  # Explicitly disable icon
+        end
+        
         render(DaisyUI::Alert.new(
                  text: text,
                  color: color,
                  variant: variant,
-                 icon: has_icon && color ? nil : (has_icon ? info_icon : nil),
+                 icon: icon_param,
                  dismissible: dismissible,
                  vertical: vertical,
                  class: classes
@@ -74,12 +80,16 @@ module DaisyUI
       end
 
       def alert_with_title_and_description
-        render(DaisyUI::Alert.new(
-                 color: :info,
-                 title: 'New message!',
-                 description: 'You have 1 unread message',
-                 vertical: true
-               ))
+        alert = DaisyUI::Alert.new(
+          color: :info,
+          title: 'New message!',
+          description: 'You have 1 unread message',
+          vertical: true
+        )
+        alert.with_actions do
+          tag.button('See', class: 'btn btn-sm')
+        end
+        render alert
       end
 
       def alert_with_buttons_responsive
