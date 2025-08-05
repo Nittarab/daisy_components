@@ -31,9 +31,9 @@ module DaisyUI
 
       def test_playground_preview_without_content
         render_preview('playground', show_content: false)
-        assert_selector '.tabs-container', count: 1
         assert_selector '.tabs', count: 1
         assert_selector '.tab', count: 4
+        assert_no_selector '.tabs-container'
         assert_no_selector '.tab-content-container'
         assert_no_selector '.tab-panel'
       end
@@ -60,6 +60,15 @@ module DaisyUI
         assert_text 'Content for Tab 1'
       end
 
+      def test_tabs_without_content_structure
+        render_preview('tabs_without_content')
+        assert_selector '.tabs', count: 1
+        assert_selector 'a.tab[href]', count: 4
+        assert_no_selector '.tabs-container'
+        assert_no_selector '.tab-content-container'
+        assert_no_selector '.tab-panel'
+      end
+
       def test_disabled_tabs
         render_preview('tabs_with_disabled_items')
         assert_selector '.tab-disabled', count: 2
@@ -69,6 +78,7 @@ module DaisyUI
       def test_navigation_tabs
         render_preview('navigation_tabs')
         assert_selector 'a.tab[href]', count: 4
+        assert_no_selector '.tabs-container'
         assert_no_selector '.tab-content-container'
       end
     end

@@ -96,18 +96,19 @@ module DaisyUI
     end
 
     def call
-      tag.div(class: 'tabs-container', **system_arguments.except(:class)) do
-        safe_join([
-          render_tabs,
-          (@show_content ? render_content : nil)
-        ].compact)
+      if @show_content
+        tag.div(class: 'tabs-container', **system_arguments.except(:class)) do
+          safe_join([render_tabs, render_content].compact)
+        end
+      else
+        render_tabs
       end
     end
 
     private
 
     def render_tabs
-      tag.div(role: 'tablist', class: computed_tab_classes) do
+      tag.div(role: 'tablist', class: computed_tab_classes, **(@show_content ? {} : system_arguments.except(:class))) do
         tabs.each_with_index.map do |tab, index|
           tab.call(index: index, show_content: @show_content)
         end
