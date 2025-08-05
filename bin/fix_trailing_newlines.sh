@@ -52,9 +52,22 @@ if [ "$STAGED_ONLY" = true ]; then
     files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(rb|erb|css|js|md|yml|yaml|json)$' || true)
     echo -e "${BLUE}📋 Checking staged files only${NC}"
 else
-    # Check all relevant files in the repository
-    files=$(find . -type f \( -name "*.rb" -o -name "*.erb" -o -name "*.css" -o -name "*.js" -o -name "*.md" -o -name "*.yml" -o -name "*.yaml" -o -name "*.json" \) -not -path "./.git/*" -not -path "./node_modules/*" -not -path "./tmp/*" -not -path "./log/*")
-    echo -e "${BLUE}📋 Checking all source files${NC}"
+    # Check all relevant files in the repository, excluding vendor and other directories
+    files=$(find . -type f \( -name "*.rb" -o -name "*.erb" -o -name "*.css" -o -name "*.js" -o -name "*.md" -o -name "*.yml" -o -name "*.yaml" -o -name "*.json" \) \
+        -not -path "./.git/*" \
+        -not -path "./.bundle/*" \
+        -not -path "./vendor/*" \
+        -not -path "./node_modules/*" \
+        -not -path "./tmp/*" \
+        -not -path "./log/*" \
+        -not -path "./coverage/*" \
+        -not -path "./public/assets/*" \
+        -not -path "./doc/*" \
+        -not -path "./pkg/*" \
+        -not -path "./test/dummy/log/*" \
+        -not -path "./test/dummy/storage/*" \
+        -not -path "./test/dummy/tmp/*")
+    echo -e "${BLUE}📋 Checking all source files (excluding vendor, node_modules, etc.)${NC}"
 fi
 
 if [ -z "$files" ]; then
