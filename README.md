@@ -59,6 +59,35 @@ With coverage:
 $ COVERAGE=true bin/rails test
 ```
 
+## Code Quality
+
+### Trailing Newlines
+
+Use the dedicated script to check and fix trailing newline issues:
+
+```bash
+# Check all files
+$ ./bin/fix_trailing_newlines.sh --check-only
+
+# Fix all files
+$ ./bin/fix_trailing_newlines.sh
+
+# Check only staged files (used by git hooks)
+$ ./bin/fix_trailing_newlines.sh --staged-only
+```
+
+### Git Hooks
+
+A pre-commit hook is available that automatically fixes trailing newline issues. To install it:
+
+```bash
+$ ./bin/setup_hooks.sh
+```
+
+Once installed, the hook will run before each commit to ensure code quality standards.
+
+**Note:** Git hooks are not automatically shared when cloning a repository. Each developer needs to run the setup script once after cloning.
+
 ## Contributing
 
 1. Fork it
