@@ -3,16 +3,16 @@ current directory: /home/runner/work/daisy_components/daisy_components/vendor/bu
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/racc-1.8.1/ext/racc/cparse
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-dredzr sitelibdir\=./.gem.20250805-3532-dredzr clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-j42aa3 sitelibdir\=./.gem.20250805-4710-j42aa3 clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/racc-1.8.1/ext/racc/cparse
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-dredzr sitelibdir\=./.gem.20250805-3532-dredzr
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-j42aa3 sitelibdir\=./.gem.20250805-4710-j42aa3
 compiling cparse.c
 linking shared-object racc/cparse.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/racc-1.8.1/ext/racc/cparse
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-dredzr sitelibdir\=./.gem.20250805-3532-dredzr install
-/usr/bin/install -c -m 0755 cparse.so ./.gem.20250805-3532-dredzr/racc
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-j42aa3 sitelibdir\=./.gem.20250805-4710-j42aa3 install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20250805-4710-j42aa3/racc
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/racc-1.8.1/ext/racc/cparse
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-dredzr sitelibdir\=./.gem.20250805-3532-dredzr clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-j42aa3 sitelibdir\=./.gem.20250805-4710-j42aa3 clean

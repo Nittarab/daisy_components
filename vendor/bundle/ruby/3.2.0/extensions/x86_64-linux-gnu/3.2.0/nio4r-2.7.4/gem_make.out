@@ -13,10 +13,10 @@ checking for sys/resource.h... yes
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/nio4r-2.7.4/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-94bo3d sitelibdir\=./.gem.20250805-3532-94bo3d clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-mhayx sitelibdir\=./.gem.20250805-4710-mhayx clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/nio4r-2.7.4/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-94bo3d sitelibdir\=./.gem.20250805-3532-94bo3d
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-mhayx sitelibdir\=./.gem.20250805-4710-mhayx
 compiling bytebuffer.c
 compiling monitor.c
 compiling nio4r_ext.c
@@ -46,8 +46,8 @@ selector.c:525:5: warning: ignoring return value of ‘write’ declared with at
 linking shared-object nio4r_ext.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/nio4r-2.7.4/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-94bo3d sitelibdir\=./.gem.20250805-3532-94bo3d install
-/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20250805-3532-94bo3d
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-mhayx sitelibdir\=./.gem.20250805-4710-mhayx install
+/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20250805-4710-mhayx
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/nio4r-2.7.4/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-94bo3d sitelibdir\=./.gem.20250805-3532-94bo3d clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-mhayx sitelibdir\=./.gem.20250805-4710-mhayx clean

@@ -28,17 +28,17 @@ checking for RB_WARN_CATEGORY_DEPRECATED in ruby.h... yes
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/bigdecimal-3.2.1/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-o5onkh sitelibdir\=./.gem.20250805-3532-o5onkh clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-6wfyun sitelibdir\=./.gem.20250805-4710-6wfyun clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/bigdecimal-3.2.1/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-o5onkh sitelibdir\=./.gem.20250805-3532-o5onkh
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-6wfyun sitelibdir\=./.gem.20250805-4710-6wfyun
 compiling bigdecimal.c
 compiling missing.c
 linking shared-object bigdecimal.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/bigdecimal-3.2.1/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-o5onkh sitelibdir\=./.gem.20250805-3532-o5onkh install
-/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20250805-3532-o5onkh
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-6wfyun sitelibdir\=./.gem.20250805-4710-6wfyun install
+/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20250805-4710-6wfyun
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/bigdecimal-3.2.1/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-o5onkh sitelibdir\=./.gem.20250805-3532-o5onkh clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-6wfyun sitelibdir\=./.gem.20250805-4710-6wfyun clean

@@ -8,16 +8,16 @@ checking for whether -std=c99 is accepted as CFLAGS... yes
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-wy7yyn sitelibdir\=./.gem.20250805-3532-wy7yyn clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-viycf0 sitelibdir\=./.gem.20250805-4710-viycf0 clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-wy7yyn sitelibdir\=./.gem.20250805-3532-wy7yyn
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-viycf0 sitelibdir\=./.gem.20250805-4710-viycf0
 compiling parser.c
 linking shared-object json/ext/parser.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-wy7yyn sitelibdir\=./.gem.20250805-3532-wy7yyn install
-/usr/bin/install -c -m 0755 parser.so ./.gem.20250805-3532-wy7yyn/json/ext
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-viycf0 sitelibdir\=./.gem.20250805-4710-viycf0 install
+/usr/bin/install -c -m 0755 parser.so ./.gem.20250805-4710-viycf0/json/ext
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-wy7yyn sitelibdir\=./.gem.20250805-3532-wy7yyn clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-viycf0 sitelibdir\=./.gem.20250805-4710-viycf0 clean

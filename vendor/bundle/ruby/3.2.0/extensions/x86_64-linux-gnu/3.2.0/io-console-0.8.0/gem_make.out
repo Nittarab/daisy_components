@@ -16,16 +16,16 @@ checking for ttyname_r()... yes
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/io-console-0.8.0/ext/io/console
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-o7ovnk sitelibdir\=./.gem.20250805-3532-o7ovnk clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-ebh0vk sitelibdir\=./.gem.20250805-4710-ebh0vk clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/io-console-0.8.0/ext/io/console
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-o7ovnk sitelibdir\=./.gem.20250805-3532-o7ovnk
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-ebh0vk sitelibdir\=./.gem.20250805-4710-ebh0vk
 compiling console.c
 linking shared-object io/console.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/io-console-0.8.0/ext/io/console
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-o7ovnk sitelibdir\=./.gem.20250805-3532-o7ovnk install
-/usr/bin/install -c -m 0755 console.so ./.gem.20250805-3532-o7ovnk/io
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-ebh0vk sitelibdir\=./.gem.20250805-4710-ebh0vk install
+/usr/bin/install -c -m 0755 console.so ./.gem.20250805-4710-ebh0vk/io
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/io-console-0.8.0/ext/io/console
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-o7ovnk sitelibdir\=./.gem.20250805-3532-o7ovnk clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-ebh0vk sitelibdir\=./.gem.20250805-4710-ebh0vk clean

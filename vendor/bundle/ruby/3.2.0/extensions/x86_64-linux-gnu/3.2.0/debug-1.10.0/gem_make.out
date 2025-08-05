@@ -3,17 +3,17 @@ current directory: /home/runner/work/daisy_components/daisy_components/vendor/bu
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/debug-1.10.0/ext/debug
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-dw2pa5 sitelibdir\=./.gem.20250805-3532-dw2pa5 clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-s8g1b3 sitelibdir\=./.gem.20250805-4710-s8g1b3 clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/debug-1.10.0/ext/debug
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-dw2pa5 sitelibdir\=./.gem.20250805-3532-dw2pa5
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-s8g1b3 sitelibdir\=./.gem.20250805-4710-s8g1b3
 compiling debug.c
 compiling iseq_collector.c
 linking shared-object debug/debug.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/debug-1.10.0/ext/debug
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-dw2pa5 sitelibdir\=./.gem.20250805-3532-dw2pa5 install
-/usr/bin/install -c -m 0755 debug.so ./.gem.20250805-3532-dw2pa5/debug
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-s8g1b3 sitelibdir\=./.gem.20250805-4710-s8g1b3 install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20250805-4710-s8g1b3/debug
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/debug-1.10.0/ext/debug
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-dw2pa5 sitelibdir\=./.gem.20250805-3532-dw2pa5 clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-s8g1b3 sitelibdir\=./.gem.20250805-4710-s8g1b3 clean

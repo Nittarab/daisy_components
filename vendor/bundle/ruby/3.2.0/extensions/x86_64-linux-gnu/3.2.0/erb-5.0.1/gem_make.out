@@ -3,16 +3,16 @@ current directory: /home/runner/work/daisy_components/daisy_components/vendor/bu
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/erb-5.0.1/ext/erb/escape
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-fui15p sitelibdir\=./.gem.20250805-3532-fui15p clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-dkzoej sitelibdir\=./.gem.20250805-4710-dkzoej clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/erb-5.0.1/ext/erb/escape
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-fui15p sitelibdir\=./.gem.20250805-3532-fui15p
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-dkzoej sitelibdir\=./.gem.20250805-4710-dkzoej
 compiling escape.c
 linking shared-object erb/escape.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/erb-5.0.1/ext/erb/escape
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-fui15p sitelibdir\=./.gem.20250805-3532-fui15p install
-/usr/bin/install -c -m 0755 escape.so ./.gem.20250805-3532-fui15p/erb
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-dkzoej sitelibdir\=./.gem.20250805-4710-dkzoej install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20250805-4710-dkzoej/erb
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/erb-5.0.1/ext/erb/escape
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-fui15p sitelibdir\=./.gem.20250805-3532-fui15p clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-dkzoej sitelibdir\=./.gem.20250805-4710-dkzoej clean

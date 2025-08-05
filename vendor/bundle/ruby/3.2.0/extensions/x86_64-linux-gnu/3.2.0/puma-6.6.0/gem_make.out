@@ -24,18 +24,18 @@ checking for Random.bytes... yes
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/puma-6.6.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-tyiwi sitelibdir\=./.gem.20250805-3532-tyiwi clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-crk7yc sitelibdir\=./.gem.20250805-4710-crk7yc clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/puma-6.6.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-tyiwi sitelibdir\=./.gem.20250805-3532-tyiwi
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-crk7yc sitelibdir\=./.gem.20250805-4710-crk7yc
 compiling http11_parser.c
 compiling mini_ssl.c
 compiling puma_http11.c
 linking shared-object puma/puma_http11.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/puma-6.6.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-tyiwi sitelibdir\=./.gem.20250805-3532-tyiwi install
-/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20250805-3532-tyiwi/puma
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-crk7yc sitelibdir\=./.gem.20250805-4710-crk7yc install
+/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20250805-4710-crk7yc/puma
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/puma-6.6.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-tyiwi sitelibdir\=./.gem.20250805-3532-tyiwi clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-crk7yc sitelibdir\=./.gem.20250805-4710-crk7yc clean

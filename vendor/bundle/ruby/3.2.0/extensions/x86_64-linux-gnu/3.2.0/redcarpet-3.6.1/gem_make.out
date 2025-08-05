@@ -3,10 +3,10 @@ current directory: /home/runner/work/daisy_components/daisy_components/vendor/bu
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/redcarpet-3.6.1/ext/redcarpet
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-mv3gar sitelibdir\=./.gem.20250805-3532-mv3gar clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-c0x10k sitelibdir\=./.gem.20250805-4710-c0x10k clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/redcarpet-3.6.1/ext/redcarpet
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-mv3gar sitelibdir\=./.gem.20250805-3532-mv3gar
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-c0x10k sitelibdir\=./.gem.20250805-4710-c0x10k
 compiling autolink.c
 compiling buffer.c
 buffer.c: In function ‘bufcstr’:
@@ -34,8 +34,8 @@ compiling stack.c
 linking shared-object redcarpet.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/redcarpet-3.6.1/ext/redcarpet
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-mv3gar sitelibdir\=./.gem.20250805-3532-mv3gar install
-/usr/bin/install -c -m 0755 redcarpet.so ./.gem.20250805-3532-mv3gar
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-c0x10k sitelibdir\=./.gem.20250805-4710-c0x10k install
+/usr/bin/install -c -m 0755 redcarpet.so ./.gem.20250805-4710-c0x10k
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/redcarpet-3.6.1/ext/redcarpet
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-mv3gar sitelibdir\=./.gem.20250805-3532-mv3gar clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-c0x10k sitelibdir\=./.gem.20250805-4710-c0x10k clean

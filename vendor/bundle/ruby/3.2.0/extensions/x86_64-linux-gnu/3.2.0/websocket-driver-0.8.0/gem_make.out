@@ -3,16 +3,16 @@ current directory: /home/runner/work/daisy_components/daisy_components/vendor/bu
 creating Makefile
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.0/ext/websocket-driver
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-m9bs86 sitelibdir\=./.gem.20250805-3532-m9bs86 clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-qdvuyc sitelibdir\=./.gem.20250805-4710-qdvuyc clean
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.0/ext/websocket-driver
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-m9bs86 sitelibdir\=./.gem.20250805-3532-m9bs86
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-qdvuyc sitelibdir\=./.gem.20250805-4710-qdvuyc
 compiling websocket_mask.c
 linking shared-object websocket_mask.so
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.0/ext/websocket-driver
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-m9bs86 sitelibdir\=./.gem.20250805-3532-m9bs86 install
-/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20250805-3532-m9bs86
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-qdvuyc sitelibdir\=./.gem.20250805-4710-qdvuyc install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20250805-4710-qdvuyc
 
 current directory: /home/runner/work/daisy_components/daisy_components/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.0/ext/websocket-driver
-make DESTDIR\= sitearchdir\=./.gem.20250805-3532-m9bs86 sitelibdir\=./.gem.20250805-3532-m9bs86 clean
+make DESTDIR\= sitearchdir\=./.gem.20250805-4710-qdvuyc sitelibdir\=./.gem.20250805-4710-qdvuyc clean
