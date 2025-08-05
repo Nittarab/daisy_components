@@ -66,10 +66,10 @@ $ COVERAGE=true bin/rails test
 Use the dedicated script to check and fix trailing newline issues:
 
 ```bash
-# Check all files
+# Check all files (excludes vendor/, node_modules/, tmp/, log/, coverage/, etc.)
 $ ./bin/fix_trailing_newlines.sh --check-only
 
-# Fix all files
+# Fix all files  
 $ ./bin/fix_trailing_newlines.sh
 
 # Check only staged files (used by git hooks)
