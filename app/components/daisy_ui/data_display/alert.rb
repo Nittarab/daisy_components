@@ -9,8 +9,8 @@ module DaisyUI
   # @example Info alert
   #   <%= render(DaisyUI::Alert.new(text: "New software update available.", color: :info)) %>
   #
-  # @example Success alert
-  #   <%= render(DaisyUI::Alert.new(text: "Your purchase has been confirmed!", color: :success)) %>
+  # @example Success alert with icon
+  #   <%= render(DaisyUI::Alert.new(text: "Your purchase has been confirmed!", color: :success, icon: helpers.check_icon)) %>
   #
   # @example With custom icon
   #   <%= render(DaisyUI::Alert.new(
@@ -45,13 +45,7 @@ module DaisyUI
       dash: 'alert-dash'
     }.freeze
 
-    # Default icons for each alert type using Phosphor icons
-    DEFAULT_ICONS = {
-      info: 'ph-info',
-      success: 'ph-check',
-      warning: 'ph-warning',
-      error: 'ph-x-circle'
-    }.freeze
+
 
     # @param text [String] The text content to display inside the alert
     # @param color [Symbol] Alert type color (info/success/warning/error)
@@ -81,16 +75,9 @@ module DaisyUI
       @description = description
       @vertical = vertical
 
-      # Set up icon logic:
-      # - If icon explicitly provided, use it
-      # - If icon is false (explicitly disabled), don't use any icon
-      # - If variant style is set, don't use default icons (matches fixtures)
-      # - Otherwise, use default icon for the color (or info if no color)
+      # Set up icon if explicitly provided
       if icon
         with_icon { icon }
-      elsif icon != false && !@variant
-        default_icon = default_icon_for_color(color || :info)
-        with_icon { default_icon } if default_icon
       end
 
       super(**system_arguments)
@@ -141,10 +128,6 @@ module DaisyUI
       end
     end
 
-    def default_icon_for_color(color)
-      return nil unless DEFAULT_ICONS.key?(color.to_sym)
 
-      tag.i(class: "ph #{DEFAULT_ICONS[color.to_sym]} h-6 w-6 shrink-0")
-    end
   end
 end

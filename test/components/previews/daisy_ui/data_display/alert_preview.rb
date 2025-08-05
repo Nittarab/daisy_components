@@ -29,9 +29,9 @@ module DaisyUI
         classes: ''
       )
         icon_param = if has_icon
-          color ? nil : info_icon  # Use default icon if no color, custom icon if has color
+          info_icon  # Always use info icon when user wants to show an icon
         else
-          false  # Explicitly disable icon
+          nil  # No icon when has_icon is false
         end
         
         render(DaisyUI::Alert.new(
