@@ -1,0 +1,14 @@
+<div class="tabs-container">
+  <div role="tablist" class="tabs tabs-bordered">
+    <button type="button" role="tab" id="tab-0" class="tab tab-active" aria-selected="true" aria-controls="tab-panel-0">Available</button>
+    <button type="button" role="tab" id="tab-1" class="tab" aria-selected="false" aria-controls="tab-panel-1">Also Available</button>
+    <button type="button" role="tab" id="tab-2" disabled class="tab tab-disabled" aria-selected="false" aria-controls="tab-panel-2">Disabled</button>
+    <button type="button" role="tab" id="tab-3" disabled class="tab tab-disabled" aria-selected="false" aria-controls="tab-panel-3">Coming Soon</button>
+  </div>
+  <div class="tab-content-container mt-4">
+    <div class="tab-panel" role="tabpanel" id="tab-panel-0" aria-labelledby="tab-0">This tab is available</div>
+    <div class="tab-panel hidden" role="tabpanel" id="tab-panel-1" aria-labelledby="tab-1">This tab is also available</div>
+    <div class="tab-panel hidden" role="tabpanel" id="tab-panel-2" aria-labelledby="tab-2">This content is not accessible</div>
+    <div class="tab-panel hidden" role="tabpanel" id="tab-panel-3" aria-labelledby="tab-3">Feature coming soon</div>
+  </div>
+</div>
