@@ -56,7 +56,7 @@ module DaisyUI
       end
 
       def success_color
-        render(DaisyUI::Alert.new(text: 'Your purchase has been confirmed!', color: :success))
+        render(DaisyUI::Alert.new(text: 'Your purchase has been confirmed!', color: :success, icon: check_icon))
       end
 
       def warning_color
@@ -64,7 +64,7 @@ module DaisyUI
       end
 
       def error_color
-        render(DaisyUI::Alert.new(text: 'Error! Task failed successfully.', color: :error))
+        render(DaisyUI::Alert.new(text: 'Error! Task failed successfully.', color: :error, icon: error_icon))
       end
 
       def alert_outline_style
@@ -93,7 +93,18 @@ module DaisyUI
       end
 
       def alert_with_buttons_responsive
-        render_with_template
+        alert = DaisyUI::Alert.new(
+          text: 'we use cookies for no reason.',
+          vertical: true,
+          icon: info_icon
+        )
+        alert.with_actions do
+          tag.div do
+            tag.button('Deny', class: 'btn btn-sm') +
+            tag.button('Accept', class: 'btn btn-sm btn-primary')
+          end
+        end
+        render alert
       end
     end
   end
