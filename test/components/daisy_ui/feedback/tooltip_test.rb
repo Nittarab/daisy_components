@@ -38,7 +38,7 @@ module DaisyUI
 
       def test_playground_preview_with_responsive
         render_preview('playground', params: { responsive: 'lg' })
-        assert_selector '.tooltip.tooltip-lg[data-tip="Hello world"]', count: 1
+        assert_selector '.lg\\:tooltip[data-tip="Hello world"]', count: 1
       end
 
       def test_playground_preview_with_custom_tip

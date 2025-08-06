@@ -3,17 +3,17 @@
 module DaisyUI
   # Tooltip component implementing DaisyUI's tooltip styles
   #
-  # @example Basic usage with text (new simplified API)
-  #   <%= render(DaisyUI::Tooltip.new(tip: "Hello world", text: "Hover me")) %>
+  # @example Basic usage with button
+  #   <%= render(DaisyUI::Tooltip.new(tip: "Hello world", button: { text: "Hover me" })) %>
   #
   # @example With position and color
-  #   <%= render(DaisyUI::Tooltip.new(position: :top, color: :primary, tip: "Primary tooltip", text: "Top", button_color: :primary)) %>
+  #   <%= render(DaisyUI::Tooltip.new(position: :top, color: :primary, tip: "Primary tooltip", button: { text: "Top", color: :primary })) %>
   #
   # @example Force open for demos  
-  #   <%= render(DaisyUI::Tooltip.new(tip: "Always visible", text: "Demo", force_open: true)) %>
+  #   <%= render(DaisyUI::Tooltip.new(tip: "Always visible", button: { text: "Demo" }, force_open: true)) %>
   #
   # @example Responsive (only show on large screens)
-  #   <%= render(DaisyUI::Tooltip.new(tip: "Large screen only", text: "Large screen tooltip", responsive: "lg")) %>
+  #   <%= render(DaisyUI::Tooltip.new(tip: "Large screen only", button: { text: "Large screen tooltip" }, responsive: "lg")) %>
   #
   # @example With custom content (traditional API)
   #   <%= render(DaisyUI::Tooltip.new(tip: "Hello world")) do %>
@@ -23,10 +23,7 @@ module DaisyUI
   # @example Button customization
   #   <%= render(DaisyUI::Tooltip.new(
   #     tip: "Custom button", 
-  #     text: "Click me",
-  #     button_color: :primary,
-  #     button_size: :lg,
-  #     button_variant: :outline
+  #     button: { text: "Click me", color: :primary, size: :lg, variant: :outline }
   #   )) %>
   class Tooltip < BaseComponent
     # Available tooltip positions from DaisyUI
@@ -58,42 +55,32 @@ module DaisyUI
     }.freeze
 
     # @param tip [String] The text content to display in the tooltip
-    # @param text [String] If provided, automatically creates a button with this text (optional)
+    # @param button [Hash] Button configuration for auto-generated button (optional)
+    # @option button [String] :text Button text
+    # @option button [Symbol] :color Button color (primary, secondary, etc)
+    # @option button [Symbol] :variant Button variant (outline, soft, etc)
+    # @option button [Symbol] :size Button size (xs, sm, md, lg, xl)
+    # @option button [Symbol] :shape Button shape (circle, square, wide)
     # @param position [String] Position of the tooltip (top/bottom/left/right)
     # @param color [String] Color theme of the tooltip (primary/secondary/accent/neutral/info/success/warning/error)
     # @param force_open [Boolean] When true, forces the tooltip to be visible (useful for demos)
     # @param responsive [String] Only show tooltip on specified screen size and up (sm/md/lg/xl)
-    # Button customization options (only used when text: is provided):
-    # @param button_color [String] Color of the auto-generated button
-    # @param button_size [String] Size of the auto-generated button  
-    # @param button_variant [String] Variant of the auto-generated button
-    # @param button_shape [String] Shape of the auto-generated button
     # @param system_arguments [Hash] Additional HTML attributes to be applied to the tooltip wrapper
     def initialize(
       tip:,
-      text: nil,
+      button: nil,
       position: nil,
       color: nil,
       force_open: false,
       responsive: nil,
-      button_color: nil,
-      button_size: nil,
-      button_variant: nil,
-      button_shape: nil,
       **system_arguments
     )
       @tip = tip
-      @text = text
+      @button = button
       @position = build_argument(position, POSITIONS, 'position')
       @color = build_argument(color, COLORS, 'color')
       @responsive = build_argument(responsive, RESPONSIVE, 'responsive')
       @force_open = force_open
-      
-      # Button customization options
-      @button_color = button_color
-      @button_size = button_size
-      @button_variant = button_variant
-      @button_shape = button_shape
 
       super(**system_arguments)
     end
@@ -107,15 +94,10 @@ module DaisyUI
     private
     
     def tooltip_content
-      if @text
-        # Auto-generate button when text is provided
-        DaisyUI::Button.new(
-          text: @text,
-          color: @button_color,
-          size: @button_size,
-          variant: @button_variant,
-          shape: @button_shape
-        ).render_in(view_context)
+      if @button
+        # Auto-generate button when button config is provided
+        button_config = @button.symbolize_keys
+        DaisyUI::Button.new(**button_config).render_in(view_context)
       else
         # Use provided block content
         content
