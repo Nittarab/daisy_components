@@ -1,0 +1,12 @@
+<%
+  alert = DaisyUI::Alert.new(
+    color: :info,
+    title: 'New message!',
+    description: 'You have 1 unread message',
+    vertical: true
+  )
+  alert.with_actions do
+    tag.button('See', class: 'btn btn-sm')
+  end
+%>
+<%= render alert %>
