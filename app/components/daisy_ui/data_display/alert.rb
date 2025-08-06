@@ -26,9 +26,18 @@ module DaisyUI
   #
   # @example Outline style
   #   <%= render(DaisyUI::Alert.new(text: "Outline alert", color: :info, variant: :outline)) %>
+  #
+  # @example With buttons parameter
+  #   <%= render(DaisyUI::Alert.new(
+  #     text: "Accept cookies?", 
+  #     buttons: [
+  #       { text: "Deny", size: :sm },
+  #       { text: "Accept", size: :sm, color: :primary }
+  #     ]
+  #   )) %>
   class Alert < DaisyUI::BaseComponent
     renders_one :icon
-    renders_one :actions
+    renders_one :actions, DaisyUI::Alert::Actions
 
     # Available alert colors from DaisyUI
     COLORS = {
@@ -55,6 +64,7 @@ module DaisyUI
     # @param title [String] Optional title for structured alerts
     # @param description [String] Optional description for structured alerts
     # @param vertical [Boolean] Whether to use vertical layout on mobile
+    # @param buttons [Array] Array of button configurations
     # @param system_arguments [Hash] Additional HTML attributes to be applied to the alert
     def initialize(
       text: nil,
@@ -65,6 +75,7 @@ module DaisyUI
       title: nil,
       description: nil,
       vertical: false,
+      buttons: nil,
       **system_arguments
     )
       @text = text
@@ -74,6 +85,7 @@ module DaisyUI
       @title = title
       @description = description
       @vertical = vertical
+      @buttons = buttons
 
       # Set up icon if explicitly provided
       if icon
@@ -87,6 +99,10 @@ module DaisyUI
       tag.div(**html_attributes) do
         safe_join([icon, content_area, actions].compact)
       end
+    end
+
+    def before_render
+      setup_buttons if @buttons && !actions?
     end
 
     delegate :to_s, to: :call
@@ -125,6 +141,17 @@ module DaisyUI
           (@title ? tag.h3(@title, class: 'font-bold') : nil),
           (@description ? tag.div(@description, class: 'text-xs') : nil)
         ].compact)
+      end
+    end
+
+    def setup_buttons
+      return unless @buttons&.any?
+
+      with_actions do |actions|
+        @buttons.each do |button_config|
+          button_config = button_config.symbolize_keys
+          actions.with_button(**button_config)
+        end
       end
     end
 

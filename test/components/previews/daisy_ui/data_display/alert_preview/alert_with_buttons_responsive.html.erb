@@ -5,8 +5,8 @@
 ) do |component| %>
   <% component.with_actions do %>
     <div>
-      <button class="btn btn-sm">Deny</button>
-      <button class="btn btn-sm btn-primary">Accept</button>
+      <%= render DaisyUI::Button.new(text: "Deny", size: :sm) %>
+      <%= render DaisyUI::Button.new(text: "Accept", size: :sm, color: :primary) %>
     </div>
   <% end %>
 <% end %>
