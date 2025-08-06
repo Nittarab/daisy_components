@@ -34,10 +34,6 @@ module DaisyUI
       end
 
       # @!endgroup
-      #
-      def loading
-        render(DaisyUI::Loading.new)
-      end
 
       def loading_spinner
         render(DaisyUI::Loading.new(type: :spinner))
