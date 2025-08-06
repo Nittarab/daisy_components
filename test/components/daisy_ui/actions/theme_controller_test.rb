@@ -68,8 +68,8 @@ module DaisyUI
         render_preview('playground', params: { type: 'swap' })
         assert_selector 'label.swap.swap-rotate', count: 1
         assert_selector 'input[type="checkbox"].theme-controller', count: 1
-        assert_selector 'svg.swap-off', count: 1
-        assert_selector 'svg.swap-on', count: 1
+        assert_selector 'i.swap-off.ph-sun', count: 1
+        assert_selector 'i.swap-on.ph-moon', count: 1
       end
 
       def test_playground_preview_toggle_icons_inside_type
