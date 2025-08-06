@@ -101,11 +101,11 @@ install_mise() {
   fi
 }
 
-# Update .tool-versions with specific Ruby version
+# Update .tool-versions with latest Ruby version
 update_tool_versions() {
   log "Updating .tool-versions..."
   
-  RUBY_VERSION="3.3.6"
+  RUBY_VERSION="latest"
   
   if [[ -f .tool-versions ]]; then
     # Update existing file
