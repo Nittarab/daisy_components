@@ -88,6 +88,19 @@ end
 
 ## Development Workflow
 
+### Environment Setup
+For setting up the development environment, use the automated setup script:
+```bash
+# Automated environment setup (recommended)
+./bin/setup
+```
+
+This script will automatically:
+- Install mise if not present
+- Install the latest Ruby version
+- Install Bundler
+- Run `bundle install` to install dependencies
+
 ### Key Commands
 ```bash
 # Start Lookbook development server

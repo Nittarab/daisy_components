@@ -24,22 +24,12 @@ $ ./bin/setup
 This script will:
 - Detect your OS and CPU architecture
 - Install [mise](https://mise.jdx.dev/) if not already present
-- Install Ruby 3.3.6 (required by the gemspec)
+- Install the latest Ruby version
 - Install Bundler if needed
 - Run `bundle install` to install dependencies
 - Provide clear instructions for using the environment
 
-### Manual Setup
-
-If you are using [mise](https://mise.jdx.dev/) for managing your development tools and environment, ensure you have it installed. You can find the installation instructions [here](https://mise.jdx.dev/getting-started.html).
-
-Once mise is set up, you can install the required Ruby version (as specified in the `.tool-versions` file) by running:
-
-```bash
-$ mise install
-```
-
-Next, add this line to your application's Gemfile:
+Add this line to your application's Gemfile:
 
 ```ruby
 gem "daisy_components"
