@@ -1,0 +1,9 @@
+<!-- This is the same as dialog_modal_closes_when_clicked_outside but with a generic name -->
+<button class="btn" onclick="my_modal_backdrop.showModal()">open modal</button>
+<%= render DaisyUI::Modal.new(
+  modal_id: "my_modal_backdrop",
+  modal_type: :dialog,
+  title: "Hello!",
+  content: "Press ESC key or click outside to close",
+  backdrop_close: true
+) %>
