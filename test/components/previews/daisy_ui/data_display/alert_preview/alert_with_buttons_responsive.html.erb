@@ -1,0 +1,14 @@
+<%
+  alert = DaisyUI::Alert.new(
+    text: 'we use cookies for no reason.',
+    vertical: true,
+    icon: info_icon
+  )
+  alert.with_actions do
+    tag.div do
+      tag.button('Deny', class: 'btn btn-sm') +
+      tag.button('Accept', class: 'btn btn-sm btn-primary')
+    end
+  end
+%>
+<%= render alert %>

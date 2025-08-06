@@ -80,31 +80,11 @@ module DaisyUI
       end
 
       def alert_with_title_and_description
-        alert = DaisyUI::Alert.new(
-          color: :info,
-          title: 'New message!',
-          description: 'You have 1 unread message',
-          vertical: true
-        )
-        alert.with_actions do
-          tag.button('See', class: 'btn btn-sm')
-        end
-        render alert
+        render_with_template
       end
 
       def alert_with_buttons_responsive
-        alert = DaisyUI::Alert.new(
-          text: 'we use cookies for no reason.',
-          vertical: true,
-          icon: info_icon
-        )
-        alert.with_actions do
-          tag.div do
-            tag.button('Deny', class: 'btn btn-sm') +
-            tag.button('Accept', class: 'btn btn-sm btn-primary')
-          end
-        end
-        render alert
+        render_with_template
       end
     end
   end
