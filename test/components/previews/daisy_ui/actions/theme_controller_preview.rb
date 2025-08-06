@@ -72,70 +72,116 @@ module DaisyUI
       # ---------------
       # Simple checkbox for theme switching
       def theme_controller_using_a_checkbox
-        render_with_template
+        render(DaisyUI::ThemeController.new(value: "synthwave"))
       end
 
       # Theme Controller using a Toggle
       # ---------------
       # Toggle switch for theme switching
       def theme_controller_using_a_toggle
-        render_with_template
+        render(DaisyUI::ThemeController.new(type: :toggle, value: "synthwave"))
       end
 
       # Theme Controller using a Radio Input
       # ---------------
       # Radio inputs with labels for theme selection
       def theme_controller_using_a_radio_input
-        render_with_template
+        render(DaisyUI::ThemeController.new(
+          type: :radio,
+          name: "theme-radios",
+          themes: [
+            { value: "default", label: "Default" },
+            { value: "retro", label: "Retro" },
+            { value: "cyberpunk", label: "Cyberpunk" },
+            { value: "valentine", label: "Valentine" },
+            { value: "aqua", label: "Aqua" }
+          ],
+          size: :sm
+        ))
       end
 
       # Theme Controller using a Radio Button
       # ---------------
       # Radio inputs styled as buttons
       def theme_controller_using_a_radio_button
-        render_with_template
+        render(DaisyUI::ThemeController.new(
+          type: :radio_button,
+          name: "theme-buttons",
+          themes: [
+            { value: "default", label: "Default" },
+            { value: "retro", label: "Retro" },
+            { value: "cyberpunk", label: "Cyberpunk" },
+            { value: "valentine", label: "Valentine" },
+            { value: "aqua", label: "Aqua" }
+          ]
+        ))
       end
 
       # Theme Controller using a Dropdown
       # ---------------
       # Dropdown menu with theme options
       def theme_controller_using_a_dropdown
-        render_with_template
+        render(DaisyUI::ThemeController.new(
+          type: :dropdown,
+          name: "theme-dropdown",
+          button_text: "Theme",
+          themes: [
+            { value: "default", label: "Default" },
+            { value: "retro", label: "Retro" },
+            { value: "cyberpunk", label: "Cyberpunk" },
+            { value: "valentine", label: "Valentine" },
+            { value: "aqua", label: "Aqua" }
+          ]
+        ))
       end
 
       # Theme Controller using a Swap
       # ---------------
       # Swap component with sun/moon icons
       def theme_controller_using_a_swap
-        render_with_template
+        render(DaisyUI::ThemeController.new(type: :swap, value: "synthwave"))
       end
 
       # Theme Controller using a Toggle with Icons
       # ---------------
       # Toggle with sun and moon icons
       def theme_controller_using_a_toggle_with_icons
-        render_with_template(locals: { helper: self })
+        render(DaisyUI::ThemeController.new(
+          type: :toggle,
+          value: "synthwave",
+          icon_before: sun_icon(width: "20", height: "20"),
+          icon_after: moon_icon(width: "20", height: "20")
+        ))
       end
 
       # Theme Controller using a Toggle with Text
       # ---------------
       # Toggle with text labels before and after
       def theme_controller_using_a_toggle_with_text
-        render_with_template
+        render(DaisyUI::ThemeController.new(
+          type: :toggle,
+          value: "synthwave",
+          text_before: "Current",
+          text_after: "Synthwave"
+        ))
       end
 
       # Theme Controller using a Toggle with Custom Colors
       # ---------------
       # Toggle with custom Tailwind color classes
       def theme_controller_using_a_toggle_with_custom_colors
-        render_with_template
+        render(DaisyUI::ThemeController.new(
+          type: :toggle,
+          value: "synthwave",
+          custom_classes: "col-span-2 col-start-1 row-start-1 border-sky-400 bg-amber-300 [--tglbg:var(--color-sky-500)] checked:border-blue-800 checked:bg-blue-300 checked:[--tglbg:var(--color-blue-900)]"
+        ))
       end
 
       # Theme Controller using a Toggle with Icons Inside
       # ---------------
       # Toggle with icons positioned inside
       def theme_controller_using_a_toggle_with_icons_inside
-        render_with_template
+        render(DaisyUI::ThemeController.new(type: :toggle_icons_inside, value: "synthwave"))
       end
     end
   end
