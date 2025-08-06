@@ -11,5 +11,3 @@
 .env*
 coverage/
 .idea/
-/vendor/bundle
-/vendor/cache
