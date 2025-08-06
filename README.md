@@ -13,15 +13,23 @@ DaisyComponents is a Ruby gem that provides a collection of ViewComponents imple
 
 ## Installation
 
-If you are using [mise](https://mise.jdx.dev/) for managing your development tools and environment, ensure you have it installed. You can find the installation instructions [here](https://mise.jdx.dev/getting-started.html).
+### Automated Setup (Recommended)
 
-Once mise is set up, you can install the required Ruby version (as specified in the `.tool-versions` file) by running:
+For new contributors or fresh environments, use the automated setup script:
 
 ```bash
-$ mise install
+$ ./bin/setup
 ```
 
-Next, add this line to your application's Gemfile:
+This script will:
+- Detect your OS and CPU architecture
+- Install [mise](https://mise.jdx.dev/) if not already present
+- Install the latest Ruby version
+- Install Bundler if needed
+- Run `bundle install` to install dependencies
+- Provide clear instructions for using the environment
+
+Add this line to your application's Gemfile:
 
 ```ruby
 gem "daisy_components"
