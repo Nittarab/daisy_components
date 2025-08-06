@@ -63,10 +63,6 @@ module DaisyUI
   #     responsive: true
   #   )) %>
   class Modal < BaseComponent
-    renders_one :header
-    renders_one :body
-    renders_one :footer
-
     # Valid modal types
     TYPES = {
       dialog: 'dialog',
@@ -103,8 +99,10 @@ module DaisyUI
       modal_box_class: nil,
       **system_arguments
     )
+      raise ArgumentError, 'modal_id is required' if modal_id.nil? || modal_id.empty?
+
       @modal_id = modal_id
-      @modal_type = build_argument(modal_type, TYPES.keys.index_with(&:to_s), 'modal_type')
+      @modal_type = build_argument(modal_type, TYPES, 'modal_type')
       @title = title
       @content = content
       @backdrop_close = backdrop_close
@@ -191,34 +189,22 @@ module DaisyUI
     end
 
     def modal_header
-      return unless @title || header?
+      return unless @title
 
-      if header?
-        header
-      elsif @title
-        tag.h3(@title, class: 'text-lg font-bold')
-      end
+      tag.h3(@title, class: 'text-lg font-bold')
     end
 
     def modal_body_content
-      return unless @content || body?
+      return unless @content
 
-      if body?
-        body
-      elsif @content
-        tag.p(@content, class: 'py-4')
-      end
+      tag.p(@content, class: 'py-4')
     end
 
     def modal_actions
-      return unless footer? || default_close_action?
+      return unless default_close_action?
 
       tag.div(class: 'modal-action') do
-        if footer?
-          footer
-        else
-          default_close_button
-        end
+        default_close_button
       end
     end
 
