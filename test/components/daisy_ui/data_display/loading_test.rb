@@ -16,24 +16,24 @@ module DaisyUI
       end
 
       def test_playground_preview_with_text
-        render_preview('playground', text: 'Loading...')
+        render_preview('playground', params: { text: 'Loading...' })
         assert_selector 'div.flex.flex-col.items-center.gap-2', count: 1
         assert_selector 'span.loading.loading-spinner', count: 1
         assert_text 'Loading...'
       end
 
       def test_playground_preview_with_type
-        render_preview('playground', type: :dots)
+        render_preview('playground', params: { type: :dots })
         assert_selector 'span.loading.loading-dots', count: 1
       end
 
       def test_playground_preview_with_size
-        render_preview('playground', size: :lg)
+        render_preview('playground', params: { size: :lg })
         assert_selector 'span.loading.loading-spinner.loading-lg', count: 1
       end
 
       def test_playground_preview_with_color
-        render_preview('playground', color: :primary)
+        render_preview('playground', params: { color: :primary })
         assert_selector 'span.loading.loading-spinner.text-primary', count: 1
       end
     end

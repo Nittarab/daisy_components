@@ -79,9 +79,9 @@ module DaisyUI
       if @text.present?
         tag.div(class: 'flex flex-col items-center gap-2') do
           safe_join([
-            tag.span(class: computed_classes),
-            tag.span(@text, class: 'text-sm')
-          ])
+                      tag.span(class: computed_classes),
+                      tag.span(@text, class: 'text-sm')
+                    ])
         end
       else
         tag.span(class: computed_classes)

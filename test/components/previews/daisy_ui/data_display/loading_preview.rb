@@ -28,7 +28,7 @@ module DaisyUI
                  type: type,
                  size: size,
                  color: color,
-                 text: text.present? ? text : nil,
+                 text: text.presence,
                  class: classes
                ))
       end
