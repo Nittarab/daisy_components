@@ -151,76 +151,14 @@ module DaisyUI
       # ---
       # Tabs with complex HTML content
       def tabs_with_rich_content
-        render DaisyUI::Tabs.new(
-          style: :bordered,
-          size: :lg,
-          tabs: [
-            { 
-              text: 'Overview', 
-              content: '
-                <div class="space-y-4">
-                  <h3 class="text-lg font-semibold">Welcome to the Overview</h3>
-                  <p>This is a comprehensive overview of all the features and capabilities.</p>
-                  <div class="stats shadow">
-                    <div class="stat">
-                      <div class="stat-title">Downloads</div>
-                      <div class="stat-value">31K</div>
-                    </div>
-                    <div class="stat">
-                      <div class="stat-title">Users</div>
-                      <div class="stat-value">4,200</div>
-                    </div>
-                  </div>
-                </div>
-              '.html_safe,
-              active: true 
-            },
-            { 
-              text: 'Features', 
-              content: '
-                <div class="space-y-4">
-                  <h3 class="text-lg font-semibold">Key Features</h3>
-                  <ul class="list-disc list-inside space-y-2">
-                    <li>Feature 1: Advanced functionality</li>
-                    <li>Feature 2: User-friendly interface</li>
-                    <li>Feature 3: Powerful integrations</li>
-                    <li>Feature 4: Mobile responsive</li>
-                  </ul>
-                </div>
-              '.html_safe
-            },
-            { 
-              text: 'Support', 
-              content: '
-                <div class="space-y-4">
-                  <h3 class="text-lg font-semibold">Get Support</h3>
-                  <p>Need help? We are here to assist you!</p>
-                  <div class="flex gap-2">
-                    <button class="btn btn-primary">Contact Support</button>
-                    <button class="btn btn-outline">View Docs</button>
-                  </div>
-                </div>
-              '.html_safe
-            }
-          ]
-        )
+        render_with_template
       end
 
       # JavaScript ready tabs
       # ---
       # Tabs with data attributes ready for JavaScript integration
       def javascript_ready_tabs
-        render DaisyUI::Tabs.new(
-          style: :bordered,
-          class: 'mb-4',
-          data: { controller: 'tabs' },
-          tabs: [
-            { text: 'Profile', content: '<div class="p-4"><h3 class="font-bold">Profile Settings</h3><p>Manage your profile information and preferences.</p></div>'.html_safe, active: true },
-            { text: 'Account', content: '<div class="p-4"><h3 class="font-bold">Account Settings</h3><p>Update your account details and security settings.</p></div>'.html_safe },
-            { text: 'Billing', content: '<div class="p-4"><h3 class="font-bold">Billing Information</h3><p>View and manage your subscription and payment methods.</p></div>'.html_safe },
-            { text: 'Notifications', content: '<div class="p-4"><h3 class="font-bold">Notification Preferences</h3><p>Configure how and when you receive notifications.</p></div>'.html_safe }
-          ]
-        )
+        render_with_template
       end
 
       # Responsive tabs
