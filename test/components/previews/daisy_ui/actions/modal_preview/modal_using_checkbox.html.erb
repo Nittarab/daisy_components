@@ -1,0 +1,10 @@
+<!-- The button to open modal -->
+<label for="my_modal_6" class="btn">open modal</label>
+
+<!-- Put this part before </body> tag -->
+<%= render DaisyUI::Modal.new(
+  modal_id: "my_modal_6",
+  modal_type: :checkbox,
+  title: "Hello!",
+  content: "This modal works with a hidden checkbox!"
+) %>

@@ -1,0 +1,9 @@
+<!-- You can open the modal using ID.showModal() method -->
+<button class="btn" onclick="my_modal_4.showModal()">open modal</button>
+<%= render DaisyUI::Modal.new(
+  modal_id: "my_modal_4",
+  modal_type: :dialog,
+  title: "Hello!",
+  content: "Click the button below to close",
+  modal_box_class: "w-11/12 max-w-5xl"
+) %>
