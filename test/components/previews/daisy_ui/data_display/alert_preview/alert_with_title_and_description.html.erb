@@ -5,6 +5,6 @@
   vertical: true
 ) do |component| %>
   <% component.with_actions do %>
-    <button class="btn btn-sm">See</button>
+    <%= render DaisyUI::Button.new(text: "See", size: :sm) %>
   <% end %>
 <% end %>

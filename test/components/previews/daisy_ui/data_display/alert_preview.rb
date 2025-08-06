@@ -86,6 +86,17 @@ module DaisyUI
       def alert_with_buttons_responsive
         render_with_template
       end
+
+      def alert_with_buttons_parameter
+        render(DaisyUI::Alert.new(
+          text: 'Accept cookies?',
+          vertical: true,
+          buttons: [
+            { text: 'Deny', size: :sm },
+            { text: 'Accept', size: :sm, color: :primary }
+          ]
+        ))
+      end
     end
   end
 end
