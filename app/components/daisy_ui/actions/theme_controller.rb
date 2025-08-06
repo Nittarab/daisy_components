@@ -93,10 +93,8 @@ module DaisyUI
 
     def call
       case @type
-      when 'checkbox'
-        render_checkbox
-      when 'toggle'
-        render_toggle
+      when 'checkbox', 'toggle'
+        render_input_with_wrapper(input_type: 'checkbox')
       when 'radio'
         render_radio_group
       when 'btn'
@@ -112,41 +110,45 @@ module DaisyUI
 
     private
 
-    def render_checkbox
-      attributes = {
-        type: 'checkbox',
-        value: @value,
-        class: class_names('checkbox', 'theme-controller', @custom_classes, system_arguments[:class]),
-        **system_arguments.except(:class)
-      }
-      attributes[:checked] = true if @checked
+    def render_input_with_wrapper(input_type:)
+      input_element = build_input(type: input_type)
       
-      tag.input(**attributes)
-    end
-
-    def render_toggle
+      # For simple checkbox without wrapper content
+      return input_element unless has_wrapper_content? || @type == 'toggle'
+      
+      # Build wrapper content
       content = []
       content << tag.span(@text_before, class: 'label-text') if @text_before
       content << @icon_before if @icon_before
-      
-      input_classes = class_names('toggle', 'theme-controller', size_class, @custom_classes, system_arguments[:class])
-      attributes = {
-        type: 'checkbox',
-        value: @value,
-        class: input_classes,
-        **system_arguments.except(:class)
-      }
-      attributes[:checked] = true if @checked
-      
-      content << tag.input(**attributes)
-      
+      content << input_element
       content << @icon_after if @icon_after
       content << tag.span(@text_after, class: 'label-text') if @text_after
 
-      if has_wrapper_content?
-        tag.label(safe_join(content), class: 'flex cursor-pointer gap-2')
-      else
-        content.first
+      tag.label(safe_join(content), class: 'flex cursor-pointer gap-2')
+    end
+
+    def build_input(type:)
+      attributes = base_input_attributes(type: type)
+      attributes[:class] = input_classes_for_type
+      tag.input(**attributes)
+    end
+
+    def base_input_attributes(type:)
+      attributes = {
+        type: type,
+        value: @value,
+        **system_arguments.except(:class)
+      }
+      attributes[:checked] = true if @checked
+      attributes
+    end
+
+    def input_classes_for_type
+      case @type
+      when 'checkbox'
+        class_names('checkbox', 'theme-controller', @custom_classes, system_arguments[:class])
+      when 'toggle'
+        class_names('toggle', 'theme-controller', size_class, @custom_classes, system_arguments[:class])
       end
     end
 
@@ -154,24 +156,7 @@ module DaisyUI
       return unless @themes
 
       tag.fieldset(class: 'fieldset') do
-        safe_join(@themes.map { |theme| render_radio_item(theme) })
-      end
-    end
-
-    def render_radio_item(theme)
-      tag.label(class: 'flex gap-2 cursor-pointer items-center') do
-        attributes = {
-          type: 'radio',
-          name: @name,
-          value: theme[:value],
-          class: class_names('radio', size_class, 'theme-controller')
-        }
-        attributes[:checked] = true if theme[:checked]
-        
-        safe_join([
-          tag.input(**attributes),
-          theme[:label]
-        ])
+        safe_join(@themes.map { |theme| build_radio_item(theme, style: :standard) })
       end
     end
 
@@ -179,21 +164,41 @@ module DaisyUI
       return unless @themes
 
       tag.div(class: 'join join-vertical') do
-        safe_join(@themes.map { |theme| render_radio_button_item(theme) })
+        safe_join(@themes.map { |theme| build_radio_item(theme, style: :button) })
       end
     end
 
-    def render_radio_button_item(theme)
+    def build_radio_item(theme, style:)
+      attributes = base_radio_attributes(theme)
+      
+      case style
+      when :standard
+        attributes[:class] = class_names('radio', size_class, 'theme-controller')
+        build_radio_with_label(attributes, theme[:label])
+      when :button
+        attributes[:class] = class_names('btn', 'theme-controller', 'join-item')
+        attributes['aria-label'] = theme[:label]
+        tag.input(**attributes)
+      end
+    end
+
+    def base_radio_attributes(theme)
       attributes = {
         type: 'radio',
         name: @name,
-        value: theme[:value],
-        class: class_names('btn', 'theme-controller', 'join-item'),
-        'aria-label': theme[:label]
+        value: theme[:value]
       }
       attributes[:checked] = true if theme[:checked]
-      
-      tag.input(**attributes)
+      attributes
+    end
+
+    def build_radio_with_label(attributes, label)
+      tag.label(class: 'flex gap-2 cursor-pointer items-center') do
+        safe_join([
+          tag.input(**attributes),
+          label
+        ])
+      end
     end
 
     def render_dropdown
@@ -218,32 +223,22 @@ module DaisyUI
 
     def render_dropdown_menu
       tag.ul(tabindex: '0', class: 'dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl') do
-        safe_join(@themes.map { |theme| render_dropdown_item(theme) })
+        safe_join(@themes.map { |theme| build_dropdown_item(theme) })
       end
     end
 
-    def render_dropdown_item(theme)
+    def build_dropdown_item(theme)
       tag.li do
-        attributes = {
-          type: 'radio',
-          name: @name,
-          value: theme[:value],
-          class: 'theme-controller w-full btn btn-sm btn-block btn-ghost justify-start',
-          'aria-label': theme[:label]
-        }
-        attributes[:checked] = true if theme[:checked]
-        
+        attributes = base_radio_attributes(theme)
+        attributes[:class] = 'theme-controller w-full btn btn-sm btn-block btn-ghost justify-start'
+        attributes['aria-label'] = theme[:label]
         tag.input(**attributes)
       end
     end
 
     def render_swap
-      attributes = {
-        type: 'checkbox',
-        value: @value,
-        class: 'theme-controller'
-      }
-      attributes[:checked] = true if @checked
+      attributes = base_checkbox_attributes
+      attributes[:class] = 'theme-controller'
       
       tag.label(class: 'swap swap-rotate') do
         safe_join([
@@ -254,12 +249,8 @@ module DaisyUI
     end
 
     def render_toggle_icons_inside
-      attributes = {
-        type: 'checkbox',
-        value: @value,
-        class: 'theme-controller'
-      }
-      attributes[:checked] = true if @checked
+      attributes = base_checkbox_attributes
+      attributes[:class] = 'theme-controller'
       
       tag.label(class: 'toggle text-base-content') do
         safe_join([
@@ -268,6 +259,15 @@ module DaisyUI
           tag.i('', class: 'ph ph-moon', 'aria-label': 'moon')
         ])
       end
+    end
+
+    def base_checkbox_attributes
+      attributes = {
+        type: 'checkbox',
+        value: @value
+      }
+      attributes[:checked] = true if @checked
+      attributes
     end
 
     def render_swap_icons
