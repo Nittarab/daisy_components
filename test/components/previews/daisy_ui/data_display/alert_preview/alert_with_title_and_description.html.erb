@@ -1,0 +1,11 @@
+<%= render DaisyUI::Alert.new(
+  color: :info,
+  title: 'New message!',
+  description: 'You have 1 unread message',
+  vertical: true,
+  icon: info_icon(class: 'h-6 w-6 shrink-0')
+) do |component| %>
+  <% component.with_actions do %>
+    <%= render DaisyUI::Button.new(text: "See", size: :sm) %>
+  <% end %>
+<% end %>
