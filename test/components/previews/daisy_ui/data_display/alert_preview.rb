@@ -56,7 +56,7 @@ module DaisyUI
       end
 
       def success_color
-        render(DaisyUI::Alert.new(text: 'Your purchase has been confirmed!', color: :success, icon: check_icon))
+        render(DaisyUI::Alert.new(text: 'Your purchase has been confirmed!', color: :success, icon: check_icon(class: 'h-6 w-6 shrink-0')))
       end
 
       def warning_color
@@ -64,7 +64,7 @@ module DaisyUI
       end
 
       def error_color
-        render(DaisyUI::Alert.new(text: 'Error! Task failed successfully.', color: :error, icon: error_icon))
+        render(DaisyUI::Alert.new(text: 'Error! Task failed successfully.', color: :error, icon: error_icon(class: 'h-6 w-6 shrink-0')))
       end
 
       def alert_outline_style
