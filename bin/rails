@@ -17,6 +17,7 @@ if ENV['COVERAGE'] == 'true'
   require 'simplecov-cobertura'
   SimpleCov.start do
     enable_coverage :branch
+    primary_coverage :branch
     add_filter '/lib/'
     add_filter '/test/controllers/'
     add_filter '/test/dummy/'
