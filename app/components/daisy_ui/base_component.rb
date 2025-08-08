@@ -3,7 +3,7 @@
 module DaisyUI
   class BaseComponent < ViewComponent::Base
     def initialize(classes: nil, **system_arguments)
-      super
+      super()
       @classes = classes
       @system_arguments = system_arguments
     end
