@@ -78,9 +78,14 @@ module DaisyUI
       end
 
       def html_attributes
-        system_arguments.merge(
-          class: computed_classes
-        )
+        attrs = system_arguments.dup
+        classes = computed_classes
+        if classes.present?
+          attrs[:class] = classes
+        else
+          attrs.delete(:class)
+        end
+        attrs
       end
     end
   end

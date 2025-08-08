@@ -10,7 +10,8 @@ module DaisyUI
   #   <%= render(DaisyUI::Alert.new(text: "New software update available.", color: :info)) %>
   #
   # @example Success alert with icon
-  #   <%= render(DaisyUI::Alert.new(text: "Your purchase has been confirmed!", color: :success, icon: helpers.check_icon)) %>
+  #   <%= render(DaisyUI::Alert.new(text: "Your purchase has been confirmed!", color: :success,
+  #                               icon: helpers.check_icon)) %>
   #
   # @example With custom icon
   #   <%= render(DaisyUI::Alert.new(
@@ -29,7 +30,7 @@ module DaisyUI
   #
   # @example With buttons parameter
   #   <%= render(DaisyUI::Alert.new(
-  #     text: "Accept cookies?", 
+  #     text: "Accept cookies?",
   #     buttons: [
   #       { text: "Deny", size: :sm },
   #       { text: "Accept", size: :sm, color: :primary }
@@ -53,8 +54,6 @@ module DaisyUI
       soft: 'alert-soft',
       dash: 'alert-dash'
     }.freeze
-
-
 
     # @param text [String] The text content to display inside the alert
     # @param color [Symbol] Alert type color (info/success/warning/error)
@@ -88,9 +87,7 @@ module DaisyUI
       @buttons = buttons
 
       # Set up icon if explicitly provided
-      if icon
-        with_icon { icon }
-      end
+      with_icon { icon } if icon
 
       super(**system_arguments)
     end
@@ -154,7 +151,5 @@ module DaisyUI
         end
       end
     end
-
-
   end
 end

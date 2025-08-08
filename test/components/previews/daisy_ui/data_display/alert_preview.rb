@@ -28,17 +28,11 @@ module DaisyUI
         vertical: false,
         classes: ''
       )
-        icon_param = if has_icon
-          info_icon  # Always use info icon when user wants to show an icon
-        else
-          nil  # No icon when has_icon is false
-        end
-        
         render(DaisyUI::Alert.new(
                  text: text,
                  color: color,
                  variant: variant,
-                 icon: icon_param,
+                 icon: has_icon ? icon_param : nil,
                  dismissible: dismissible,
                  vertical: vertical,
                  class: classes
@@ -46,13 +40,13 @@ module DaisyUI
       end
 
       # @!endgroup
-      
+
       def alert
-        render(DaisyUI::Alert.new(text: '12 unread messages. Tap to see.'))
+        render(DaisyUI::Alert.new(text: '12 unread messages. Tap to see.', icon: info_icon(class: 'h-6 w-6 shrink-0')))
       end
 
       def info_color
-        render(DaisyUI::Alert.new(text: 'New software update available.', color: :info))
+        render(DaisyUI::Alert.new(text: 'New software update available.', color: :info, icon: info_icon(class: 'h-6 w-6 shrink-0')))
       end
 
       def success_color
@@ -60,7 +54,7 @@ module DaisyUI
       end
 
       def warning_color
-        render(DaisyUI::Alert.new(text: 'Warning: Invalid email address!', color: :warning))
+        render(DaisyUI::Alert.new(text: 'Warning: Invalid email address!', color: :warning, icon: warning_icon(class: 'h-6 w-6 shrink-0')))
       end
 
       def error_color
@@ -80,22 +74,22 @@ module DaisyUI
       end
 
       def alert_with_title_and_description
-        render_with_template
+        render_with_template(locals: { helper: self })
       end
 
       def alert_with_buttons_responsive
-        render_with_template
+        render_with_template(locals: { helper: self })
       end
 
       def alert_with_buttons_parameter
         render(DaisyUI::Alert.new(
-          text: 'Accept cookies?',
-          vertical: true,
-          buttons: [
-            { text: 'Deny', size: :sm },
-            { text: 'Accept', size: :sm, color: :primary }
-          ]
-        ))
+                 text: 'Accept cookies?',
+                 vertical: true,
+                 buttons: [
+                   { text: 'Deny', size: :sm },
+                   { text: 'Accept', size: :sm, color: :primary }
+                 ]
+               ))
       end
     end
   end
