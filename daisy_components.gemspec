@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary     = 'DaisyUI components for Rails'
   spec.description = 'A collection of ViewComponents implementing DaisyUI design system'
   spec.license     = 'MIT'
-  spec.required_ruby_version = '>= 3.3.0'
+  spec.required_ruby_version = '>= 3.2.3'
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/Nittarab/daisy_components'
