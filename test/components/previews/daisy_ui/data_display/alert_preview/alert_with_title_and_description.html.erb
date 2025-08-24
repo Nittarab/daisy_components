@@ -1,0 +1,11 @@
+<%= render DaisyUI::Alert.new(
+  color: :info,
+  vertical: true,
+  icon: helper.info_icon(class: 'h-6 w-6 shrink-0')
+) do %>
+  <div>
+    <h3 class="font-bold">New message!</h3>
+    <div class="text-xs">You have 1 unread message</div>
+  </div>
+  <%= render DaisyUI::Button.new(text: "See", size: :sm) %>
+<% end %>
