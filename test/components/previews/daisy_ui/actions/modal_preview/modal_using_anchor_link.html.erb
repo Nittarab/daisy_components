@@ -1,0 +1,10 @@
+<!-- The button to open modal -->
+<a href="#my_modal_8" class="btn">open modal</a>
+
+<!-- Put this part before </body> tag -->
+<%= render DaisyUI::Modal.new(
+  modal_id: "my_modal_8",
+  modal_type: :anchor,
+  title: "Hello!",
+  content: "This modal works with anchor links"
+) %>
