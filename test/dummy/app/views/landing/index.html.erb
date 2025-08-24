@@ -1,0 +1,203 @@
+<div data-theme="light" class="flex flex-col min-h-screen">
+  <!-- Navbar -->
+  <div class="navbar bg-base-100 shadow-lg">
+    <div class="flex-1">
+      <a href="/" class="btn btn-ghost normal-case text-xl">Daisy ViewComponents</a>
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        <li><a href="/lookbook" target="_blank" class="btn btn-primary btn-sm">Explore in Lookbook</a></li>
+        <li><a href="https://github.com/Nittarab/daisy_components" target="_blank" class="btn btn-ghost btn-sm">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <section id="hero" class="hero min-h-[60vh] bg-base-200">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">Beautiful Rails UIs with Daisy ViewComponents</h1>
+          <p class="py-6">
+            Leverage the power of server-side ViewComponents combined with the simplicity and elegance of DaisyUI.
+            Build modern, responsive web applications in Rails with ease.
+          </p>
+          <a href="/lookbook" class="btn btn-primary">Explore Components in Lookbook</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Daisy ViewComponents? -->
+    <section id="why-daisy-vc" class="py-16 bg-base-100">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Why Daisy ViewComponents?</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="card bg-base-200 shadow-xl transform hover:scale-105 transition-transform duration-300">
+            <div class="card-body items-center text-center">
+              <div class="p-4 bg-primary rounded-full inline-block mb-4">
+                <!-- Heroicon: server-stack -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-content">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+                </svg>
+              </div>
+              <h3 class="card-title text-2xl">Seamless Integration</h3>
+              <p>Effortlessly integrate the elegance of DaisyUI directly into your Rails views using server-side ViewComponents.</p>
+            </div>
+          </div>
+          <div class="card bg-base-200 shadow-xl transform hover:scale-105 transition-transform duration-300">
+            <div class="card-body items-center text-center">
+              <div class="p-4 bg-primary rounded-full inline-block mb-4">
+                <!-- Heroicon: puzzle-piece -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-content">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.324-.639.304-.993A9.753 9.753 0 0012.004 3c-5.384 0-9.752 4.368-9.752 9.752s4.368 9.752 9.752 9.752c2.277 0 4.36-.783 5.997-2.072.363-.29.818-.422 1.228-.422.619 0 1.184.402 1.375.979.14.417.043.874-.235 1.213A9.753 9.753 0 0112.004 21c-5.384 0-9.752-4.368-9.752-9.752S6.62 3 12.004 3c.481 0 .954.035 1.417.102.363.052.698.21.959.401z" />
+                   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 11.25l-2.25 2.25m0 0l-2.25 2.25m2.25-2.25l2.25-2.25m-2.25 2.25l2.25 2.25" /> <!-- Simplified puzzle piece part -->
+                </svg>
+              </div>
+              <h3 class="card-title text-2xl">Reusable & Testable</h3>
+              <p>Leverage the power of ViewComponents for creating encapsulated, reusable, and easily testable UI elements.</p>
+            </div>
+          </div>
+          <div class="card bg-base-200 shadow-xl transform hover:scale-105 transition-transform duration-300">
+            <div class="card-body items-center text-center">
+              <div class="p-4 bg-primary rounded-full inline-block mb-4">
+                 <!-- Heroicon: code-bracket-square -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-content">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                </svg>
+              </div>
+              <h3 class="card-title text-2xl">Purely Server-Side</h3>
+              <p>Enjoy server-rendered HTML with the simplicity of ERB. No complex JavaScript frameworks needed for your core UI.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CardComponent Showcase -->
+    <section id="card-showcase" class="py-16 bg-base-100">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Featuring: The Card Component</h2>
+        <p class="text-center text-lg mb-10 max-w-2xl mx-auto">
+          Our `CardComponent` is versatile and easy to use. Here are a few examples of how you can create rich card layouts
+          with a simple and expressive API.
+        </p>
+
+        <div class="space-y-12">
+          <!-- Example 1: Basic Card -->
+          <div>
+            <h3 class="text-2xl font-semibold mb-4">1. Basic Card</h3>
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+              <div>
+                <%= render DaisyUI::Card.new(
+                      title: "Shoes!",
+                      description: "If a dog chews shoes whose shoes does he choose?",
+                      button: { text: "Buy Now", color: :primary, justify: :end },
+                      class: "shadow-xl"
+                    ) %>
+              </div>
+              <div class="mockup-code text-sm">
+                <pre data-prefix="~"><code class="language-erb">&lt;%= render DaisyUI::Card.new(
+      title: "Shoes!",
+      description: "If a dog chews shoes whose shoes does he choose?",
+      button: { text: "Buy Now", color: :primary, justify: :end },
+      class: "shadow-xl"
+    ) %&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example 2: Card with Image and Actions Slot -->
+          <div>
+            <h3 class="text-2xl font-semibold mb-4">2. Card with Image & Actions</h3>
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+              <div>
+                <%= render DaisyUI::Card.new(img_url: "https://picsum.photos/seed/shoes/400/225", img_alt: "Shoes", class: "shadow-xl") do |card| %>
+                  <% card.with_body do |body| %>
+                    <% body.with_title { "Fancy Shoes Collection" } %>
+                    <p>Discover our latest collection of stylish and comfortable shoes.</p>
+                    <% body.with_actions do |actions| %>
+                      <% actions.with_button(text: "Learn More", variant: :ghost, color: :accent) %>
+                      <% actions.with_button(text: "Add to Cart", color: :primary) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="mockup-code text-sm">
+                <pre data-prefix="~"><code class="language-erb">&lt;%= render DaisyUI::Card.new(img_url: "https://picsum.photos/seed/shoes/400/225", img_alt: "Shoes", class: "shadow-xl") do |card| %&gt;
+  &lt;% card.with_body do |body| %&gt;
+    &lt;% body.with_title { "Fancy Shoes Collection" } %&gt;
+    &lt;p&gt;Discover our latest collection of stylish and comfortable shoes.&lt;/p&gt;
+    &lt;% body.with_actions do |actions| %&gt;
+      &lt;% actions.with_button(text: "Learn More", variant: :ghost, color: :accent) %&gt;
+      &lt;% actions.with_button(text: "Add to Cart", color: :primary) %&gt;
+    &lt;% end %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example 3: Side Card (Responsive) -->
+          <div>
+            <h3 class="text-2xl font-semibold mb-4">3. Side Card (Responsive)</h3>
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+              <div>
+                <%= render DaisyUI::Card.new(
+                      variant: :side_responsive,
+                      img_url: "https://picsum.photos/seed/tech/200/300",
+                      img_alt: "Tech Gadget",
+                      class: "bg-base-200 shadow-xl max-w-2xl mx-auto"
+                    ) do |card| %>
+                  <% card.with_body do |body| %>
+                    <% body.with_title { "New Gadget Released!" } %>
+                    <p>Check out the latest tech gadget with amazing features. Perfect for your daily needs and productivity boost.</p>
+                    <% body.with_actions do |actions| %>
+                      <% actions.with_button(text: "View Specs", color: :secondary) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="mockup-code text-sm">
+                <pre data-prefix="~"><code class="language-erb">&lt;%= render DaisyUI::Card.new(
+      variant: :side_responsive,
+      img_url: "https://picsum.photos/seed/tech/200/300",
+      img_alt: "Tech Gadget",
+      class: "bg-base-200 shadow-xl"
+    ) do |card| %&gt;
+  &lt;% card.with_body do |body| %&gt;
+    &lt;% body.with_title { "New Gadget Released!" } %&gt;
+    &lt;p&gt;Check out the latest tech gadget...&lt;/p&gt;
+    &lt;% body.with_actions do |actions| %&gt;
+      &lt;% actions.with_button(text: "View Specs", color: :secondary) %&gt;
+    &lt;% end %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+    <nav class="grid grid-flow-col gap-4">
+      <a href="/lookbook" class="link link-hover">Lookbook</a>
+      <a href="https://github.com/Nittarab/daisy_components" class="link link-hover">GitHub</a>
+      <a href="https://nittarab.dev" class="link link-hover">Nittarab.dev</a>
+    </nav>
+    <aside>
+      <p>Copyright © <%= Time.now.year %> - All right reserved by Daisy ViewComponents</p>
+      <p>Built with <span class="text-red-500">❤️</span> using DaisyUI and ViewComponent.</p>
+    </aside>
+  </footer>
+</div>
+
+<%# Ensure Tailwind/DaisyUI is loaded. This would typically be in the main layout. %>
+<%# For the dummy app, if it's not already set up, you might need to add: %>
+<%# <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+<%# in `test/dummy/app/views/layouts/application.html.erb` if it's missing or not including DaisyUI. %>
+<%# Assuming the dummy app's asset pipeline is configured for Tailwind/DaisyUI. %>
