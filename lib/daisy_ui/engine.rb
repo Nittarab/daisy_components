@@ -31,6 +31,7 @@ module DaisyUI
             'Actions' => 'daisy_ui/actions/*',
             'Data Display' => 'daisy_ui/data_display/*',
             'Data Input' => 'daisy_ui/data_input/*',
+            'Feedback' => 'daisy_ui/feedback/*',
             'Layout' => 'daisy_ui/layout/*',
             'Navigation' => 'daisy_ui/navigation/*'
           }
