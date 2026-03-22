@@ -125,8 +125,8 @@ module DaisyUI
     end
 
     def markdown_renderer
-      @markdown_renderer ||= Redcarpet::Markdown.new(
-        Redcarpet::Render::HTML.new(
+      @markdown_renderer ||= ::Redcarpet::Markdown.new(
+        ::Redcarpet::Render::HTML.new(
           hard_wrap: true,
           link_attributes: { target: '_blank', rel: 'noopener' }
         ),
