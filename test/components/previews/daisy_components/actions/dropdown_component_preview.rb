@@ -14,7 +14,7 @@ module DaisyComponents
       # ---------------
       # Interactive dropdown menu with customizable trigger and content
       #
-      # @param position select { choices: [top, top_end, top_center, bottom, bottom_end, bottom_center, left, left_end, left_center, right, right_end, right_center] } # rubocop:disable Layout/LineLength
+      # @param position select { choices: [top, top_end, top_center, bottom, bottom_end, bottom_center, left, left_end, left_center, right, right_end, right_center] }
       #                       "Position of the dropdown content relative to the trigger"
       # @param hover select { choices: [false, true, content] }
       #                    "How the dropdown opens on hover (false, true, or content)"
@@ -30,8 +30,8 @@ module DaisyComponents
       # @param trigger_text text "Text for the trigger button"
       # @param trigger_icon toggle "Show icon in trigger button"
       # @param show_header toggle "Show header in dropdown"
-      # @param show_footer toggle "Show footer in dropdown"
-      def playground( # rubocop:disable Metrics/AbcSize
+      # @param show_divider toggle "Show divider in dropdown"
+      def playground(
         position: nil,
         hover: false,
         open: false,
@@ -43,7 +43,7 @@ module DaisyComponents
         trigger_text: 'Click me',
         trigger_icon: false,
         show_header: false,
-        show_footer: false
+        show_divider: false
       )
         render(DaisyComponents::Actions::DropdownComponent.new(
                  position: position,
@@ -59,9 +59,8 @@ module DaisyComponents
           d.with_title { 'Menu' } if show_header
           d.with_item(href: '#') { safe_join([home_icon('h-5 w-5 mr-2'), 'Item 1']) }
           d.with_item(href: '#') { safe_join([email_icon('h-5 w-5 mr-2'), 'Item 2']) }
-          d.with_divider
+          d.with_divider if show_divider
           d.with_item(href: '#', class: 'text-error') { safe_join([sun_icon('h-5 w-5 mr-2'), 'Item 3']) }
-          d.with_item { tag.button('Save changes', class: 'btn btn-primary btn-sm w-full') } if show_footer
         end
       end
 

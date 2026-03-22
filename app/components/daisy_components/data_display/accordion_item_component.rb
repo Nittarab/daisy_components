@@ -55,8 +55,6 @@ module DaisyComponents
       def render_input
         input_type = if @radio
                        'radio'
-                     elsif @plus
-                       'checkbox'
                      else
                        'checkbox'
                      end
