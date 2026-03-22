@@ -1,0 +1,22 @@
+<%# Avatar Group %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(size: :md)) do |component| %>
+  <%= component.with_group(
+    shape: :circle,
+    img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=1',
+    img_alt: 'Avatar 1'
+  ) %>
+            
+  <%= component.with_group(
+    shape: :circle,
+    img_src: 'https://placehold.co/400x400/22C55E/FFFFFF?text=2',
+    img_alt: 'Avatar 2'
+  ) %>
+  
+  <%= component.with_group(
+    shape: :circle,
+    img_src: 'https://placehold.co/400x400/EF4444/FFFFFF?text=3',
+    img_alt: 'Avatar 3'
+  ) %>
+  
+  <%= component.with_group(placeholder: '+2') %>
+<% end %> 

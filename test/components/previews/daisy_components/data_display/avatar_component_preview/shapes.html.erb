@@ -1,10 +1,53 @@
 <%# Avatar Shapes %>
 <div class="flex gap-4">
-  <% [:circle, :squircle, :hexagon, :triangle].each do |shape| %>
-    <%= render(DaisyComponents::DataDisplay::AvatarComponent.new(shape: shape, size: 24)) do |component| %>
-      <% component.with_image do %>
-        <%= tag.img(src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=A') %>
-      <% end %>
-    <% end %>
+  <% [:circle, :squircle, :hexagon, :triangle, :half_1, :half_2].each do |shape| %>
+    <%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+      shape: shape,
+      size: :md,
+      img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=A',
+      img_alt: "Avatar shape #{shape}"
+    )) %>
   <% end %>
-</div> 
+</div>
+
+<%# Circle %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  shape: :circle,
+  img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=CI',
+  img_alt: 'Circle Avatar'
+)) %>
+
+<%# Squircle %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  shape: :squircle,
+  img_src: 'https://placehold.co/400x400/22C55E/FFFFFF?text=SQ',
+  img_alt: 'Squircle Avatar'
+)) %>
+
+<%# Hexagon %>
+<%= render(DaisyComponents::DataDisplay:: AvatarComponent.new(
+  shape: :hexagon,
+  img_src: 'https://placehold.co/400x400/F59E0B/FFFFFF?text=HX',
+  img_alt: 'Hexagon Avatar'
+)) %>
+
+<%# Triangle %>
+<%= render(DaisyComponents::DataDisplay:: AvatarComponent.new(
+  shape: :triangle,
+  img_src: 'https://placehold.co/400x400/DC2626/FFFFFF?text=TR',
+  img_alt: 'Triangle Avatar'
+)) %>
+
+<%# Half 1 %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  shape: :half_1,
+  img_src: 'https://placehold.co/400x400/8B5CF6/FFFFFF?text=H1',
+  img_alt: 'Half 1 Avatar'
+)) %>
+
+<%# Half 2 %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  shape: :half_2,
+  img_src: 'https://placehold.co/400x400/EC4899/FFFFFF?text=H2',
+  img_alt: 'Half 2 Avatar'
+)) %> 

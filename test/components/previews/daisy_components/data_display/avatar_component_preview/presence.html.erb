@@ -1,0 +1,31 @@
+<%# Online %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  presence: :online,
+  img_src: 'https://placehold.co/400x400/22C55E/FFFFFF?text=ON',
+  img_alt: 'Online Avatar',
+  shape: :circle
+)) %>
+
+<%# Offline %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  presence: :offline,
+  img_src: 'https://placehold.co/400x400/EF4444/FFFFFF?text=OFF',
+  img_alt: 'Offline Avatar',
+  shape: :circle
+)) %>
+
+<%# Away %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  presence: :away,
+  img_src: 'https://placehold.co/400x400/F59E0B/FFFFFF?text=AW',
+  img_alt: 'Away Avatar',
+  shape: :circle
+)) %>
+
+<%# Busy %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  presence: :busy,
+  img_src: 'https://placehold.co/400x400/DC2626/FFFFFF?text=BS',
+  img_alt: 'Busy Avatar',
+  shape: :circle
+)) %> 

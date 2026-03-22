@@ -104,7 +104,7 @@ module DaisyComponents
                          loading: true,
                          active: true,
                          type: 'button',
-                         classes: 'custom-class'
+                         class: 'custom-class'
                        })
 
         assert_selector('button.btn.btn-primary.btn-lg.btn-disabled.loading.btn-active.custom-class')
@@ -184,12 +184,12 @@ module DaisyComponents
       end
 
       def test_base_component_classes
-        button = ButtonComponent.new(text: 'Test', classes: 'custom-class-1 custom-class-2')
+        button = ButtonComponent.new(text: 'Test', class: 'custom-class-1 custom-class-2')
         assert_equal 'custom-class-1 custom-class-2', button.send(:classes)
       end
 
       def test_base_component_nil_classes
-        button = ButtonComponent.new(text: 'Test', classes: nil)
+        button = ButtonComponent.new(text: 'Test', class: nil)
         assert_equal '', button.send(:classes)
       end
 

@@ -2,16 +2,15 @@
 
 module DaisyComponents
   class BaseComponent < ViewComponent::Base
-    def initialize(classes: nil, **system_arguments)
+    def initialize(**system_arguments)
       super
-      @classes = classes
       @system_arguments = system_arguments
     end
 
     private
 
     def classes
-      class_names(@classes)
+      class_names(system_arguments[:class])
     end
 
     attr_reader :system_arguments

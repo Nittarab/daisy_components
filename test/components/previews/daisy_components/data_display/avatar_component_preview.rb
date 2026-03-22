@@ -11,38 +11,80 @@ module DaisyComponents
       # ---------------
       # Interactive avatar component with customizable appearance and status
       #
-      # @param size select { choices: [8, 12, 16, 20, 24, 32] } "Size of the avatar in Tailwind units"
-      # @param shape select { choices: [circle, squircle, hexagon, triangle] } "Shape of the avatar container"
-      # @param online toggle "Show an online status indicator"
-      # @param offline toggle "Show an offline status indicator"
-      # @param classes text "Additional CSS classes to apply to the avatar container"
-      def playground(size: 24, shape: :circle, online: false, offline: false, classes: '')
+      # @param size select { choices: [xs, sm, md, lg] } "Size of the avatar"
+      # @param shape select { choices: [circle, squircle, hexagon, triangle, half_1, half_2] } "Shape of the avatar"
+      # @param presence select { choices: [online, offline, away, busy] } "Presence indicator"
+      # @param ring toggle "Show ring around avatar"
+      # @param img_src text "URL of the avatar image" default: "https://placehold.co/400x400/3B82F6/FFFFFF?text=A"
+      # @param img_alt text "Alt text for the avatar image" default: "Avatar"
+      # @param classes text "Additional CSS classes"
+      def playground(
+        size: :md,
+        shape: :circle,
+        presence: nil,
+        ring: false,
+        img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=A',
+        img_alt: 'Avatar',
+        classes: ''
+      )
         render(AvatarComponent.new(
-                 size:, shape:, online:, offline:, class: classes
-               )) do |component|
-          component.with_image do
-            tag.img(src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=A', alt: 'Avatar')
-          end
-        end
+                 size: size,
+                 shape: shape,
+                 presence: presence,
+                 ring: ring,
+                 img_src: img_src,
+                 img_alt: img_alt,
+                 class: classes
+               ))
       end
-
       # @!endgroup
 
-      # @!group Examples
-
+      # @!group Basic Examples
       # Basic Avatar
       # ---------------
       # Simple avatar with an image
       #
       # @label Basic
       def basic
-        render(AvatarComponent.new(size: 12)) do |component|
-          component.with_image do
-            tag.img(src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=A', alt: 'Avatar')
-          end
-        end
+        render(DaisyComponents::DataDisplay::AvatarComponent.new(
+                 img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=A',
+                 img_alt: 'Avatar'
+               ))
       end
 
+      # Presence States
+      # ---------------
+      # Avatar with different presence indicators
+      #
+      # @label Presence
+      def presence
+        render_with_template
+      end
+
+      # Ring Style
+      # ---------------
+      # Avatar with ring decoration
+      #
+      # @label Ring
+      def ring
+        render(DaisyComponents::DataDisplay::AvatarComponent.new(
+                 ring: true,
+                 img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=R',
+                 img_alt: 'Ring Avatar'
+               ))
+      end
+
+      # Text Placeholder
+      # ---------------
+      # Avatar with text placeholder instead of image
+      #
+      # @label Placeholder
+      def placeholder
+        render(DaisyComponents::DataDisplay::AvatarComponent.new(placeholder: 'JD'))
+      end
+      # @!endgroup
+
+      # @!group Gallery Examples
       # Avatar Sizes
       # ---------------
       # Different size variations
@@ -54,48 +96,11 @@ module DaisyComponents
 
       # Avatar Shapes
       # ---------------
-      # Different shape variations
+      # Different shape variations including half masks
       #
       # @label Shapes
       def shapes
         render_with_template
-      end
-
-      # Online Status
-      # ---------------
-      # Avatar with online indicator
-      #
-      # @label Online
-      def online
-        render(AvatarComponent.new(online: true, size: 12)) do |component|
-          component.with_image do
-            tag.img(src: 'https://placehold.co/400x400/22C55E/FFFFFF?text=ON', alt: 'Online Avatar')
-          end
-        end
-      end
-
-      # Offline Status
-      # ---------------
-      # Avatar with offline indicator
-      #
-      # @label Offline
-      def offline
-        render(AvatarComponent.new(offline: true, size: 12)) do |component|
-          component.with_image do
-            tag.img(src: 'https://placehold.co/400x400/EF4444/FFFFFF?text=OFF', alt: 'Offline Avatar')
-          end
-        end
-      end
-
-      # Text Placeholder
-      # ---------------
-      # Avatar with text placeholder instead of image
-      #
-      # @label Placeholder
-      def placeholder
-        render(AvatarComponent.new(size: 12)) do |component|
-          component.with_placeholder { 'JD' }
-        end
       end
 
       # Avatar Group
@@ -104,32 +109,8 @@ module DaisyComponents
       #
       # @label Group
       def group
-        render(AvatarComponent.new(size: 12, class: 'avatar-group h-12')) do |component|
-          # First avatar
-          component.with_group do |avatar|
-            avatar.with_image do
-              tag.img(src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=1', alt: 'Avatar 1')
-            end
-          end
-          # Second avatar
-          component.with_group do |avatar|
-            avatar.with_image do
-              tag.img(src: 'https://placehold.co/400x400/22C55E/FFFFFF?text=2', alt: 'Avatar 2')
-            end
-          end
-          # Third avatar
-          component.with_group do |avatar|
-            avatar.with_image do
-              tag.img(src: 'https://placehold.co/400x400/EF4444/FFFFFF?text=3', alt: 'Avatar 3')
-            end
-          end
-          # Counter avatar
-          component.with_group do |avatar|
-            avatar.with_placeholder { '+2' }
-          end
-        end
+        render_with_template
       end
-
       # @!endgroup
     end
   end

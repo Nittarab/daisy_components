@@ -1,10 +1,38 @@
 <%# Avatar Sizes %>
 <div class="flex gap-4 items-end">
   <% [8, 12, 16, 20, 24, 32].each do |size| %>
-    <%= render(DaisyComponents::DataDisplay::AvatarComponent.new(size: size)) do |component| %>
-      <% component.with_image do %>
-        <%= tag.img(src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=A') %>
-      <% end %>
-    <% end %>
+    <%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+      size: size,
+      img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=A',
+      img_alt: "Avatar size #{size}"
+    )) %>
   <% end %>
-</div> 
+</div>
+
+<%# Extra Small %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  size: :xs,
+  img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=XS',
+  img_alt: 'Extra Small Avatar'
+)) %>
+
+<%# Small %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  size: :sm,
+  img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=SM',
+  img_alt: 'Small Avatar'
+)) %>
+
+<%# Medium %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  size: :md,
+  img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=MD',
+  img_alt: 'Medium Avatar'
+)) %>
+
+<%# Large %>
+<%= render(DaisyComponents::DataDisplay::AvatarComponent.new(
+  size: :lg,
+  img_src: 'https://placehold.co/400x400/3B82F6/FFFFFF?text=LG',
+  img_alt: 'Large Avatar'
+)) %> 
