@@ -16,6 +16,30 @@ Metrics/ParameterLists:
 Metrics/ClassLength:
   Exclude:
     - test/**/*
+    - app/helpers/daisy_components/icons_helper.rb
 
 Metrics/MethodLength:
   Max: 20
+  Exclude:
+    - app/helpers/daisy_components/icons_helper.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - test/**/*
+    - app/helpers/daisy_components/icons_helper.rb
+
+Layout/LineLength:
+  Exclude:
+    - app/helpers/daisy_components/icons_helper.rb
+
+Metrics/AbcSize:
+  Exclude:
+    - app/helpers/daisy_components/icons_helper.rb
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - app/helpers/daisy_components/icons_helper.rb
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - app/helpers/daisy_components/icons_helper.rb

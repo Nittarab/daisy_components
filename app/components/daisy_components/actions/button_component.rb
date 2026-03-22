@@ -2,57 +2,6 @@
 
 module DaisyComponents
   module Actions
-    # Button component implementing DaisyUI's button styles
-    #
-    # @example Basic usage
-    #   <%= render(ButtonComponent.new(text: "Click me")) %>
-    #
-    # @example With icons
-    #   <%= render(ButtonComponent.new(
-    #     text: "Submit",
-    #     icon_start: helpers.check_icon("h-5 w-5"),
-    #     variant: "primary"
-    #   )) %>
-    #
-    # @example With both icons
-    #   <%= render(ButtonComponent.new(
-    #     text: "Next",
-    #     icon_start: helpers.sync_icon("h-5 w-5"),
-    #     icon_end: helpers.arrow_right_icon("h-5 w-5")
-    #   )) %>
-    #
-    # @example Icon only button
-    #   <%= render(ButtonComponent.new(
-    #     icon_start: helpers.search_icon("h-6 w-6"),
-    #     class: "btn-square"
-    #   )) %>
-    #
-    # @example With block content
-    #   <%= render(ButtonComponent.new) do %>
-    #     Complex <strong>content</strong>
-    #   <% end %>
-    #
-    # @example As a link
-    #   <%= render(ButtonComponent.new(
-    #     text: "Visit site",
-    #     href: "https://example.com",
-    #     target: "_blank"
-    #   )) %>
-    #
-    # @example Form submit button
-    #   <%= render(ButtonComponent.new(
-    #     text: "Submit",
-    #     type: "submit",
-    #     variant: "primary"
-    #   )) %>
-    #
-    # @example Delete action with Turbo
-    #   <%= render(ButtonComponent.new(
-    #     text: "Delete",
-    #     href: item_path(@item),
-    #     method: :delete,
-    #     variant: "error"
-    #   )) %>
     class ButtonComponent < BaseComponent # rubocop:disable Metrics/ClassLength
       renders_one :start_icon
       renders_one :end_icon
@@ -75,7 +24,7 @@ module DaisyComponents
       # @param text [String] The text content to display inside the button
       # @param variant [String] Visual style of the button
       #    (neutral/primary/secondary/accent/info/success/warning/error/ghost/link)
-      # @param size [String] Size of the button (xl/lg/md/sm/xs)
+      # @param size [String] Size of the button. Allowed values: "xl", "lg", "md", "sm", "xs"
       # @param style [String] Style of the button (outline/soft)
       # @param shape [String] Shape modifier of the button (wide/block/circle/square)
       # @param disabled [Boolean] When true, prevents user interaction and grays out the button
@@ -97,7 +46,7 @@ module DaisyComponents
         shape: nil,
         disabled: false,
         href: nil,
-        type: 'button',
+        tag_type: :button,
         method: nil,
         target: nil,
         rel: nil,
@@ -117,7 +66,7 @@ module DaisyComponents
         @rel = rel
         @loading = loading
         @active = active
-
+        @tag_type = tag_type
         with_start_icon { icon_start } if icon_start
         with_end_icon { icon_end } if icon_end
 
@@ -125,11 +74,10 @@ module DaisyComponents
       end
 
       def call
-        tag_type = @href ? :a : :button
-        if simple?
-          tag.send(tag_type, button_content, **simple_arguments)
+        if @tag_type == :button
+          tag.send(@tag_type, button_content, **simple_arguments)
         else
-          tag.send(tag_type, **full_arguments) { button_content }
+          tag.send(@tag_type, **full_arguments) { button_content }
         end
       end
 
@@ -147,12 +95,6 @@ module DaisyComponents
         return value if !value || valid_values.include?(value.to_s)
 
         raise ArgumentError, "Invalid #{attr_name}: #{value}. Must be one of: #{valid_values.join(', ')}"
-      end
-
-      def simple?
-        !@variant && !@style && !@size && !@shape && !@disabled && !@loading && !@active &&
-          system_arguments.keys.empty? && (@type == 'button' || @href) && !@class &&
-          !@method && !@target && !@rel
       end
 
       def simple_arguments
